@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<!--
+	Snapshot by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>Snapshot by TEMPLATED</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body>
+		<div class="page-wrap">
+
+			<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html" class="active"><span class="icon fa-home"></span></a></li>
+						<li><a href="gallery.html"><span class="icon fa-camera-retro"></span></a></li>
+						<li><a href="generic.html"><span class="icon fa-file-text-o"></span></a></li>
+					</ul>
+				</nav>
+
+			<!-- Main -->
+				<section id="main">
+
+					<!-- Banner -->
+						<section id="banner">
+							<div class="inner">
+								<h1>Welcome to the DTU Snapmap</h1>
+								<p>Your guide to life on campus</p>
+								<ul class="actions">
+									<li><a href="#galleries" class="button alt scrolly big">Continue</a></li>
+								</ul>
+							</div>
+						</section>
+
+					<section id="map">
+
+					<div class="inner column">
+					<h2> Upcoming Events: </h2>
+					<ul>
+					<li>
+					Concert happening on <b> 20 Sept 2019 18:00</b> 
+					at <b> Sports Hall </b>
+					</li>
+					</ul>
+					</div>
+					<div class="inner column">
+						<iframe  data-src="app.html" src="./mazemap.html">
+						</iframe>
+					</div>
+					</section>
+
+
+					<!-- Gallery 
+						<section id="galleries">
+
+							
+								<div class="gallery">
+									<header class="special">
+										<h2>What's New</h2>
+									</header>
+									<div class="content">
+										<div class="media">
+											<a href="images/fulls/01.jpg"><img src="images/thumbs/01.jpg" alt="" title="This right here is a caption." /></a>
+										</div>
+										<div class="media">
+											<a href="images/fulls/05.jpg"><img src="images/thumbs/05.jpg" alt="" title="This right here is a caption." /></a>
+										</div>
+										<div class="media">
+											<a href="images/fulls/09.jpg"><img src="images/thumbs/09.jpg" alt="" title="This right here is a caption." /></a>
+										</div>
+										<div class="media">
+											<a href="images/fulls/02.jpg"><img src="images/thumbs/02.jpg" alt="" title="This right here is a caption." /></a>
+										</div>
+										<div class="media">
+											<a href="images/fulls/06.jpg"><img src="images/thumbs/06.jpg" alt="" title="This right here is a caption." /></a>
+										</div>
+										<div class="media">
+											<a href="images/fulls/10.jpg"><img src="images/thumbs/10.jpg" alt="" title="This right here is a caption." /></a>
+										</div>
+										<div class="media">
+											<a href="images/fulls/03.jpg"><img src="images/thumbs/03.jpg" alt="" title="This right here is a caption." /></a>
+										</div>
+										<div class="media">
+											<a href="images/fulls/07.jpg"><img src="images/thumbs/07.jpg" alt="" title="This right here is a caption." /></a>
+										</div>
+									</div>
+									<footer>
+										<a href="gallery.html" class="button big">Full Gallery</a>
+									</footer>
+								</div>
+						</section>
+					-->
+					
+					<!-- Contact -->
+						<section id="contact">
+							<!-- Social -->
+								<div class="social column">
+									<h3>About DTU Snapmap</h3>
+									<p>Here you can look at upcoming events, follow your friends around and find classrooms and shit! Welcome to the DTU Snapmap, your new favourite website while on campus :).</p>
+									<p>Click on events to see their description and add them to your calendar! </p>
+									<h3>Social Media</h3>
+									<ul class="icons">
+										<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+									</ul>
+								</div>
+
+							<!-- Form -->
+								<div class="column">
+									<h3>Sign in with your DTU Inside account</h3>
+									<form action="#" method="post">
+										<div class="field half first">
+											<label for="studnum">Student number</label>
+											<input name="studnum" id="studnum" type="text" placeholder="Name">
+										</div>
+										<div class="field half">
+											<label for="password">Password</label>
+											<input name="password" id="password" type="password" placeholder="Email">
+										</div>
+										<ul class="actions">
+											<li><input value="Log in" class="button" type="submit"></li>
+										</ul>
+									</form>
+								</div>
+
+						</section>
+
+					<!-- Footer -->
+						<footer id="footer">
+							<div class="copyright">
+								&copy; Group E: <a href="https://se2-webapp05.compute.dtu.dk/">DTU Snapmap</a>. Images: <a href="http://inside.dtu.dk">DTU Inside</a>.
+							</div>
+						</footer>
+				</section>
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.poptrox.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
