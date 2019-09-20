@@ -12,6 +12,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.0</version>
         <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
           <release>10</release>
         </configuration>
       </plugin>
