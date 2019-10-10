@@ -15,7 +15,7 @@
    <packaging>war</packaging>
    <description>Example Spring Boot with JSP view</description>
    <properties>
-      <java.version>10</java.version>
+      <java.version>1.8</java.version>
    </properties>
    <dependencies>
       <dependency>
