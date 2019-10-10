@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HelloController 
 {
-    @GetMapping({"/", "/index1"})
+    @GetMapping({"/", "/index"})
     public String index(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name) 
     {
         model.addAttribute("name", name);
@@ -17,5 +17,11 @@ public class HelloController
     public String events(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name)
     {
     	return "events";
+    }
+
+    @GetMapping({"/login"})
+    public String login(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name)
+    {
+        return "login";
     }
 }
