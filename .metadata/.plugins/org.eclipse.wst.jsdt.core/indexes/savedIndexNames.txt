@@ -1,6 +1,5 @@
 INDEX VERSION 1.4+C:\Users\mikke\Dropbox\Uni\02162 Software Engineering 2\Git repo\DTULibrary\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-1001083435.index
-3408884034.index
-3016917506.index
-2273870865.index
-3831211036.index
+1386839376.index
+3208645431.index
+3289287724.index
+1947957563.index
