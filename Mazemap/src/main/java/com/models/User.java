@@ -23,27 +23,6 @@ public class User {
 
     private String email;
 
-    private Boolean isFaculty;     // Grants access to make public events
-
-    public Boolean getFaculty() {
-        return isFaculty;
-    }
-
-    public void setFaculty(Boolean faculty) {
-        isFaculty = faculty;
-    }
-
-    public Boolean getResearcher() {
-        return isResearcher;
-    }
-
-    public void setResearcher(Boolean researcher) {
-        isResearcher = researcher;
-    }
-
-    private Boolean isResearcher;  // Grants access to make and read survey/results
-
-
     public Integer getId() {
         return id;
     }

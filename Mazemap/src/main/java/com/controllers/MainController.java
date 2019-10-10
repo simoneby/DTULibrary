@@ -25,8 +25,6 @@ public class MainController {
         User n = new User();
         n.setName(name);
         n.setEmail(email);
-        n.setResearcher(isResearcher);
-        n.setFaculty(isFaculty);
         userRepository.save(n);
         return "Saved";
     }
