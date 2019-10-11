@@ -1,4 +1,8 @@
 package com;
+import com.models.*;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -11,8 +15,12 @@ public class SpringBootJspApplication extends SpringBootServletInitializer
    {
       return application.sources(SpringBootJspApplication.class);
    }
-   public static void main(String[] args) 
-   {
+   public static void main(String[] args) {
+
       SpringApplication.run(SpringBootJspApplication.class, args);
+
+
+
+
    }
 }
