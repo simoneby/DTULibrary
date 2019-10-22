@@ -22,7 +22,8 @@ public class User {
     private String name;
 
     private String email;
-
+    
+    
     public Integer getId() {
         return id;
     }
@@ -46,7 +47,7 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
+    
     @ManyToMany(cascade={CascadeType.ALL})
     @JoinTable(name="friends",
             joinColumns={@JoinColumn(name="user_id")},
@@ -65,7 +66,18 @@ public class User {
         return friends;
     }
 
-
+    @ManyToMany(cascade={CascadeType.ALL})
+    @JoinTable(name="user_role",
+            joinColumns={@JoinColumn(name="user_id")},
+            inverseJoinColumns={@JoinColumn(name="role_id")})
+    private Set<Role> roles = new HashSet<Role>();
+    public void addRole (Role role){
+        roles.add(role);
+    }
+    public Set<Role> getRoles()
+    {
+    	return roles;
+    }
 }
 
 
