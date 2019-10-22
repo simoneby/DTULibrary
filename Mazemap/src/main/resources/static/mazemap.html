@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <head>
-    <meta name="viewport" id="vp" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
-    <meta charset="utf-8" />
+<meta name="viewport" id="vp"
+	content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
+<meta charset="utf-8" />
 
 
-    <link rel="stylesheet" href="https://api.mazemap.com/js/v2.0.14/mazemap.min.css">
-    <script type='text/javascript' src='https://api.mazemap.com/js/v2.0.14/mazemap.min.js'></script>
+<link rel="stylesheet"
+	href="https://api.mazemap.com/js/v2.0.14/mazemap.min.css">
+<script type='text/javascript'
+	src='https://api.mazemap.com/js/v2.0.14/mazemap.min.js'></script>
 
-    <style>
-        body { margin:0px; padding:0px; width: 100%; height:100%; }
-    </style>
+<style>
+body {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	height: 100%;
+}
+</style>
 </head>
 <body>
-<div id="startLat"></div>
+	<div id="startLat"></div>
 
-<div id="startLon"></div>
-    <div id="map" class="mazemap"></div>
+	<div id="startLon"></div>
+	<div id="map" class="mazemap"></div>
 
-    <script>
+	<script>
     	var currentLat,currentLong;
         var map = new Mazemap.Map({
             // container id specified in the HTML
@@ -39,6 +47,33 @@
 		
 		var lngLat = {lng: 12.525542, lat: 55.786158}; // DTU Library
 		
+		//data source for polygons, properties can be used to get information about climate?
+		var testPolygoner = [
+            {
+                type: "Feature",
+                properties: { zLevel: 1, name: 'areaOne', co2: '45' },
+                geometry: {
+                    type: "Polygon",
+                    coordinates: [ [  [12.523030,55.787066],
+                                    [12.523013,55.787037],
+                                    [12.523118,55.787017],
+                                    [12.523132,55.787038], [12.523030,55.787066] ] ]
+                }
+            },
+            {
+                type: "Feature",
+                properties: { zLevel: 1, name: 'areaTwo', co2: '35' },
+                geometry: {
+                    type: "Polygon",
+                    coordinates: [ [  [12.522894,55.786921],
+                                    [12.523096,55.786884],
+                                    [12.523069,55.786829],
+                                    [12.522862,55.786863], [12.522894,55.786921] ] ]
+                }
+            }
+        ];
+				
+		//datasource for markers
 		var testMarker = new Mazemap.MazeMarker( {
 			zLevel : 1,
 			color: 'green',
@@ -58,6 +93,7 @@
 		testMarker.setPopup(testMarkerPopup);
 		
 		window.onload = function() {
+			
 			// check for Geolocation support
 			if (navigator.geolocation) {
 			  console.log('Geolocation is supported!');
@@ -79,9 +115,22 @@
 			  };
 			  navigator.geolocation.getCurrentPosition(geoSuccess);
 			};
-			
+		
 			//map.center = {lng: currentLong, lat: currentLat};
 			  map.on('load', function(){
+				
+				  map.addLayer({
+			            id: 'custom-polygon-layer',
+			            type: "fill",
+			            source: {
+			                type: 'geojson',
+			                data: null,
+			            },
+			            paint: {
+			                "fill-color": "#fc0",
+			                "fill-outline-color": "red"
+			            }
+			        });
 				  console.log(currentLong,currentLat);
 				var blueDot = new Mazemap.BlueDot( {
 			    	zLevel: 1,
@@ -89,7 +138,27 @@
 					} )
 					.setLngLat( {lng: currentLong, lat: currentLat} )
 					.setAccuracy(10).addTo(map);
+				
+				
+				//Polygon code, example of click action on polygon while getting feature names 
+				map.layerEventHandler.on('click', 'custom-polygon-layer', (e, features) => {
+                console.log('@@@ clicked custom-polygon-layer features: ', features);
+                var topFeature = features[0];
+                alert("you clicked feature named: " + topFeature.properties.name + " - co2 niveau er på " + topFeature.properties.co2);
+            });
+				
+				
+				map.on('zlevel', redrawPolygons);
+	            redrawPolygons();
 			
 			  });
+			    //Code such that you can do different floors for polygons
+			  function redrawPolygons() {
+		            var zLevel = map.getZLevel();
+		           
+		            var filteredFeatures = testPolygoner.filter( feature => feature.properties.zLevel === zLevel );
+
+		            map.getSource("custom-polygon-layer").setData({type: "FeatureCollection", features:filteredFeatures });
+		        }
     </script>
 </body>
