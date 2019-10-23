@@ -30,5 +30,6 @@
         <mapping class="com.models.Group" />
         <mapping class="com.models.Event" />
         <mapping class="com.models.Role" />
+        <mapping class="com.models.SensorData" />
     </session-factory>
 </hibernate-configuration>

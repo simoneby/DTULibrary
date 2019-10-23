@@ -30,24 +30,27 @@ public class SensorDataController {
   RestTemplate restTemplate;
 
   @RequestMapping(value = "/zonedata", method = RequestMethod.GET)
-  public ProcessedSensorData[] getZoneData() {
-    //ArrayList<SensorData> sensorData = new ArrayList<SensorData>();
+  public ProcessedSensorData[] getZoneData(
+      @RequestParam(name = "level", required = false, defaultValue = "0") short level) {
+    // ArrayList<SensorData> sensorData = new ArrayList<SensorData>();
     HashMap<String, ProcessedSensorData> zoneData = new HashMap<String, ProcessedSensorData>();
     InitialSensorData[] sensorData = SensorDataHelper.getSensorData();
-
     for (int i = 0; i < sensorData.length; i++) {
       InitialSensorData sd = sensorData[i];
-      if (zoneData.containsKey(sd.getName())) {
-        zoneData.get(sd.getName()).addProperty(sd.getType(), sd.getUnit(), sd.getValue());
-      } else {
-        ProcessedSensorData newVal = new ProcessedSensorData();
-        newVal.setPointId(sd.getName());
-        newVal.setBuilding(sd.getBuilding());
-        newVal.setFloor(sd.getFloor());
-        newVal.setZone(sd.getZone());
-        newVal.addProperty(sd.getType(), sd.getUnit(), sd.getValue());
-        newVal.setTimestamp(sd.getTimeStamp());
-        zoneData.put(sd.getName(), newVal);
+      if (level == sd.getFloor()) {
+        String zoneName = String.format("%d_%d_%d", sd.getBuilding(), sd.getFloor(), sd.getZone());
+        if (zoneData.containsKey(zoneName)) {
+          zoneData.get(zoneName).addProperty(sd.getType(), sd.getUnit(), sd.getValue());
+        } else {
+          ProcessedSensorData newVal = new ProcessedSensorData();
+          newVal.setPointId(sd.getName());
+          newVal.setBuilding(sd.getBuilding());
+          newVal.setFloor(sd.getFloor());
+          newVal.setZone(sd.getZone());
+          newVal.addProperty(sd.getType(), sd.getUnit(), sd.getValue());
+          newVal.setTimestamp(sd.getTimeStamp());
+          zoneData.put(zoneName, newVal);
+        }
       }
     }
     ProcessedSensorData[] a = new ProcessedSensorData[zoneData.size()];

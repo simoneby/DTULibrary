@@ -9,11 +9,11 @@
       <relativePath/> <!-- lookup parent from repository -->
    </parent>
    <groupId>com.eprogrammerz.examples.spring</groupId>
-   <artifactId>spring-boot-jsp</artifactId>
-   <version>0.0.1-SNAPSHOT</version>
-   <name>spring-boot-jsp</name>
+   <artifactId>DTU-campus-net</artifactId>
+   <version>0.0.1-Mazemap</version>
+   <name>DTU-campus-net</name>
    <packaging>war</packaging>
-   <description>Example Spring Boot with JSP view</description>
+   <description>DTU CampusNet</description>
    <properties>
       <java.version>1.8</java.version>
    </properties>
@@ -57,6 +57,12 @@
          <artifactId>spring-boot-starter-test</artifactId>
          <scope>test</scope>
       </dependency>
+          <dependency>
+        <groupId>net.sf.json-lib</groupId>
+        <artifactId>json-lib</artifactId>
+        <version>2.4</version>
+        <classifier>jdk15</classifier>
+    </dependency>
    </dependencies>
    <build>
       <plugins>

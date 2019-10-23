@@ -1,52 +1,51 @@
 package com.models;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Entity
 public class ProcessedSensorData {
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonIgnore
 	private Integer id;
+	@JsonIgnore
 	private String pointId;
+	@JsonIgnore
 	private Date timestamp;
-    //zone coordinates for the overlay
-    private double[] coordinates = new double[5];
+	private String type = "Feature";
+	// zone coordinates for the overlay
+	@JsonIgnore
 	private Short building;
+	@JsonIgnore
 	private Short floor;
+	@JsonIgnore
 	private Short zone;
-    private ArrayList<SensorValue> zoneProperties;
+	PolygonGeometry geometry;
+	PolygonProperties properties;
 
 	public ProcessedSensorData() {
-        zoneProperties = new ArrayList<SensorValue>();
-	}
-	public double[] getCoordinates() {
-		return coordinates;
-	}
+		properties = new PolygonProperties();
+		geometry = new PolygonGeometry();
+		properties.zoneProperties = new ArrayList<SensorValue>();
 
-	public void setCoordinates(double[] coordinates) {
-		this.coordinates = coordinates;
 	}
 
 	public String getPointId() {
 		return pointId;
 	}
+
 	public void setPointId(String pointId) {
 		this.pointId = pointId;
-		this.building = Short.valueOf(pointId.substring(1,4));
-        this.floor = Short.valueOf(pointId.substring(7,8));
-        this.zone = Short.valueOf(pointId.substring(11,13));
+		this.building = Short.valueOf(pointId.substring(1, 4));
+		this.floor = Short.valueOf(pointId.substring(7, 8));
+		this.zone = Short.valueOf(pointId.substring(11, 13));
 	}
+
 	public Date getTimestamp() {
 		return timestamp;
 	}
+
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
@@ -81,59 +80,124 @@ public class ProcessedSensorData {
 
 	public void setId(Integer id) {
 		this.id = id;
-    }
-    public void addProperty(String type, String unit, double value)
-    {
-        zoneProperties.add(new SensorValue(type,unit,value));
-    }
-    
-class SensorValue
-{
-    private String type;
-    private String unit;
-    private double value;
+	}
 
-    
-        public String getType() {
-            return type;
-        }
+	public void addProperty(String type, String unit, double value) {
+		properties.addProperty(type, unit, value);
+	}
 
-        public void setType(String type) {
-            this.type = type;
-        }
+	class SensorValue {
+		private String type;
+		private String unit;
+		private double value;
 
-        public String getUnit() {
-            return unit;
-        }
+		public String getType() {
+			return type;
+		}
 
-        public void setUnit(String unit) {
-            this.unit = unit;
-        }
+		public void setType(String type) {
+			this.type = type;
+		}
 
-        public double getValue() {
-            return value;
-        }
+		public String getUnit() {
+			return unit;
+		}
 
-        public void setValue(double value) {
-            this.value = value;
-        }
+		public void setUnit(String unit) {
+			this.unit = unit;
+		}
 
-        public SensorValue(String type, String unit, double value) {
-            this.type = type;
-            this.unit = unit;
-            this.value = value;
-        }
+		public double getValue() {
+			return value;
+		}
 
-        public SensorValue() {
-        }
+		public void setValue(double value) {
+			this.value = value;
+		}
+
+		public SensorValue(String type, String unit, double value) {
+			this.type = type;
+			this.unit = unit;
+			this.value = value;
+		}
+
+		public SensorValue() {
+		}
+	}
+
+	class PolygonGeometry {
+		String type = "Polygon";
+		private double[] coordinates = new double[5];
+
+		public String getType() {
+			return type;
+		}
+
+		public void setType(String type) {
+			this.type = type;
+		}
+
+		public double[] getCoordinates() {
+			return coordinates;
+		}
+
+		public void setCoordinates(double[] coordinates) {
+			this.coordinates = coordinates;
+		}
+
+	}
+
+	class PolygonProperties {
+		private short zLevel;
+		private ArrayList<SensorValue> zoneProperties;
+		public PolygonProperties()
+		{
+			zoneProperties = new ArrayList<SensorValue>();
+		}
+		public short getzLevel() {
+			return zLevel;
+		}
+
+		public ArrayList<SensorValue> getZoneProperties() {
+			return zoneProperties;
+		}
+
+		public void setZoneProperties(ArrayList<SensorValue> zoneProperties) {
+			this.zoneProperties = zoneProperties;
+		}
+
+		public void addProperty(String type, String unit, double value) {
+			zoneProperties.add(new SensorValue(type, unit, value));
+		}
+
+		public void setzLevel(short zLevel) {
+			this.zLevel = zLevel;
+		}
+
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public PolygonGeometry getGeometry() {
+		return geometry;
+	}
+
+	public void setGeometry(PolygonGeometry geometry) {
+		this.geometry = geometry;
+	}
+
+	public PolygonProperties getProperties() {
+		return properties;
+	}
+
+	public void setProperties(PolygonProperties properties) {
+		this.properties = properties;
+	}
+
 }
-
-    public ArrayList<SensorValue> getZoneProperties() {
-        return zoneProperties;
-    }
-
-    public void setZoneProperties(ArrayList<SensorValue> zoneProperties) {
-        this.zoneProperties = zoneProperties;
-    }
-}
-
