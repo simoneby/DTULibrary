@@ -1,16 +1,10 @@
 package com.models;
 
 import org.hibernate.Session;
-
 import javax.persistence.*;
-
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
 import java.util.*;
-
-
-
 
 @Entity // This tells Hibernate to make a table out of this class
 public class User {

@@ -1,15 +1,12 @@
 package com.controllers;
-import java.util.concurrent.atomic.AtomicLong;
 import com.models.*;
 import com.repositories.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.*;
-import com.repositories.*;
+//import java.util.*;
 @RestController
 public class LoginController 
 {

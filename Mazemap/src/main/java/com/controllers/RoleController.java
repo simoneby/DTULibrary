@@ -1,12 +1,9 @@
 package com.controllers;
-import java.util.concurrent.atomic.AtomicLong;
 import com.models.*;
 import com.repositories.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
-import com.repositories.*;
 
 @RestController
 @RequestMapping("roles")
