@@ -20,9 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
 @RestController
 @RequestMapping(path = "/sensors")
 public class SensorDataController {
@@ -60,7 +57,6 @@ public class SensorDataController {
 
   @RequestMapping(value = "/base_wendy", method = RequestMethod.GET)
   public InitialSensorData[] getBaseData2() {
-    // ArrayList<SensorData> sensorData = new ArrayList<SensorData>();
     return SensorDataHelper.getSensorData();
   }
 
