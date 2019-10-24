@@ -160,6 +160,8 @@ body {
 	//function to get and redraw polygons on start and on floor switch, Coordinates need to be server side
 	function redrawPolygons() {
 		var zLevel = map.getZLevel();
+		if(zLevel > -1)
+			zLevel = zLevel -1; 
 		var getAddress = "http://localhost:8080/sensors/zonedata?level=".concat(zLevel);
 			   	
 		//need to get coords from server in the future
