@@ -40,7 +40,7 @@ body {
 
 	<div id="startLon"></div>
 	<div id="map" class="mazemap"></div>
-    <div id="events">Click the layers...</div>
+    <div id="events"></div>
 	<script>
     	var currentLat,currentLong;
         var map = new Mazemap.Map({
@@ -60,34 +60,9 @@ body {
 
         // Add zoom and rotation controls to the map.
         map.addControl(new Mazemap.mapboxgl.NavigationControl());
-		
+		var zonePolygons;
 		var lngLat = {lng: 12.525542, lat: 55.786158}; // DTU Library
-		
-		//data source for polygons, properties can be used to get information about climate?
-		var testPolygoner = [
-            {
-                type: "Feature",
-                properties: { zLevel: 1, name: 'areaOne', co2: '45' },
-                geometry: {
-                    type: "Polygon",
-                    coordinates: [ [  [12.523030,55.787066],
-                                    [12.523013,55.787037],
-                                    [12.523118,55.787017],
-                                    [12.523132,55.787038], [12.523030,55.787066] ] ]
-                }
-            },
-            {
-                type: "Feature",
-                properties: { zLevel: 1, name: 'areaTwo', co2: '35' },
-                geometry: {
-                    type: "Polygon",
-                    coordinates: [ [  [12.522894,55.786921],
-                                    [12.523096,55.786884],
-                                    [12.523069,55.786829],
-                                    [12.522862,55.786863], [12.522894,55.786921] ] ]
-                }
-            }
-        ];
+	
 				
 		//datasource for markers
 		var testMarker = new Mazemap.MazeMarker( {
@@ -110,74 +85,102 @@ body {
 		
 		window.onload = function() {
 			
-			// check for Geolocation support
-			if (navigator.geolocation) {
-			  console.log('Geolocation is supported!');
-			}
-			else {
-			  console.log('Geolocation is not supported for this Browser/OS.');
-			}
-			
-			  var startPos;
-			  var geoOptions = {
-					    enableHighAccuracy: true
-					  }
-			  var geoSuccess = function(position) {
-			    startPos = position;
-			    document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-			    document.getElementById('startLon').innerHTML = startPos.coords.longitude;
-			    currentLat = startPos.coords.latitude;
-			    currentLong = startPos.coords.longitude;
-			  };
-			  navigator.geolocation.getCurrentPosition(geoSuccess);
-			};
-		
-			//map.center = {lng: currentLong, lat: currentLat};
-			  map.on('load', function(){
-				
-				  map.addLayer({
-			            id: 'custom-polygon-layer',
-			            type: "fill",
-			            source: {
-			                type: 'geojson',
-			                data: null,
-			            },
-			            paint: {
-			                "fill-color": "#fc0",
-			                "fill-outline-color": "red"
-			            }
-			        });
-				  console.log(currentLong,currentLat);
-				var blueDot = new Mazemap.BlueDot( {
-			    	zLevel: 1,
-			    	accuracyCircle: true
-					} )
-					.setLngLat( {lng: currentLong, lat: currentLat} )
-					.setAccuracy(10).addTo(map);
-				
-				
-				//Polygon code, example of click action on polygon while getting feature names 
-				map.layerEventHandler.on('click', 'custom-polygon-layer', (e, features) => {
-                console.log('@@@ clicked custom-polygon-layer features: ', features);
-                var topFeature = features[0];
-                document.getElementById("events").style.display = "flex";
-                document.getElementById("events").innerHTML = "you clicked feature named: " + topFeature.properties.name + " - co2 niveau er på " + topFeature.properties.co2";
-                console.log("you clicked feature named: " + topFeature.properties.name + " - co2 niveau er på " + topFeature.properties.co2);
-                //alert("you clicked feature named: " + topFeature.properties.name + " - co2 niveau er på " + topFeature.properties.co2);
-            });
-				
-				
-				map.on('zlevel', redrawPolygons);
-	            redrawPolygons();
-			
-			  });
-			    //Code such that you can do different floors for polygons
-			  function redrawPolygons() {
-		            var zLevel = map.getZLevel();
-		           
-		            var filteredFeatures = testPolygoner.filter( feature => feature.properties.zLevel === zLevel );
+		// check for Geolocation support
+		if (navigator.geolocation) {
+			console.log('Geolocation is supported!');
+		}
+		else {
+			console.log('Geolocation is not supported for this Browser/OS.');
+		}
 
-		            map.getSource("custom-polygon-layer").setData({type: "FeatureCollection", features:filteredFeatures });
-		        }
+		  	var startPos;
+		  	var geoOptions = {
+			    enableHighAccuracy: true
+			}
+		  	var geoSuccess = function(position) {
+		  		startPos = position;
+		    	document.getElementById('startLat').innerHTML = startPos.coords.latitude;
+		    	document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+		    	currentLat = startPos.coords.latitude;
+		    	currentLong = startPos.coords.longitude;
+			};
+			navigator.geolocation.getCurrentPosition(geoSuccess);
+		};
+		
+		//map.center = {lng: currentLong, lat: currentLat};
+		  map.on('load', function(){
+			  
+			  console.log(currentLong,currentLat);
+		
+		var blueDot = new Mazemap.BlueDot( {
+		   	zLevel: 1,
+		   	accuracyCircle: true
+			} )
+			.setLngLat( {lng: currentLong, lat: currentLat} )
+			.setAccuracy(10).addTo(map);
+		
+		/**
+ 		* Kasper Jensen s183051
+ 		*
+ 		* Layers, get request for zones
+ 		*/
+ 		
+		map.addLayer({
+			      id: 'custom-polygon-layer',
+		          type: "fill",
+		          source: {
+		    	      type: 'geojson',
+		              data: null,
+		          },
+		          paint: {
+		              "fill-color": "#fc0",
+		              "fill-outline-color": "red"
+		          }
+		      });			 
+		map.layerEventHandler.on('click', 'custom-polygon-layer', (e, features) => {    
+           	var output = ""
+           	var zonePropertiesArray = JSON.parse(features[0].properties.zoneProperties);
+           	for(var i in zonePropertiesArray)
+           		output = appendString(zonePropertiesArray[i], output);
+                	
+           	document.getElementById("events").style.display = "flex";
+           	document.getElementById("events").innerHTML = output; 
+        });		
+            
+		map.on('zlevel', redrawPolygons);
+	    redrawPolygons();
+	});
+			  
+	//simple append function
+	function appendString(item, output) {
+		var res = output.concat(item.type + ": " + item.value + " " + item.unit + " ");
+		return res;
+	}
+			    
+	//function to get and redraw polygons on start and on floor switch, Coordinates need to be server side
+	function redrawPolygons() {
+		var zLevel = map.getZLevel();
+		var getAddress = "http://localhost:8080/sensors/zonedata?level=".concat(zLevel);
+			   	
+		//need to get coords from server in the future
+		fetch(getAddress).then(response => {
+  			return response.json();
+			}).then(data => {
+  				zonePolygons = data;
+  			  if(zonePolygons.length > 0)
+  				zonePolygons[0].geometry.coordinates = [ [  [12.523030,55.787066],
+                       [12.523013,55.787037],
+                       [12.523118,55.787017],
+                       [12.523132,55.787038], [12.523030,55.787066] ] ];
+              if(zonePolygons.length > 1)
+				zonePolygons[1].geometry.coordinates = [ [  [12.522894,55.786921],
+                       [12.523096,55.786884],
+                       [12.523069,55.786829],
+                       [12.522862,55.786863], [12.522894,55.786921] ] ];                                    
+                map.getSource("custom-polygon-layer").setData({type: "FeatureCollection", features:zonePolygons });
+				}).catch(err => {
+  			console.log('The request failed!'); 
+		});	         
+	}
     </script>
 </body>
