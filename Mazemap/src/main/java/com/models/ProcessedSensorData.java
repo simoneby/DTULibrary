@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.helpers.Coordinates;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProcessedSensorData {
@@ -125,22 +126,47 @@ public class ProcessedSensorData {
 		}
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public PolygonGeometry getGeometry() {
+		return geometry;
+	}
+
+	public void setGeometry(short floor, short zone) {
+		this.geometry.addCoordinates(floor, zone);
+	}
+
+	public PolygonProperties getProperties() {
+		return properties;
+	}
+
+	public void setProperties(PolygonProperties properties) {
+		this.properties = properties;
+	}
+
+	// #region inner classes
 	class PolygonGeometry {
 		String type = "Polygon";
-		private ArrayList<double[][]> coordinates ;
+		private ArrayList<double[][]> coordinates;
 
-		public PolygonGeometry(){
-		coordinates =  new ArrayList<double[][]>();
-		addCoordinates((short)0,(short)0,(short)0);
+		public PolygonGeometry() {
+			coordinates = new ArrayList<double[][]>();
 		}
 
 		public String getType() {
 			return type;
 		}
-		public void addCoordinates(short building, short floor, short zone)
-		{
-			coordinates.add(new double[5][2]);
+
+		public void addCoordinates(short floor, short zone) {
+			coordinates.add(Coordinates.getCoordinates(floor, zone));
 		}
+
 		public void setType(String type) {
 			this.type = type;
 		}
@@ -152,17 +178,17 @@ public class ProcessedSensorData {
 		public void setCoordinates(ArrayList<double[][]> coordinates) {
 			this.coordinates = coordinates;
 		}
-		
 
 	}
 
 	class PolygonProperties {
 		private short zLevel;
 		private ArrayList<SensorValue> zoneProperties;
-		public PolygonProperties()
-		{
+
+		public PolygonProperties() {
 			zoneProperties = new ArrayList<SensorValue>();
 		}
+
 		public short getzLevel() {
 			return zLevel;
 		}
@@ -184,29 +210,5 @@ public class ProcessedSensorData {
 		}
 
 	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public PolygonGeometry getGeometry() {
-		return geometry;
-	}
-
-	public void setGeometry(PolygonGeometry geometry) {
-		this.geometry = geometry;
-	}
-
-	public PolygonProperties getProperties() {
-		return properties;
-	}
-
-	public void setProperties(PolygonProperties properties) {
-		this.properties = properties;
-	}
-
+	// #endregion
 }

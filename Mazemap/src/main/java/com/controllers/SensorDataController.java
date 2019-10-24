@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.function.Function;
 
 import com.models.*;
+//import com.models.ProcessedSensorData.PolygonGeometry;
 import com.helpers.*;
 
 import org.hibernate.internal.util.compare.ComparableComparator;
@@ -46,6 +47,7 @@ public class SensorDataController {
           newVal.setZone(sd.getZone());
           newVal.addProperty(sd.getType(), sd.getUnit(), sd.getValue());
           newVal.setTimestamp(sd.getTimeStamp());
+          newVal.setGeometry(sd.getFloor(),sd.getZone());
           zoneData.put(zoneName, newVal);
         }
       }
