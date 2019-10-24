@@ -127,23 +127,32 @@ public class ProcessedSensorData {
 
 	class PolygonGeometry {
 		String type = "Polygon";
-		private double[] coordinates = new double[5];
+		private ArrayList<double[][]> coordinates ;
+
+		public PolygonGeometry(){
+		coordinates =  new ArrayList<double[][]>();
+		addCoordinates((short)0,(short)0,(short)0);
+		}
 
 		public String getType() {
 			return type;
 		}
-
+		public void addCoordinates(short building, short floor, short zone)
+		{
+			coordinates.add(new double[5][2]);
+		}
 		public void setType(String type) {
 			this.type = type;
 		}
 
-		public double[] getCoordinates() {
+		public ArrayList<double[][]> getCoordinates() {
 			return coordinates;
 		}
 
-		public void setCoordinates(double[] coordinates) {
+		public void setCoordinates(ArrayList<double[][]> coordinates) {
 			this.coordinates = coordinates;
 		}
+		
 
 	}
 
