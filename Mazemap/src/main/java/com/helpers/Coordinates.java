@@ -19,11 +19,14 @@ public class Coordinates {
     {
         if(floor==0 || floor == 1)
         {
+            int index = zone > 0 ? zone-1 : 9;
             double[][] finalCoord = new double[5][2];
-            for (int i =0;i<floor_0_1[zone].length;i++) {
-                finalCoord[i] = floor_0_1[zone][i];
+            for (int i =0;i<floor_0_1[index].length;i++) {
+                //finalCoord[i] = floor_0_1[index][i];
+                finalCoord[i][0]=floor_0_1[index][i][1];
+                finalCoord[i][1]=floor_0_1[index][i][0];
             }
-            finalCoord[4]=floor_0_1[zone][0];
+            finalCoord[4]=finalCoord[0];
             return finalCoord;
         }
         return new double[5][2];
