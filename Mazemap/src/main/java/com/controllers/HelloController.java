@@ -24,4 +24,14 @@ public class HelloController
     {
         return "login";
     }
+    @GetMapping({"/register"})
+    public String register(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name)
+    {
+        return "register";
+    }
+    @GetMapping({"/friendlist"})
+    public String friendlist(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name)
+    {
+        return "friendlist";
+    }
 }

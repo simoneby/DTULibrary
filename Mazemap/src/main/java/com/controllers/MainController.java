@@ -40,7 +40,6 @@ public class MainController {
         // This returns a JSON or XML with the users
         return userRepository.findUsersByEmail(email);
     }
-
 //    @PostMapping(path="/addFriend") // Map ONLY POST Requests
 //    public @ResponseBody String addFriends(@RequestParam int id1, @RequestParam int id2) {
 //        // @ResponseBody means the returned String is the response, not a view name
