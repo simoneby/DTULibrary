@@ -54,14 +54,22 @@
 				<div class="inner column">
 					<h2> Friend list: </h2>
 					<div class="demo-section k-content wide">
-						<div id="listView"></div>
+						<div id="listView">
+							<table></table>
+						</div>
 						<div id="pager" class="k-pager-wrap"></div>
 					</div>
 
 					<script type="text/x-kendo-template" id="template">
-							<div>
-								<h3>#:name#</h3>
-								<p>#:email#</p>
+						<tr><td colspan="3">
+								<h3>#:name#</h3><td> </tr>
+							<tr>	
+								<td colspan="2"><p>#:email#</p>
+								</td>
+								<td colspan="1">
+									<button>See location </button>
+								</td>
+								</tr>
 							</div>
 						</script>
 				</div>
