@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,28 +45,7 @@
 			</section>
 
 		<div class="column">
-			<h3>Sign in with your DTU Inside account</h3>
-			<form id="sign_in" method="POST" action="http://localhost:8080/signin">
-				<div class="field half first">
-					<label for="email">Student email </label>
-					<input name="email" id="email" type="text" placeholder="Name">
-				</div>
-				<div class="field half">
-					<label for="password">Password</label>
-					<input name="password" id="password" type="password" placeholder="Password">
-				</div>
-				<!-- <div class="field half">
-				<h4><label for="user_role">User roles</label></h4>
-				<select id="user_role">
-				</select>
-				</div> -->
-				<ul class="actions">
-					<li><input value="Log in" class="button" type="submit"></li>
-				</ul>
-			</form>
-			<div> Don't have an account? 
-				<a href="register">Click here to register for our application</a>
-			 </div>
+			<h3>You've just been signed in <%= request.getParameter("name") %> </h3>
 			<div id="#result" class="column inner"></div>
 		</div>
 			<!-- Footer -->
