@@ -6,8 +6,8 @@
         <!-- JDBC Database connection settings -->
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/springbootdb?serverTimezone=UTC</property>
-        <property name="connection.username">root</property>
-        <property name="connection.password">root</property>
+        <property name="connection.username">springuser</property>
+        <property name="connection.password">ThePassword</property>
         <!-- JDBC connection pool settings ... using built-in test pool -->
         <property name="connection.pool_size">100</property>
         <!-- Select our SQL dialect -->
