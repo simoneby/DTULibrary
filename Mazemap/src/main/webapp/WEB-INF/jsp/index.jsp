@@ -38,6 +38,9 @@
 				</div>
 			</section>
 
+			<!--Share Location to All-->
+
+
 			<section id="map">
 				<div class="inner column">
 					<h2> Upcoming Events: </h2>
@@ -53,6 +56,44 @@
 					</iframe>
 				</div>
 			</section>
+			<section id="shareLocation">
+				<button onclick="broadcastToAll()">
+					<!-- <input type="button" onclick="window.alert('Hi!')"> -->
+				<script>
+					function broadcastToAll(){
+						var locMessage = prompt("Tell your friends where you are: ");
+						var stLoc = JSON.parse(localStorage.getItem("storedLocation"));
+						alert("Broadcasting my Location:" + stLoc.lat + "," + stLoc.long +"\n" + locMessage);
+						var loc = {
+							coordinateX: stLoc.lat,
+							coordinateY: stLoc.long,
+							locationMessage: locMessage
+						}
+						//add location onto database
+						console.log(loc);
+						$.ajax({
+					contentType: 'application/json',
+					data: JSON.stringify(loc),
+					dataType: 'json',
+					success: function (data, status) {
+						console.log(data);
+						$("#result").text("<p>"+data+"</p>");
+					},
+					error: function () {
+						console.log("Stuff happened");
+					},
+					processData: false,
+					type: 'POST',
+					url: 'http://localhost:8080/location/addMessage'
+				});
+
+					}
+				</script>
+   						Broadcast Location
+				</button>
+			</section>
+
+			
 
 			<!-- Contact -->
 			<section id="contact">
