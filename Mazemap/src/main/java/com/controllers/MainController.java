@@ -43,7 +43,7 @@ public class MainController {
     }
 
     @GetMapping(path="/getuser")
-    User getUserByStudentNumber(@RequestParam String studentnr) {
+    public @ResponseBody User getUserByStudentNumber(@RequestParam String studentnr) {
         // Return the user
         return userRepository.findUserByStudentNumber(studentnr);
     }
