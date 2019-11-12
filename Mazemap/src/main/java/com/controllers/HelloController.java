@@ -19,11 +19,11 @@ public class HelloController
     	return "events";
     }
 
-    @GetMapping({"/login"})
-    public String login(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name)
-    {
-        return "login";
-    }
+//    @GetMapping({"/login"})
+//    public String login(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name)
+//    {
+//        return "login";
+//    }
     @GetMapping({"/register"})
     public String register(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name)
     {

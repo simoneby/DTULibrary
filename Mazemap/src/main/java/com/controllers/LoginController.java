@@ -130,7 +130,7 @@ public class LoginController {
 //		return "Login Failed!";
 //	}
 
-	@RequestMapping(value="/signin",method=RequestMethod.POST)
+	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public RedirectView login(HttpServletResponse HttpServletResponse)
 	{
 		// REROUTE TO ADDESS:
