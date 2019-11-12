@@ -21,7 +21,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.*;
 import java.lang.*;
+import java.io.*;
+import org.apache.commons.io.IOUtils;
+import java.net.URLConnection;
+import java.net.*;
+import java.util.Scanner;
+import java.io.IOException;
 import org.springframework.*;
+
 // import com.controllers.RedirectController.*;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -146,13 +153,35 @@ public class LoginController {
 	// @author s154666
 	@RequestMapping(value="/redirect", method=RequestMethod.GET)
 	@ResponseBody
-	public String redirect(@RequestParam("ticket") String ticket, @RequestBody() String studentnr) {
+	public String redirect(@RequestParam("ticket") String ticket) throws MalformedURLException, IOException{
 
 
-		//String studentnr = "https://auth.dtu.dk/dtu/servicevalidate?service=http%3A%2F%2Fse2-webapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fmazemap%2Fredirect&ticket=" + ticket;
+		String u = "https://auth.dtu.dk/dtu/servicevalidate?service=http%3A%2F%2Fse2-webapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fmazemap%2Fredirect&ticket=" + ticket;
+		if (isUrlValid(u)){
+			URL url = new URL(u);
+			URLConnection con = url.openConnection();
+			InputStream in = con.getInputStream();
+			String encoding = con.getContentEncoding();  // ** WRONG: should use "con.getContentType()" instead but it returns something like "text/html; charset=UTF-8" so this value must be parsed to extract the actual encoding
+			encoding = encoding == null ? "UTF-8" : encoding;
+			String studentnr = IOUtils.toString(in, encoding);
+
+		}
+
 
 		return "this is the ticket: " + ticket + " for student: " + studentnr;
 
+	}
+
+	public static boolean isUrlValid(String url) {
+		try {
+			URL obj = new URL(url);
+			obj.toURI();
+			return true;
+		} catch (MalformedURLException e) {
+			return false;
+		} catch (URISyntaxException e) {
+			return false;
+		}
 	}
 
 
