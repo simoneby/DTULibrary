@@ -19,13 +19,14 @@ public class MainController {
 
     @PostMapping(path="/add") // Map ONLY POST Requests
     public @ResponseBody String addNewUser (@RequestParam String name
-            , @RequestParam String email, @RequestParam boolean isResearcher, @RequestParam boolean isFaculty) {
+            , @RequestParam String email, @RequestParam String studentnr) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 
         User n = new User();
         n.setName(name);
         n.setEmail(email);
+        n.setStudentnr(studentnr);
         userRepository.save(n);
         return "Saved";
     }
@@ -40,6 +41,18 @@ public class MainController {
         // This returns a JSON or XML with the users
         return userRepository.findUsersByEmail(email);
     }
+
+    @GetMapping(path="/getuser")
+    User getUserByStudentNumber(@RequestParam String userName) {
+        // Return the user
+        return userRepository.findUserByStudentNumber(userName);
+    }
+    
+
+
+
+
+
 //    @PostMapping(path="/addFriend") // Map ONLY POST Requests
 //    public @ResponseBody String addFriends(@RequestParam int id1, @RequestParam int id2) {
 //        // @ResponseBody means the returned String is the response, not a view name

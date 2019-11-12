@@ -170,6 +170,7 @@ public class LoginController {
 		}
 
 
+
 		return "this is the ticket: " + ticket + " for student: " + studentnr;
 
 	}

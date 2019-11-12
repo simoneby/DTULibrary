@@ -23,6 +23,16 @@ public class User {
 
     private String name;
 
+    public String getStudentnr() {
+        return studentnr;
+    }
+
+    public void setStudentnr(String studentnr) {
+        this.studentnr = studentnr;
+    }
+
+    private String studentnr;
+
     private String email;
     @JsonIgnore
     private String password;
