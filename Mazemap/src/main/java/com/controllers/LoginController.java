@@ -149,7 +149,7 @@ public class LoginController {
 	// @author s154666
 	@RequestMapping(value="/redirect", method=RequestMethod.GET)
 	@ResponseBody
-	@GetMapping({"/register"})
+	@GetMapping({"/redirect"})
 	public String redirect(@RequestParam("ticket") String ticket) {
 		return "redirect";
 
