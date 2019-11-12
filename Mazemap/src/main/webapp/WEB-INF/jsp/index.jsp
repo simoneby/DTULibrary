@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="stylesheet" type="text/css" href="/css/main.css">
-	<link rel="stylesheet" type="text/css" href="/css/custom.css">
-	<link rel="stylesheet" href="/kendo-ui-core/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="/kendo-ui-core/styles/kendo.default.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
+	<link rel="stylesheet" href="kendo-ui-core/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="kendo-ui-core/styles/kendo.default.min.css">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>DTU CampusNet</title>
@@ -29,7 +29,7 @@
 			<section id="banner">
 				<div class="inner">
 				<div class="column">
-					<h1>Welcome to DTU Map</h1>
+					<h1>Welcome to DTU Hub</h1>
 					<p>Your guide to life on campus</p>
 					</div>
 					<div class="column">
@@ -80,13 +80,13 @@
 	</div>
 
 	<!-- Scripts -->
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/jquery.poptrox.min.js"></script>
-	<script src="/js/jquery.scrolly.min.js"></script>
-	<script src="/js/skel.min.js"></script>
-	<script src="/js/util.js"></script>
-	<script src="/js/main.js"></script>
-	<script src="/kendo-ui-core/js/kendo.core.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.poptrox.min.js"></script>
+	<script src="js/jquery.scrolly.min.js"></script>
+	<script src="js/skel.min.js"></script>
+	<script src="js/util.js"></script>
+	<script src="js/main.js"></script>
+	<script src="kendo-ui-core/js/kendo.core.min.js"></script>
 
 	
 </body>
