@@ -125,7 +125,7 @@
 					roleData1 = new kendo.data.DataSource({
 						transport: {
 							read: {
-								url: "http://localhost:8080/roles/all",
+								url: "https://se2-webapp05.compute.dtu.dk:8080/roles/all",
 								type: "get",
 								dataType: "json"
 							}
@@ -186,7 +186,7 @@
 					},
 					processData: false,
 					type: 'POST',
-					url: 'http://localhost:8080/signup'
+					url: 'https://se2-webapp05.compute.dtu.dk:8080/signup'
 				});
 				// $.post("http://localhost:8080/signup",
 				// 	{ user : user},

@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="stylesheet" type="text/css" href="/css/main.css">
-	<link rel="stylesheet" type="text/css" href="/css/custom.css">
-	<link rel="stylesheet" href="/kendo-ui-core/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="/kendo-ui-core/styles/kendo.default.min.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="stylesheet" type="text/css" href="custom.css">
+	<link rel="stylesheet" href="kendo-ui-core/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="kendo-ui-core/styles/kendo.default.min.css">
 		<!-- Scripts -->
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/jquery.poptrox.min.js"></script>
@@ -45,7 +45,7 @@
 
 		<div class="column">
 			<h3>Sign in with your DTU Inside account</h3>
-			<form id="sign_in" method="POST" action="https://se2-webapp05.compute.dtu.dk/signin">
+			<form id="sign_in" method="POST" action="https://auth.dtu.dk/dtu/?service=https%3A%2F%2Fse2%2Dwebapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fredirect%2F">
 				<div class="field half first">
 					<label for="email">Student email </label>
 					<input name="email" id="email" type="text" placeholder="Name">
