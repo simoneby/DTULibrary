@@ -155,6 +155,8 @@ public class LoginController {
 	@ResponseBody
 	public String redirect(@RequestParam("ticket") String ticket) throws MalformedURLException, IOException{
 
+		String studentnr = "no"
+
 
 		String u = "https://auth.dtu.dk/dtu/servicevalidate?service=http%3A%2F%2Fse2-webapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fmazemap%2Fredirect&ticket=" + ticket;
 		if (isUrlValid(u)){
@@ -163,7 +165,7 @@ public class LoginController {
 			InputStream in = con.getInputStream();
 			String encoding = con.getContentEncoding();  // ** WRONG: should use "con.getContentType()" instead but it returns something like "text/html; charset=UTF-8" so this value must be parsed to extract the actual encoding
 			encoding = encoding == null ? "UTF-8" : encoding;
-			String studentnr = IOUtils.toString(in, encoding);
+			studentnr = IOUtils.toString(in, encoding);
 
 		}
 
