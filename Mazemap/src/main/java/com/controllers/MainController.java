@@ -43,11 +43,11 @@ public class MainController {
     }
 
     @GetMapping(path="/getuser")
-    User getUserByStudentNumber(@RequestParam String userName) {
+    User getUserByStudentNumber(@RequestParam String studentnr) {
         // Return the user
-        return userRepository.findUserByStudentNumber(userName);
+        return userRepository.findUserByStudentNumber(studentnr);
     }
-    
+
 
 
 
