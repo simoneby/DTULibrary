@@ -133,15 +133,12 @@ public class LoginController {
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public RedirectView login(HttpServletResponse HttpServletResponse)
 	{
-		// REROUTE TO ADDESS:
-		// https://auth.dtu.dk/dtu/?service=https%3A%2F%2Fse2%2Dwebapp05%2Ecompute%2Edtu%2Edk%3A8080%2F
 		RedirectView redirectView = new RedirectView();
 
 		// FOR REALSIES
 		redirectView.setUrl("https://auth.dtu.dk/dtu/?service=http%3A%2F%2Fse2%2Dwebapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fmazemap%2Fredirect");
 
-		// LOCAL STUFF
-		// redirectView.setUrl("https://auth.dtu.dk/dtu/?service=%5c%5clocalhost%3A8080");//;%2Fredirect%2F");
+
 
 		return redirectView;
 	}
@@ -149,10 +146,16 @@ public class LoginController {
 	// @author s154666
 	@RequestMapping(value="/redirect", method=RequestMethod.GET)
 	@ResponseBody
-	public String redirect(@RequestParam("ticket") String ticket) {
-		return "this is the ticket" + ticket;
+	public String redirect(@RequestParam("ticket") String ticket, @RequestBody() String studentnr) {
+
+
+		//String studentnr = "https://auth.dtu.dk/dtu/servicevalidate?service=http%3A%2F%2Fse2-webapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fmazemap%2Fredirect&ticket=" + ticket;
+
+		return "this is the ticket: " + ticket + " for student: " + studentnr;
 
 	}
+
+
 
 
 
