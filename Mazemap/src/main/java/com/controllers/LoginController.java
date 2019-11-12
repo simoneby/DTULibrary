@@ -138,7 +138,7 @@ public class LoginController {
 		RedirectView redirectView = new RedirectView();
 
 		// FOR REALSIES
-		redirectView.setUrl("https://auth.dtu.dk/dtu/?service=https%3A%2F%2Fse2%2Dwebapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fredirect%2F");
+		redirectView.setUrl("http://auth.dtu.dk/dtu/?service=https%3A%2F%2Fse2%2Dwebapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fredirect");
 
 		// LOCAL STUFF
 		// redirectView.setUrl("https://auth.dtu.dk/dtu/?service=%5c%5clocalhost%3A8080");//;%2Fredirect%2F");
@@ -151,6 +151,7 @@ public class LoginController {
 	@ResponseBody
 	public String redirect(@RequestParam("ticket") String ticket) {
 		return "This is the ticket:" + ticket;
+
 	}
 
 
