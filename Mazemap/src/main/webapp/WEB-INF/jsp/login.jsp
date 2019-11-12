@@ -45,7 +45,7 @@
 
 		<div class="column">
 			<h3>Sign in with your DTU Inside account</h3>
-			<form id="sign_in" method="POST" action="https://auth.dtu.dk/dtu/?service=https%3A%2F%2Fse2%2Dwebapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fredirect%2F">
+			<form id="sign_in" method="POST" action="https://se2-webapp05.compute.dtu.dk:8080/signin">
 				<div class="field half first">
 					<label for="email">Student email </label>
 					<input name="email" id="email" type="text" placeholder="Name">
