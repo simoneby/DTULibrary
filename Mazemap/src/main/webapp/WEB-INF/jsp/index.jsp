@@ -29,7 +29,7 @@
 			<section id="banner">
 				<div class="inner">
 				<div class="column">
-					<h1>Welcome to DTU Map</h1>
+					<h1>Welcome to DTU Hub</h1>
 					<p>Your guide to life on campus</p>
 					</div>
 					<div class="column">
