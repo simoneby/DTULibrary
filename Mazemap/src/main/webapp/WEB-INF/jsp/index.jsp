@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/custom.css">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="stylesheet" type="text/css" href="custom.css">
 	<link rel="stylesheet" href="kendo-ui-core/styles/kendo.common.min.css">
     <link rel="stylesheet" href="kendo-ui-core/styles/kendo.default.min.css">
 	
@@ -80,13 +80,13 @@
 	</div>
 
 	<!-- Scripts -->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/jquery.poptrox.min.js"></script>
-	<script src="js/jquery.scrolly.min.js"></script>
-	<script src="js/skel.min.js"></script>
-	<script src="js/util.js"></script>
-	<script src="js/main.js"></script>
-	<script src="kendo-ui-core/js/kendo.core.min.js"></script>
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery.poptrox.min.js"></script>
+	<script src="/js/jquery.scrolly.min.js"></script>
+	<script src="/js/skel.min.js"></script>
+	<script src="/js/util.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="/kendo-ui-core/js/kendo.core.min.js"></script>
 
 	
 </body>
