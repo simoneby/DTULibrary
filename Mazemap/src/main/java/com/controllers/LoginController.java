@@ -187,7 +187,7 @@ public class LoginController {
 		}
 
 
-
+		return "index";
 		//return "." + studentnr + "." + name;
 
 	}
