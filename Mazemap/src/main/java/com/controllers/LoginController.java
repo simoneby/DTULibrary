@@ -156,7 +156,7 @@ public class LoginController {
 	// @author s154666
 	@RequestMapping(value="/redirect", method=RequestMethod.GET)
 	@ResponseBody
-	public String redirect(@RequestParam("ticket") String ticket) throws MalformedURLException, IOException{
+	public RedirectView redirect(@RequestParam("ticket") String ticket) throws MalformedURLException, IOException{
 
 		String studentnr = "no";
 
@@ -174,9 +174,9 @@ public class LoginController {
 		}
 
 		RedirectView redirectView = new RedirectView();
-		redirectView.setUrl("https://se2-webapp05.compute.dtu.dk:8080/register");
+		redirectView.setUrl("http://se2-webapp05.compute.dtu.dk:8080/register");
 
-		return "register";
+		return redirectView;
 
 		//return "this is the ticket: " + ticket + " for student: " + studentnr;
 
