@@ -156,7 +156,7 @@ public class LoginController {
 	}
 
 	// @author s154666
-	@RequestMapping(value="/redirect", method=RequestMethod.GET)
+	@GetMapping(value="/redirect", method=RequestMethod.GET)
 	@ResponseBody
 	public String redirect(@RequestParam("ticket") String ticket) throws MalformedURLException, IOException
 	{
