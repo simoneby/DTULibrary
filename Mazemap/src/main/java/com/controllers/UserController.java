@@ -1,5 +1,6 @@
 package com.controllers;
 
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,7 +54,7 @@ public class UserController {
     {
         try
         {
-            return userRepository.findUserByStudentNumber(studentnr);
+            return userRepository.findUserByStudentnr(studentnr);
         }
         catch (HibernateException e)
         {
