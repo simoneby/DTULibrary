@@ -23,7 +23,7 @@ public class RegisterController {
 	private RoleRepository roleRepository;
 
 	@PostMapping(value = "/signup", headers = "Accept='application/json'")
-	public String signup(@RequestBody User user) {
+	public String signup(@SessionAttribute("user") User user) {
 		// return user.toString();
 
 		if (!userRepository.findUsersByEmail(user.getEmail()).isEmpty()) {

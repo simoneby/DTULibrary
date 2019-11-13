@@ -152,7 +152,8 @@ public class LoginController {
 	{
 		RedirectView redirectView = new RedirectView();
 
-		// FOR REALSIES
+		// Redirects to the Auth DTU service
+		// Returns the user with se2-webapp05.compute.dtu.dk/redirect?ticket=[TICKET]
 		redirectView.setUrl("https://auth.dtu.dk/dtu/?service=http%3A%2F%2Fse2%2Dwebapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fmazemap%2Fredirect");
 
 
@@ -183,13 +184,13 @@ public class LoginController {
 				User foundUser = userRepository.findUserByStudentnr(studentnr);
 				name = foundUser.getName();
 
-				user = foundUser;
+				this.user = foundUser;
 				// GO TO INDEX PAGE
 				return "index";
 			} catch (HibernateException | NullPointerException e){ //POSSIBLY CLEAN UP LATER
 				// GO TO REGISTER PAGE
-				user = new User();
-				user.setStudentnr(studentnr);
+				this.user = new User();
+				this.user.setStudentnr(studentnr);
 
 				return "register";
 			}
