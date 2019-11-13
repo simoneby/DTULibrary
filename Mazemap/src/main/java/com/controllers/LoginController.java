@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.*;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -162,7 +161,7 @@ public class LoginController {
 	}
 
 	// @author s154666
-	@GetMapping(value="/redirect", method=RequestMethod.GET)
+	@GetMapping(value="/redirect")
 	public String redirect(@RequestParam("ticket") String ticket) throws MalformedURLException, IOException
 	{
 
@@ -192,7 +191,7 @@ public class LoginController {
 		}
 
 
-		return "index"
+		return "index";
 		//return "." + studentnr + "." + name;
 
 	}
