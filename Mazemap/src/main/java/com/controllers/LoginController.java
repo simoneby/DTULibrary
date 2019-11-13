@@ -50,7 +50,7 @@ public class LoginController {
 	private RoleRepository roleRepository;
 	
 	private User user;
-	
+
 	@ModelAttribute("user")
 	public User setUpUserForm() {
 	return user;
@@ -155,8 +155,6 @@ public class LoginController {
 		// Returns the user with se2-webapp05.compute.dtu.dk/redirect?ticket=[TICKET]
 		redirectView.setUrl("https://auth.dtu.dk/dtu/?service=http%3A%2F%2Fse2%2Dwebapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fmazemap%2Fredirect");
 
-
-
 		return redirectView;
 	}
 
@@ -184,7 +182,7 @@ public class LoginController {
 				if (userRepository.findUserByStudentnr(studentnr) == null) 
 				{
 					User entity = new User();
-					entity.setEmail(String.format("%s@student.dtu.dk"));
+					entity.setEmail(String.format("%s@student.dtu.dk",studentnr));
 					//entity.addRole(roleRepository.findAll().iterator().next());
 					userRepository.save(entity);
 					this.user = entity;
