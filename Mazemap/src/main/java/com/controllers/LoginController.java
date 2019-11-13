@@ -174,7 +174,7 @@ public class LoginController {
 		}
 
 		RedirectView redirectView = new RedirectView();
-		redirectView.setUrl("http://se2-webapp05.compute.dtu.dk:8080/register");
+		redirectView.setUrl("http://se2-webapp05.compute.dtu.dk:8080/mazemap/register");
 
 		return redirectView;
 
