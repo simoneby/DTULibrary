@@ -176,6 +176,7 @@ public class LoginController {
 
 			try 
 			{
+
 				User foundUser = userController.getUserByStudentnr(studentnr);
 				name = foundUser.getName();
 			} catch (HibernateException | NullPointerException e){}
@@ -186,7 +187,7 @@ public class LoginController {
 
 		//return redirectView;
 
-		return "this is the ticket: " + ticket + " for student: " + studentnr + " named: " + name;
+		return "." + studentnr + ".";
 
 	}
 
