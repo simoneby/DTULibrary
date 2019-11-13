@@ -9,6 +9,7 @@ import com.controllers.UserController;
 
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -36,7 +37,7 @@ import org.springframework.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 @SessionAttributes("user")
-@Controller
+@RestController
 public class LoginController {
 	@Autowired
 	private FilteredUserRepository userRepository;
@@ -171,25 +172,31 @@ public class LoginController {
 			URLConnection con = url.openConnection();
 			InputStream in = con.getInputStream();
 			String encoding = con.getContentEncoding();  // ** WRONG: should use "con.getContentType()" instead but it returns something like "text/html; charset=UTF-8" so this value must be parsed to extract the actual encoding
-			//encoding = encoding == null ? "UTF-8" : encoding;
 			studentnr = IOUtils.toString(in, "UTF-8").replaceAll("\\s","").replaceAll("\\<.*?\\>", "");
-
 
 			try 
 			{
-
 				User foundUser = userRepository.findUserByStudentnr(studentnr);
 				name = foundUser.getName();
-			} catch (HibernateException | NullPointerException e){}
+				// GO TO INDEX PAGE
+			} catch (HibernateException | NullPointerException e){ //POSSIBLY CLEAN UP LATER
+				// GO TO REGISTER PAGE
+			}
 		}
 
 
 
-		//return redirectView;
-
 		return "." + studentnr + "." + name;
 
 	}
+
+
+
+
+
+
+
+
 
 	public static boolean isUrlValid(String url) {
 		try {
