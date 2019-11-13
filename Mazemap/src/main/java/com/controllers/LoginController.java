@@ -50,8 +50,7 @@ public class LoginController {
 	private RoleRepository roleRepository;
 	
 	private User user;
-	private UserController userController = new UserController();
-
+	
 	@ModelAttribute("user")
 	public User setUpUserForm() {
 	return user;
@@ -168,7 +167,7 @@ public class LoginController {
 
 		String studentnr = "initial";
 		String name = "noname";
-
+		boolean login = false;
 
 		String u = "https://auth.dtu.dk/dtu/servicevalidate?service=http%3A%2F%2Fse2-webapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fmazemap%2Fredirect&ticket=" + ticket;
 		if (isUrlValid(u))
@@ -181,20 +180,22 @@ public class LoginController {
 
 			try 
 			{
-				User foundUser;
-				if (userRepository.findUserByStudentnr(studentnr) == null) {
-				User entity = new User();
-				entity.setEmail(String.format("%s@student.dtu.dk"));
-				//entity.addRole(roleRepository.findAll().iterator().next());
-				userRepository.save(entity);
-				this.user = entity;
-				login = true;
+				User foundUser = null;
+				if (userRepository.findUserByStudentnr(studentnr) == null) 
+				{
+					User entity = new User();
+					entity.setEmail(String.format("%s@student.dtu.dk"));
+					//entity.addRole(roleRepository.findAll().iterator().next());
+					userRepository.save(entity);
+					this.user = entity;
+					login = true;
 				}
-				else {
-				 = userRepository.findUserByStudentnr(studentnr);
-				name = foundUser.getName();
-				login = true;
-			}
+				else 
+				{
+					foundUser = userRepository.findUserByStudentnr(studentnr);
+					//name = foundUser.getName();
+					login = true;
+				}
 
 
 				this.user = foundUser;
