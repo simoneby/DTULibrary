@@ -37,7 +37,7 @@ import org.springframework.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 @SessionAttributes("user")
-@RestController
+@Controller
 public class LoginController {
 	@Autowired
 	private FilteredUserRepository userRepository;
@@ -157,7 +157,6 @@ public class LoginController {
 
 	// @author s154666
 	@GetMapping(value="/redirect", method=RequestMethod.GET)
-	@ResponseBody
 	public String redirect(@RequestParam("ticket") String ticket) throws MalformedURLException, IOException
 	{
 
@@ -187,7 +186,7 @@ public class LoginController {
 		}
 
 
-		return "index";
+		return "index"
 		//return "." + studentnr + "." + name;
 
 	}
