@@ -172,7 +172,7 @@ public class LoginController {
 			InputStream in = con.getInputStream();
 			String encoding = con.getContentEncoding();  // ** WRONG: should use "con.getContentType()" instead but it returns something like "text/html; charset=UTF-8" so this value must be parsed to extract the actual encoding
 			encoding = encoding == null ? "UTF-16" : encoding;
-			studentnr = IOUtils.toString(in, encoding).replaceAll("\\s","");
+			studentnr = IOUtils.toString(in, "UTF-8").replaceAll("\\s","");
 
 			try 
 			{
@@ -186,7 +186,7 @@ public class LoginController {
 
 		//return redirectView;
 
-		return "." + studentnr + "." + name;
+		return "." + studentnr == "s154666" + "." + name;
 
 	}
 
