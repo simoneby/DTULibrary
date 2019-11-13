@@ -163,7 +163,8 @@ public class LoginController {
 
 
 		String u = "https://auth.dtu.dk/dtu/servicevalidate?service=http%3A%2F%2Fse2-webapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fmazemap%2Fredirect&ticket=" + ticket;
-		if (isUrlValid(u)){
+		if (isUrlValid(u))
+		{
 			URL url = new URL(u);
 			URLConnection con = url.openConnection();
 			InputStream in = con.getInputStream();
@@ -171,12 +172,16 @@ public class LoginController {
 			encoding = encoding == null ? "UTF-8" : encoding;
 			studentnr = IOUtils.toString(in, encoding);
 
-			User foundUser = userController.getUserByStudentnr(studentnr);
-
-			if (foundUser != null)
+			try 
 			{
+				User foundUser = userController.getUserByStudentnr(studentnr);
 				name = foundUser.getName();
+			} catch (HibernateException e)
+			{
 			}
+		
+
+			
 
 		}
 

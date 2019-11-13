@@ -45,17 +45,9 @@ public class UserController {
 
 
 
-    public User getUserByStudentnr(String studentnr)
+    public User getUserByStudentnr(String studentnr) throws HibernateException
     {
-        try
-        {
-            return userRepository.findUserByStudentnr(studentnr);
-        }
-        catch (HibernateException e)
-        {
-            return null;
-        }
-
+        return userRepository.findUserByStudentnr(studentnr);
     }
 
 
