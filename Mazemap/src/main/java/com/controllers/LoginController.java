@@ -179,14 +179,16 @@ public class LoginController {
 				User foundUser = userRepository.findUserByStudentnr(studentnr);
 				name = foundUser.getName();
 				// GO TO INDEX PAGE
+				return "index";
 			} catch (HibernateException | NullPointerException e){ //POSSIBLY CLEAN UP LATER
 				// GO TO REGISTER PAGE
+				return "register";
 			}
 		}
 
 
 
-		return "." + studentnr + "." + name;
+		//return "." + studentnr + "." + name;
 
 	}
 
