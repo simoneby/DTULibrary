@@ -159,6 +159,7 @@ public class LoginController {
 	public String redirect(@RequestParam("ticket") String ticket) throws MalformedURLException, IOException{
 
 		String studentnr = "no";
+		String name = "noname";
 
 
 		String u = "https://auth.dtu.dk/dtu/servicevalidate?service=http%3A%2F%2Fse2-webapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fmazemap%2Fredirect&ticket=" + ticket;
@@ -170,7 +171,7 @@ public class LoginController {
 			encoding = encoding == null ? "UTF-8" : encoding;
 			studentnr = IOUtils.toString(in, encoding);
 
-			//System.out.println(userController.getUserByStudentnr(studentnr).getName());
+			name = userController.getUserByStudentnr(studentnr).getName();
 		}
 
 		RedirectView redirectView = new RedirectView();
@@ -178,7 +179,7 @@ public class LoginController {
 
 		//return redirectView;
 
-		return "this is the ticket: " + ticket + " for student: " + studentnr;
+		return "this is the ticket: " + ticket + " for student: " + studentnr + " named: " + name;
 
 	}
 
