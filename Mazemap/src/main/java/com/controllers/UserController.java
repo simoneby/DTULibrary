@@ -49,8 +49,18 @@ public class MainController {
     }
 
 
+    public User getUserByStudentnr(String studentnr)
+    {
+        try
+        {
+            return userRepository.findUserByStudentNumber(studentnr);
+        }
+        catch (HibernateException e)
+        {
+            return null;
+        }
 
-
+    }
 
 
 //    @PostMapping(path="/addFriend") // Map ONLY POST Requests

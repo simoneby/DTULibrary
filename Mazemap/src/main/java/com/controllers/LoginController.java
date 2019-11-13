@@ -5,6 +5,8 @@ import java.util.Set;
 
 import com.models.*;
 import com.repositories.*;
+import com.controllers.UserController;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -167,6 +169,7 @@ public class LoginController {
 			encoding = encoding == null ? "UTF-8" : encoding;
 			studentnr = IOUtils.toString(in, encoding);
 
+			System.out.println(UserController.getUserByStudentnr(studentnr).getName());
 		}
 
 
