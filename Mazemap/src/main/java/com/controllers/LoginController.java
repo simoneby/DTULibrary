@@ -177,7 +177,7 @@ public class LoginController {
 			try 
 			{
 
-				User foundUser = userController.getUserByStudentnr(studentnr);
+				User foundUser = userRepository.findUserByStudentnr(studentnr);
 				name = foundUser.getName();
 			} catch (HibernateException | NullPointerException e){}
 
