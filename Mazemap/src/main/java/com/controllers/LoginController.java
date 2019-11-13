@@ -156,7 +156,7 @@ public class LoginController {
 	// @author s154666
 	@RequestMapping(value="/redirect", method=RequestMethod.GET)
 	@ResponseBody
-	public RedirectView redirect(@RequestParam("ticket") String ticket) throws MalformedURLException, IOException{
+	public String redirect(@RequestParam("ticket") String ticket) throws MalformedURLException, IOException{
 
 		String studentnr = "no";
 
@@ -176,9 +176,9 @@ public class LoginController {
 		RedirectView redirectView = new RedirectView();
 		redirectView.setUrl("http://se2-webapp05.compute.dtu.dk:8080/mazemap/register");
 
-		return redirectView;
+		//return redirectView;
 
-		//return "this is the ticket: " + ticket + " for student: " + studentnr;
+		return "this is the ticket: " + ticket + " for student: " + studentnr;
 
 	}
 
