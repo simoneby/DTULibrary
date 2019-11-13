@@ -43,6 +43,7 @@ public class LoginController {
 	private RoleRepository roleRepository;
 	
 	private User user;
+	private UserController userController;
 
 	@ModelAttribute("user")
 	public User setUpUserForm() {
@@ -169,7 +170,7 @@ public class LoginController {
 			encoding = encoding == null ? "UTF-8" : encoding;
 			studentnr = IOUtils.toString(in, encoding);
 
-			System.out.println(UserController.getUserByStudentnr(studentnr).getName());
+			System.out.println(userController.getUserByStudentnr(studentnr).getName());
 		}
 
 
