@@ -44,7 +44,7 @@ public class LoginController {
 	private RoleRepository roleRepository;
 	
 	private User user;
-	private UserController userController;
+	private UserController userController = new UserController();
 
 	@ModelAttribute("user")
 	public User setUpUserForm() {
@@ -179,7 +179,7 @@ public class LoginController {
 
 				User foundUser = userController.getUserByStudentnr(studentnr);
 				name = foundUser.getName();
-			} catch (HibernateException | NullPointerException e){name = "fuck you";}
+			} catch (HibernateException | NullPointerException e){}
 
 		}
 
