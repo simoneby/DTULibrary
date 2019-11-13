@@ -6,5 +6,5 @@ import org.springframework.data.repository.*;
 public interface FilteredUserRepository extends UserRepository{
 	  List<User> findUsersByEmail(String email);
 	  User findUserByEmail(String email);
-	  User findUserByStudentNumber(String studentnr);
+	  User findUserByStudentnr(String studentnr);
 }

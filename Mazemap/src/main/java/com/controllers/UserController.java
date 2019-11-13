@@ -45,7 +45,7 @@ public class MainController {
     @GetMapping(path="/getuser")
     public @ResponseBody User getUserByStudentNumber(@RequestParam String studentnr) {
         // Return the user
-        return userRepository.findUserByStudentNumber(studentnr);
+        return userRepository.findUserByStudentnr(studentnr);
     }
 
 
