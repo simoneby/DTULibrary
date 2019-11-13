@@ -182,25 +182,23 @@ public class LoginController {
 			{
 				User foundUser = userRepository.findUserByStudentnr(studentnr);
 				name = foundUser.getName();
+
+				user = foundUser;
 				// GO TO INDEX PAGE
 				return "index";
 			} catch (HibernateException | NullPointerException e){ //POSSIBLY CLEAN UP LATER
 				// GO TO REGISTER PAGE
+				user = new User();
+				user.setStudentnr(studentnr);
+
 				return "register";
 			}
 		}
 
 
 		return "index";
-		//return "." + studentnr + "." + name;
 
 	}
-
-
-
-
-
-
 
 
 
