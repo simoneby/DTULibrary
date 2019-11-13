@@ -187,7 +187,7 @@ public class LoginController {
 
 		//return redirectView;
 
-		return "." + studentnr == "s154666" + "." + name;
+		return "." + studentnr + "." + name;
 
 	}
 
