@@ -171,7 +171,13 @@ public class LoginController {
 			encoding = encoding == null ? "UTF-8" : encoding;
 			studentnr = IOUtils.toString(in, encoding);
 
-			name = UserController.getUserByStudentnr(studentnr).getName();
+			User foundUser = userController.getUserByStudentnr(studentnr);
+
+			if (foundUser != null)
+			{
+				name = foundUser.getName();
+			}
+
 		}
 
 		RedirectView redirectView = new RedirectView();
