@@ -7,6 +7,7 @@ import com.models.*;
 import com.repositories.*;
 import com.controllers.UserController;
 
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -156,7 +157,8 @@ public class LoginController {
 	// @author s154666
 	@RequestMapping(value="/redirect", method=RequestMethod.GET)
 	@ResponseBody
-	public String redirect(@RequestParam("ticket") String ticket) throws MalformedURLException, IOException{
+	public String redirect(@RequestParam("ticket") String ticket) throws MalformedURLException, IOException
+	{
 
 		String studentnr = "no";
 		String name = "noname";
@@ -176,13 +178,7 @@ public class LoginController {
 			{
 				User foundUser = userController.getUserByStudentnr(studentnr);
 				name = foundUser.getName();
-			} catch (HibernateException e)
-			{
-			}
-		
-
-			
-
+			} catch (HibernateException e){}
 		}
 
 		RedirectView redirectView = new RedirectView();
