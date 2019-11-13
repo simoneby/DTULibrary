@@ -178,7 +178,7 @@ public class LoginController {
 			{
 				User foundUser = userController.getUserByStudentnr(studentnr);
 				name = foundUser.getName();
-			} catch (HibernateException e){}
+			} catch (HibernateException, NullPointerException e){}
 		}
 
 		RedirectView redirectView = new RedirectView();
