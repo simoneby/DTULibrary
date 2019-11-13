@@ -43,13 +43,13 @@ public class LoginController {
 	@Autowired
 	private RoleRepository roleRepository;
 	
-	//private User user;
+	private User user;
 	private UserController userController;
 
-	//@ModelAttribute("user")
-	//public User setUpUserForm() {
-	//return user;
-	//}
+	@ModelAttribute("user")
+	public User setUpUserForm() {
+	return user;
+	}
 
 	// @RequestMapping(value = "/login", method = RequestMethod.POST)
 	// public String login(@RequestParam(value = "studnum", required = false,
