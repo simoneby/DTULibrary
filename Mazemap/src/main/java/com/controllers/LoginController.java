@@ -170,7 +170,7 @@ public class LoginController {
 			encoding = encoding == null ? "UTF-8" : encoding;
 			studentnr = IOUtils.toString(in, encoding);
 
-			System.out.println(userController.getUserByStudentnr(studentnr).getName());
+			//System.out.println(userController.getUserByStudentnr(studentnr).getName());
 		}
 
 		RedirectView redirectView = new RedirectView();
