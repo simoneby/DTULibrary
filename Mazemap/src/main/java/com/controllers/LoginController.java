@@ -160,7 +160,7 @@ public class LoginController {
 	public String redirect(@RequestParam("ticket") String ticket) throws MalformedURLException, IOException
 	{
 
-		String studentnr = "no";
+		String studentnr = "s191772";
 		String name = "noname";
 
 
@@ -172,7 +172,7 @@ public class LoginController {
 			InputStream in = con.getInputStream();
 			String encoding = con.getContentEncoding();  // ** WRONG: should use "con.getContentType()" instead but it returns something like "text/html; charset=UTF-8" so this value must be parsed to extract the actual encoding
 			encoding = encoding == null ? "UTF-8" : encoding;
-			studentnr = IOUtils.toString(in, encoding).trim();
+			//studentnr = IOUtils.toString(in, encoding).trim();
 
 			try 
 			{
