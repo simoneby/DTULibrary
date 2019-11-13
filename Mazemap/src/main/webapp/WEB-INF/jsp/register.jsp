@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<%@ page session="true" contentType="text/html;charset=UTF-8" language="java" %>
 <head>
 	<meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="css/main.css">
@@ -47,6 +47,15 @@
 
 			<div class="column">
 				<h3>Create an account</h3>
+								<%
+                if(session.getAttribute("user")!=null)
+                {
+					User user =  (User) session.getAttribute("user");
+                %>
+				<h3>You've just been signed in <%= user.getStudentnr() %> </h3>
+                 <% } else { %> 
+					<p> Session attribute is null </p>
+					<% } %>
 				<form id="signup">
 					<div class="field half first">
 						<label for="email">Email</label>

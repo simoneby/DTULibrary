@@ -181,8 +181,21 @@ public class LoginController {
 
 			try 
 			{
-				User foundUser = userRepository.findUserByStudentnr(studentnr);
+				User foundUser;
+				if (userRepository.findUserByStudentnr(studentnr) == null) {
+				User entity = new User();
+				entity.setEmail(String.format("%s@student.dtu.dk"));
+				//entity.addRole(roleRepository.findAll().iterator().next());
+				userRepository.save(entity);
+				this.user = entity;
+				login = true;
+				}
+				else {
+				 = userRepository.findUserByStudentnr(studentnr);
 				name = foundUser.getName();
+				login = true;
+			}
+
 
 				this.user = foundUser;
 				// GO TO INDEX PAGE
@@ -191,6 +204,12 @@ public class LoginController {
 				// GO TO REGISTER PAGE
 				this.user = new User();
 				this.user.setStudentnr(studentnr);
+
+				User entity = new User();
+//				entity.setEmail(email);
+//				entity.setName("some name");
+//				entity.addRole(roleRepository.findAll().iterator().next());
+//				userRepository.save(entity);
 
 				return "register";
 			}
