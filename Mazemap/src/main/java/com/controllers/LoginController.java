@@ -169,8 +169,12 @@ public class LoginController {
 
 		}
 
+		RedirectView redirectView = new RedirectView();
+		redirectView.setUrl("https://se2-webapp05.compute.dtu.dk:8080/register");
 
-		return "this is the ticket: " + ticket + " for student: " + studentnr;
+		return "register";
+
+		//return "this is the ticket: " + ticket + " for student: " + studentnr;
 
 	}
 
