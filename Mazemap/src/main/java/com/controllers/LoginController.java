@@ -130,7 +130,7 @@ public class LoginController {
 
 	// @author s154666
 	@GetMapping(value="/redirect")
-	public String redirect(@RequestParam("ticket") String ticket) throws MalformedURLException, IOException
+	public String redirect(@RequestParam("ticket") String ticket, HttpSession httpSession,Model model, HttpServletRequest request) throws MalformedURLException, IOException
 	{
 
 		String studentnr = "initial";
@@ -159,7 +159,7 @@ public class LoginController {
 					this.user = entity;
 					//login = true;
 
-					saveUserInSession();
+					saveUserInSession(httpSession);
 					// GO TO REGISTER PAGE
 					return "register";
 				}
@@ -169,7 +169,7 @@ public class LoginController {
 					//name = foundUser.getName();
 					//login = true;
 					this.user = foundUser;
-					saveUserInSession();
+					saveUserInSession(httpSession);
 					return "index";
 				}
 				
@@ -183,7 +183,7 @@ public class LoginController {
 //				entity.setName("some name");
 //				entity.addRole(roleRepository.findAll().iterator().next());
 //				userRepository.save(entity);
-				saveUserInSession();
+				saveUserInSession(httpSession);
 				return "register";
 			}
 		}
@@ -207,7 +207,7 @@ public class LoginController {
 		}
 	}
 
-	public void saveUserInSession() 
+	public void saveUserInSession(HttpSession httpSession) 
 	{
 		if(httpSession.getAttribute("user")!=null)
 			httpSession.removeAttribute("user");
