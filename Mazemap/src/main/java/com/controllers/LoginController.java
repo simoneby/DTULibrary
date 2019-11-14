@@ -46,7 +46,7 @@ public class LoginController {
 	private FilteredUserRepository userRepository;
 	@Autowired
 	private RoleRepository roleRepository;
-
+	private User user;
 
 	// if (succesfulSignIn) {
 	// if (userRepository.findUsersByEmail(user.getEmail()).isEmpty()) {
