@@ -23,19 +23,15 @@ public class RegisterController {
 	private RoleRepository roleRepository;
 
 	@PostMapping(value = "/signup", headers = "Accept='application/json'")
-	public String signup(@SessionAttribute("user") User user) {
+	public String signup(@SessionAttribute("user") User user, @RequestBody String name) {
 		// return user.toString();
 
 		if (!userRepository.findUsersByEmail(user.getEmail()).isEmpty()) {
 			return String.format("A user with the email %s already exists!", user.getEmail());
 		}
 		try {
-			// Set<Role> roleSet = new HashSet<Role>();
-			// for (Role role : user.getRoles()) {
-			// 	roleSet.add(roleRepository.findById(role.getId()).get());
-			// }
-			//user.setRoles(roleSet);
 			user.setStudentnr("student nr here");
+			user.setName(name);
 			userRepository.save(user);
 			return "You have been signed up!";
 		} catch (Exception e) {

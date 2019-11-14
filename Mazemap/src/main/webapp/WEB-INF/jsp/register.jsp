@@ -58,27 +58,10 @@
 					<p> Session attribute is null </p>
 					<% } %>
 				<form id="signup">
-					<div class="field half first">
-						<label for="email">Email</label>
-						<input name="email" id="email" type="text" placeholder="Email...">
-					</div>
 					<div class="field half ">
 						<label for="name">Name</label>
 						<input name="name" id="name" type="text" placeholder="Name...">
 					</div>
-					<!--<div class="field half">
-						<label for="password">Password</label>
-						<input name="password" id="password" type="password" placeholder="Password">
-					</div>
-					<div class="field half">
-						<label for="repassword">Repeat password</label>
-						<input name="repassword" id="repassword" type="password" placeholder="Repeat Password">
-					</div>-->
-					<!--<div class="field half">
-						<h4><label for="roles">User roles</label></h4>
-						<select id="roles" name="roles">
-						</select>
-					</div>-->
 					<ul class="actions">
 						<li><input value="Sign up" class="button" type="submit"></li>
 					</ul>
