@@ -27,6 +27,9 @@ public class RegisterController {
 		// return user.toString();
 
 		if (!userRepository.findUsersByEmail(user.getEmail()).isEmpty()) {
+			user.setName(name);
+			userRepository.setFixedNameFor(name,user.getStudentnr());
+
 			return String.format("A user with the email %s already exists!", user.getEmail());
 		}
 		try {
