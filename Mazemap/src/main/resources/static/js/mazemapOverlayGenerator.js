@@ -65,7 +65,7 @@
 		var eventData;
 	    var markerIterator;
 	    var markerIteratorPopup;
-	    fetch('http://localhost:8080/events/eventdata').then(response => {
+	    fetch('http://se2-webapp05.compute.dtu.dk:8080/mazemap/events/eventdata').then(response => {
   			return response.json();
 			}).then(data => {
   				eventData = data;
@@ -119,7 +119,7 @@
 		var zLevel = map.getZLevel();
 		if(zLevel > -1)
 			zLevel = zLevel -1; 
-		var getAddress = "http://localhost:8080/sensors/zonedata?level=".concat(zLevel);
+		var getAddress = "http://se2-webapp05.compute.dtu.dk:8080/mazemap/sensors/zonedata?level=".concat(zLevel);
 			   	
 		//need to get coords from server in the future
 		fetch(getAddress).then(response => {

@@ -165,7 +165,7 @@ body {
 		var eventData;
 	    var markerIterator;
 	    var markerIteratorPopup;
-	    fetch('http://localhost:8080/events/eventdata').then(response => {
+	    fetch('http://se2-webapp05.compute.dtu.dk:8080/mazemap/events/eventdata').then(response => {
   			return response.json();
 			}).then(data => {
   				eventData = data;
