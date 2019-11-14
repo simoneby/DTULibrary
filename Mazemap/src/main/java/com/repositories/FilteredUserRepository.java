@@ -9,4 +9,5 @@ public interface FilteredUserRepository extends UserRepository{
 	  List<User> findUsersByEmail(String email);
 	  User findUserByEmail(String email);
 	  User findUserByStudentnr(String studentnr);
+	  void updateUserName(String name);
 }
