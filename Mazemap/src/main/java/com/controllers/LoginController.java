@@ -157,8 +157,9 @@ public class LoginController {
 					//entity.addRole(roleRepository.findAll().iterator().next());
 					userRepository.save(entity);
 					this.user = entity;
-					login = true;
+					//login = true;
 
+					saveUserInSession();
 					// GO TO REGISTER PAGE
 					return "register";
 				}
@@ -166,8 +167,9 @@ public class LoginController {
 				{
 					foundUser = userRepository.findUserByStudentnr(studentnr);
 					//name = foundUser.getName();
-					login = true;
+					//login = true;
 					this.user = foundUser;
+					saveUserInSession();
 					return "index";
 				}
 				
@@ -181,7 +183,7 @@ public class LoginController {
 //				entity.setName("some name");
 //				entity.addRole(roleRepository.findAll().iterator().next());
 //				userRepository.save(entity);
-
+				saveUserInSession();
 				return "register";
 			}
 		}
@@ -203,6 +205,13 @@ public class LoginController {
 		} catch (URISyntaxException e) {
 			return false;
 		}
+	}
+
+	public void saveUserInSession() 
+	{
+		if(httpSession.getAttribute("user")!=null)
+			httpSession.removeAttribute("user");
+		httpSession.setAttribute("user", this.user);
 	}
 
 	@GetMapping(path = "/loginsuccesful")
