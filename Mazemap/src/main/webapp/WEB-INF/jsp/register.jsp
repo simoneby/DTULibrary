@@ -21,7 +21,7 @@
 	<script src="kendo-ui-core/js/kendo.dropdownlist.min.js"></script>
 	<script src="kendo-ui-core/js/kendo.multiselect.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>DTU CampusNet</title>
+	<title>DTU Hub</title>
 </head>
 
 <body>
@@ -90,7 +90,7 @@
 			<!-- Footer -->
 			<footer id="footer">
 				<div class="copyright">
-					&copy; Group E: <a href="https://se2-webapp05.compute.dtu.dk/">DTU Snapmap</a>. Images: <a
+					&copy; Group E: <a href="https://se2-webapp05.compute.dtu.dk/">DTU Hub</a>. Images: <a
 						href="http://inside.dtu.dk">DTU Inside</a>.
 				</div>
 			</footer>
