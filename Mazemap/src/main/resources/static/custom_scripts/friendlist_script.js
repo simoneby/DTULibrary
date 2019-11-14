@@ -5,7 +5,7 @@ $(document).ready(function () {
     require.config({
         baseUrl: "./kendo-ui-core/js/", // the path where the kendo scripts are present
         paths: {
-            "jquery": "/js/jquery.min",//jquery path
+            "jquery": "./jquery.min",//jquery path
         }
     });
     loadFriendlist(friends,friendRequestsReceived,friendRequestsSent);
@@ -23,7 +23,7 @@ $(document).ready(function () {
         var data = {};
         data.friendEmail = $("#friendEmail").val();
         console.log(data.friendEmail);
-        doPostRequest(data.friendEmail,'http://se2-webapp05.compute.dtu.dk:8080/mazemap/friends/add',"#addFriendResult");
+        doPostRequest(data.friendEmail,'http://localhost:8080/mazemap/friends/add',"#addFriendResult");
     };
 
     const form = document.getElementById('friendForm');
@@ -40,12 +40,12 @@ $(document).ready(function () {
 function acceptRequest(element) {
     var friendEmail = element.getAttribute("data-email");
     console.log("accepted");
-    doPostRequest(friendEmail,'http://se2-webapp05.compute.dtu.dk:8080/mazemap/friends/acceptFriendRequest',"#acceptRequestResult");
+    doPostRequest(friendEmail,'http://localhost:8080/mazemap/friends/acceptFriendRequest',"#acceptRequestResult");
 };
 function rejectRequest(element) {
     var friendEmail = element.getAttribute("data-email");
     console.log("rejected")
-    doPostRequest(friendEmail,'http://se2-webapp05.compute.dtu.dk:8080/mazemap/friends/rejectFriendRequest',"#rejectRequestResult");
+    doPostRequest(friendEmail,'http://localhost:8080/mazemap/friends/rejectFriendRequest',"#rejectRequestResult");
 };
 function doPostRequest(data, url,resultId)
 {
@@ -72,12 +72,12 @@ function loadFriendlist(friends,friendRequestsReceived,friendRequestsSent) {
             friends = new kendo.data.DataSource({
                 transport: {
                     read: {
-                        url: "http://se2-webapp05.compute.dtu.dk:8080/mazemap/friends/all",
+                        url: "http://localhost:8080/mazemap/friends/all",
                         type: "get",
                         dataType: "json"
                     },
                     destroy: {
-                        url: "http://se2-webapp05.compute.dtu.dk:8080/mazemap/friends/deleteFriend",
+                        url: "http://localhost:8080/mazemap/friends/deleteFriend",
                         type: "delete",
                         dataType: "json",
                     },
@@ -104,7 +104,7 @@ function loadFriendlist(friends,friendRequestsReceived,friendRequestsSent) {
             friendRequestsSent = new kendo.data.DataSource({
                 transport: {
                     read: {
-                        url: "http://se2-webapp05.compute.dtu.dk:8080/mazemap/friends/sentFriendRequests",
+                        url: "http://localhost:8080/mazemap/friends/sentFriendRequests",
                         type: "get",
                         dataType: "json"
                     },
@@ -124,7 +124,7 @@ function loadFriendlist(friends,friendRequestsReceived,friendRequestsSent) {
             friendRequestsReceived = new kendo.data.DataSource({
                 transport: {
                     read: {
-                        url: "http://se2-webapp05.compute.dtu.dk:8080/mazemap/friends/receivedFriendRequests",
+                        url: "http://localhost:8080/mazemap/friends/receivedFriendRequests",
                         type: "get",
                         dataType: "json"
                     },
