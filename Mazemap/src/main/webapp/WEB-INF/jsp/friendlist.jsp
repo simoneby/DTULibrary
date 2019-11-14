@@ -7,7 +7,6 @@
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
 	<link rel="stylesheet" href="kendo-ui-core/styles/kendo.common.min.css">
 	<link rel="stylesheet" href="kendo-ui-core/styles/kendo.default.min.css">
-	<link rel="stylesheet" href="kendo-ui-core/styles/kendo.listview.min.css">
 	<!-- Scripts -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery.poptrox.min.js"></script>
@@ -21,7 +20,7 @@
 	<script src="kendo-ui-core/js/kendo.data.min.js"></script>
 	<script src="kendo-ui-core/js/kendo.tabstrip.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
-	<script src="/custom_scripts/friendlist_script.js"></script>
+	<script src="./custom_scripts/friendlist_script.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>DTU CampusNet</title>
 </head>
