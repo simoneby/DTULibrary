@@ -57,16 +57,16 @@
                  <% } else { %> 
 					<p> Session attribute is null </p>
 					<% } %>
-				<form id="signup">
-					<div class="field half ">
-						<label for="name">Name</label>
-						<input name="name" id="name" type="text" placeholder="Name...">
-					</div>
+				<form id="friendForm">
+					<label for="name"> Enter your name: </label>
+					<input name="name" id="name" type="text"
+						placeholder="Enter your name here...">
+					</input>
 					<ul class="actions">
-						<li><input value="Sign up" class="button" type="submit"></li>
+						<li><input value="signup" class="button" type="submit"></li>
 					</ul>
 				</form>
-				<div id="result" class="content">
+				<div id="signupResult">
 				</div>
 			</div>
 
