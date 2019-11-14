@@ -187,12 +187,16 @@ public class LoginController {
 					userRepository.save(entity);
 					this.user = entity;
 					login = true;
+
+					// GO TO REGISTER PAGE
+					return "register";
 				}
 				else 
 				{
 					foundUser = userRepository.findUserByStudentnr(studentnr);
 					//name = foundUser.getName();
 					login = true;
+					return "index";
 				}
 
 
