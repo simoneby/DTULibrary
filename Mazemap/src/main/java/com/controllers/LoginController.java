@@ -183,6 +183,7 @@ public class LoginController {
 				{
 					User entity = new User();
 					entity.setEmail(String.format("%s@student.dtu.dk",studentnr));
+					entity.setStudentnr(studentnr);
 					//entity.addRole(roleRepository.findAll().iterator().next());
 					userRepository.save(entity);
 					this.user = entity;
