@@ -66,14 +66,14 @@
 						<label for="name">Name</label>
 						<input name="name" id="name" type="text" placeholder="Name...">
 					</div>
-					<div class="field half">
+					<!--<div class="field half">
 						<label for="password">Password</label>
 						<input name="password" id="password" type="password" placeholder="Password">
 					</div>
 					<div class="field half">
 						<label for="repassword">Repeat password</label>
 						<input name="repassword" id="repassword" type="password" placeholder="Repeat Password">
-					</div>
+					</div>-->
 					<!--<div class="field half">
 						<h4><label for="roles">User roles</label></h4>
 						<select id="roles" name="roles">
@@ -171,20 +171,20 @@
 				$("#signup").find("input, textarea, select").each(function () {
 					var inputType = this.tagName.toUpperCase() === "INPUT" && this.type.toUpperCase();
 					if (inputType !== "BUTTON" && inputType !== "SUBMIT") {
-						if (this.name === "roles") {
-							var user_roles = [];
-							$("#roles option:selected").each(function () {
-								var optionValue = $(this).val();
-								var optionText = $(this).text();
-								user_roles.push({ id: optionValue, name: optionText });
-								console.log("optionText", optionText,optionValue);
-							});
-							user[this.name] = user_roles;
-						}
-						else {
+						// if (this.name === "roles") {
+						// 	var user_roles = [];
+						// 	$("#roles option:selected").each(function () {
+						// 		var optionValue = $(this).val();
+						// 		var optionText = $(this).text();
+						// 		user_roles.push({ id: optionValue, name: optionText });
+						// 		console.log("optionText", optionText,optionValue);
+						// 	});
+						// 	user[this.name] = user_roles;
+						// }
+						// else {
 							user[this.name] = $(this).val();
 							console.log(this.name);
-						}
+						// }
 					}
 				});
 

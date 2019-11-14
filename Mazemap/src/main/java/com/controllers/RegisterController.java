@@ -30,10 +30,10 @@ public class RegisterController {
 			return String.format("A user with the email %s already exists!", user.getEmail());
 		}
 		try {
-			Set<Role> roleSet = new HashSet<Role>();
-			for (Role role : user.getRoles()) {
-				roleSet.add(roleRepository.findById(role.getId()).get());
-			}
+			// Set<Role> roleSet = new HashSet<Role>();
+			// for (Role role : user.getRoles()) {
+			// 	roleSet.add(roleRepository.findById(role.getId()).get());
+			// }
 			//user.setRoles(roleSet);
 			user.setStudentnr("student nr here");
 			userRepository.save(user);
