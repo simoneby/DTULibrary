@@ -34,7 +34,7 @@ public class RegisterController {
 			for (Role role : user.getRoles()) {
 				roleSet.add(roleRepository.findById(role.getId()).get());
 			}
-			user.setRoles(roleSet);
+			//user.setRoles(roleSet);
 			user.setStudentnr("student nr here");
 			userRepository.save(user);
 			return "You have been signed up!";

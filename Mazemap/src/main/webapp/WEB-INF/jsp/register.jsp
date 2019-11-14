@@ -74,11 +74,11 @@
 						<label for="repassword">Repeat password</label>
 						<input name="repassword" id="repassword" type="password" placeholder="Repeat Password">
 					</div>
-					<div class="field half">
+					<!--<div class="field half">
 						<h4><label for="roles">User roles</label></h4>
 						<select id="roles" name="roles">
 						</select>
-					</div>
+					</div>-->
 					<ul class="actions">
 						<li><input value="Sign up" class="button" type="submit"></li>
 					</ul>
@@ -129,31 +129,36 @@
 				}
 			});
 
-			var roleData1 = [];
-			require(["jquery", "kendo.multiselect.min"],
-				function ($, kendo) {
-					roleData1 = new kendo.data.DataSource({
-						transport: {
-							read: {
-								url: "https://se2-webapp05.compute.dtu.dk:8080/roles/all",
-								type: "get",
-								dataType: "json"
-							}
-						}
-					});
+			// var roleData1 = [];
+			// require(["jquery", "kendo.multiselect.min"],
+			// 	function ($, kendo) {
+			// 		roleData1 = new kendo.data.DataSource({
+			// 			transport: {
+			// 				read: {
+			// 					url: "https://se2-webapp05.compute.dtu.dk:8080/roles/all",
+			// 					type: "get",
+			// 					dataType: "json"
+			// 				}
+			// 			}
+			// 		});
 
-					// create multiSelect from input HTML element
-					roleData1.read().then(function () {
-						$("#roles").kendoMultiSelect({
-							placeHolder: "Select user roles...",
-							autoBind: true,
-							dataSource: roleData1,
-							dataTextField: "name",
-							dataValueField: "id",
-							value: []
-						}).data("kendoMultiSelect");
-					});
-				});
+			// 		// create multiSelect from input HTML element
+			// 		roleData1.read().then(function () 
+			// 		{
+			// 			$("#roles").kendoMultiSelect(
+			// 			{
+			// 				placeHolder: "Select user roles...",
+			// 				autoBind: true,
+			// 				dataSource: roleData1,
+			// 				dataTextField: "name",
+			// 				dataValueField: "id",
+			// 				value: []
+			// 			}
+			// 			).data("kendoMultiSelect");
+			// 		}
+			// 		);
+			// 	}
+			// );
 
 			const handleFormSubmit = event => {
 
