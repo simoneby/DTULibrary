@@ -42,7 +42,7 @@
 			<section id="banner">
 				<div class="inner">
 					<div class="column">
-						<h1>Welcome to DTU Map</h1>
+						<h1>Welcome to DTU Hub</h1>
 						<p>Your guide to life on campus</p>
 					</div>
 					<div class="column">
@@ -89,10 +89,10 @@
 			<section id="contact">
 				<!-- Social -->
 				<div class="social column">
-					<h3>About DTU Map</h3>
+					<h3>About DTU Hub</h3>
 					<p>Here you can look at upcoming events, follow your friends around and find classrooms and shit!
 						Welcome to
-						the DTU Map, your new favourite website while on campus :).</p>
+						the DTU Hub, your new favourite website while on campus :).</p>
 					<p>Click on events to see their description and add them to your calendar! </p>
 					<h3>Social Media</h3>
 					<ul class="icons">

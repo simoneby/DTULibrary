@@ -99,8 +99,8 @@
 			<section id="contact">
 				<!-- Social -->
 					<div class="social column">
-						<h3>About DTU Map</h3>
-						<p>Here you can look at upcoming events, follow your friends around and find classrooms and shit! Welcome to the DTU Map, your new favourite website while on campus :).</p>
+						<h3>About DTU Hub</h3>
+						<p>Here you can look at upcoming events, follow your friends around and find classrooms and shit! Welcome to the DTU Hub, your new favourite website while on campus :).</p>
 						<p>Click on events to see their description and add them to your calendar! </p>
 						<h3>Social Media</h3>
 						<ul class="icons">
