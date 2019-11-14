@@ -1,4 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session="true" contentType="text/html;charset=UTF-8" language="java" %>
+<%@page import="com.models.User"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +32,7 @@
 				<li><a href="index"><span class="icon fa-home"></span></a></li>
 				<li><a href=""><span class="icon fas fa-map"></span></a></li>
 				<li><a href="friendlist"><span class="icon fas fa-users"></span></a></li>
-				<li><a href="#" class="active"><span class="icon fas fa-sign-in"></span></a></li>
+				<li><a href="login" class="active"><span class="icon fas fa-sign-in"></span></a></li>
 			</ul>
 		</nav>
 
@@ -45,7 +46,15 @@
 			</section>
 
 		<div class="column">
-			<h3>You've just been signed in <%= request.getParameter("name") %> </h3>
+				<%
+                if(session.getAttribute("user")!=null)
+                {
+					User user =  (User) session.getAttribute("user");
+                %>
+				<h3>You've just been signed in <%= user.getEmail() %> </h3>
+                 <% } else { %> 
+					<p> Session attribute is null fuck </p>
+					<% } %>
 			<div id="#result" class="column inner"></div>
 		</div>
 			<!-- Footer -->

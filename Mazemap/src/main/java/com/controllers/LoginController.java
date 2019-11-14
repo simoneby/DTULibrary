@@ -1,7 +1,7 @@
 package com.controllers;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.models.*;
 import com.repositories.*;
@@ -9,15 +9,13 @@ import com.controllers.UserController;
 
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.*;
 
 import org.springframework.ui.Model;
@@ -48,35 +46,7 @@ public class LoginController {
 	private FilteredUserRepository userRepository;
 	@Autowired
 	private RoleRepository roleRepository;
-	
-	private User user;
 
-	@ModelAttribute("user")
-	public User setUpUserForm() {
-	return user;
-	}
-
-	// @RequestMapping(value = "/login", method = RequestMethod.POST)
-	// public String login(@RequestParam(value = "studnum", required = false,
-	// defaultValue = "") String name) {
-
-	// return "Grats you've been logged in!\t" + name;
-	// }
-
-	// @RequestMapping(method = RequestMethod.POST,value = "/loginNew",headers =
-	// "Accept='application/json'")
-	// public String loginWithEmail(@ModelAttribute("user") User user) {
-	// /*
-	// * if(roleRepository.findAll()==null ||
-	// * !roleRepository.findAll().iterator().hasNext()) { roleRepository.save(new
-	// * Role("Student")); roleRepository.save(new Role("Faculty"));
-	// * roleRepository.save(new Role("Library Staff")); }
-	// */
-	// if(user == null || user.getEmail() == null)
-	// return "not logged in";
-
-	// // check DTU inside sign in
-	// boolean succesfulSignIn = true;
 
 	// if (succesfulSignIn) {
 	// if (userRepository.findUsersByEmail(user.getEmail()).isEmpty()) {
@@ -235,37 +205,14 @@ public class LoginController {
 		}
 	}
 
+	@GetMapping(path = "/loginsuccesful")
+	public String loginsuccesful(@RequestParam(value = "name", required = false, defaultValue = "World") String name) {
+		return "loginsuccesful";
+	}
 
-
-
-
-	//{
-
-		// USER WILL RETURN WITH URL
-		// https://se2-webapp05.compute.dtu.dk:8080?ticket=[TICKET]
-		// WHERE TICKET IS USED TO GET DATA FROM CAMPUSNET ( I THINK ??? )
-
-		// ON SUCCESSFUL LOGIN:
-		// DTU CAS RESPONDS WITH
-		// yes
-		// [USERNAME] (NOT THE USER'S NAME BUT THE USERNAME IN CAS)
-
-
-		// ON UNSUCCESSFUL LOGIN:
-		// DTU CAS RESPONDS WITH
-		// no
-
-
-
-	//	return "Grats you've been logged in!\t";
-	//}
-
-
-
-
-
-	@GetMapping(path="/loginsuccesful")
-    public String loginsuccesful(@RequestParam(value="name", required=false, defaultValue="World") String name) {
-        return "loginsuccesful";
-    }
+	@RequestMapping("/logout")
+	public String logout(Model model, HttpServletRequest request, SessionStatus status) {
+		status.setComplete();
+		return "loginsuccesful";
+	}
 }
