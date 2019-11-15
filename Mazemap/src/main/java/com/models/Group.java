@@ -3,6 +3,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+// @Author: s191772
 @Entity(name = "group_of_users") // This tells Hibernate to make a table out of this class
 public class Group {
     @Id

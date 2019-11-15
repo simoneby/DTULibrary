@@ -5,8 +5,6 @@ import javax.servlet.http.HttpSession;
 
 import com.models.*;
 import com.repositories.*;
-import com.controllers.UserController;
-
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,7 +36,7 @@ import org.springframework.*;
 
 // import com.controllers.RedirectController.*;
 import org.springframework.web.servlet.view.RedirectView;
-
+// @Author: s191772 and s154666
 @SessionAttributes("user")
 @Controller
 public class LoginController {

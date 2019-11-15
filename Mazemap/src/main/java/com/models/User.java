@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.*;
 
+
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "friends", "teammates", "friendRequests",
         "sentFriendRequests", "receivedFriendRequests" })
 @Entity // This tells Hibernate to make a table out of this class

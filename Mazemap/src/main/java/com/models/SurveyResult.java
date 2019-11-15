@@ -17,7 +17,7 @@ import java.util.*;
 
 
 
-
+// @Author: s191772
 @Entity(name="survey_result") // This tells Hibernate to make a table out of this class
 public class SurveyResult {
     @Id
