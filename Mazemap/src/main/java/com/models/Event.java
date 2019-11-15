@@ -18,10 +18,12 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
+  
     private String name; // name of the event
 
-    private String location;  // string or ??
+    private double lat;  // string or ??
+    
+    private double lng;  // string or ??
 
     private String description; // string or text file(?)
 
@@ -30,7 +32,6 @@ public class Event {
     private java.sql.Date date;
 
     private java.sql.Time time;
-
 
     public Date getDate() {
         return date;
@@ -70,16 +71,24 @@ public class Event {
         return description;
     }
 
-    public void setDescription(String setDescription) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public String getLocation() {
-        return location;
+    public double getLng() {
+        return lng;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
     }
 
     public Boolean getPublic() {
