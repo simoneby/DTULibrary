@@ -51,20 +51,4 @@ public class UserController {
     }
 
 
-//    @PostMapping(path="/addFriend") // Map ONLY POST Requests
-//    public @ResponseBody String addFriends(@RequestParam int id1, @RequestParam int id2) {
-//        // @ResponseBody means the returned String is the response, not a view name
-//        // @RequestParam means it is a parameter from the GET or POST request
-//
-//        Friendship f = new Friendship();
-//        f.setActive(true);
-//        f.setDate(new Date());
-//        f.setRequester(userRepository.findById(id1));
-//        f.setFriend(userRepository.findById(id2));
-//        em.persist(f);
-//    }
-//
-//
-
-
 }
