@@ -9,11 +9,7 @@ JDK 10 or higher
 Installation:
 
 The application requires a database running, therefor create a database.
-
-Default app values for the database:
-name: springbootdb
-user: root
-password: root
+(Ask for default app values for the database). 
 
 If any values differs from this DTULibrary\Mazemap\src\main\resources\static\application.properties need to reflect the actual values database name, user and password.
 
