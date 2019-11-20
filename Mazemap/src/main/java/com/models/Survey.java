@@ -25,17 +25,29 @@ public class Survey {
     private String description;
     private Date startDate;
     private Date endDate;
-    private Set<Question> questions;
+
     @ManyToOne
     @JoinColumn(name="survey_creator")
-
     private User creator;
     public void setCreator (User creator) {
         this.creator = creator;
     }
-
     public User getCreator() {
         return creator;
     }
+
+
+    @OneToMany(mappedBy = "question")
+    @JoinColumn(name="survey_id")
+    private Set<Question> questions;
+
+    public Set<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Set<Question> questions) {
+        this.questions = questions;
+    }
+
 
 }
