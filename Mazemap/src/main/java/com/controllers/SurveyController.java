@@ -3,6 +3,7 @@ package com.controllers;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.helpers.ReturnMessageHelper;
 import com.models.*;
 import com.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,38 +14,37 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import java.sql.Date;
+
 
 
 @RequestMapping("/survey")
 @RestController
 public class SurveyController {
+
     @Autowired
     private FilteredUserRepository userRepository;
 
     @Autowired
     private SurveyRepository surveyRepository;
 
+
     @PostMapping(value = "/save", headers = "Accept='application/json'")
-    public String save(@RequestBody Survey survey) {
+    public String save(@SessionAttribute("user") User currentUser, @RequestBody Survey survey) {
 
+        if (userRepository.findUserByStudentnr(currentUser.getStudentnr()) != null) {
 
+            Date today = new Date(0);
+            survey.setStartDate(today);
 
+            survey.setCreator(currentUser);
 
-
-
-        if (!userRepository.findUsersByEmail(user.getEmail()).isEmpty()) {
-            return String.format("A user with the email %s already exists!", user.getEmail());
+            surveyRepository.save(survey);
+            return ReturnMessageHelper.getReturnMessage("survey saved!");
         }
-        try {
-            Set<Role> roleSet = new HashSet<Role>();
-            for (Role role : user.getRoles()) {
-                roleSet.add(roleRepository.findById(role.getId()).get());
-            }
-            user.setRoles(roleSet);
-            userRepository.save(user);
-            return "You have been signed up!";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "There was an error! User was not created! Please Try again! " + user.toString();
+        else {
+            return ReturnMessageHelper.getReturnMessage("You need to log in to create a survey!");
         }
     }
+
+}
