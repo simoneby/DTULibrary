@@ -3,6 +3,7 @@ package com.models;
 import javax.persistence.*;
 import java.util.Set;
 
+@Entity
 public class Question
 {
     @Id
