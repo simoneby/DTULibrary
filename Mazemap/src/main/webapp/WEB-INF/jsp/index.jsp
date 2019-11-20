@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="stylesheet" type="text/css" href="main.css">
-	<link rel="stylesheet" type="text/css" href="custom.css">
-	<link rel="stylesheet" href="kendo-ui-core/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="kendo-ui-core/styles/kendo.default.min.css">
+	<link rel="stylesheet" type="text/css" href="./css/main.css">
+	<link rel="stylesheet" type="text/css" href="./css/custom.css">
+	<link rel="stylesheet" href="./kendo-ui-core/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="./kendo-ui-core/styles/kendo.default.min.css">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>DTU CampusNet</title>
@@ -38,6 +38,9 @@
 				</div>
 			</section>
 
+			<!--Share Location to All-->
+
+
 			<section id="map">
 				<div class="inner column">
 					<h2> Upcoming Events: </h2>
@@ -53,13 +56,51 @@
 					</iframe>
 				</div>
 			</section>
+			<section id="shareLocation">
+				<button onclick="broadcastToAll()">
+					<!-- <input type="button" onclick="window.alert('Hi!')"> -->
+				<script>
+					function broadcastToAll(){
+						var locMessage = prompt("Tell your friends where you are: ");
+						var stLoc = JSON.parse(localStorage.getItem("storedLocation"));
+						alert("Broadcasting my Location:" + stLoc.lat + "," + stLoc.long +"\n" + locMessage);
+						var loc = {
+							coordinateX: stLoc.lat,
+							coordinateY: stLoc.long,
+							locationMessage: locMessage
+						}
+						//add location onto database
+						console.log(loc);
+						$.ajax({
+					contentType: 'application/json',
+					data: JSON.stringify(loc),
+					dataType: 'json',
+					success: function (data, status) {
+						console.log(data);
+						$("#result").text("<p>"+data+"</p>");
+					},
+					error: function () {
+						console.log("Stuff happened");
+					},
+					processData: false,
+					type: 'POST',
+					url: 'http://localhost:8080/location/addMessage'
+				});
+
+					}
+				</script>
+   						Broadcast Location
+				</button>
+			</section>
+
+			
 
 			<!-- Contact -->
 			<section id="contact">
 				<!-- Social -->
 					<div class="social column">
-						<h3>About DTU Map</h3>
-						<p>Here you can look at upcoming events, follow your friends around and find classrooms and shit! Welcome to the DTU Map, your new favourite website while on campus :).</p>
+						<h3>About DTU Hub</h3>
+						<p>Here you can look at upcoming events, follow your friends around and find classrooms and shit! Welcome to the DTU Hub, your new favourite website while on campus :).</p>
 						<p>Click on events to see their description and add them to your calendar! </p>
 						<h3>Social Media</h3>
 						<ul class="icons">
@@ -80,13 +121,13 @@
 	</div>
 
 	<!-- Scripts -->
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/jquery.poptrox.min.js"></script>
-	<script src="/js/jquery.scrolly.min.js"></script>
-	<script src="/js/skel.min.js"></script>
-	<script src="/js/util.js"></script>
-	<script src="/js/main.js"></script>
-	<script src="/kendo-ui-core/js/kendo.core.min.js"></script>
+	<script src="./js/jquery.min.js"></script>
+	<script src="./js/jquery.poptrox.min.js"></script>
+	<script src="./js/jquery.scrolly.min.js"></script>
+	<script src="./js/skel.min.js"></script>
+	<script src="./js/util.js"></script>
+	<script src="./js/main.js"></script>
+	<script src="./kendo-ui-core/js/kendo.core.min.js"></script>
 
 	
 </body>

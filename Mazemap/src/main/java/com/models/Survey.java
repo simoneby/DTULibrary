@@ -9,15 +9,13 @@ import java.sql.Time;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import javax.persistence.*;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import java.io.Serializable;
 import java.util.*;
 import java.sql.Blob;
 
 
-
+// @Author: s191772
 @Entity // This tells Hibernate to make a table out of this class
 public class Survey {
     @Id
