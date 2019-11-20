@@ -71,13 +71,11 @@ public class SurveyController {
 
         Question question1 = new Question();
         question1.setText("How shit is it?");
-        //question1.setSurvey(survey);
         questionRepository.save(question1);
 
 
         Question question2 = new Question();
         question2.setText("Which one is the shittiest?");
-        //question2.setSurvey(survey);
         questionRepository.save(question2);
 
 
@@ -89,6 +87,12 @@ public class SurveyController {
         surveyRepository.save(survey);
         return survey;
     }
+
+    // TODO: Save surveyAnswers (and QuestionAnswers)
+
+    // TODO: get/filter survey by date (to display only current surveys)
+
+    // TODO: get/filter survey by creator (to display to the user)
 
 
 
