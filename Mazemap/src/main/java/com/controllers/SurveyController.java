@@ -22,7 +22,7 @@ public class SurveyController {
     private FilteredUserRepository userRepository;
 
     @Autowired
-    private
+    private SurveyRepository surveyRepository;
 
     @PostMapping(value = "/save", headers = "Accept='application/json'")
     public String save(@RequestBody Survey survey) {
