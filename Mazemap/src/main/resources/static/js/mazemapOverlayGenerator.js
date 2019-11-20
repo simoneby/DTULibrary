@@ -1,106 +1,6 @@
-<!DOCTYPE html>
-<head>
-<meta name="viewport" id="vp"
-	content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
-<meta charset="utf-8" />
 
 
-<link rel="stylesheet"
-	href="https://api.mazemap.com/js/v2.0.14/mazemap.min.css">
-<script type='text/javascript'
-	src='https://api.mazemap.com/js/v2.0.14/mazemap.min.js'></script>
-	
-
-<style>
-body {
-	margin: 0px;
-	padding: 0px;
-	width: 100%;
-	height: 100%;
-	
-}
-#events{
-            position: absolute;
-            box-sizing: border-box;
-            padding: 10px;
-            top: 10px;
-            left: 10px;
-            width: auto;
-            height: auto;
-            width: calc( 50% - 20px );
-            display: none;
-            background: rgb(255, 255, 255);
-            border-radius: 4px;
-            box-shadow: 0px 0px 0px 1px rgba(93, 93, 93, 0.31)
-        }
-</style>
-</head>
-<body>
-   
-	<div id="startLat"></div>
-
-	<div id="startLon"></div>
-	<div id="map" class="mazemap"></div>
-    <div id="events"></div>
-	<script>
-    	var currentLat,currentLong;
-        var map = new Mazemap.Map({
-            // container id specified in the HTML
-            container: 'map',
-
-            campuses: 89,
-
-            // initial position in lngLat format
-            
-            center: {lng: 12.521545, lat: 55.785585},
-
-            // initial zoom
-            zoom: 15,
-
-            zLevel: 1
-        });
-
-        // Add zoom and rotation controls to the map.
-        map.addControl(new Mazemap.mapboxgl.NavigationControl());
-		var zonePolygons;
-		var lngLat = {lng: 12.525542, lat: 55.786158}; // DTU Library
-		
-		window.onload = function() {
-			
-		// check for Geolocation support
-		if (navigator.geolocation) {
-			console.log('Geolocation is supported!');
-		}
-		else {
-			console.log('Geolocation is not supported for this Browser/OS.');
-		}
-
-		  	var startPos;
-		  	var geoOptions = {
-			    enableHighAccuracy: true
-			}
-		  	var geoSuccess = function(position) {
-		  		startPos = position;
-		    	document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-		    	document.getElementById('startLon').innerHTML = startPos.coords.longitude;
-		    	currentLat = startPos.coords.latitude;
-		    	currentLong = startPos.coords.longitude;
-			};
-			navigator.geolocation.getCurrentPosition(geoSuccess);
-		};
-		
-		//map.center = {lng: currentLong, lat: currentLat};
-		  map.on('load', function(){
-			  
-			  console.log(currentLong,currentLat);
-		
-		var blueDot = new Mazemap.BlueDot( {
-		   	zLevel: 1,
-		   	accuracyCircle: true
-			} )
-			.setLngLat( {lng: currentLong, lat: currentLat} )
-			.setAccuracy(10).addTo(map);
-		/**
+	/**
  		* Kasper Jensen s183051
  		*
  		* Layers, get request for zones
@@ -135,7 +35,7 @@ body {
 	    //fetching events on window load
 	    redrawMarkers();
 	    	         
-		  });
+	
 			  
 	//simple append function
 	function appendString(item, output) {
@@ -171,7 +71,7 @@ body {
   				eventData = data;
   				for(var i in eventData){
   			  		markerIterator = new Mazemap.MazeMarker( {
-				zLevel : 1,
+				zLevel : 0,
 				color: 'green',
 				innerCircle: true,
 				innerCircleColor: '#FEFEFE',
@@ -190,7 +90,6 @@ body {
 		
   		  	}                                    
 		}).catch(err => {
-			/*
   			eventData = testMarkers;
   			for(var i in eventData){
   				markerIterator = new Mazemap.MazeMarker( {
@@ -210,9 +109,8 @@ body {
 		markerIterator.setPopup(markerIteratorPopup);
 		
 		markerIterator.addTo(map);
-  			}
-		*/
-  		         
+		
+  		}         
 	});
 	}
 				    
@@ -243,7 +141,3 @@ body {
   			console.log('The request failed!'); 
 		});	         
 	}
-	
-    </script>
-    
-</body>

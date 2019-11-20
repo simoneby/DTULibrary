@@ -1,49 +1,8 @@
-<!DOCTYPE html>
-<head>
-<meta name="viewport" id="vp"
-	content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width" />
-<meta charset="utf-8" />
-
-
-<link rel="stylesheet"
-	href="https://api.mazemap.com/js/v2.0.14/mazemap.min.css">
-<script type='text/javascript'
-	src='https://api.mazemap.com/js/v2.0.14/mazemap.min.js'></script>
-	
-
-<style>
-body {
-	margin: 0px;
-	padding: 0px;
-	width: 100%;
-	height: 100%;
-	
-}
-#events{
-            position: absolute;
-            box-sizing: border-box;
-            padding: 10px;
-            top: 10px;
-            left: 10px;
-            width: auto;
-            height: auto;
-            width: calc( 50% - 20px );
-            display: none;
-            background: rgb(255, 255, 255);
-            border-radius: 4px;
-            box-shadow: 0px 0px 0px 1px rgba(93, 93, 93, 0.31)
-        }
-</style>
-</head>
-<body>
-   
-	<div id="startLat"></div>
-
-	<div id="startLon"></div>
-	<div id="map" class="mazemap"></div>
-    <div id="events"></div>
-	<script>
     	var currentLat,currentLong;
+    	var curLocation = {
+    		lat : 0,
+    		long : 0
+    	};
         var map = new Mazemap.Map({
             // container id specified in the HTML
             container: 'map',
@@ -68,74 +27,89 @@ body {
 		window.onload = function() {
 			
 		// check for Geolocation support
-		if (navigator.geolocation) {
-			console.log('Geolocation is supported!');
-		}
-		else {
-			console.log('Geolocation is not supported for this Browser/OS.');
-		}
-
-		  	var startPos;
-		  	var geoOptions = {
-			    enableHighAccuracy: true
+			if (navigator.geolocation) {
+				console.log('Geolocation is supported!');
 			}
-		  	var geoSuccess = function(position) {
-		  		startPos = position;
-		    	document.getElementById('startLat').innerHTML = startPos.coords.latitude;
-		    	document.getElementById('startLon').innerHTML = startPos.coords.longitude;
-		    	currentLat = startPos.coords.latitude;
-		    	currentLong = startPos.coords.longitude;
-			};
-			navigator.geolocation.getCurrentPosition(geoSuccess);
+			else {
+				console.log('Geolocation is not supported for this Browser/OS.');
+			}
+
+			  	var startPos;
+			  	var geoOptions = {
+				    enableHighAccuracy: true
+				}
+			  	var geoSuccess = function(position) {
+			  		startPos = position;
+			    	document.getElementById('startLat').innerHTML = startPos.coords.latitude;
+			    	document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+			    	currentLat = startPos.coords.latitude;
+			    	currentLong = startPos.coords.longitude;
+				};
+				navigator.geolocation.getCurrentPosition(geoSuccess);
 		};
 		
 		//map.center = {lng: currentLong, lat: currentLat};
-		  map.on('load', function(){
+		map.on('load', function(){
 			  
-			  console.log(currentLong,currentLat);
+			console.log(currentLong,currentLat);
+			curLocation.lat = currentLat;
+			curLocation.long = currentLong;
+			localStorage.setItem("storedLocation",JSON.stringify(curLocation));
 		
-		var blueDot = new Mazemap.BlueDot( {
-		   	zLevel: 1,
-		   	accuracyCircle: true
-			} )
-			.setLngLat( {lng: currentLong, lat: currentLat} )
-			.setAccuracy(10).addTo(map);
+			var blueDot = new Mazemap.BlueDot( {
+			   	zLevel: 1,
+			   	accuracyCircle: true
+				} )
+				.setLngLat( {lng: currentLong, lat: currentLat} )
+				.setAccuracy(10).addTo(map);
+
+			var tempMarker = new Mazemap.MazeMarker( {
+                color: "MazeBlue",
+                size: 36,
+                zLevel: 1,
+                glyph: 'friend1',
+                glyphColor:'#000000',
+                glyphSize:'20'
+            }).setLngLat({lng: currentLong, lat: currentLat}).addTo(map);
+
+		
+
 		/**
  		* Kasper Jensen s183051
  		*
  		* Layers, get request for zones
  		*/
  		
-		map.addLayer({
-			      id: 'custom-polygon-layer',
-		          type: "fill",
-		          source: {
-		    	      type: 'geojson',
-		              data: null,
-		          },
-		          paint: {
-		              "fill-color": "#fc0",
-		              "fill-outline-color": "red"
-		          }
-		      });			 
-		map.layerEventHandler.on('click', 'custom-polygon-layer', (e, features) => {    
-           	var output = ""
-           	var zonePropertiesArray = JSON.parse(features[0].properties.zoneProperties);
-           	for(var i in zonePropertiesArray)
-           		output = appendString(zonePropertiesArray[i], output);
-                	
-           	document.getElementById("events").style.display = "flex";
-           	document.getElementById("events").innerHTML = output; 
-        });		
-            
-		map.on('zlevel', redrawPolygons);
-	    redrawPolygons();
-	    
-	    
-	    //fetching events on window load
-	    redrawMarkers();
+			map.addLayer({
+				      id: 'custom-polygon-layer',
+			          type: "fill",
+			          source: {
+			    	      type: 'geojson',
+			              data: null,
+			          },
+			          paint: {
+			              "fill-color": "#fc0",
+			              "fill-outline-color": "red"
+			          }
+			      });			 
+			map.layerEventHandler.on('click', 'custom-polygon-layer', (e, features) => {    
+	           	var output = ""
+	           	var zonePropertiesArray = JSON.parse(features[0].properties.zoneProperties);
+	           	for(var i in zonePropertiesArray)
+	           		output = appendString(zonePropertiesArray[i], output);
+	                	
+	           	document.getElementById("events").style.display = "flex";
+	           	document.getElementById("events").innerHTML = output; 
+	        });		
+	            
+			map.on('zlevel', redrawPolygons);
+		    redrawPolygons();
+		    
+		    
+		    //fetching events on window load
+		    redrawMarkers();
 	    	         
-		  });
+		});
 			  
 	//simple append function
 	function appendString(item, output) {
@@ -165,13 +139,13 @@ body {
 		var eventData;
 	    var markerIterator;
 	    var markerIteratorPopup;
-	    fetch('http://se2-webapp05.compute.dtu.dk:8080/mazemap/events/eventdata').then(response => {
+	    fetch('!!!!!ADDRESS!!!!!').then(response => {
   			return response.json();
 			}).then(data => {
   				eventData = data;
   				for(var i in eventData){
   			  		markerIterator = new Mazemap.MazeMarker( {
-				zLevel : 1,
+				zLevel : eventData[i].zLevel,
 				color: 'green',
 				innerCircle: true,
 				innerCircleColor: '#FEFEFE',
@@ -180,9 +154,9 @@ body {
 				glyphSize: 20,
 				glyph: '🤷'
 			} )
-			.setLngLat({lng: eventData[i].lng, lat: eventData[i].lat})
+			.setLngLat({lng: eventData[i].coordinates[0], lat: eventData[i].coordinates[1]})
 			markerIteratorPopup = new Mazemap.Popup({ closeOnClick: true, offset: [0,-40]})
-			.setHTML(eventData[i].date + " at " + eventData[i].time + " --- " + eventData[i].description);
+			.setHTML(eventData[i].date + " at " + eventData[i].hour + " --- " + eventData[i].eventDescription);
 
 			markerIterator.setPopup(markerIteratorPopup);
 		
@@ -190,11 +164,10 @@ body {
 		
   		  	}                                    
 		}).catch(err => {
-			/*
   			eventData = testMarkers;
   			for(var i in eventData){
   				markerIterator = new Mazemap.MazeMarker( {
-			zLevel : 0,
+			zLevel : eventData[i].zLevel,
 			color: 'green',
 			innerCircle: true,
 			innerCircleColor: '#FEFEFE',
@@ -210,18 +183,20 @@ body {
 		markerIterator.setPopup(markerIteratorPopup);
 		
 		markerIterator.addTo(map);
-  			}
-		*/
-  		         
+		
+  		}         
 	});
 	}
-				    
+	// function broadcastToAll(){
+	// 		console.log(currentLat, currentLong);
+	// 		return ;
+	// }			    
 	//function to get and redraw polygons on start and on floor switch, Coordinates need to be server side
 	function redrawPolygons() {
 		var zLevel = map.getZLevel();
 		if(zLevel > -1)
 			zLevel = zLevel -1; 
-		var getAddress = "http://se2-webapp05.compute.dtu.dk:8080/mazemap/sensors/zonedata?level=".concat(zLevel);
+		var getAddress = "http://localhost:8080/sensors/zonedata?level=".concat(zLevel);
 			   	
 		//need to get coords from server in the future
 		fetch(getAddress).then(response => {
@@ -243,7 +218,3 @@ body {
   			console.log('The request failed!'); 
 		});	         
 	}
-	
-    </script>
-    
-</body>

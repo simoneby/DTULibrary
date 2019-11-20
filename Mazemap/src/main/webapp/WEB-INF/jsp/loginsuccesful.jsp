@@ -1,24 +1,25 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session="true" contentType="text/html;charset=UTF-8" language="java" %>
+<%@page import="com.models.User"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<link rel="stylesheet" type="text/css" href="/css/main.css">
-	<link rel="stylesheet" type="text/css" href="/css/custom.css">
-	<link rel="stylesheet" href="/kendo-ui-core/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="/kendo-ui-core/styles/kendo.default.min.css">
+	<link rel="stylesheet" type="text/css" href="./css/main.css">
+	<link rel="stylesheet" type="text/css" href="./css/custom.css">
+	<link rel="stylesheet" href="./kendo-ui-core/styles/kendo.common.min.css">
+    <link rel="stylesheet" href="./kendo-ui-core/styles/kendo.default.min.css">
 		<!-- Scripts -->
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/jquery.poptrox.min.js"></script>
-	<script src="/js/jquery.scrolly.min.js"></script>
-	<script src="/js/skel.min.js"></script>
-	<script src="/js/util.js"></script>
-	<script src="/js/main.js"></script>
+	<script src="./js/jquery.min.js"></script>
+	<script src="./js/jquery.poptrox.min.js"></script>
+	<script src="./js/jquery.scrolly.min.js"></script>
+	<script src="./js/skel.min.js"></script>
+	<script src="./js/util.js"></script>
+	<script src="./js/main.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
-	<script src="/kendo-ui-core/js/kendo.core.min.js"></script>
-	<script src="/kendo-ui-core/js/kendo.data.min.js"></script>
-	<script src="/kendo-ui-core/js/kendo.dropdownlist.min.js"></script>
-	<script src="/kendo-ui-core/js/kendo.multiselect.min.js"></script>
+	<script src="./kendo-ui-core/js/kendo.core.min.js"></script>
+	<script src="./kendo-ui-core/js/kendo.data.min.js"></script>
+	<script src="./kendo-ui-core/js/kendo.dropdownlist.min.js"></script>
+	<script src="./kendo-ui-core/js/kendo.multiselect.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>DTU CampusNet</title>
 </head>
@@ -31,7 +32,7 @@
 				<li><a href="index"><span class="icon fa-home"></span></a></li>
 				<li><a href=""><span class="icon fas fa-map"></span></a></li>
 				<li><a href="friendlist"><span class="icon fas fa-users"></span></a></li>
-				<li><a href="#" class="active"><span class="icon fas fa-sign-in"></span></a></li>
+				<li><a href="login" class="active"><span class="icon fas fa-sign-in"></span></a></li>
 			</ul>
 		</nav>
 
@@ -45,7 +46,15 @@
 			</section>
 
 		<div class="column">
-			<h3>You've just been signed in <%= request.getParameter("name") %> </h3>
+				<%
+                if(session.getAttribute("user")!=null)
+                {
+					User user =  (User) session.getAttribute("user");
+                %>
+				<h3>You've just been signed in <%= user.getEmail() %> </h3>
+                 <% } else { %> 
+					<p> Session attribute is null fuck </p>
+					<% } %>
 			<div id="#result" class="column inner"></div>
 		</div>
 			<!-- Footer -->
