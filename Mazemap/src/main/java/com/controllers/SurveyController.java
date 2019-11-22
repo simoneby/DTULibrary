@@ -33,6 +33,12 @@ public class SurveyController {
     @Autowired
     private QuestionRepository questionRepository;
 
+    @Autowired
+    private SurveyAnswerRepository surveyAnswerRepository;
+
+    @Autowired
+    private QuestionAnswerRepository questionAnswerRepository;
+
 
     @PostMapping(value = "/save", headers = "Accept='application/json'")
     public String save(@SessionAttribute("user") User currentUser, @RequestBody Survey survey) {
@@ -51,6 +57,17 @@ public class SurveyController {
             return ReturnMessageHelper.getReturnMessage("You need to log in to create a survey!");
         }
     }
+
+    // TODO: get/filter survey by date (to display only current surveys)
+
+    @PostMapping(value="/active")
+    public @ResponseBody Survey activeSurvey(){
+
+        Date today = new Date(0);
+        // select * from Survey where start <= 'YYYY-MM-DD' and endd >= ''YYYY-MM-DD';
+
+    }
+
 
     @GetMapping(path="/test")
     public @ResponseBody Survey createSurveyTest() {
@@ -88,11 +105,70 @@ public class SurveyController {
         return survey;
     }
 
-    // TODO: Save surveyAnswers (and QuestionAnswers)
+    // TODO: Save surveyAnswers (and QuestionAnswers) (DONE?)
 
-    // TODO: get/filter survey by date (to display only current surveys)
+    @PostMapping(value = "/answer/save", headers = "Accept='application/json'")
+    public String saveAnswer(@SessionAttribute("user") User currentUser, @RequestBody SurveyAnswer surveyAnswer, @RequestBody Survey currentSurvey) {
+
+        if (userRepository.findUserByStudentnr(currentUser.getStudentnr()) != null) {
+
+            Date today = new Date(0);
+            surveyAnswer.setDate(today);
+            surveyAnswer.setUser(currentUser);
+            surveyAnswer.setSurvey(currentSurvey);
+
+            surveyAnswerRepository.save(surveyAnswer);
+            return ReturnMessageHelper.getReturnMessage("survey answers saved!");
+        }
+        else {
+            return ReturnMessageHelper.getReturnMessage("You need to log in to answer a survey!");
+        }
+    }
+
+
+
 
     // TODO: get/filter survey by creator (to display to the user)
+
+
+
+
+
+
+
+    @GetMapping(path="/test2")
+    public @ResponseBody SurveyAnswer SurveyAnswerTest() {
+
+        SurveyAnswer surveyAnswer = new SurveyAnswer();
+
+        User user = new User();
+        user.setStudentnr("s172637");
+        user.setName("Frank");
+        user.setEmail("s172637");
+        userRepository.save(user);
+
+
+        surveyAnswer.setUser(user);
+
+
+        QuestionAnswer questionAnswer1 = new QuestionAnswer();
+        questionAnswer1.setText("Very shit");
+        questionAnswerRepository.save(questionAnswer1);
+
+
+        QuestionAnswer questionAnswer2 = new QuestionAnswer();
+        questionAnswer2.setText("americano");
+        questionAnswerRepository.save(questionAnswer2);
+
+
+        Set<QuestionAnswer> questionAnswerSet = new HashSet<>();
+        questionAnswerSet.add(questionAnswer1);
+        questionAnswerSet.add(questionAnswer2);
+
+        surveyAnswer.setQuestionAnswers(questionAnswerSet);
+        surveyAnswerRepository.save(surveyAnswer);
+        return surveyAnswer;
+    }
 
 
 
