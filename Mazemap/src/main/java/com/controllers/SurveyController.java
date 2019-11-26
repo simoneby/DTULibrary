@@ -150,6 +150,18 @@ public class SurveyController {
     // TODO: get/filter survey by creator (to display to the user)
 
 
+    @GetMapping(value="/my_surveys")
+    public @ResponseBody Set<Survey> getMySurvey(@SessionAttribute("user") User currentUser){
+        Set<Survey> surveys = surveyRepository.findByCreator(currentUser);
+        return surveys;
+    }
+    // THIS METHOD OLY WORKS WHEN USERS HAVE A UNIQUE STUDENTNR IN THE DATABASE
+    @GetMapping(value="/my_surveys_test")
+    public @ResponseBody Set<Survey> getMySurvey(){
+        User user = userRepository.findUserByStudentnr("s191772");
+        Set<Survey> surveys = surveyRepository.findByCreator(user);
+        return surveys;
+    }
 
 
 
