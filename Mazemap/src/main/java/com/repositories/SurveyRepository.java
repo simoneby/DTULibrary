@@ -8,7 +8,7 @@ import java.util.*;
 
 @Repository
 public interface SurveyRepository extends CrudRepository<Survey,Integer> {
-    Set<Survey> findByStartDateAfter(Date today);
-    Set<Survey> findByEndDateBefore(Date today);
+    Set<Survey> findByIdGreaterThanEqual(int id);
+
 
 }

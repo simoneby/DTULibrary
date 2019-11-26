@@ -1,8 +1,11 @@
 package com.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Set;
 
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "survey"})
 @Entity
 public class Question
 {

@@ -16,6 +16,7 @@ import java.sql.Blob;
 
 
 // @Author: s191772
+
 @Entity // This tells Hibernate to make a table out of this class
 public class Survey {
     @Id
