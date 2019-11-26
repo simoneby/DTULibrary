@@ -139,6 +139,8 @@ public class SurveyController {
     @GetMapping(path="/test2")
     public @ResponseBody SurveyAnswer SurveyAnswerTest() {
 
+        Survey survey = surveyRepository.findSurveyById(0);
+
         SurveyAnswer surveyAnswer = new SurveyAnswer();
 
         User user = new User();
@@ -153,6 +155,7 @@ public class SurveyController {
 
         QuestionAnswer questionAnswer1 = new QuestionAnswer();
         questionAnswer1.setText("Very shit");
+        questionAnswer1.setQuestion(questionRepository.findBySurveyId);
         questionAnswerRepository.save(questionAnswer1);
 
 
