@@ -71,18 +71,22 @@ public class SurveyController {
         }
         return active_surveys;
 
+    }
 
-
-
-
-        // select * from Survey where start <= 'YYYY-MM-DD' and endd >= ''YYYY-MM-DD';
+    @GetMapping(value="/current")
+    public @ResponseBody Survey currentSurvey(@RequestParam int survey_id){
+        return surveyRepository.findById(survey_id);
 
     }
 
-//    @GetMapping(path="get_active_survey")
-//    public @ResponseBody Set<Survey> getActiveSurvey(){
-//        return activeSurvey();
-//    }
+    @GetMapping(value="/current_test")
+    public @ResponseBody Survey currentSurvey(){
+        int survey_id = 1;
+        Survey survey = surveyRepository.findById(survey_id);
+        return survey;
+
+    }
+
 
     @GetMapping(path="/test")
     public @ResponseBody Survey createSurveyTest() {
@@ -102,8 +106,8 @@ public class SurveyController {
         survey.setCreator(user);
 
 
-        survey.setStartDate(new Date(1574238634000L));
-        survey.setEndDate(new Date(1575102634000L));
+        survey.setStartDate(new Date(1574238634000L)); // 2019-11-20
+        survey.setEndDate(new Date(1575102634000L));   // 2019-11-30
 
         Question question1 = new Question();
         question1.setText("How shit is it?");
@@ -199,14 +203,9 @@ public class SurveyController {
 
 
         surveyAnswer.setUser(user);
-
-        
-
-        
         QuestionAnswer questionAnswer1 = new QuestionAnswer();
         questionAnswer1.setText("Very shit");
         questionAnswer1.setNumber(1);
-        
         QuestionAnswer questionAnswer2 = new QuestionAnswer();
         questionAnswer2.setText("americano");
         questionAnswer2.setNumber(2);
