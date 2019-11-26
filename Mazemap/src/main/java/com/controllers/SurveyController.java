@@ -75,14 +75,10 @@ public class SurveyController {
 
 
 
-        // select * from Survey where start <= 'YYYY-MM-DD' and endd >= ''YYYY-MM-DD';
 
     }
 
-//    @GetMapping(path="get_active_survey")
-//    public @ResponseBody Set<Survey> getActiveSurvey(){
-//        return activeSurvey();
-//    }
+/
 
     @GetMapping(path="/test")
     public @ResponseBody Survey createSurveyTest() {
@@ -102,8 +98,8 @@ public class SurveyController {
         survey.setCreator(user);
 
 
-        survey.setStartDate(new Date(1574238634000L));
-        survey.setEndDate(new Date(1575102634000L));
+        survey.setStartDate(new Date(1574238634000L)); // 2019-11-20
+        survey.setEndDate(new Date(1575102634000L));   // 2019-11-30
 
         Question question1 = new Question();
         question1.setText("How shit is it?");
