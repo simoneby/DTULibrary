@@ -1,9 +1,6 @@
 package com.controllers;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 import com.helpers.ReturnMessageHelper;
 import com.models.*;
@@ -19,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.sql.Date;
 
 
-
+// @Author: s191772 and s154666
 @RequestMapping("/survey")
 @RestController
 public class SurveyController {
@@ -60,14 +57,32 @@ public class SurveyController {
 
     // TODO: get/filter survey by date (to display only current surveys)
 
-    @PostMapping(value="/active")
-    public @ResponseBody Survey activeSurvey(){
+    @GetMapping(value="/active")
+    public @ResponseBody Set<Survey> activeSurvey(){
+        java.util.Date current = new java.util.Date();
+        Date today = new Date(current.getTime());
+        Set<Survey> all_surveys = surveyRepository.findByIdGreaterThanEqual(1);
+        Set<Survey> active_surveys = new HashSet<Survey>();
+        for (Survey survey:all_surveys){
+            if (survey.getStartDate().before(today) && survey.getEndDate().after(today)){
+                active_surveys.add(survey);
+            }
 
-        Date today = new Date(0);
+        }
+        return active_surveys;
+
+
+
+
+
         // select * from Survey where start <= 'YYYY-MM-DD' and endd >= ''YYYY-MM-DD';
 
     }
 
+//    @GetMapping(path="get_active_survey")
+//    public @ResponseBody Set<Survey> getActiveSurvey(){
+//        return activeSurvey();
+//    }
 
     @GetMapping(path="/test")
     public @ResponseBody Survey createSurveyTest() {
@@ -85,6 +100,10 @@ public class SurveyController {
         survey.setName("How crappy is the coffee in 303?");
         survey.setDescription("About the coffee in 303");
         survey.setCreator(user);
+
+
+        survey.setStartDate(new Date(1574238634000L));
+        survey.setEndDate(new Date(1575102634000L));
 
         Question question1 = new Question();
         question1.setText("How shit is it?");
@@ -131,6 +150,18 @@ public class SurveyController {
     // TODO: get/filter survey by creator (to display to the user)
 
 
+    @GetMapping(value="/my_surveys")
+    public @ResponseBody Set<Survey> getMySurvey(@SessionAttribute("user") User currentUser){
+        Set<Survey> surveys = surveyRepository.findByCreator(currentUser);
+        return surveys;
+    }
+    // THIS METHOD OLY WORKS WHEN USERS HAVE A UNIQUE STUDENTNR IN THE DATABASE
+    @GetMapping(value="/my_surveys_test")
+    public @ResponseBody Set<Survey> getMySurvey(){
+        User user = userRepository.findUserByStudentnr("s191772");
+        Set<Survey> surveys = surveyRepository.findByCreator(user);
+        return surveys;
+    }
 
 
 
