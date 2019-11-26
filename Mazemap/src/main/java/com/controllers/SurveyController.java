@@ -137,6 +137,23 @@ public class SurveyController {
             surveyAnswer.setDate(today);
             surveyAnswer.setUser(currentUser);
             surveyAnswer.setSurvey(currentSurvey);
+            // surveyAnswerRepository.save(surveyAnswer);
+
+            Set<Question> questions = currentSurvey.getQuestions();
+            Set<QuestionAnswer> questionAnswerSet = surveyAnswer.getQuestionAnswers();
+            
+            for (Question q : questions)
+            {
+                for (QuestionAnswer qa : questionAnswerSet)
+                {
+                    if (q.getNumber() == qa.getNumber())
+                    {
+                        qa.setQuestion(q);
+                        questionAnswerRepository.save(qa);
+                        break;
+                    }
+                }    
+            }
 
             surveyAnswerRepository.save(surveyAnswer);
             return ReturnMessageHelper.getReturnMessage("survey answers saved!");
@@ -201,7 +218,6 @@ public class SurveyController {
 
         Survey survey = surveyRepository.findById(39);
        
-        Set<Question> questions = survey.getQuestions();
         for (Question q : questions)
         {
             for (QuestionAnswer qa : questionAnswerSet)
@@ -209,6 +225,8 @@ public class SurveyController {
                 if (q.getNumber() == qa.getNumber())
                 {
                     qa.setQuestion(q);
+                    questionAnswerRepository.save(qa);
+                    break;
                 }
             }    
         }
