@@ -11,6 +11,6 @@ import java.util.*;
 public interface SurveyRepository extends CrudRepository<Survey,Integer> {
     Set<Survey> findByIdGreaterThanEqual(int id);
     Set<Survey> findByCreator(User user);
-
+    Survey findById(int id);
 
 }
