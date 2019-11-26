@@ -111,11 +111,13 @@ public class SurveyController {
 
         Question question1 = new Question();
         question1.setText("How shit is it?");
+        question1.setNumber(1);
         questionRepository.save(question1);
 
 
         Question question2 = new Question();
         question2.setText("Which one is the shittiest?");
+        question2.setNumber(2);
         questionRepository.save(question2);
 
 
@@ -184,22 +186,37 @@ public class SurveyController {
 
 
         surveyAnswer.setUser(user);
-
-
         QuestionAnswer questionAnswer1 = new QuestionAnswer();
         questionAnswer1.setText("Very shit");
-        questionAnswerRepository.save(questionAnswer1);
-
-
+        questionAnswer1.setNumber(1);
         QuestionAnswer questionAnswer2 = new QuestionAnswer();
         questionAnswer2.setText("americano");
-        questionAnswerRepository.save(questionAnswer2);
-
+        questionAnswer2.setNumber(2);
 
         Set<QuestionAnswer> questionAnswerSet = new HashSet<>();
         questionAnswerSet.add(questionAnswer1);
         questionAnswerSet.add(questionAnswer2);
 
+
+        Survey survey = surveyRepository.findById(39);
+       
+        Set<Question> questions = survey.getQuestions();
+        for (Question q : questions)
+        {
+            for (QuestionAnswer qa : questionAnswerSet)
+            {
+                if (q.getNumber() == qa.getNumber())
+                {
+                    qa.setQuestion(q);
+                }
+            }    
+        }
+       
+        questionAnswerRepository.save(questionAnswer1);
+        questionAnswerRepository.save(questionAnswer2);
+
+
+       
         surveyAnswer.setQuestionAnswers(questionAnswerSet);
         surveyAnswerRepository.save(surveyAnswer);
         return surveyAnswer;

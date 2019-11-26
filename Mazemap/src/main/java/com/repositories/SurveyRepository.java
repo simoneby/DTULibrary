@@ -13,5 +13,4 @@ public interface SurveyRepository extends CrudRepository<Survey,Integer> {
     Set<Survey> findByCreator(User user);
     Survey findById(int id);
 
-
 }
