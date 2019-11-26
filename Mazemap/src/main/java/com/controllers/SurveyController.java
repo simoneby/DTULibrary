@@ -71,13 +71,20 @@ public class SurveyController {
         }
         return active_surveys;
 
+    }
 
-
-
-
+    @GetMapping(value="/current")
+    public @ResponseBody Survey currentSurvey(@RequestParam int survey_id){
+        return surveyRepository.findById(survey_id);
 
     }
 
+    @GetMapping(value="/current_test")
+    public @ResponseBody Survey currentSurvey(){
+        int survey_id = 30;
+        return surveyRepository.findById(survey_id);
+
+    }
 
 
     @GetMapping(path="/test")
