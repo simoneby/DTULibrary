@@ -53,7 +53,7 @@
                 %>
 				<h3>You've just been signed in <%= user.getEmail() %> </h3>
                  <% } else { %> 
-					<p> Session attribute is null fuck </p>
+					<p> Session attribute is null</p>
 					<% } %>
 			<div id="#result" class="column inner"></div>
 		</div>
