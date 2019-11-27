@@ -9,4 +9,5 @@ public interface FilteredUserRepository extends CrudRepository<User, Integer>{
 	  List<User> findUsersByEmail(String email);
 	  User findUserByEmail(String email);
 	  User findUserByStudentnr(String studentnr);
+	  User findById(int id);
 }
