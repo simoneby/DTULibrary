@@ -75,14 +75,17 @@ public class SurveyController {
 
     @GetMapping(value="/current")
     public @ResponseBody Survey currentSurvey(@RequestParam int survey_id){
+        Survey survey = surveyRepository.findById(survey_id);
+        System.out.println(survey.toString());
         return surveyRepository.findById(survey_id);
 
     }
 
     @GetMapping(value="/current_test")
     public @ResponseBody Survey currentSurvey(){
-        int survey_id = 1;
+        int survey_id = 30;
         Survey survey = surveyRepository.findById(survey_id);
+        System.out.println(survey.toString());
         return survey;
 
     }

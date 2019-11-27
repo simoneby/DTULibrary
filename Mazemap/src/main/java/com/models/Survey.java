@@ -92,5 +92,8 @@ public class Survey {
         this.questions = questions;
     }
 
-
+    @Override
+    public String toString() {
+        return String.format("name %s id %d", name,id);
+    }
 }
