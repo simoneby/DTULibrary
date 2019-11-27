@@ -24,6 +24,9 @@ public class User {
     private String name;
 
     private String email;
+
+    // private Integer loc_id;
+
     @JsonIgnore
     private String password;
     @JsonIgnore
@@ -52,6 +55,8 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
     
     @ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE},fetch = FetchType.LAZY)
     @JoinTable(name="friends",
@@ -87,6 +92,19 @@ public class User {
     {
     	this.roles = roles;
     }
+
+    @OneToOne(mappedBy="user")
+    private LocationOfUsers location;
+
+    public void setLocationOfUser(LocationOfUsers location) {
+        this.location = location;
+    }
+    public LocationOfUsers getLocationOfUser() {
+        return this.location;
+    }
+
+
+
     @Override
     public String toString() {
         return "User [email=" + email + ", friends=" + friends + ", id=" + id + ", name=" + name + ", roles=" + roles

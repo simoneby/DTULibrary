@@ -1,8 +1,10 @@
+
     	var currentLat,currentLong;
     	var curLocation = {
     		lat : 0,
     		long : 0
     	};
+
         var map = new Mazemap.Map({
             // container id specified in the HTML
             container: 'map',
@@ -25,7 +27,8 @@
 		var lngLat = {lng: 12.525542, lat: 55.786158}; // DTU Library
 		
 		window.onload = function() {
-			
+
+			// console.log(locationDataOfAll);
 		// check for Geolocation support
 			if (navigator.geolocation) {
 				console.log('Geolocation is supported!');
@@ -50,6 +53,7 @@
 		
 		//map.center = {lng: currentLong, lat: currentLat};
 		map.on('load', function(){
+
 			  
 			console.log(currentLong,currentLat);
 			curLocation.lat = currentLat;
@@ -63,17 +67,56 @@
 				.setLngLat( {lng: currentLong, lat: currentLat} )
 				.setAccuracy(10).addTo(map);
 
-			var tempMarker = new Mazemap.MazeMarker( {
-                color: "MazeBlue",
-                size: 36,
-                zLevel: 1,
-                glyph: 'friend1',
-                glyphColor:'#000000',
-                glyphSize:'20'
-            }).setLngLat({lng: currentLong, lat: currentLat}).addTo(map);
+			
 
-		
+			function showLocations(){
+				var friends;
+				$.ajax({
 
+						dataType: 'json',
+						success: function (data2) {
+							try {
+								data2 = jQuery.parseJSON(data2);
+							}
+							catch (err) {
+								data2 = typeof data2 =='object' ? data2 : jQuery.parseJSON(data2);
+							}
+							friends = data2;
+							// console.log(data2);
+						},
+						error: function () {
+							console.log("Stuff happened");
+						},
+						// processData: false,
+						type: 'get',
+						async: false,
+						url: 'http://localhost:8080/friends/all'
+
+					
+					});
+				console.log(friends);
+				for (i=0;i<friends.length;i++){
+					console.log(friends[i].locationOfUser.locationMessage);
+					var displayName = friends[i].name;
+					var la = parseFloat(friends[i].locationOfUser.coordinateX);
+					var lo = parseFloat(friends[i].locationOfUser.coordinateY);
+
+					var tempMarker = new Mazemap.MazeMarker( {
+                	color: "MazeBlue",
+                	size: 36,
+                	zLevel: 1,
+                	glyph: displayName,
+                	glyphColor:'#000000',
+                	glyphSize:'20'
+            }).setLngLat({lng: lo, lat: la}).addTo(map);
+
+				}
+
+
+
+				
+		}
+		showLocations();
 		/**
  		* Kasper Jensen s183051
  		*

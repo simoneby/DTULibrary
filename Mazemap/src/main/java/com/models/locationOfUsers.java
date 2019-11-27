@@ -3,22 +3,27 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "user"})
 @Entity(name = "location") // This tells Hibernate to make a table out of this class
 public class LocationOfUsers {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Integer id;
     private double coordinateX;
 
     private double coordinateY;
 
     private String locationMessage;
 
-    public long getId() {
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -54,7 +59,15 @@ public class LocationOfUsers {
 
     public void setUser(User user) {
         this.user = user;
+        // this.user_id2 = user.getId();
+    }
+    public User getUser() {
+        return this.user;
     }
 
+
+    // public Integer getUser(Integer user_id2){
+    //     return user_id2;
+    // }
 
 }
