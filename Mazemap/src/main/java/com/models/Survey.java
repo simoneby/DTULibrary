@@ -80,7 +80,7 @@ public class Survey {
     }
 
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name="survey_id")
     private Set<Question> questions;
 

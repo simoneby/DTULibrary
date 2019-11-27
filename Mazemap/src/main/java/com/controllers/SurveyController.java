@@ -80,60 +80,8 @@ public class SurveyController {
 
     }
 
-    @GetMapping(value="/current_test")
-    public @ResponseBody Survey currentSurvey(){
-        int survey_id = 30;
-        Survey survey = surveyRepository.findById(survey_id);
-        return survey;
 
-    }
-
-
-    @GetMapping(path="/test")
-    public @ResponseBody Survey createSurveyTest() {
-
-        Survey survey = new Survey();
-
-        User user = userRepository.findUserByStudentnr("s2");
-
-
-        survey.setCreator(user);
-        survey.setName("Course evaluation: 02762 (Birdwatching)");
-        survey.setDescription("How do you feel about these courses");
-        survey.setCreator(user);
-
-
-        survey.setStartDate(new Date(1574238634000L)); // 2019-11-20
-        survey.setEndDate(new Date(1575102634000L));   // 2019-11-30
-
-        Question question1 = new Question();
-        question1.setText("What is your favourite bird?");
-        question1.setNumber(1);
-        questionRepository.save(question1);
-
-
-        Question question2 = new Question();
-        question2.setText("How many birds did you see?");
-        question2.setNumber(2);
-        questionRepository.save(question2);
-
-        Question question3 = new Question();
-        question3.setText("Did you ever get pooped on");
-        question3.setNumber(3);
-        questionRepository.save(question3);
-
-
-        Set<Question> questionSet = new HashSet<Question>();
-        questionSet.add(question1);
-        questionSet.add(question2);
-        questionSet.add(question3);
-
-        survey.setQuestions(questionSet);
-        surveyRepository.save(survey);
-        return survey;
-    }
-
-    // TODO: Save surveyAnswers (and QuestionAnswers) (DONE?)
+    // TODO: Save surveyAnswers (and QuestionAnswers) (DONE)
 
     @PostMapping(value = "/answer/save", headers = "Accept='application/json'")
     public String saveAnswer(@SessionAttribute("user") User currentUser, @RequestBody SurveyAnswer surveyAnswer, @RequestBody Survey currentSurvey) {
@@ -172,7 +120,6 @@ public class SurveyController {
 
 
 
-
     // TODO: get/filter survey by creator (to display to the user)
 
 
@@ -181,6 +128,18 @@ public class SurveyController {
         Set<Survey> surveys = surveyRepository.findByCreator(currentUser);
         return surveys;
     }
+
+
+    // TODO: get results from a survey, bundle question answers together
+
+    @GetMapping(value="/question_answers")
+    public @ResponseBody Set<QuestionAnswer> getQuestionAnswers(@RequestParam int question_id){
+        return questionAnswerRepository.findByQuestionId(question_id);
+    }
+
+
+   /* TESTS TESTS TESTS TESTS TESTS TESTS TESTS TESTS TESTS TESTS TESTS TESTS TESTS TESTS TESTS TESTS TESTS TESTS */
+
     // THIS METHOD OLY WORKS WHEN USERS HAVE A UNIQUE STUDENTNR IN THE DATABASE
     @GetMapping(value="/my_surveys_test")
     public @ResponseBody Set<Survey> getMySurvey(){
@@ -189,9 +148,52 @@ public class SurveyController {
         return surveys;
     }
 
+    @GetMapping(path="/test")
+    public @ResponseBody Survey createSurveyTest() {
+
+        Survey survey = new Survey();
+
+        User user = userRepository.findUserByStudentnr("s2");
 
 
+        survey.setCreator(user);
+        survey.setName("Course evaluation: 02762 (Birdwatching)");
+        survey.setDescription("How do you feel about these courses");
+        survey.setCreator(user);
 
+
+        survey.setStartDate(new Date(1574238634000L)); // 2019-11-20
+        survey.setEndDate(new Date(1575102634000L));   // 2019-11-30
+
+        Question question1 = new Question();
+        question1.setText("What is your favourite bird?");
+        question1.setNumber(1);
+        question1.setType(QuestionType.TEXT);
+        questionRepository.save(question1);
+
+
+        Question question2 = new Question();
+        question2.setText("How many birds did you see?");
+        question2.setNumber(2);
+        question2.setType(QuestionType.TEXT);
+        questionRepository.save(question2);
+
+        Question question3 = new Question();
+        question3.setText("Did you ever get pooped on");
+        question3.setNumber(3);
+        question3.setType(QuestionType.TEXT);
+        questionRepository.save(question3);
+
+
+        Set<Question> questionSet = new HashSet<Question>();
+        questionSet.add(question1);
+        questionSet.add(question2);
+        questionSet.add(question3);
+
+        survey.setQuestions(questionSet);
+        surveyRepository.save(survey);
+        return survey;
+    }
 
     @GetMapping(path="/test2")
     public @ResponseBody SurveyAnswer SurveyAnswerTest(@RequestParam int survey_id) {

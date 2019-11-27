@@ -5,7 +5,11 @@
 package com.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "question","surveyAnswer"})
 
 @Entity
 public class QuestionAnswer {
@@ -53,6 +57,7 @@ public class QuestionAnswer {
     @JoinColumn(name = "question_id")
     private Question question;
     public void setQuestion(Question question) {
+        this.question = question;
     }
 
 

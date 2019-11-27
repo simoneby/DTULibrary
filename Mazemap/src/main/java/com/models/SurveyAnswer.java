@@ -6,12 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Date;
 import java.sql.Time;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import javax.persistence.*;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import java.io.Serializable;
 import java.util.*;
 
@@ -64,7 +64,7 @@ public class SurveyAnswer {
         this.survey = survey;
     }
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name="surveyAnswer_id")
     private Set<QuestionAnswer> questionAnswers;
 
