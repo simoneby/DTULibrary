@@ -34,7 +34,6 @@ public class RegisterController {
 
 			userRepository.save(entity);
 
-
 			return String.format("A user with the email %s already exists!", user.getEmail());
 		}
 		try {

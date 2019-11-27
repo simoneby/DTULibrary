@@ -33,6 +33,7 @@
 				<li><a href=""><span class="icon fas fa-map"></span></a></li>
 				<li><a href="friendlist"><span class="icon fas fa-users"></span></a></li>
 				<li><a href="login" class="active"><span class="icon fas fa-sign-in"></span></a></li>
+				<li><a href="logout"><span class="icon fas fa-sign-out-alt"></span></a></li>
 			</ul>
 		</nav>
 
