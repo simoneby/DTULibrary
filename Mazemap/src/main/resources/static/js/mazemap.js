@@ -82,7 +82,6 @@
 								data2 = typeof data2 =='object' ? data2 : jQuery.parseJSON(data2);
 							}
 							friends = data2;
-							// console.log(data2);
 						},
 						error: function () {
 							console.log("Stuff happened");
@@ -94,22 +93,28 @@
 
 					
 					});
-				console.log(friends);
 				for (i=0;i<friends.length;i++){
-					console.log(friends[i].locationOfUser.locationMessage);
-					var displayName = friends[i].name;
-					var la = parseFloat(friends[i].locationOfUser.coordinateX);
-					var lo = parseFloat(friends[i].locationOfUser.coordinateY);
 
-					var tempMarker = new Mazemap.MazeMarker( {
-                	color: "MazeBlue",
-                	size: 36,
-                	zLevel: 1,
-                	glyph: displayName,
-                	glyphColor:'#000000',
-                	glyphSize:'20'
-            }).setLngLat({lng: lo, lat: la}).addTo(map);
+					var matches = friends[i].name.match(/\b(\w)/g); // first letter of each word in string
+					var displayName = matches.join('').toUpperCase(); 
 
+
+					if (friends[i].locationOfUser!=null){
+						var la = parseFloat(friends[i].locationOfUser.coordinateX);
+						var lo = parseFloat(friends[i].locationOfUser.coordinateY);
+						var tempMarker = new Mazemap.MazeMarker( {
+		                	color: "MazeBlue",
+		                	size: 36,
+		                	zLevel: 1,
+		                	glyph: displayName,
+		                	glyphColor:'#000000',
+		                	glyphSize:'20'
+		            	}).setLngLat({lng: lo, lat: la}).addTo(map);
+						var markerIteratorPopup = new Mazemap.Popup({ closeOnClick: true, offset: [0,-40]})
+						.setHTML(friends[i].name + ": " + friends[i].locationOfUser.locationMessage);
+						tempMarker.setPopup(markerIteratorPopup);
+						tempMarker.addTo(map);
+					}
 				}
 
 
