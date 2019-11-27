@@ -104,6 +104,7 @@ public class SurveyController {
                     if (q.getNumber() == qa.getNumber())
                     {
                         qa.setQuestion(q);
+                        qa.setQuestionType(q.getType());
                         questionAnswerRepository.save(qa);
                         break;
                     }
