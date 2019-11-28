@@ -29,10 +29,11 @@
 		<!-- Nav -->
 		<nav id="nav">
 			<ul>
-				<li><a href="index"><span class="icon fa-home"></span></a></li>
+				<li><a href="index" class="active"><span class="icon fa-home"></span></a></li>
 				<li><a href=""><span class="icon fas fa-map"></span></a></li>
 				<li><a href="friendlist"><span class="icon fas fa-users"></span></a></li>
-				<li><a href="login" class="active"><span class="icon fas fa-sign-in"></span></a></li>
+				<li><a href="login"><span class="icon fas fa-sign-in"></span></a></li>
+				<li><a href="logout"><span class="icon fas fa-sign-out"></span></a></li>
 			</ul>
 		</nav>
 
@@ -53,7 +54,7 @@
                 %>
 				<h3>You've just been signed in <%= user.getEmail() %> </h3>
                  <% } else { %> 
-					<p> Session attribute is null </p>
+					<p> Session attribute is null</p>
 					<% } %>
 			<div id="#result" class="column inner"></div>
 		</div>
