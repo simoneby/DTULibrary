@@ -220,6 +220,19 @@ public class LoginController {
 	@RequestMapping("/logout")
 	public String logout(Model model, HttpServletRequest request, SessionStatus status) {
 		status.setComplete();
+		return "index";
+	}
+
+	@GetMapping("/login_testing")
+	public String loginTesting(@RequestParam String studentnr,
+		HttpSession httpSession,Model model, HttpServletRequest request)
+	{
+		User foundUser = null;
+		foundUser = userRepository.findUserByStudentnr(studentnr);
+		//name = foundUser.getName();
+		//login = true;
+		this.user = foundUser;
+		saveUserInSession(httpSession);
 		return "loginsuccesful";
 	}
 }
