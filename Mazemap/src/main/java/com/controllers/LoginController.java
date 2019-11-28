@@ -217,7 +217,7 @@ public class LoginController {
 		return "loginsuccesful";
 	}
 
-	@RequestMapping("/logout")
+	@GetMapping("/logout")
 	public String logout(Model model, HttpServletRequest request, SessionStatus status) {
 		status.setComplete();
 		return "loginsuccesful";
