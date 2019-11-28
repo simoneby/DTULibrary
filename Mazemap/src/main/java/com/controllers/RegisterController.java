@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 //@SessionAttributes("user")
 @RestController
 public class RegisterController {
@@ -22,15 +24,25 @@ public class RegisterController {
 	@Autowired
 	private RoleRepository roleRepository;
 
-	@PostMapping(value = "/signup", headers = "Accept='application/json'")
-	public String signup(@SessionAttribute("user") User user, @RequestParam String name) {
+	private User user;
+
+	@GetMapping(value = "/signup")
+	public String signup(@SessionAttribute("user") User user, @RequestParam String name, @RequestParam String studentnr, HttpSession httpSession) {
 		// return user.toString();
 
 		if (! userRepository.findUsersByEmail(user.getEmail()).isEmpty()) {
 			
 
-			User entity = userRepository.findUserByStudentnr(user.getStudentnr());
+
+			User entity = new User();
+			entity.setEmail(String.format("%s@student.dtu.dk",studentnr));
+			entity.setStudentnr(studentnr);
 			entity.setName(name);
+			userRepository.save(entity);
+			this.user = entity;
+
+			saveUserInSession(httpSession);
+			// GO TO REGISTER PAGE
 
 			userRepository.save(entity);
 
@@ -45,6 +57,13 @@ public class RegisterController {
 			e.printStackTrace();
 			return "There was an error! User was not created! Please Try again! " + user.toString();
 		}
+	}
+
+	public void saveUserInSession(HttpSession httpSession)
+	{
+		if(httpSession.getAttribute("user")!=null)
+			httpSession.removeAttribute("user");
+		httpSession.setAttribute("user", this.user);
 	}
 
 }

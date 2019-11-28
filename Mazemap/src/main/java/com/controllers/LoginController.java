@@ -149,16 +149,7 @@ public class LoginController {
 				User foundUser = null;
 				if (userRepository.findUserByStudentnr(studentnr) == null) 
 				{
-					User entity = new User();
-					entity.setEmail(String.format("%s@student.dtu.dk",studentnr));
-					entity.setStudentnr(studentnr);
-					//entity.addRole(roleRepository.findAll().iterator().next());
-					userRepository.save(entity);
-					this.user = entity;
-					//login = true;
 
-					saveUserInSession(httpSession);
-					// GO TO REGISTER PAGE
 					return "register";
 				}
 				else 
