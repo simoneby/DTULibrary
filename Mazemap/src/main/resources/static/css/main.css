@@ -1,4 +1,4 @@
-@import url(font-awesome.min.css);
+@import "font-awesome.min.css";
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600");
 
 /*
@@ -1470,7 +1470,7 @@
 		height: 60vh;
 		position: relative;
 		background: #000;
-		background-image: url(./images/dtu_banner2.jpg);
+		background-image: url("../images/dtu_banner2.jpg");
 		background-size: cover;
 		background-attachment: fixed;
 		background-repeat: no-repeat;
