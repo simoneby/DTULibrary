@@ -80,7 +80,7 @@ public class Survey {
     }
 
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name="survey_id")
     private Set<Question> questions;
 
@@ -92,5 +92,8 @@ public class Survey {
         this.questions = questions;
     }
 
-
+    @Override
+    public String toString() {
+        return String.format("name %s id %d", name,id);
+    }
 }
