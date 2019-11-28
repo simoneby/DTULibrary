@@ -1,4 +1,8 @@
 package com.models;
+
+import javax.persistence.Entity;
+
+@Entity
 public class RangeQuestion extends Question
 {
     private Integer start;
