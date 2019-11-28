@@ -23,18 +23,16 @@ public class RegisterController {
 	private RoleRepository roleRepository;
 
 	@PostMapping(value = "/signup", headers = "Accept='application/json'")
-	public String signup(@SessionAttribute("user") User user, @RequestBody String name) {
+	public String signup(@SessionAttribute("user") User user, @RequestParam String name) {
 		// return user.toString();
 
-		if (!userRepository.findUsersByEmail(user.getEmail()).isEmpty()) {
+		if (! userRepository.findUsersByEmail(user.getEmail()).isEmpty()) {
 			
-			User entity = new User();
-			
-			entity = userRepository.findUserByStudentnr(user.getStudentnr());
+
+			User entity = userRepository.findUserByStudentnr(user.getStudentnr());
 			entity.setName(name);
 
 			userRepository.save(entity);
-
 
 			return String.format("A user with the email %s already exists!", user.getEmail());
 		}
@@ -48,4 +46,6 @@ public class RegisterController {
 			return "There was an error! User was not created! Please Try again! " + user.toString();
 		}
 	}
+
 }
+
