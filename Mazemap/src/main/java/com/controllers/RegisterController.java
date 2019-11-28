@@ -48,5 +48,4 @@ public class RegisterController {
 			return "There was an error! User was not created! Please Try again! " + user.toString();
 		}
 	}
-
 }
