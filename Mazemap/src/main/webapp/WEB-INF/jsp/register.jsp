@@ -58,7 +58,7 @@
                  <% } else { %> 
 					<p> Session attribute is null </p>
 					<% } %>
-				<form id="friendForm">
+				<form id="signup">
 					<label for="name"> Enter your name: </label>
 					<input name="name" id="name" type="text"
 						placeholder="Enter your name here...">
@@ -185,7 +185,7 @@
 					},
 					processData: false,
 					type: 'POST',
-					url: 'https://se2-webapp05.compute.dtu.dk:8080/signup'
+					url: 'http://localhost:8080/signup'
 				});
 				// $.post("http://localhost:8080/signup",
 				// 	{ user : user},
