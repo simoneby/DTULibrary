@@ -68,8 +68,8 @@
 									<input name="name" id="name" type="text"
 										placeholder="Enter the survey name here...">
 									</input>
-									<label for="expiration_date"> Enter expiration date: </label>
-									<input id="expiration_date" name="expiration_date" title="please enter date" style="width: 100%" />
+									<label for="endDate"> Enter expiration date: </label>
+									<input id="endDate" name="endDate" title="please enter date" style="width: 100%" />
 									<div class="demo-section k-content wide">
 										<a class="k-button k-button-icontext k-add-button" href="#"><span
 												class="k-icon k-i-add"></span>Add question</a>
@@ -187,7 +187,9 @@
 			});
 			require(["jquery", "kendo.pager.min", "kendo.listview.min", "kendo.data.min", "kendo.dropdownlist.min"],
 				function ($, kendo) {
-					$("#expiration_date").kendoDateInput();
+					$("#endDate").kendoDateInput({
+						format: 'yyyy-MM-dd'
+					});
 					var questionList = [];
 					 questions = new kendo.data.DataSource({
 						data: questionList,
@@ -308,6 +310,8 @@
 					data: JSON.stringify(survey),
 					dataType: 'json',
 					success: function (data, status) {
+
+						alert("survey saved!");
 						$("#result").text("<p>" + data + "</p>");
 					},
 					error: function () {

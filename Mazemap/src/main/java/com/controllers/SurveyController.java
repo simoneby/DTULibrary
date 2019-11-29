@@ -42,7 +42,8 @@ public class SurveyController {
 
         if (userRepository.findUserByStudentnr(currentUser.getStudentnr()) != null) {
 
-            Date today = new Date(0);
+            java.util.Date current = new java.util.Date();
+            Date today = new Date(current.getTime());
             survey.setStartDate(today);
             survey.setCreator(currentUser);
             Set<Question> questions = survey.getQuestions(); 
