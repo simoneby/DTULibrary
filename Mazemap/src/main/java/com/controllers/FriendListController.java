@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 @RestController
-@RequestMapping("/friends/")
+@RequestMapping("/friends")
 public class FriendListController {
     @Autowired
     private FilteredUserRepository userRepository;

@@ -29,4 +29,9 @@ public class HelloController
     {
         return "friendlist";
     }
+    @GetMapping({"/save_survey"})
+    public String save_survey(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name)
+    {
+        return "save_survey";
+    }
 }

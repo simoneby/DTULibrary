@@ -44,10 +44,14 @@ public class SurveyController {
 
             Date today = new Date(0);
             survey.setStartDate(today);
-
             survey.setCreator(currentUser);
-
+            Set<Question> questions = survey.getQuestions(); 
+            survey.setQuestions(null);
             surveyRepository.save(survey);
+            for (Question question : questions) {
+                question.setSurvey(survey);
+                questionRepository.save(question);
+            }
             return ReturnMessageHelper.getReturnMessage("survey saved!");
         }
         else {

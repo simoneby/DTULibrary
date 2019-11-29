@@ -18,7 +18,14 @@ public class Question
     private Integer number;
 
     private QuestionType type;
+    
+    @Transient
+    private boolean isRange = false;
 
+    public boolean getIsRange()
+    {
+        return type == QuestionType.RANGE;
+    } 
     public Integer getId() {
         return id;
     }
