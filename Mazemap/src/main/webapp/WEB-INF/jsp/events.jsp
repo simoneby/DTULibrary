@@ -61,33 +61,38 @@
 									My Events
 								</li>
 							</ul>
-							<div id="tab1">
+							<div id="events_tab">
 								<div class="demo-section k-content wide">
-									<div id="listView1">
+									<div id="listViewEvents">
 										<table></table>
 									</div>
-									<div id="pager1" class="k-pager-wrap"></div>
+									<div id="pagerEvents" class="k-pager-wrap"></div>
 								</div>
 
-								<script type="text/x-kendo-template" id="template1">
+								<script type="text/x-kendo-template" id="templateEvents">
 									<div class="k-widget">
-														<tr>
+													<tr>
 
 															<td colspan="4">
 																<h3>#:name#</h3>
 															</td> 
-														</tr>
-														<tr>
-															<td colspan="2"><p>#:email#</p>
-																</td>
-															<td colspan="1">
-																<button>See location </button>
+													</tr>
+													<tr>
+															<td colspan="2"><p>#:description#</p>
+													</td>															
+													</tr>
+													<tr>
+															<td colspan="1"><p>#:date#</p>
+															</td>															
+															<td colspan="1"><p>#:time#</p>
 															</td>
+													
 														<td colspan="1" class="edit-buttons">
-															<a class="k-button k-delete-button" href="\\#"><span class="k-icon k-i-close"></span></a>
+															
+															<a class="k-button k-delete-button" href="\\#"><span class="k-icon k-i-close"></span></a><p>Delete event</p>
 														</td>
 													</tr>
-													</div>
+									</div>
 									</script>
 							</div>
 						</div>

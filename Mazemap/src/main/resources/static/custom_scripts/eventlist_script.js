@@ -7,6 +7,7 @@ $(document).ready(function () {
         }
     });
     loadEventlist(events);
+    console.log(events);
 
     //var acceptRequestButtons = document.getElementsByClassName('acceptReqButton');
     //acceptRequestButtons.foreach()
@@ -15,11 +16,29 @@ $(document).ready(function () {
 });
 
 function loadEventlist(events) {
-    require(["jquery", "kendo.pager.min", "kendo.listview.min"],
-        function ($, kendo) {
-            events = new kendo.data.DataSource({
-                transport: {
-                    read: {
+	 require(["jquery", "kendo.pager.min", "kendo.listview.min"],
+		      function ($, kendo) {
+		 			events = new kendo.data.DataSource({
+
+	                    schema: {
+	                        model: {
+	                            id: "id",
+	                            fields: {
+	                                id: { type : "number"},
+	                                name: { type : "string"},
+	                                lat: { type : "number" },
+	                                lng: { type : "number" },
+	                                description:{ type : "string"},
+	                                
+	                                date: { type : "string" },
+	                                time: { type : "string" },
+	                                
+	                                
+	                            }
+	                        }
+	                },
+		 				transport: {
+		 					read: {
                         url: "http://localhost:8080/events/eventdata",
                         type: "get",
                         dataType: "json"
@@ -34,32 +53,23 @@ function loadEventlist(events) {
                         console.log(options);
                         if (operation !== "read" && options) {
                             //console.log(options.models);
-                            return {friendEmail : options.email};
+                            return {id : options.id};
                         }
                     }
-                },
-                    schema: {
-                        model: {
-                            id: "id",
-                            fields: {
-                                id: { type : "number"},
-                                name: { type : "string"},
-                                description:{ type : "string"},
-                            }
-                        }
                 }
             });
-                        });
+                        
             // create multiSelect from input HTML element
             events.read().then(function () {
-                $("#pager1").kendoPager({
+                $("#pagerEvents").kendoPager({
                     dataSource: events
                 });
 
-                $("#listView1").kendoListView({
+                $("#listViewEvents").kendoListView({
                     dataSource: events,
-                    template: kendo.template($("#template1").html())
+                    template: kendo.template($("#templateEvents").html())
                 });
             });
+	 });
        };
 

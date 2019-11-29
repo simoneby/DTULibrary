@@ -1,11 +1,13 @@
 package com.controllers;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.validation.Errors;
 import javax.validation.Valid;
 import java.util.stream.Collectors;
 import com.helpers.*;
-
+import com.helpers.ReturnMessageHelper;
 import com.models.*;
+import java.util.Set;
 //import java.util.concurrent.atomic.AtomicLong;
 import com.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +27,12 @@ public class EventController
 	
 	
 	@RequestMapping(value = "/eventdata", method = RequestMethod.GET)
-	  public ArrayList<Event> getEventData(
-	      @RequestParam(name = "userId", required = false, defaultValue = "0") short level) {
+	  public Set<Event> getEventData() 
+	  {
 	    // ArrayList<SensorData> sensorData = new ArrayList<SensorData>();
-		ArrayList<Event> events = new ArrayList<Event>();
-		eventRepository.findAll().forEach(events::add);
+		HashSet<Event> tempEvents = new HashSet<Event>();
+		eventRepository.findAll().forEach(tempEvents::add);
+	    Set<Event> events = tempEvents;
 	    
 	    	    return events;
 	  }
@@ -86,10 +89,6 @@ public class EventController
 				 
 		         
 				 eventRepository.save(event);
-	    
-	    	    
-	
-	
 	}
 			  @RequestMapping(value = "/createeventtest", method = RequestMethod.GET)
 			  public String createEventTest()
@@ -102,6 +101,36 @@ public class EventController
 			
 			
 			}
+			  @RequestMapping(value = "/deleteevent", method = RequestMethod.DELETE)
+			    public String deleteFriend(@RequestParam  Integer id) {
+			        String returnMessage;
+			        if (id == 0)
+			            returnMessage = String.format("The event with id %s does not exist!", id);
+			        else {
+			        	Optional<Event> tempEvent = eventRepository.findById(id);
+			        	Event event = tempEvent.get();
+			        	eventRepository.deleteById(id);
+			            /*
+			            //User friend = userRepository.findUsersByEmail(friendEmail).get(0);
+			            if (event != null && currentUser != null) {
+			                User u = userRepository.findUserByEmail(currentUser.getEmail());
+			                    try {
+			                        u.removeFriendFromFollowingByEmail(friendEmail);
+			                        friend.removeFriendFromFollowerByEmail(u.getEmail());
+			                        userRepository.save(u);
+			                        userRepository.save(friend);
+			                        returnMessage = String.format("Friend %s was removed from your list!", friendEmail);
+			                    } catch (Exception e) {
+			                        e.printStackTrace();
+			                        returnMessage = "There was an error when removing your friend! Check the email you input!";
+			                    }
+
+			            } else {*/
+			                returnMessage = "Error: one of the entities is null!";
+			          //  }
+			        }
+			        return ReturnMessageHelper.getReturnMessage(returnMessage);
+			    }
 			  
 			  @RequestMapping(value = "/updateevent", method = RequestMethod.GET)
 			  public String updateEvent()
