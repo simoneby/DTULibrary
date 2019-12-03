@@ -88,12 +88,31 @@
 															</td>
 													
 														<td colspan="1" class="edit-buttons">
-															
+															<a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit-tools"></span></a><p>Edit event</p>
 															<a class="k-button k-delete-button" href="\\#"><span class="k-icon k-i-close"></span></a><p>Delete event</p>
 														</td>
 													</tr>
 									</div>
 									</script>
+									<script type="text/x-kendo-tmpl" id="editTemplate">
+        								<div class="event-view k-widget">
+								            <dl>
+                								<dt>Name</dt>
+                								<dd>
+                    								<input type="text" class="k-textbox" data-bind="value:name" name="Name" required="required" validationMessage="required" />
+                    								<span data-for="name" class="k-invalid-msg"></span>
+                								</dd>
+                								<dt>Description</dt>
+                								<dd>
+                    								<input type="text" data-bind="value:description" name="Description" required="required" validationMessage="required" />
+                    								<span data-for="description" class="k-invalid-msg"></span>
+                								</dd>
+                								<div class="edit-buttons">
+                									<a class="k-button k-update-button" href="\\#"><span class="k-icon k-i-check"></span></a>
+                									<a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-i-cancel"></span></a>
+            									</div>
+        							</div>
+    						</script>
 							</div>
 						</div>
 					</div>

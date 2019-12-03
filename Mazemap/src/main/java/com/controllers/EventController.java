@@ -132,24 +132,24 @@ public class EventController
 			        return ReturnMessageHelper.getReturnMessage(returnMessage);
 			    }
 			  
-			  @RequestMapping(value = "/updateevent", method = RequestMethod.GET)
-			  public String updateEvent()
-					  
+			  @RequestMapping(value = "/updateevent", method = RequestMethod.POST)
+			  public void updateEvent(@RequestBody Event event)  
 				{
+				//  eventRepository.save(event);
 			    // ArrayList<SensorData> sensorData = new ArrayList<SensorData>();
-				Long tempId = (long) 3;
-				Optional<Event> event = eventRepository.findById(3);
+				/*int tempId = event.Id;
+				Optional<Event> event = eventRepository.findById(tempId);
 				
 				java.sql.Date date = java.sql.Date.valueOf("2019-11-28");
 				long tempDate = date.getTime();
 				date.setTime(tempDate + 4320000);
 				event.get().setDate(date);
 				
-				/*event.get().setCreator(2);*/
+				
 				
 				eventRepository.save(event.get());
-			    
-			    	    return "got it";
+			    */
+			    	   
 			
 			
 			}
