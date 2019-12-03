@@ -29,6 +29,9 @@ public class User {
     private String studentnr;
 
     private String email;
+
+    // private Integer loc_id;
+
     @JsonIgnore
     private String password;
     @JsonIgnore
@@ -115,6 +118,19 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+
+    @OneToOne(mappedBy="user")
+    private LocationOfUsers location;
+
+    public void setLocationOfUser(LocationOfUsers location) {
+        this.location = location;
+    }
+    public LocationOfUsers getLocationOfUser() {
+        return this.location;
+    }
+
+
 
     @Override
     public String toString() {

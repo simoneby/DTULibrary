@@ -11,6 +11,15 @@
     <title>DTU CampusNet</title>
 </head>
 <body>
+
+		<!-- Scripts -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery.poptrox.min.js"></script>
+	<script src="/js/jquery.scrolly.min.js"></script>
+	<script src="/js/skel.min.js"></script>
+	<script src="/js/util.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="/kendo-ui-core/js/kendo.core.min.js"></script>
     <div class="page-wrap">
 
 		<!-- Nav -->
@@ -167,9 +176,11 @@
 				</div>
 			</section>
 			<section id="shareLocation">
+
 				<button onclick="broadcastToAll()">
 					<!-- <input type="button" onclick="window.alert('Hi!')"> -->
 				<script>
+
 					function broadcastToAll(){
 						var locMessage = prompt("Tell your friends where you are: ");
 						var stLoc = JSON.parse(localStorage.getItem("storedLocation"));
@@ -229,6 +240,7 @@
 			</footer>
 		</section>
 	</div>
+
 
 	<!-- Scripts -->
 	<script src="./js/jquery.min.js"></script>
