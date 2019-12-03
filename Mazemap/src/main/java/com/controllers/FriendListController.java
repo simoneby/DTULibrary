@@ -6,6 +6,7 @@ import java.util.Set;
 import com.helpers.ReturnMessageHelper;
 import com.models.User;
 import com.repositories.FilteredUserRepository;
+import com.services.FriendListService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,98 +21,44 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 public class FriendListController {
     @Autowired
     private FilteredUserRepository userRepository;
-
+    @Autowired
+    private FriendListService friendService;
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public Set<User> getAllFriends(@SessionAttribute("user") User user) {
-        // User[] userArray;
-        if (user == null) {
-            try {
-                throw new Exception("Stuff dont work");
-            } catch (Exception e) {
-                e.printStackTrace();
-                return new HashSet<User>();
+        if(friendService == null)
+        {
+            try{
+                
+            throw new Exception("Service is null");
             }
-        }
-        // Set<User> bs = new HashSet<User>();
-        // bs.add(user);
-        // return bs;
-        Set<User> stuff = userRepository.findUserByEmail(user.getEmail()).getFriends();
-        // stuff.add(user);
-        return stuff;
-    }
-
-    @RequestMapping(value = "/receivedFriendRequests", method = RequestMethod.GET)
-    public Set<User> getFriendRequests(@SessionAttribute("user") User user) {
-        // User[] userArray;
-        if (user == null) {
-            try {
-                throw new Exception("Stuff dont work");
-            } catch (Exception e) {
-                e.printStackTrace();
-                return new HashSet<User>();
-            }
-        }
-        Set<User> stuff = userRepository.findUserByEmail(user.getEmail()).getReceivedFriendRequests();
-        return stuff;
-    }
-
-    @RequestMapping(value = "/sentFriendRequests", method = RequestMethod.GET)
-    public Set<User> getSentFriendRequests(@SessionAttribute("user") User user) {
-        // User[] userArray;
-        if (user == null) {
-            try {
-                throw new Exception("Stuff dont work");
-            } catch (Exception e) {
-                e.printStackTrace();
-                return new HashSet<User>();
-            }
-        }
-        Set<User> stuff = userRepository.findUserByEmail(user.getEmail()).getSentFriendRequests();
-        return stuff;
-    }
-
-    @RequestMapping(value = "/allByEmail", method = RequestMethod.GET)
-    public Set<User> getAllFriendsByEmail(@RequestParam("email") String email) {
-        User user = userRepository.findUserByEmail(email);
-        if (user == null) {
-            try {
-                throw new Exception("Stuff dont work");
-            } catch (Exception e) {
+            catch(Exception e)
+            {
                 e.printStackTrace();
                 return null;
             }
         }
-        return user.getFriends();
+        return friendService.getAllFriends(user.getEmail());
+    }
+
+    @RequestMapping(value = "/receivedFriendRequests", method = RequestMethod.GET)
+    public Set<User> getFriendRequests(@SessionAttribute("user") User user) {
+        return friendService.getReceivedFriendRequests(user.getEmail());
+    }
+
+    @RequestMapping(value = "/sentFriendRequests", method = RequestMethod.GET)
+    public Set<User> getSentFriendRequests(@SessionAttribute("user") User user) {
+        return friendService.getSentFriendRequests(user.getEmail());
+    }
+
+    @RequestMapping(value = "/allByEmail", method = RequestMethod.GET)
+    public Set<User> getAllFriendsByEmail(@RequestParam("email") String email) {
+        return friendService.getAllFriends(email);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addFriend(@SessionAttribute("user") User currentUser, @RequestBody String friendEmail) {
-        String returnMessage;
-        if (friendEmail == null || friendEmail.isEmpty() || userRepository.findUsersByEmail(friendEmail).isEmpty())
-            returnMessage = String.format("The user with email %s does not exist!", friendEmail);
-        else {
-            User friend = userRepository.findUsersByEmail(friendEmail).get(0);
-            if (friend != null && currentUser != null) {
-                User u = userRepository.findUserByEmail(currentUser.getEmail());
-                // u.getFriends();
-                if (u.getFriends().contains(friend))
-                    returnMessage = "That person is already part of your friend list!";
-                else {
-                    try {
 
-                        friend.getFriends();
-                        u.setFriend(friend);
-                        userRepository.save(u);
-                        returnMessage = String.format("A friend request was sent to user with email %s!", friendEmail);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        returnMessage = "There was an error and the friend request could not be sent!";
-                    }
-                }
-            } else {
-                returnMessage = "Error: one of the entities is null!";
-            }
-        }
+        String returnMessage = friendService.addFriend(currentUser.getEmail(), friendEmail);
         return ReturnMessageHelper.getReturnMessage(returnMessage);
     }
 
