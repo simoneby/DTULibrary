@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
+	<%@ page session="true" contentType="text/html;charset=UTF-8" language="java" %>
+	<%@page import="com.models.User"%>
+	<%@page import="com.Helpers.ServerUrl"%>
 <head>
 	<meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="./css/main.css">
@@ -26,6 +28,8 @@
 </head>
 
 <body>
+	
+		<input type="hidden" id="baseUrl" name="baseUrl" value = '<%= ServerUrl.baseUrl %>' > 
 	<div class="page-wrap">
 
 		<!-- Nav -->

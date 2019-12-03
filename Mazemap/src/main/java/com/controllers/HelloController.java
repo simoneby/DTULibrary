@@ -34,4 +34,9 @@ public class HelloController
     {
         return "save_survey";
     }
+    @GetMapping({"/complete_survey"})
+    public String complete_survey(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name)
+    {
+        return "complete_survey";
+    }
 }

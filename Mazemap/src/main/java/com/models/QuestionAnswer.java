@@ -1,7 +1,4 @@
 // Relates to one Question in a specific survey
-
-
-
 package com.models;
 
 
@@ -21,7 +18,8 @@ public class QuestionAnswer {
     private Integer number; // what number in the survey.
     private QuestionType questionType;
     private String text;
-
+    private Integer range_answer;
+    private Integer text_answer;
 
     public Integer getId() {
         return id;
@@ -76,6 +74,26 @@ public class QuestionAnswer {
 
     public void setSurveyAnswer(SurveyAnswer surveyAnswer) {
         this.surveyAnswer = surveyAnswer;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getRange_answer() {
+        return range_answer;
+    }
+
+    public void setRange_answer(Integer range_answer) {
+        this.range_answer = range_answer;
+    }
+
+    public Integer getText_answer() {
+        return text_answer;
+    }
+
+    public void setText_answer(Integer text_answer) {
+        this.text_answer = text_answer;
     }
 
 }

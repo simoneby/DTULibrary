@@ -59,12 +59,12 @@ public class User {
         this.email = email;
     }
 
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE }, fetch = FetchType.LAZY)
     @JoinTable(name = "following", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
             @JoinColumn(name = "friend_id") })
     private Set<User> friends = new HashSet<User>();
 
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE }, fetch = FetchType.LAZY)
     @JoinTable(name = "followers", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
             @JoinColumn(name = "follower_id") })
     private Set<User> friendRequests = new HashSet<User>();
@@ -171,5 +171,19 @@ public class User {
             return false;
         friendRequests.remove(friend);
         return true;
+    }
+    public void removeAllFriends()
+    {
+        friends.clear();
+        friendRequests.clear();
+    }
+
+    public User(String name, String studentnr, String email) {
+        this.name = name;
+        this.studentnr = studentnr;
+        this.email = email;
+    }
+
+    public User() {
     }
 }
