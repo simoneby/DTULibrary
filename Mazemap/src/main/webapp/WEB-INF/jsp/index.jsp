@@ -42,9 +42,116 @@
 			</section>
 
 			<!--Share Location to All-->
+			
+			
+			<!--CREATING A BUTTON FOR CREATE EVENT-->
+			<section>
+			<h1>Create an event by clicking below</h1>
+			<a id="button" class="button">CLICK ME BABA</a>
+			</section>
+			
+			<section id="createEvent">
+			<div id="feedback"></div>
+			<!-- The popup modal -->
+					<div class="bg-modal">
+						<div class="modal-content">
+							<div id="close" class="close">+</div>
+							<form id="createEventForm">
+								<input type="text" id="description" name="eventDescr" placeholder="Event Description">
+								<input type="date" id="date" name="date" placeholder="Event date">
+								<input type="text" id="name" name="name" placeholder="Event Name">
+								<input type="time" id="time" name="time" placeholder="Event hour">
+								<input type="number" step=0.01 id="eventLng" name="lng" placeholder="Event Longitude">
+								<input type="number" step=0.01 id="eventLat" name="lat" placeholder="Event Latitude">
+								<button type="submit" id="submitEventForm" onclick="fire_ajax_submit()">Tester</button>
+								
+								<!-- <a href="" onclick="submitButton()" class="button">Submit</a> -->
+							</form>
+						</div>
+						<script>
+							
+							document.getElementById("button").addEventListener("click", function() {
+								document.querySelector(".bg-modal").style.display="flex";
+							});
+							
+							document.getElementById("close").addEventListener("click", function() {
+								document.querySelector(".bg-modal").style.display="none";
+							});
+							
+							function fire_ajax_submit() {
 
+							    var event = {}
+							    event["description"] = $("#description").val();
+							    event["name"] = $("#name").val();
+							    event["date"] = $("#date").val();
+							    event["time"] = $("#time").val();
+							    event["lng"] = $("#eventLng").val();
+							    event["lat"] = $("#eventLat").val();
+							    
 
+							    $("#submitEventForm").prop("disabled", true);
+
+							    $.ajax({
+							        type: "POST",
+							        contentType: "application/json",
+							        url: "/events/createevent",
+							        data: JSON.stringify(event),
+							        dataType: 'json',
+							        cache: false,
+							        timeout: 600000,
+							        success: function (data) {
+
+							            var json = "<h4>Ajax Response</h4><pre>"
+							                + JSON.stringify(data, null, 4) + "</pre>";
+							            $('#feedback').html(json);
+
+							            console.log("SUCCESS : ", data);
+							            $("#submitEventForm").prop("disabled", false);
+							            document.querySelector(".bg-modal").style.display="none";
+
+							        },
+							        error: function (e) {
+
+							            var json = "<h4>Ajax Response</h4><pre>"
+							                + e.responseText + "</pre>";
+							            $('#feedback').html(json);
+
+							            console.log("ERROR : ", e);
+							            $("#submitEventForm").prop("disabled", false);
+
+							        }
+							    });
+
+							}
+							
+							//var tester = []
+							//function submitButton() {
+								
+								//var event = [
+								//	document.getElementById("eventName").value,
+								//	document.getElementById("eventPlace").value,
+								//	document.getElementByID("eventDate").value	
+								//]
+								//alert(document.getElementById("eventName").value);
+								//tester.push.apply(tester, event)
+								//alert(event);
+
+							//}
+							
+
+						</script>
+					</div>
+			</section>
+			
+			
+			
+			<!-- STOP HERE TEST -->
+			
+			
+			
+			
 			<section id="map">
+			
 				<div class="inner column">
 					<h2> Upcoming Events: </h2>
 					<ul>
