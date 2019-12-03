@@ -1439,19 +1439,6 @@
 					}
 
 
-				#nav ul li b {
-					color: rgba(255, 255, 255, 0.5);
-					text-decoration: none;
-					font-size: 1.5em;
-				}
-
-					#nav ul li b:hover {
-						color: red;
-					}
-
-					#nav ul li b.active {
-						color: #19B5FE;
-					}
 
 				@media screen and (max-width: 736px) {
 
