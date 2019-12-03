@@ -86,7 +86,7 @@
 										 Question #:number# 
 										
 										Type: 
-										<input class="view_q_type" value="#:type#" read-only="true">
+										<input class="view_q_type" value="#:type#">
 										
 									</p>
 										#if(isRange)
@@ -220,6 +220,7 @@
 					//console.log("sth1");
 					listView = $("#questionList").kendoListView({
 						dataSource: questions,
+						editale: true,
 						template: kendo.template($("#viewTemplate").html()),
 						editTemplate: kendo.template($("#editTemplate").html()),
 						edit: function (e) {
@@ -234,6 +235,7 @@
 									dataTextField: "text",
 									dataValueField: "value",
 									dataSource: q_type,
+									enable: false
 								});
 							});
 						}
@@ -244,6 +246,7 @@
 							dataTextField: "text",
 							dataValueField: "value",
 							dataSource: q_type,
+							enable: false
 						});
 					});
 				});
@@ -259,6 +262,7 @@
 						dataTextField: "text",
 						dataValueField: "value",
 						dataSource: q_type,
+						enable: true,
 						value: 1,
 						change: function (e) {
 							var value = this.value();
