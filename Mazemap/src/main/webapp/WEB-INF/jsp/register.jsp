@@ -60,7 +60,7 @@
                  <% } else { %> 
 					<p> Session attribute is null </p>
 					<% } %>
-				<form id="friendForm">
+				<form id="signup">
 					<label for="name"> Enter your name: </label>
 					<input name="name" id="name" type="text"
 						placeholder="Enter your name here...">
