@@ -36,9 +36,14 @@ body {
 </style>
 </head>
 <body>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.poptrox.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
    
 	<div id="startLat"></div>
-
 	<div id="startLon"></div>
 	<div id="map" class="mazemap"></div>
     <div id="events"></div>
@@ -165,7 +170,7 @@ body {
 		var eventData;
 	    var markerIterator;
 	    var markerIteratorPopup;
-	    fetch('http://se2-webapp05.compute.dtu.dk:8080/mazemap/events/eventdata').then(response => {
+	    fetch('http://localhost:8080/events/eventdata').then(response => {
   			return response.json();
 			}).then(data => {
   				eventData = data;
@@ -221,7 +226,7 @@ body {
 		var zLevel = map.getZLevel();
 		if(zLevel > -1)
 			zLevel = zLevel -1; 
-		var getAddress = "http://se2-webapp05.compute.dtu.dk:8080/mazemap/sensors/zonedata?level=".concat(zLevel);
+		var getAddress = "http://localhost:8080/sensors/zonedata?level=".concat(zLevel);
 			   	
 		//need to get coords from server in the future
 		fetch(getAddress).then(response => {

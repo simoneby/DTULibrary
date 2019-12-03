@@ -2,6 +2,7 @@
 <html lang="en">
 <%@ page session="true" contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="com.models.User"%>
+<%@page import="com.Helpers.ServerUrl"%>
 <head>
 	<meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="./css/main.css">
@@ -25,15 +26,17 @@
 </head>
 
 <body>
+	<input type="hidden" id="baseUrl" name="baseUrl" value = '<%= ServerUrl.baseUrl %>' > 
 	<div class="page-wrap">
 
 		<!-- Nav -->
 		<nav id="nav">
 			<ul>
-				<li><a href="index"><span class="icon fa-home"></span></a></li>
-				<li><a href="#"><span class="icon fas fa-map"></span></a></li>
+				<li><a href="index" class="active"><span class="icon fa-home"></span></a></li>
+				<li><a href=""><span class="icon fas fa-map"></span></a></li>
 				<li><a href="#"><span class="icon fas fa-users"></span></a></li>
-				<li><a href="#" class="active"><span class="icon fas fa-sign-in"></span></a></li>
+				<li><a href="#"><span class="icon fas fa-sign-in"></span></a></li>
+				<li><a href="logout"><span class="icon fas fa-sign-out"></span></a></li>
 			</ul>
 		</nav>
 
@@ -57,7 +60,7 @@
                  <% } else { %> 
 					<p> Session attribute is null </p>
 					<% } %>
-				<form id="friendForm">
+				<form id="signup">
 					<label for="name"> Enter your name: </label>
 					<input name="name" id="name" type="text"
 						placeholder="Enter your name here...">
@@ -104,7 +107,10 @@
 		}
 	</style>
 	<script>
+		
 		$(document).ready(function () {
+			var baseUrl = $("baseUrl").val();
+			console.log(baseUrl);
 			require.config({
 				baseUrl: "/kendo-ui-core/js/", // the path where the kendo scripts are present
 				paths: {
@@ -184,7 +190,7 @@
 					},
 					processData: false,
 					type: 'POST',
-					url: 'https://se2-webapp05.compute.dtu.dk:8080/signup'
+					url: baseUrl + '/signup'
 				});
 				// $.post("http://localhost:8080/signup",
 				// 	{ user : user},

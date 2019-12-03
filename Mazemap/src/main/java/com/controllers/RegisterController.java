@@ -23,30 +23,45 @@ public class RegisterController {
 	private RoleRepository roleRepository;
 
 	@PostMapping(value = "/signup", headers = "Accept='application/json'")
-	public String signup(@SessionAttribute("user") User user, @RequestBody String name) {
+	public String signup(@SessionAttribute("user") User user, @RequestBody User newUser) {
 		// return user.toString();
 
-		if (!userRepository.findUsersByEmail(user.getEmail()).isEmpty()) {
-			
-			User entity = new User();
-			
-			entity = userRepository.findUserByStudentnr(user.getStudentnr());
-			entity.setName(name);
+		if (! userRepository.findUsersByEmail(user.getEmail()).isEmpty()) {
+			String name2 = newUser.getName();
+
+			User entity = userRepository.findUserByStudentnr(user.getStudentnr());
+			entity.setName(name2);
 
 			userRepository.save(entity);
 
-
-			return String.format("A user with the email %s already exists!", user.getEmail());
+			return "index";
 		}
 		try {
+			String name2 = newUser.getName();
 			user.setStudentnr("student nr here");
-			user.setName(name);
+			user.setName(name2);
 			userRepository.save(user);
-			return "You have been signed up!";
+			return "index";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "There was an error! User was not created! Please Try again! " + user.toString();
+			return "index";
 		}
 	}
 
+	@GetMapping(value = "signup_test")
+	public @ResponseBody String signup_test() {
+
+		User testUser = null;
+		String studentnr = "s154666";
+
+		testUser = userRepository.findUserByStudentnr(studentnr);
+
+		testUser.setName("qweqweqwe");
+
+		userRepository.save(testUser);
+
+		return "donee :)) "+testUser.getName();
+
+	}
 }
+

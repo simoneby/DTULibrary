@@ -1,5 +1,10 @@
 package com.models;
 
+
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.annotation.*;
+import com.helpers.*;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
@@ -30,7 +35,8 @@ public class Event {
     private Boolean isPublic;      // is the event public (open for everyone)
 
     private java.sql.Date date;
-
+    
+    @JsonDeserialize(using = SqlTimeHelper.class)
     private java.sql.Time time;
 
     public Date getDate() {
@@ -106,7 +112,6 @@ public class Event {
 
     @OneToOne
     @JoinColumn(name="event_creator")
-
     private User creator;
     public void setCreator (User creator) {
         this.creator = creator;
