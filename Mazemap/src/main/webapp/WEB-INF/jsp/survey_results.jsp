@@ -23,7 +23,8 @@
     <script src="./kendo-ui-core/js/kendo.data.min.js"></script>
     <script src="./kendo-ui-core/js/kendo.tabstrip.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
-    <script src="./custom_scripts/answer_survey_script.js"></script>
+    <script src="https://kit.fontawesome.com/7510661d31.js" crossorigin="anonymous"></script>
+    <script src="./custom_scripts/survey_results_script.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>DTU CampusNet</title>
 </head>
@@ -63,40 +64,40 @@
                     <div class="demo-section k-content">
                         <div id="tabstrip">
                             <div id="tab3">
-                                <h2> Complete survey</h2>
-                                <form id="survey_form">
-
+                                <h2> View survey results</h2>
+                                <h3 id="survey_name"> </h3>
+                                <p id="survey_info"> </p>
                                     <div class="demo-section k-content wide">
                                         <div id="questionList">
                                         </div>
                                     </div>
-                                    <ul class="actions">
-                                        <li><input id="save_survey" value="Submit survey answers" class="button" type="submit"></li>
-                                    </ul>
-                                </form>
                                 <div id="result"></div>
                                 <script type="text/x-kendo-tmpl" id="viewTemplate">
 									<div class=" k-widget">
 										<p class=""> 
-										 Question #:question_number# 
+										 Question #:number# 
                                         </p>
 										<p>
-                                            <h3>#:question_text#</h3> 
-                                            #if(question_isRange) {#
-                                        Where #:question_start# represents #:question_start_label# and #:question_end# represents #:question_end_label#
+                                            <h3>#:text#</h3> 
+                                            #if(isRange) {#
+                                        Where #:start# represents #:start_label# and #:end# represents #:end_label#
                                     #}#    
                                     </p>
-                                            #if(question_isRange)
-                                            {#
-                                            <p>
-                                                <input id="slider_#:number#" data-number="#:number#" class="range_edit" data-bind="value:range_answer" title="slider" />
-                                            </p>
-                                            #} else {#
-                                                <textarea id="text_answer_#:number#" data-number="#:number#" rows="3" cols="150"  class="k-textbox text_answer" data-bind="value:text_answer" name="text_answer">
-                                                </textarea>
-                                                #}#
-
-                             </script>
+                                    <dl id="answers#:number#"> </dl>
+                                    <input id="seeAnswers#:number#" type="button" value="See answers" onclick="loadAnswers(#:id#,#:number#);" />
+                                    <input id="hideAnswers#:number#" type="button" value="Hide answers" onclick="hideAnswers(#:number#);" />
+                            
+                                </div>
+                                </script>
+                             <script type="text/x-kendo-tmpl" id="answerTemplate">
+                                <dt>User #:user_studentnr# </dt>
+                                #if(questionType=="RANGE") {#
+                                <dd>     #:range_answer# </dd>
+                                #}#    
+                                #if(questionType=="TEXT") {#
+                                <dd>    #:text_answer# </dd>
+                               #}#    
+                            </script>
                             </div>
                         </div>
                     </div>

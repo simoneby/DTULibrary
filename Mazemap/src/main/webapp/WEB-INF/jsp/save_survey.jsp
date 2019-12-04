@@ -25,6 +25,7 @@
 	<script src="./kendo-ui-core/js/kendo.tabstrip.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
 	<script src="./custom_scripts/survey_script.js"></script>
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>DTU CampusNet</title>
 </head>

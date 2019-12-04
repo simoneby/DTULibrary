@@ -39,6 +39,11 @@ public class HelloController
     {
         return "complete_survey";
     }
+    @GetMapping({"/view_survey_results"})
+    public String view_survey_results(Model model, @RequestParam(value="survey_id", required=true, defaultValue="15") String survey_id)
+    {
+        return "survey_results";
+    }
     @GetMapping({"/survey_main"})
     public String survey_main(Model model)
     {
