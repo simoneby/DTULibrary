@@ -5,8 +5,15 @@
 	<link rel="stylesheet" type="text/css" href="./css/main.css">
 	<link rel="stylesheet" type="text/css" href="./css/custom.css">
 	<link rel="stylesheet" href="./kendo-ui-core/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="./kendo-ui-core/styles/kendo.default.min.css">
-	
+	<link rel="stylesheet" href="./kendo-ui-core/styles/kendo.default.min.css">
+	<script src="./js/jquery.min.js"></script>
+	<script src="./js/jquery.poptrox.min.js"></script>
+	<script src="./js/jquery.scrolly.min.js"></script>
+	<script src="./js/skel.min.js"></script>
+	<script src="./js/util.js"></script>
+	<script src="./js/main.js"></script>
+	<script src="./kendo-ui-core/js/kendo.core.min.js"></script>
+	<script src="https://kit.fontawesome.com/7510661d31.js" crossorigin="anonymous"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>DTU CampusNet</title>
 </head>
@@ -17,9 +24,8 @@
 		<nav id="nav">
 			<ul>
 				<li><a href="#" class="active"><span class="icon fa-home"></span></a></li>
-				<li><a href=""><span class="icon fas fa-map"></span></a></li>
 				<li><a href="friendlist"><span class="icon fas fa-users"></span></a></li>
-				<li><a href="save_survey"><span class="icon fas fa-poll-h"></span></a></li>
+				<li><a href="survey_main"><i class="fas fa-poll-h"></i></a></li>
 				<li><a href="login"><span class="icon fas fa-sign-in"></span></a></li>
 				<li><a href="logout"><span class="icon fas fa-sign-out"></span></a></li>
 			</ul>
@@ -124,13 +130,6 @@
 	</div>
 
 	<!-- Scripts -->
-	<script src="./js/jquery.min.js"></script>
-	<script src="./js/jquery.poptrox.min.js"></script>
-	<script src="./js/jquery.scrolly.min.js"></script>
-	<script src="./js/skel.min.js"></script>
-	<script src="./js/util.js"></script>
-	<script src="./js/main.js"></script>
-	<script src="./kendo-ui-core/js/kendo.core.min.js"></script>
 
 	
 </body>

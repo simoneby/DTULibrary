@@ -1,7 +1,8 @@
+<!-- @author s192671 -->
 <!DOCTYPE html>
 <html lang="en">
 <%@ page session="true" contentType="text/html;charset=UTF-8" language="java" %>
-<%@page import="com.models.Survey"%>
+<%@page import="com.models.User"%>
 <%@page import="com.Helpers.ServerUrl"%>
 
 <head>
@@ -10,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="./css/custom.css">
     <link rel="stylesheet" href="./kendo-ui-core/styles/kendo.common.min.css">
     <link rel="stylesheet" href="./kendo-ui-core/styles/kendo.default.min.css">
+    <script src="https://kit.fontawesome.com/7510661d31.js" crossorigin="anonymous"></script>
     <!-- Scripts -->
     <script src="./js/jquery.min.js"></script>
     <script src="./js/jquery.poptrox.min.js"></script>
@@ -23,23 +25,21 @@
     <script src="./kendo-ui-core/js/kendo.data.min.js"></script>
     <script src="./kendo-ui-core/js/kendo.tabstrip.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
-    <script src="./custom_scripts/answer_survey_script.js"></script>
+    <script src="./custom_scripts/survey_main_script.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>DTU CampusNet</title>
 </head>
 
 <body>
     <input type="hidden" id="baseUrl" name="baseUrl" value='<%= ServerUrl.baseUrl %>'>
-    <input type="hidden" id="survey_id" name="survey_id" value='<%= request.getParameter("survey_id") %>'>
     <div class="page-wrap">
 
         <!-- Nav -->
         <nav id="nav">
             <ul>
                 <li><a href="index" class="active"><span class="icon fa-home"></span></a></li>
-                <li><a href=""><span class="icon fas fa-map"></span></a></li>
                 <li><a href="friendlist"><span class="icon fas fa-users"></span></a></li>
-                <li><a href="save_survey"><span class="icon fas fa-poll-h"></span></a></li>
+                <li><a href="survey_main"><i class="fas fa-poll-h"></i></a></li>
                 <li><a href="login"><span class="icon fas fa-sign-in"></span></a></li>
                 <li><a href="logout"><span class="icon fas fa-sign-out"></span></a></li>
             </ul>
@@ -59,57 +59,56 @@
                     </div>
                 </div>
             </section>
-            <section id="surveyList">
-                <div id="survey_tab" class="column">
+            <section>
+                <div id="active_surveys" class="column">
                     <div class="demo-section k-content">
                         <div id="tabstrip">
-                            <div id="tab3">
-                                <h2> Complete survey</h2>
-                                <form id="survey_form">
-
-                                    <div class="demo-section k-content wide">
-                                        <div id="questionList">
-                                        </div>
-                                    </div>
-                                    <ul class="actions">
-                                        <li><input id="save_survey" value="Submit survey answers" class="button" type="submit"></li>
-                                    </ul>
-                                </form>
-                                <div id="result"></div>
-                                <script type="text/x-kendo-tmpl" id="viewTemplate">
-									<div class=" k-widget">
-										<p class=""> 
-										 Question #:question_number# 
-                                        </p>
-										<p>
-                                            <h3>#:question_text#</h3> 
-                                            #if(question_isRange) {#
-                                        Where #:question_start# represents #:question_start_label# and #:question_end# represents #:question_end_label#
-                                    #}#    
-                                    </p>
-                                            #if(question_isRange)
-                                            {#
-                                            <p>
-                                                <input id="slider_#:number#" data-number="#:number#" class="range_edit" data-bind="value:range_answer" title="slider" />
-                                            </p>
-                                            #} else {#
-                                                <textarea id="text_answer_#:number#" data-number="#:number#" rows="3" cols="150"  class="k-textbox text_answer" data-bind="value:text_answer" name="text_answer">
-                                                </textarea>
-                                                #}#
-
-                             </script>
+                            <ul>
+                                <li> Active survey list </li>
+                                <li> Surveys you created</li>
+                            </ul>
+                            <div>
+                                <table id="survey_list_to_complete"></table>
+                            </div>
+                            <div>
+                                <table id="survey_list_created">
+                                </table>
+                                <div>
+                                    <li><a href="save_survey"><i class="fas fa-external-link-square-alt"> Click here to
+                                                create new survey... </i></a></li>
+                                </div>
                             </div>
                         </div>
+
                     </div>
+                </div>
             </section>
-            <!--                                                 <div class="edit-buttons">
-                                                        <a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a> </div>
-                                        </div>	
-                                    -->
+            <script type="text/x-kendo-tmpl" id="template1">
+									<tr class=" k-widget">
+										<th> 
+										 Survey name:  #:name# 
+                                        </th>
+                                    <td><a href="complete_survey?survey_id=#:id#"><i class="fas fa-external-link-square-alt"> Complete survey... </i></a>  
+                                    </td> </tr>
+                                        <tr> <td>
+                                         Created on: #:startDate.toDateString()#; </td> <td> Expires on #:endDate.toDateString()#</td> </tr>
+
+                </script>
+            <script type="text/x-kendo-tmpl" id="template2">
+                    <tr class=" k-widget">
+                        <th> 
+                         Survey name:  #:name# 
+                        </th>
+                    <td><a href="view_survey_results?survey_id=#:id#"><i class="fas fa-external-link-square-alt"> View survey results... </i></a>  
+                    </td> </tr>
+                        <tr> <td>
+                         Created on: #:startDate.toDateString()#; </td> <td> Expires on #:endDate.toDateString()#</td> </tr>
+
+</script>
             <!-- Contact -->
             <section id="contact">
                 <!-- Social -->
-                <div class="social column">
+                <div class="social">
 
                     Welcome to
                     the DTU Hub, your new favourite website while on campus :).</p>

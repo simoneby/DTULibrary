@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "question","surveyAnswer"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler","surveyAnswer"})
 
 @Entity
 public class QuestionAnswer {
@@ -19,7 +19,7 @@ public class QuestionAnswer {
     private QuestionType questionType;
     private String text;
     private Integer range_answer;
-    private Integer text_answer;
+    private String text_answer;
 
     public Integer getId() {
         return id;
@@ -88,12 +88,22 @@ public class QuestionAnswer {
         this.range_answer = range_answer;
     }
 
-    public Integer getText_answer() {
+    public String getText_answer() {
         return text_answer;
     }
 
-    public void setText_answer(Integer text_answer) {
+    public void setText_answer(String text_answer) {
         this.text_answer = text_answer;
+    }
+
+    public QuestionAnswer(Question question) {
+        this.question = question;
+        this.number = question.getNumber();
+    }
+
+    public QuestionAnswer()
+    {
+        
     }
 
 }
