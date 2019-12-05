@@ -110,7 +110,9 @@ public class QuestionAnswer {
     }
 
     public String getUser_studentnr() {
+        if(this.surveyAnswer != null && this.surveyAnswer.getUser() != null)
         user_studentnr = this.surveyAnswer.getUser().getStudentnr();
+        else user_studentnr = "NA";
         return user_studentnr;
     }
 
