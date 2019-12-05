@@ -20,7 +20,9 @@ public class QuestionAnswer {
     private String text;
     private Integer range_answer;
     private String text_answer;
-
+    @Transient
+    private String user_studentnr;
+    
     public Integer getId() {
         return id;
     }
@@ -74,6 +76,7 @@ public class QuestionAnswer {
 
     public void setSurveyAnswer(SurveyAnswer surveyAnswer) {
         this.surveyAnswer = surveyAnswer;
+        user_studentnr = this.surveyAnswer.getUser().getStudentnr();
     }
 
     public void setId(Integer id) {
@@ -104,6 +107,11 @@ public class QuestionAnswer {
     public QuestionAnswer()
     {
         
+    }
+
+    public String getUser_studentnr() {
+        user_studentnr = this.surveyAnswer.getUser().getStudentnr();
+        return user_studentnr;
     }
 
 }
