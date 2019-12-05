@@ -1,177 +1,164 @@
-// var url="http://se2-webapp05.compute.dtu.dk:8080/mazemap/";
-// $(document).ready(function () {
-//     var friends = [];
-//     var friendRequestsReceived = [];
-//     var friendRequestsSent = [];
-//     require.config({
-//         baseUrl: "./kendo-ui-core/js/", // the path where the kendo scripts are present
-//         paths: {
-//             "jquery": "./jquery.min",//jquery path
-//         }
-//     });
-//     loadFriendlist(friends,friendRequestsReceived,friendRequestsSent);
+var baseUrl ;
+var listView = {};
+var questions = {};
+var q_type = [
+    { text: "Text", value: 0 },
+    { text: "Range", value: 1 },
+];
+$(document).ready(function () {
+    require.config({
+        baseUrl: "./kendo-ui-core/js/", // the path where the kendo scripts are present
+        paths: {
+            "jquery": "./jquery.min",//jquery path
+        }
+    });
+    require(["jquery", "kendo.pager.min", "kendo.listview.min", "kendo.data.min", "kendo.dropdownlist.min"],
+        function ($, kendo) {
+            $("#endDate").kendoDateInput({
+                format: 'yyyy-MM-dd'
+            });
+            var questionList = [];
+             questions = new kendo.data.DataSource({
+                data: questionList,
+                schema: {
+                    model: {
+                        id: "number",
+                        fields: {
+                            text: { type: "string" },
+                            number: { type: "number" },
+                            type: { type: "number" },
+                            start: { type: "number" },
+                            end: { type: "number" },
+                            start_label: { type: "string" },
+                            end_label: { type: "string" },
+                            isRange: { type: "boolean" }
 
-//     //var acceptRequestButtons = document.getElementsByClassName('acceptReqButton');
-//     //acceptRequestButtons.foreach()
-//     //acceptRequestButtons.foreach.addEventListener('submit', handleFormSubmit);
-//     const handleFormSubmit = event => {
+                        }
+                    },
+                },
+                sort: { field: "number", dir: "asc" },
+                change: function (e) {
+                    console.log(e.model);
+                    this.data().forEach(element => {
+                        element.isRange = element.type == 1;
+                        console.log("isRange" + element.number + "value" + element.isRange);
+                    });
+                    //	  listView.refresh();
+                }
+            });
+            //console.log("sth1");
+            listView = $("#questionList").kendoListView({
+                dataSource: questions,
+                editale: true,
+                template: kendo.template($("#viewTemplate").html()),
+                editTemplate: kendo.template($("#editTemplate").html()),
+                edit: function (e) {
+                    if (e.model.number == 0) {
+                        e.model.number = this.dataSource.data().length;
+                        console.log(e.model.isRange);
+                    }
+                },
+                dataBound: function () {
+                    $(".view_q_type").each(function (index) {
+                        $(this).kendoDropDownList({
+                            dataTextField: "text",
+                            dataValueField: "value",
+                            dataSource: q_type,
+                            enable: false
+                        });
+                    });
+                }
+            }).data("kendoListView");
+            // create DropDownList from input HTML element
+            $(".view_q_type").each(function (index) {
+                $(this).kendoDropDownList({
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: q_type,
+                    enable: false
+                });
+            });
+        });
+    $(".k-add-button").click(function (e) {
+        var currentQuestionNumber = questionList.length + 1;
+        //e.model.number = currentQuestionNumber;
+        //e.model.type = 1;
+        console.log("adding");
+        listView.add();
+        $(".range_edit").hide();
+        $(".view_q_type, .type_in_Edit").each(function (index) {
+            $(this).kendoDropDownList({
+                dataTextField: "text",
+                dataValueField: "value",
+                dataSource: q_type,
+                enable: true,
+                value: 1,
+                change: function (e) {
+                    var value = this.value();
+                    if (value == 1) {
+                        $(".range_edit").show();
+                    }
+                    else {
+                        $(".range_edit").hide();
+                    }
+                }
+            });
+        });
+        e.preventDefault();
+        //console.log("add event activated");
+    });
+    const handleFormSubmit = event => {
+        // Stop the form from submitting since we’re handling that with AJAX.
+        event.preventDefault();
+        submitForm();
+    }
+    function submitForm() {
+        baseUrl = $("#baseUrl").val();
+        var survey = {};
+        $("#survey_form").find("input, textarea").each(function () {
+            var inputType = this.tagName.toUpperCase() === "INPUT" && this.type.toUpperCase();
+            if (inputType !== "BUTTON" && inputType !== "SUBMIT") {
+                // if (this.name === "roles") {
+                // 	var user_roles = [];
+                // 	$("#roles option:selected").each(function () {
+                // 		var optionValue = $(this).val();
+                // 		var optionText = $(this).text();
+                // 		user_roles.push({ id: optionValue, name: optionText });
+                // 		console.log("optionText", optionText,optionValue);
+                // 	});
+                // 	user[this.name] = user_roles;
+                // }
+                // else {
+                survey[this.name] = $(this).val();
+                console.log(this.name);
+                // }
+            }
+        });
+        survey.questions = questions.data(); 
+        console.log(survey);
+        $.ajax({
+            contentType: 'application/json',
+            data: JSON.stringify(survey),
+            dataType: 'json',
+            success: function (data, status) {
 
-//         // Stop the form from submitting since we’re handling that with AJAX.
-//         event.preventDefault();
-//         submitForm();
-//     };
-//     function submitForm() {
-//         var data = {};
-//         data.friendEmail = $("#friendEmail").val();
-//         console.log(data.friendEmail);
-//         doPostRequest(data.friendEmail,'http://se2-webapp05.compute.dtu.dk:8080/mazemap/friends/add',"#addFriendResult");
-//     };
-
-//     const form = document.getElementById('friendForm');
-//     form.addEventListener('submit', handleFormSubmit);
-//     $("#tabstrip").kendoTabStrip({
-//         animation:  {
-//             open: {
-//                 effects: "fadeIn"
-//             }
-//         }
-//     });
-// });
-
-// function acceptRequest(element) {
-//     var friendEmail = element.getAttribute("data-email");
-//     console.log("accepted");
-//     doPostRequest(friendEmail,'http://se2-webapp05.compute.dtu.dk:8080/mazemap/friends/acceptFriendRequest',"#acceptRequestResult");
-// };
-// function rejectRequest(element) {
-//     var friendEmail = element.getAttribute("data-email");
-//     console.log("rejected")
-//     doPostRequest(friendEmail,'http://se2-webapp05.compute.dtu.dk:8080/mazemap/friends/rejectFriendRequest',"#rejectRequestResult");
-// };
-// function doPostRequest(data, url,resultId)
-// {
-//     $.ajax({
-//         contentType: 'application/json',
-//         data: data,
-//         dataType: 'json',
-//         success: function (data, status) {
-//             console.log("Data: " + data + "\nStatus: " + status);
-//             $(resultId).html("<p>"+ data.message+"</p>") 
-//             loadFriendlist();
-//         },
-//         error: function () {
-//             console.log("Something went wrong!");
-//         },
-//         processData: false,
-//         type: 'POST',
-//         url: url
-//     });
-// };
-// function loadFriendlist(friends,friendRequestsReceived,friendRequestsSent) {
-//     require(["jquery", "kendo.pager.min", "kendo.listview.min"],
-//         function ($, kendo) {
-//             friends = new kendo.data.DataSource({
-//                 transport: {
-//                     read: {
-//                         url: "http://se2-webapp05.compute.dtu.dk:8080/mazemap/friends/all",
-//                         type: "get",
-//                         dataType: "json"
-//                     },
-//                     destroy: {
-//                         url: "http://se2-webapp05.compute.dtu.dk:8080/mazemap/friends/deleteFriend",
-//                         type: "delete",
-//                         dataType: "json",
-//                     },
-//                     parameterMap: function(options, operation) {
-//                         console.log(operation);
-//                         console.log(options);
-//                         if (operation !== "read" && options) {
-//                             //console.log(options.models);
-//                             return {friendEmail : options.email};
-//                         }
-//                     }
-//                 },
-//                     schema: {
-//                         model: {
-//                             id: "id",
-//                             fields: {
-//                                 id: { type : "number"},
-//                                 name: { type : "string"},
-//                                 email:{ type : "string"},
-//                             }
-//                         }
-//                 }
-//             });
-//             friendRequestsSent = new kendo.data.DataSource({
-//                 transport: {
-//                     read: {
-//                         url: "http://se2-webapp05.compute.dtu.dk:8080/mazemap/friends/sentFriendRequests",
-//                         type: "get",
-//                         dataType: "json"
-//                     },
-
-//                 },
-//                 schema: {
-//                     model: {
-//                         id: "id",
-//                         fields: {
-//                             id: { type : "number"},
-//                             name: { type : "string"},
-//                             email:{ type : "string"},
-//                         }
-//                     }
-//             }
-//             });
-//             friendRequestsReceived = new kendo.data.DataSource({
-//                 transport: {
-//                     read: {
-//                         url: "http://se2-webapp05.compute.dtu.dk:8080/mazemap/friends/receivedFriendRequests",
-//                         type: "get",
-//                         dataType: "json"
-//                     },
-//                 },
-//                 schema: {
-//                     model: {
-//                         id: "id",
-//                         fields: {
-//                             id: { type : "number"},
-//                             name: { type : "string"},
-//                             email:{ type : "string"},
-//                         }
-//                     }
-//             }
-//             });
-//             // create multiSelect from input HTML element
-//             friends.read().then(function () {
-//                 $("#pager1").kendoPager({
-//                     dataSource: friends
-//                 });
-
-//                 $("#listView1").kendoListView({
-//                     dataSource: friends,
-//                     template: kendo.template($("#template1").html())
-//                 });
-//             });
-//             // create multiSelect from input HTML element
-//             friendRequestsSent.read().then(function () {
-//                 $("#pager2").kendoPager({
-//                     dataSource: friendRequestsSent
-//                 });
-
-//                 $("#listView2").kendoListView({
-//                     dataSource: friendRequestsSent,
-//                     template: kendo.template($("#template2").html())
-//                 });
-//             });
-//             friendRequestsReceived.read().then(function () {
-//                 $("#pager3").kendoPager({
-//                     dataSource: friendRequestsReceived
-//                 });
-
-//                 $("#listView3").kendoListView({
-//                     dataSource: friendRequestsReceived,
-//                     template: kendo.template($("#template3").html())
-//                 });
-//             });
-//         });
-// };
+                alert("survey saved!");
+                $("#result").text("<p>" + data + "</p>");
+            },
+            error: function () {
+                console.log("Stuff happened");
+            },
+            processData: false,
+            type: 'POST',
+            url: baseUrl + '/survey/save'
+        });
+        // $.post("http://localhost:8080/signup",
+        // 	{ user : user},
+        // 	function (data, status) {
+        // 		alert("Data: " + data + "\nStatus: " + status);
+        // 	}
+        // 	);
+    };
+    const form = document.getElementById('survey_form');
+    form.addEventListener('submit', handleFormSubmit);
+});

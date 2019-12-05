@@ -35,8 +35,18 @@ public class HelloController
         return "save_survey";
     }
     @GetMapping({"/complete_survey"})
-    public String complete_survey(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name)
+    public String complete_survey(Model model, @RequestParam(value="survey_id", required=true, defaultValue="15") String survey_id)
     {
         return "complete_survey";
+    }
+    @GetMapping({"/view_survey_results"})
+    public String view_survey_results(Model model, @RequestParam(value="survey_id", required=true, defaultValue="15") String survey_id)
+    {
+        return "survey_results";
+    }
+    @GetMapping({"/survey_main"})
+    public String survey_main(Model model)
+    {
+        return "surveys_main";
     }
 }
