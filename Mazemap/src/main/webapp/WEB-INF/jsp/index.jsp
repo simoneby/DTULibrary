@@ -41,16 +41,17 @@
 
 			<!--Share Location to All-->
 			
-			
+	
 			<!--CREATING A BUTTON FOR CREATE EVENT-->
+					<!--
 			<section>
 			<h1>Create an event by clicking below</h1>
-			<a id="button" class="button">CLICK ME BABA</a>
+			<a id="button" class="button">Create Event</a>
 			</section>
 			
 			<section id="createEvent">
 			<div id="feedback"></div>
-			<!-- The popup modal -->
+			
 					<div class="bg-modal">
 						<div class="modal-content">
 							<div id="close" class="close">+</div>
@@ -63,7 +64,7 @@
 								<input type="number" step=0.01 id="eventLat" name="lat" placeholder="Event Latitude">
 								<button type="submit" id="submitEventForm" onclick="fire_ajax_submit()">Tester</button>
 								
-								<!-- <a href="" onclick="submitButton()" class="button">Submit</a> -->
+								
 							</form>
 						</div>
 						<script>
@@ -120,28 +121,12 @@
 							        }
 							    });
 
-							}
-							
-							//var tester = []
-							//function submitButton() {
-								
-								//var event = [
-								//	document.getElementById("eventName").value,
-								//	document.getElementById("eventPlace").value,
-								//	document.getElementByID("eventDate").value	
-								//]
-								//alert(document.getElementById("eventName").value);
-								//tester.push.apply(tester, event)
-								//alert(event);
-
-							//}
-							
-
+							}	
 						</script>
 					</div>
 			</section>
 			
-			
+			 --!>
 			
 			<!-- STOP HERE TEST -->
 			

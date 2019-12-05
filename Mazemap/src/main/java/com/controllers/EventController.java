@@ -60,47 +60,12 @@ public class EventController
 
         }
         
-        result.setMsg("success");
-        
-        result.setEvent(event);
+        result.setMsg("Event created");
 
         return ResponseEntity.ok(result);
 
     }
 
-	
-	@RequestMapping(value = "/createevents", method = RequestMethod.POST)
-	  public void createEvents(
-			  @RequestParam(value = "creatorId") int creatorId, 
-			  @RequestParam(value = "eventDescr") String description,
-			  @RequestParam(value = "date") String date,
-	  		  @RequestParam(value = "hour") int hour,
-			  @RequestParam(value = "minute") int minute,
-			  @RequestParam(value = "lng") double lng,
-			  @RequestParam(value = "lat") double lat)
-		{
-	    // ArrayList<SensorData> sensorData = new ArrayList<SensorData>();
-		java.sql.Date tempDate = java.sql.Date.valueOf(date);
-		long longDate = tempDate.getTime();
-		tempDate.setTime(longDate + 4320000);
-		Event event = new Event();
-		 /*event.setCreator(creator);*/ event.setDescription(description); event.setLng(lng); event.setLat(lat); 
-				 event.setDate(tempDate); event.setTime(new java.sql.Time(hour, minute, 0));
-				 
-		         
-				 eventRepository.save(event);
-	}
-			  @RequestMapping(value = "/createeventtest", method = RequestMethod.GET)
-			  public String createEventTest()
-					  
-				{
-			    // ArrayList<SensorData> sensorData = new ArrayList<SensorData>();
-				User user = new User();
-				    userRepository.save(user);
-			    	    return "got it";
-			
-			
-			}
 			  @RequestMapping(value = "/deleteevent", method = RequestMethod.DELETE)
 			    public String deleteFriend(@RequestParam  Integer id) {
 			        String returnMessage;
@@ -133,30 +98,8 @@ public class EventController
 			    }
 			  
 			  @RequestMapping(value = "/updateevent", method = RequestMethod.POST)
-			  public void updateEvent(@RequestBody Event event)  
+			  public void updateEvent(@Valid @RequestBody Event event, Errors errors)  
 				{
-				//  eventRepository.save(event);
-			    // ArrayList<SensorData> sensorData = new ArrayList<SensorData>();
-				/*int tempId = event.Id;
-				Optional<Event> event = eventRepository.findById(tempId);
-				
-				java.sql.Date date = java.sql.Date.valueOf("2019-11-28");
-				long tempDate = date.getTime();
-				date.setTime(tempDate + 4320000);
-				event.get().setDate(date);
-				
-				
-				
-				eventRepository.save(event.get());
-			    */
-			    	   
-			
-			
+				  eventRepository.save(event);
 			}
-			  
-    @RequestMapping({"/otherevent"})
-    public String event(@RequestParam(value="name", required=false, defaultValue="World") String name) 
-    {
-        return "some evnt stuff";
-    }
 }

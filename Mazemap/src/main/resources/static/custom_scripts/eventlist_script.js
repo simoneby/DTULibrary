@@ -7,12 +7,6 @@ $(document).ready(function () {
         }
     });
     loadEventlist(events);
-    console.log(events);
-
-    //var acceptRequestButtons = document.getElementsByClassName('acceptReqButton');
-    //acceptRequestButtons.foreach()
-
-    
 });
 
 function loadEventlist(events) {
@@ -29,11 +23,10 @@ function loadEventlist(events) {
 	                                lat: { type : "number" },
 	                                lng: { type : "number" },
 	                                description:{ type : "string"},
-	                                
+	                                isPublic:{ type: "boolean"},
+	                                creator:{ type:"string"},
 	                                date: { type : "string" },
 	                                time: { type : "string" },
-	                                
-	                                
 	                            }
 	                        }
 	                },
@@ -55,8 +48,6 @@ function loadEventlist(events) {
                     	contentType:"application/json",
                     },
                     parameterMap: function(options, operation) {
-                        console.log(operation);
-                        console.log(options);
                         if (operation == "destroy" && options) {
                             //console.log(options.models);
                             return {id : options.id};

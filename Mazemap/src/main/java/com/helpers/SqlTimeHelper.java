@@ -14,7 +14,8 @@ public final class SqlTimeHelper extends JsonDeserializer<java.sql.Time> {
         ObjectCodec oc = jsonParser.getCodec();
         JsonNode node = oc.readTree(jsonParser);
         String time = node.textValue();
-        time = time + ":00";
+        if(time.length() == 5)
+        	time = time + ":00";
         return java.sql.Time.valueOf(time);
     }
 

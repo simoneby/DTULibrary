@@ -107,6 +107,26 @@
                     								<input type="text" data-bind="value:description" name="Description" required="required" validationMessage="required" />
                     								<span data-for="description" class="k-invalid-msg"></span>
                 								</dd>
+												<dt>Time</dt>
+												<dd>
+                    								<input type="time" data-bind="value:time" name="Time" required="required" validationMessage="required" />
+                    								<span data-for="time" class="k-invalid-msg"></span>
+                								</dd>
+												<dt>Date</dt>
+											    <dd>
+                    								<input type="date" data-bind="value:date" name="Date" required="required" validationMessage="required" />
+                    								<span data-for="date" class="k-invalid-msg"></span>
+                								</dd>
+												<dt>Longitude</dt>
+ 												<dd>
+                    								<input type="number" data-bind="value:lng" name="Longitude" required="required" validationMessage="required" />
+                    								<span data-for="lng" class="k-invalid-msg"></span>
+                								</dd>
+												<dt>Latitude</dt>
+												 <dd>
+                    								<input type="number" data-bind="value:lat" name="Latitude" required="required" validationMessage="required" />
+                    								<span data-for="lat" class="k-invalid-msg"></span>
+                								</dd>
                 								<div class="edit-buttons">
                 									<a class="k-button k-update-button" href="\\#"><span class="k-icon k-i-check"></span></a>
                 									<a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-i-cancel"></span></a>
