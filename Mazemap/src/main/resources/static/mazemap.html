@@ -7,10 +7,14 @@
 
 <link rel="stylesheet"
 	href="https://api.mazemap.com/js/v2.0.14/mazemap.min.css">
-<script type='text/javascript'
-	src='https://api.mazemap.com/js/v2.0.14/mazemap.min.js'></script>
-	
-
+	<script type='text/javascript' src='https://api.mazemap.com/js/v2.0.14/mazemap.min.js'></script>
+	<script src="./js/jquery.min.js"></script>
+	<script src="./js/jquery.poptrox.min.js"></script>
+	<script src="./js/jquery.scrolly.min.js"></script>
+	<script src="./js/skel.min.js"></script>
+	<script src="./js/util.js"></script>
+	<script src="./js/main.js"></script>
+	<script src="./kendo-ui-core/js/kendo.core.min.js"></script>
 <style>
 body {
 	margin: 0px;
@@ -19,11 +23,11 @@ body {
 	height: 100%;
 	
 }
-#events{
+#sensorZones{
             position: absolute;
             box-sizing: border-box;
             padding: 10px;
-            top: 10px;
+            top: 80px;
             left: 10px;
             width: auto;
             height: auto;
@@ -33,6 +37,41 @@ body {
             border-radius: 4px;
             box-shadow: 0px 0px 0px 1px rgba(93, 93, 93, 0.31)
         }
+#createButton{
+ 			position: absolute;
+            box-sizing: border-box;
+            padding: 10px;
+            top: 10px;
+            left: 10px;
+            width: auto;
+            height: auto;
+            display: block;
+            background: rgb(255, 255, 255);
+            border-radius: 4px;
+            box-shadow: 0px 0px 0px 1px rgba(93, 93, 93, 0.31)           
+}        
+#bg-modal{
+			position: absolute;
+            box-sizing: border-box;
+            padding: 10px;
+            top: 10px;
+            left: 10px;
+            width: auto;
+            height: auto;
+            display: none;
+            background: rgb(255, 255, 255);
+}
+#feedback{
+position: absolute;
+            box-sizing: border-box;
+            padding: 10px;
+            top: 10px;
+            left: 120px;
+            width: auto;
+            height: auto;
+            display: none;
+            background: rgb(255, 255, 255);
+}
 </style>
 </head>
 <body>
@@ -46,8 +85,36 @@ body {
 	<div id="startLat"></div>
 	<div id="startLon"></div>
 	<div id="map" class="mazemap"></div>
-    <div id="events"></div>
+    <div id="sensorZones"></div>
+    <button id="createButton" class="createButton">Create Event</button>
+    <section id="createEvent">
+			<div class="feedback" id="feedback"></div>
+			<!-- The popup modal -->
+					<div class="bg-modal" id="bg-modal">
+						<div class="modal-content">
+							<div id="close" class="close">+</div>
+							<form id="createEventForm">
+								<input type="text" id="description" name="eventDescr" placeholder="Event Description">
+								<input type="date" id="date" name="date" placeholder="Event date">
+								<input type="text" id="name" name="name" placeholder="Event Name">
+								<input type="time" id="time" name="time" placeholder="Event hour">
+								<input type="number" step=0.0000000000000001 id="eventLng" class="eventLng" name="lng" placeholder="Event Longitude">
+								<input type="number" step=0.0000000000000001 id="eventLat" class="eventLat" name="lat" placeholder="Event Latitude">
+								<button type="submit" id="submitEventForm" onclick="fire_ajax_submit()">Create Event</button>
+							</form>
+						</div>
+					</div>
+			</section>
 	<script>
+	document.getElementById("createButton").addEventListener("click", function() {
+		document.querySelector(".bg-modal").style.display="block";
+		document.querySelector(".feedback").style.display="none";
+	});
+	
+	document.getElementById("close").addEventListener("click", function() {
+		document.querySelector(".bg-modal").style.display="none";
+	});
+	
     	var currentLat,currentLong;
         var map = new Mazemap.Map({
             // container id specified in the HTML
@@ -64,7 +131,7 @@ body {
 
             zLevel: 1
         });
-
+       
         // Add zoom and rotation controls to the map.
         map.addControl(new Mazemap.mapboxgl.NavigationControl());
 		var zonePolygons;
@@ -129,8 +196,8 @@ body {
            	for(var i in zonePropertiesArray)
            		output = appendString(zonePropertiesArray[i], output);
                 	
-           	document.getElementById("events").style.display = "flex";
-           	document.getElementById("events").innerHTML = output; 
+           	document.getElementById("sensorZones").style.display = "flex";
+           	document.getElementById("sensorZones").innerHTML = output; 
         });		
             
 		map.on('zlevel', redrawPolygons);
@@ -148,25 +215,65 @@ body {
 		return res;
 	}
 	
-	//function to get and draw markers on the map - catching right now just to test
-	function redrawMarkers() {
-	//purely testmarkers
-		var testMarkers = [{
-	    	"zLevel" :1,
-	    	"coordinates" : [12.525542, 55.786158],
-	    	"date": "Tomorrow",
-	    	"hour": "in an hour",
-	    	"eventDescription":"Bullrun like the ones in Madrid!"
-	    	},
-	    	{ 
-	    	"zLevel" :0,
-	    	"coordinates" : [12.525362, 55.786078],
-	    	"date": "today",
-	    	"hour": "now",
-	    	"eventDescription":"Savage icetea making!"
-	    	}
-	    ];
+	var center = map.getBounds().getCenter();
+ 	document.querySelector(".eventLng").value=center.lng;
+ 	document.querySelector(".eventLat").value=center.lat;
+     
+ 	map.on('dragend', function() {
+ 		center = map.getBounds().getCenter();
+     	document.querySelector(".eventLng").value=center.lng;
+     	document.querySelector(".eventLat").value=center.lat;
+		});
+ 	
+	function fire_ajax_submit() {
+
+	    var event = {}
+	    event["description"] = $("#description").val();
+	    event["name"] = $("#name").val();
+	    event["date"] = $("#date").val();
+	    event["time"] = $("#time").val();
+	    event["lng"] = $("#eventLng").val();
+	    event["lat"] = $("#eventLat").val();
 	    
+
+	    $("#submitEventForm").prop("disabled", true);
+
+	    $.ajax({
+	        type: "POST",
+	        contentType: "application/json",
+	        url: "/events/createevent",
+	        data: JSON.stringify(event),
+	        dataType: 'json',
+	        cache: false,
+	        timeout: 600000,
+	        success: function (data) {
+
+	            var json = "<h4>Ajax Response</h4><pre>"
+	                + JSON.stringify(data, null, 4) + "</pre>";
+	            $('#feedback').html(data.msg);
+	            window.location.reload(true);
+	            console.log("SUCCESS : ", data);
+	            $("#submitEventForm").prop("disabled", false);
+	            document.querySelector(".feedback").style.display="block";
+	            document.querySelector(".bg-modal").style.display="none";
+
+	        },
+	        error: function (e) {
+
+	            var json = "<h4>Ajax Response</h4><pre>"
+	                + e.responseText + "</pre>";
+	            $('#feedback').html(json);
+	            document.querySelector(".feedback").style.display="block";
+	            document.querySelector(".bg-modal").style.display="none";
+	            console.log("ERROR : ", e);
+	            $("#submitEventForm").prop("disabled", false);
+
+	        }
+	    });
+
+	}	
+	//function to get and draw markers on the map - catching right now just to test
+	function redrawMarkers() {   
 		var eventData;
 	    var markerIterator;
 	    var markerIteratorPopup;
@@ -195,28 +302,7 @@ body {
 		
   		  	}                                    
 		}).catch(err => {
-			/*
-  			eventData = testMarkers;
-  			for(var i in eventData){
-  				markerIterator = new Mazemap.MazeMarker( {
-			zLevel : 0,
-			color: 'green',
-			innerCircle: true,
-			innerCircleColor: '#FEFEFE',
-			innerCircleScale: 0.7,
-			glyphColor: '#000',
-			glyphSize: 20,
-			glyph: '🤷'
-		} )
-		.setLngLat({lng: eventData[i].coordinates[0], lat: eventData[i].coordinates[1]})
-		markerIteratorPopup = new Mazemap.Popup({ closeOnClick: true, offset: [0,-40]})
-			.setHTML(eventData[i].date + " at " + eventData[i].hour + " --- " + eventData[i].eventDescription);
 			
-		markerIterator.setPopup(markerIteratorPopup);
-		
-		markerIterator.addTo(map);
-  			}
-		*/
   		         
 	});
 	}
@@ -227,22 +313,11 @@ body {
 		if(zLevel > -1)
 			zLevel = zLevel -1; 
 		var getAddress = "http://localhost:8080/sensors/zonedata?level=".concat(zLevel);
-			   	
-		//need to get coords from server in the future
+	
 		fetch(getAddress).then(response => {
   			return response.json();
 			}).then(data => {
   				zonePolygons = data;
-  			 /* if(zonePolygons.length > 0)
-  				zonePolygons[0].geometry.coordinates = [ [  [12.523030,55.787066],
-                       [12.523013,55.787037],
-                       [12.523118,55.787017],
-                       [12.523132,55.787038], [12.523030,55.787066] ] ];
-              if(zonePolygons.length > 1)
-				zonePolygons[1].geometry.coordinates = [ [  [12.522894,55.786921],
-                       [12.523096,55.786884],
-                       [12.523069,55.786829],
-                       [12.522862,55.786863], [12.522894,55.786921] ] ];    */                                
                 map.getSource("custom-polygon-layer").setData({type: "FeatureCollection", features:zonePolygons });
 				}).catch(err => {
   			console.log('The request failed!'); 
@@ -250,5 +325,6 @@ body {
 	}
 	
     </script>
+  
     
 </body>

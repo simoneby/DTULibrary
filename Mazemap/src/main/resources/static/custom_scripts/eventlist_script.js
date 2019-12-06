@@ -7,12 +7,6 @@ $(document).ready(function () {
         }
     });
     loadEventlist(events);
-    console.log(events);
-
-    //var acceptRequestButtons = document.getElementsByClassName('acceptReqButton');
-    //acceptRequestButtons.foreach()
-
-    
 });
 
 function loadEventlist(events) {
@@ -29,11 +23,10 @@ function loadEventlist(events) {
 	                                lat: { type : "number" },
 	                                lng: { type : "number" },
 	                                description:{ type : "string"},
-	                                
+	                                isPublic:{ type: "boolean"},
+	                                creator:{ type:"string"},
 	                                date: { type : "string" },
 	                                time: { type : "string" },
-	                                
-	                                
 	                            }
 	                        }
 	                },
@@ -48,12 +41,19 @@ function loadEventlist(events) {
                         type: "delete",
                         dataType: "json",
                     },
+                    update: {
+                    	url: "http://localhost:8080/events/updateevent",
+                    	type: "post",
+                    	dataType:"json",
+                    	contentType:"application/json",
+                    },
                     parameterMap: function(options, operation) {
-                        console.log(operation);
-                        console.log(options);
-                        if (operation !== "read" && options) {
+                        if (operation == "destroy" && options) {
                             //console.log(options.models);
                             return {id : options.id};
+                        }
+                        if (operation == "update" && options) {
+                        	return JSON.stringify(options);
                         }
                     }
                 }
@@ -67,7 +67,8 @@ function loadEventlist(events) {
 
                 $("#listViewEvents").kendoListView({
                     dataSource: events,
-                    template: kendo.template($("#templateEvents").html())
+                    template: kendo.template($("#templateEvents").html()),
+                    editTemplate: kendo.template($("#editTemplate").html())
                 });
             });
 	 });

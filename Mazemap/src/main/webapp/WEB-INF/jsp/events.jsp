@@ -90,12 +90,51 @@
 															</td>
 													
 														<td colspan="1" class="edit-buttons">
-															
+															<a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit-tools"></span></a><p>Edit event</p>
 															<a class="k-button k-delete-button" href="\\#"><span class="k-icon k-i-close"></span></a><p>Delete event</p>
 														</td>
 													</tr>
 									</div>
 									</script>
+									<script type="text/x-kendo-tmpl" id="editTemplate">
+        								<div class="event-view k-widget">
+								            <dl>
+                								<dt>Name</dt>
+                								<dd>
+                    								<input type="text" class="k-textbox" data-bind="value:name" name="Name" required="required" validationMessage="required" />
+                    								<span data-for="name" class="k-invalid-msg"></span>
+                								</dd>
+                								<dt>Description</dt>
+                								<dd>
+                    								<input type="text" data-bind="value:description" name="Description" required="required" validationMessage="required" />
+                    								<span data-for="description" class="k-invalid-msg"></span>
+                								</dd>
+												<dt>Time</dt>
+												<dd>
+                    								<input type="time" data-bind="value:time" name="Time" required="required" validationMessage="required" />
+                    								<span data-for="time" class="k-invalid-msg"></span>
+                								</dd>
+												<dt>Date</dt>
+											    <dd>
+                    								<input type="date" data-bind="value:date" name="Date" required="required" validationMessage="required" />
+                    								<span data-for="date" class="k-invalid-msg"></span>
+                								</dd>
+												<dt>Longitude</dt>
+ 												<dd>
+                    								<input type="number" data-bind="value:lng" name="Longitude" required="required" validationMessage="required" />
+                    								<span data-for="lng" class="k-invalid-msg"></span>
+                								</dd>
+												<dt>Latitude</dt>
+												 <dd>
+                    								<input type="number" data-bind="value:lat" name="Latitude" required="required" validationMessage="required" />
+                    								<span data-for="lat" class="k-invalid-msg"></span>
+                								</dd>
+                								<div class="edit-buttons">
+                									<a class="k-button k-update-button" href="\\#"><span class="k-icon k-i-check"></span></a>
+                									<a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-i-cancel"></span></a>
+            									</div>
+        							</div>
+    						</script>
 							</div>
 						</div>
 					</div>
