@@ -23,12 +23,12 @@
 
         // Add zoom and rotation controls to the map.
         map.addControl(new Mazemap.mapboxgl.NavigationControl());
-		var zonePolygons;
+		
 		var lngLat = {lng: 12.525542, lat: 55.786158}; // DTU Library
 		
 		window.onload = function() {
 
-			// console.log(locationDataOfAll);
+		// console.log(locationDataOfAll);
 		// check for Geolocation support
 			if (navigator.geolocation) {
 				console.log('Geolocation is supported!');
@@ -235,32 +235,19 @@
   		}         
 	});
 	}
-	// function broadcastToAll(){
-	// 		console.log(currentLat, currentLong);
-	// 		return ;
-	// }			    
-	//function to get and redraw polygons on start and on floor switch, Coordinates need to be server side
+	
+	// Wendy Dec.6th
+	var zonePolygons;
 	function redrawPolygons() {
 		var zLevel = map.getZLevel();
-		if(zLevel > -1)
-			zLevel = zLevel -1; 
-		var getAddress = "http://localhost:8080/sensors/zonedata?level=".concat(zLevel);
+		if(zLevel > -1) zLevel = zLevel -1; 
+		var getAddress = baseUrl+"/sensors/zonedata?level="+zLevel;
 			   	
 		//need to get coords from server in the future
 		fetch(getAddress).then(response => {
   			return response.json();
 			}).then(data => {
-  				zonePolygons = data;
-  			 /* if(zonePolygons.length > 0)
-  				zonePolygons[0].geometry.coordinates = [ [  [12.523030,55.787066],
-                       [12.523013,55.787037],
-                       [12.523118,55.787017],
-                       [12.523132,55.787038], [12.523030,55.787066] ] ];
-              if(zonePolygons.length > 1)
-				zonePolygons[1].geometry.coordinates = [ [  [12.522894,55.786921],
-                       [12.523096,55.786884],
-                       [12.523069,55.786829],
-                       [12.522862,55.786863], [12.522894,55.786921] ] ];    */                                
+  				zonePolygons = data;                              
                 map.getSource("custom-polygon-layer").setData({type: "FeatureCollection", features:zonePolygons });
 				}).catch(err => {
   			console.log('The request failed!'); 

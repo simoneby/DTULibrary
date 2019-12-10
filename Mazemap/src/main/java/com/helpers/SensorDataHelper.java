@@ -36,8 +36,8 @@ public class SensorDataHelper {
 
     public static InitialSensorData[] getSensorData()
     {
-        String url = "https://scadadataapi.azurewebsites.net/api/values"; //写上自己的url链接即可，我的就不公布了哈~
-        String json = loadJsonData(url);  //获得json字符串
+        String url = "https://scadadataapi.azurewebsites.net/api/values";
+        String json = loadJsonData(url);  
         json = "{'array':"+json+"}";
         jsonObject = JSONObject.fromObject(json);
         jsonArray = jsonObject.getJSONArray("array");
@@ -46,28 +46,14 @@ public class SensorDataHelper {
         {
             String s = jsonArray.getJSONObject(i).getString("pointId");
             boolean deal = false;
-            /*
-            for (int j = 0; j<InitialSensorData.sensorNum ; ++j)
-                if(s == sensors[j].getName())
-                {
-                    try {
-                        Exception e = new Exception("There is a value conflict");
-                        if(!sensors[j].changeData(jsonArray.getJSONObject(i).getString("type"), (float) jsonArray.getJSONObject(i).get("value"),true))
-                            throw e;
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                    deal = true;
-                    break;
-                }*/
-            //if(!deal)
-                try {
-                    sensors[i] = new InitialSensorData(jsonArray.getJSONObject(i));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                    sensors[i] = new InitialSensorData();
-                    sensors[i].setName(e.getLocalizedMessage());
-                }
+            
+            try {
+                sensors[i] = new InitialSensorData(jsonArray.getJSONObject(i));
+            } catch (ParseException e) {
+                e.printStackTrace();
+                sensors[i] = new InitialSensorData();
+                sensors[i].setName(e.getLocalizedMessage());
+            }
         }
         return sensors;
     }

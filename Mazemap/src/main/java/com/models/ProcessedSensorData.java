@@ -1,3 +1,4 @@
+//@Author Laura & Wendy
 package com.models;
 
 import java.util.ArrayList;
@@ -84,6 +85,7 @@ public class ProcessedSensorData {
 	}
 
 	public void addProperty(String type, String unit, double value) {
+		if(unit.equals("int")) unit = "";
 		properties.addProperty(type, unit, value);
 	}
 
@@ -134,22 +136,6 @@ public class ProcessedSensorData {
 		this.type = type;
 	}
 
-	public PolygonGeometry getGeometry() {
-		return geometry;
-	}
-
-	public void setGeometry(short floor, short zone) {
-		this.geometry.addCoordinates(floor, zone);
-	}
-
-	public PolygonProperties getProperties() {
-		return properties;
-	}
-
-	public void setProperties(PolygonProperties properties) {
-		this.properties = properties;
-	}
-
 	// #region inner classes
 	class PolygonGeometry {
 		String type = "Polygon";
@@ -178,7 +164,6 @@ public class ProcessedSensorData {
 		public void setCoordinates(ArrayList<double[][]> coordinates) {
 			this.coordinates = coordinates;
 		}
-
 	}
 
 	class PolygonProperties {
@@ -208,7 +193,22 @@ public class ProcessedSensorData {
 		public void setzLevel(short zLevel) {
 			this.zLevel = zLevel;
 		}
+	}
 
+	public PolygonGeometry getGeometry() {
+		return geometry;
+	}
+
+	public void setGeometry(short floor, short zone) {
+		this.geometry.addCoordinates(floor, zone);
+	}
+
+	public PolygonProperties getProperties() {
+		return properties;
+	}
+
+	public void setProperties(PolygonProperties properties) {
+		this.properties = properties;
 	}
 	// #endregion
 }
