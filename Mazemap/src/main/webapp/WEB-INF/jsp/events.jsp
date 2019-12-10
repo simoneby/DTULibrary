@@ -21,6 +21,7 @@
 	<script src="./kendo-ui-core/js/kendo.tabstrip.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
 	<script src="./custom_scripts/eventlist_script.js"></script>
+	<script src="https://kit.fontawesome.com/7510661d31.js" crossorigin="anonymous"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>DTU CampusNet</title>
 </head>
@@ -32,9 +33,11 @@
 		<nav id="nav">
 			<ul>
 				<li><a href="index" class="active"><span class="icon fa-home"></span></a></li>
-				<li><a href=""><span class="icon fas fa-map"></span></a></li>
 				<li><a href="friendlist"><span class="icon fas fa-users"></span></a></li>
+				<li><a href="survey_main"><i class="fas fa-poll-h"></i></a></li>
+				<li><a href="events"><i class="fa fa-calendar"></i></a></li>
 				<li><a href="login"><span class="icon fas fa-sign-in"></span></a></li>
+				<li><a href="logout"><span class="icon fas fa-sign-out"></span></a></li>
 			</ul>
 		</nav>
 
@@ -88,12 +91,51 @@
 															</td>
 													
 														<td colspan="1" class="edit-buttons">
-															
+															<a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit-tools"></span></a><p>Edit event</p>
 															<a class="k-button k-delete-button" href="\\#"><span class="k-icon k-i-close"></span></a><p>Delete event</p>
 														</td>
 													</tr>
 									</div>
 									</script>
+									<script type="text/x-kendo-tmpl" id="editTemplate">
+        								<div class="event-view k-widget">
+								            <dl>
+                								<dt>Name</dt>
+                								<dd>
+                    								<input type="text" class="k-textbox" data-bind="value:name" name="Name" required="required" validationMessage="required" />
+                    								<span data-for="name" class="k-invalid-msg"></span>
+                								</dd>
+                								<dt>Description</dt>
+                								<dd>
+                    								<input type="text" data-bind="value:description" name="Description" required="required" validationMessage="required" />
+                    								<span data-for="description" class="k-invalid-msg"></span>
+                								</dd>
+												<dt>Time</dt>
+												<dd>
+                    								<input type="time" data-bind="value:time" name="Time" required="required" validationMessage="required" />
+                    								<span data-for="time" class="k-invalid-msg"></span>
+                								</dd>
+												<dt>Date</dt>
+											    <dd>
+                    								<input type="date" data-bind="value:date" name="Date" required="required" validationMessage="required" />
+                    								<span data-for="date" class="k-invalid-msg"></span>
+                								</dd>
+												<dt>Longitude</dt>
+ 												<dd>
+                    								<input type="number" data-bind="value:lng" name="Longitude" required="required" validationMessage="required" />
+                    								<span data-for="lng" class="k-invalid-msg"></span>
+                								</dd>
+												<dt>Latitude</dt>
+												 <dd>
+                    								<input type="number" data-bind="value:lat" name="Latitude" required="required" validationMessage="required" />
+                    								<span data-for="lat" class="k-invalid-msg"></span>
+                								</dd>
+                								<div class="edit-buttons">
+                									<a class="k-button k-update-button" href="\\#"><span class="k-icon k-i-check"></span></a>
+                									<a class="k-button k-cancel-button" href="\\#"><span class="k-icon k-i-cancel"></span></a>
+            									</div>
+        							</div>
+    						</script>
 							</div>
 						</div>
 					</div>

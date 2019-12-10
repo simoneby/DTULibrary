@@ -75,4 +75,12 @@ public class SurveyAnswer {
     public void setQuestionAnswers(Set<QuestionAnswer> questionAnswers) {
         this.questionAnswers = questionAnswers;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Survey getSurvey() {
+        return survey;
+    }
 }

@@ -5,8 +5,15 @@
 	<link rel="stylesheet" type="text/css" href="./css/main.css">
 	<link rel="stylesheet" type="text/css" href="./css/custom.css">
 	<link rel="stylesheet" href="./kendo-ui-core/styles/kendo.common.min.css">
-    <link rel="stylesheet" href="./kendo-ui-core/styles/kendo.default.min.css">
-	
+	<link rel="stylesheet" href="./kendo-ui-core/styles/kendo.default.min.css">
+	<script src="./js/jquery.min.js"></script>
+	<script src="./js/jquery.poptrox.min.js"></script>
+	<script src="./js/jquery.scrolly.min.js"></script>
+	<script src="./js/skel.min.js"></script>
+	<script src="./js/util.js"></script>
+	<script src="./js/main.js"></script>
+	<script src="./kendo-ui-core/js/kendo.core.min.js"></script>
+	<script src="https://kit.fontawesome.com/7510661d31.js" crossorigin="anonymous"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>DTU CampusNet</title>
 </head>
@@ -26,9 +33,9 @@
 		<nav id="nav">
 			<ul>
 				<li><a href="#" class="active"><span class="icon fa-home"></span></a></li>
-				<li><a href=""><span class="icon fas fa-map"></span></a></li>
 				<li><a href="friendlist"><span class="icon fas fa-users"></span></a></li>
-				<li><a href="save_survey"><span class="icon fas fa-poll-h"></span></a></li>
+				<li><a href="survey_main"><i class="fas fa-poll-h"></i></a></li>
+				<li><a href="events"><i class="fa fa-calendar"></i></a></li>
 				<li><a href="login"><span class="icon fas fa-sign-in"></span></a></li>
 				<li><a href="logout"><span class="icon fas fa-sign-out"></span></a></li>
 			</ul>
@@ -52,16 +59,17 @@
 
 			<!--Share Location to All-->
 			
-			
+	
 			<!--CREATING A BUTTON FOR CREATE EVENT-->
+					<!--
 			<section>
 			<h1>Create an event by clicking below</h1>
-			<a id="button" class="button">CLICK ME BABA</a>
+			<a id="button" class="button">Create Event</a>
 			</section>
 			
 			<section id="createEvent">
 			<div id="feedback"></div>
-			<!-- The popup modal -->
+			
 					<div class="bg-modal">
 						<div class="modal-content">
 							<div id="close" class="close">+</div>
@@ -74,7 +82,7 @@
 								<input type="number" step=0.01 id="eventLat" name="lat" placeholder="Event Latitude">
 								<button type="submit" id="submitEventForm" onclick="fire_ajax_submit()">Tester</button>
 								
-								<!-- <a href="" onclick="submitButton()" class="button">Submit</a> -->
+								
 							</form>
 						</div>
 						<script>
@@ -131,28 +139,12 @@
 							        }
 							    });
 
-							}
-							
-							//var tester = []
-							//function submitButton() {
-								
-								//var event = [
-								//	document.getElementById("eventName").value,
-								//	document.getElementById("eventPlace").value,
-								//	document.getElementByID("eventDate").value	
-								//]
-								//alert(document.getElementById("eventName").value);
-								//tester.push.apply(tester, event)
-								//alert(event);
-
-							//}
-							
-
+							}	
 						</script>
 					</div>
 			</section>
 			
-			
+			 --!>
 			
 			<!-- STOP HERE TEST -->
 			
@@ -243,13 +235,6 @@
 
 
 	<!-- Scripts -->
-	<script src="./js/jquery.min.js"></script>
-	<script src="./js/jquery.poptrox.min.js"></script>
-	<script src="./js/jquery.scrolly.min.js"></script>
-	<script src="./js/skel.min.js"></script>
-	<script src="./js/util.js"></script>
-	<script src="./js/main.js"></script>
-	<script src="./kendo-ui-core/js/kendo.core.min.js"></script>
 
 	
 </body>
