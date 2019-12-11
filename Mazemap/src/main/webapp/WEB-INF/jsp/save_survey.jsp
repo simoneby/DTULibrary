@@ -41,6 +41,7 @@
 				<li><a href=""><span class="icon fas fa-map"></span></a></li>
 				<li><a href="friendlist"><span class="icon fas fa-users"></span></a></li>
 				<li><a href="save_survey"><i class="fas fa-poll-h"></i></a></li>
+				<li><a href="events"><i class="fa fa-calendar"></i></a></li>
 				<li><a href="login"><span class="icon fas fa-sign-in"></span></a></li>
 				<li><a href="logout"><span class="icon fas fa-sign-out"></span></a></li>
 			</ul>

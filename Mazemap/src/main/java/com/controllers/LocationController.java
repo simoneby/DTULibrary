@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.*;
+import java.lang.*;
+
 
 @RestController
 @RequestMapping("/location/")
@@ -38,7 +41,8 @@ public class LocationController {
             		locationRepository.save(loc);
             	}
             	else{
-            	location.setUser(cu);            	
+            	location.setUser(cu);  
+  	
             	locationRepository.save(location);
             	}
                 return String.format("Your location was saved %s",location.getLocationMessage());
@@ -50,6 +54,14 @@ public class LocationController {
         } else {
             return "There was an error and location could not be broadcasted! Try again!";
         }
+    }
+
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public ArrayList<LocationOfUsers> getAllLocations() {
+        ArrayList<LocationOfUsers> locations = new ArrayList<LocationOfUsers>();
+        locationRepository.findAll().forEach(locations::add);
+        return locations;
+        
     }
 
 }
