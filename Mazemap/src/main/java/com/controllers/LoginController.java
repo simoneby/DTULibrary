@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import com.models.*;
 import com.repositories.*;
+import com.services.*;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,73 +47,6 @@ public class LoginController {
 	private RoleRepository roleRepository;
 	private User user;
 
-	// if (succesfulSignIn) {
-	// if (userRepository.findUsersByEmail(user.getEmail()).isEmpty()) {
-	// User entity = new User();
-	// entity.setEmail(user.getEmail());
-	// entity.setName("some name");
-	// entity.addRole(roleRepository.findAll().iterator().next());
-	// userRepository.save(entity);
-	// user = entity;
-	// //return entity;
-	// return "User added";
-	// } else {
-	// //return userRepository.findUserByEmail(user.getEmail());
-	// return String.format("Login successful %s",user.getEmail());
-	// }
-	// } else {
-	// if (!userRepository.findUsersByEmail(user.getEmail()).isEmpty()) {
-	// //return userRepository.findUserByEmail(user.getEmail());
-	// //return user;
-	// return "Login succesfull :)";
-	// }
-	// //return String;
-	// return "Credentials not recognized";
-	// }
-	// }
-	//@ModelAttribute("user")
-//	@RequestMapping(value = "/signin", method = RequestMethod.POST)
-//	public String signin(
-//			@RequestParam(value = "email", required = true, defaultValue = "") String email,
-//			@RequestParam(value = "password", required = false, defaultValue = "") String password) {
-//		/*
-//		 * if(roleRepository.findAll()==null ||
-//		 * !roleRepository.findAll().iterator().hasNext()) { roleRepository.save(new
-//		 * Role("Student")); roleRepository.save(new Role("Faculty"));
-//		 * roleRepository.save(new Role("Library Staff")); }
-//		 */
-//
-//		// check DTU inside sign in
-//		if (email == null)
-//			return "Email is null";
-//		boolean succesfulDTUSignIn = true;
-//		boolean login = false;
-//		if (succesfulDTUSignIn) {
-//			if (userRepository.findUsersByEmail(email).isEmpty()) {
-//				User entity = new User();
-//				entity.setEmail(email);
-//				entity.setName("some name");
-//				entity.addRole(roleRepository.findAll().iterator().next());
-//				userRepository.save(entity);
-//				this.user = entity;
-//				login = true;
-//			} else {
-//				this.user= userRepository.findUserByEmail(email);
-//				login = true;
-//			}
-//		} else {
-//			if (!userRepository.findUsersByEmail(email).isEmpty()) {
-//				this.user = userRepository.findUserByEmail(email);
-//				login = true;
-//			}
-//		}
-//		if(login)
-//		{
-//			setUpUserForm();
-//			return loginsuccesful(this.user.getEmail());
-//		}
-//		return "Login Failed!";
-//	}
 
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public RedirectView login(HttpServletResponse HttpServletResponse)
@@ -136,7 +70,7 @@ public class LoginController {
 		boolean login = false;
 
 		String u = "https://auth.dtu.dk/dtu/servicevalidate?service=http%3A%2F%2Fse2-webapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fmazemap%2Fredirect&ticket=" + ticket;
-		if (isUrlValid(u))
+		if (LoginService.isUrlValid(u))
 		{
 			URL url = new URL(u);
 			URLConnection con = url.openConnection();
@@ -157,7 +91,7 @@ public class LoginController {
 					this.user = entity;
 					//login = true;
 
-					saveUserInSession(httpSession);
+					LoginService.saveUserInSession(httpSession);
 					// GO TO REGISTER PAGE
 					return "register";
 				}
@@ -167,7 +101,7 @@ public class LoginController {
 					//name = foundUser.getName();
 					//login = true;
 					this.user = foundUser;
-					saveUserInSession(httpSession);
+					LoginService.saveUserInSession(httpSession);
 					return "index";
 				}
 				
@@ -181,7 +115,7 @@ public class LoginController {
 //				entity.setName("some name");
 //				entity.addRole(roleRepository.findAll().iterator().next());
 //				userRepository.save(entity);
-				saveUserInSession(httpSession);
+				LoginService.saveUserInSession(httpSession);
 				return "register";
 			}
 		}
@@ -193,24 +127,7 @@ public class LoginController {
 
 
 
-	public static boolean isUrlValid(String url) {
-		try {
-			URL obj = new URL(url);
-			obj.toURI();
-			return true;
-		} catch (MalformedURLException e) {
-			return false;
-		} catch (URISyntaxException e) {
-			return false;
-		}
-	}
-
-	public void saveUserInSession(HttpSession httpSession) 
-	{
-		if(httpSession.getAttribute("user")!=null)
-			httpSession.removeAttribute("user");
-		httpSession.setAttribute("user", this.user);
-	}
+	
 
 	@GetMapping(path = "/loginsuccesful")
 	public String loginsuccesful(@RequestParam(value = "name", required = false, defaultValue = "World") String name) {
@@ -232,7 +149,7 @@ public class LoginController {
 		//name = foundUser.getName();
 		//login = true;
 		this.user = foundUser;
-		saveUserInSession(httpSession);
+		LoginService.saveUserInSession(httpSession);
 		return "loginsuccesful";
 	}
 }
