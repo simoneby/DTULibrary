@@ -121,7 +121,7 @@ public class LoginController {
 
 		// Redirects to the Auth DTU service
 		// Returns the user with se2-webapp05.compute.dtu.dk/redirect?ticket=[TICKET]
-		redirectView.setUrl("https://auth.dtu.dk/dtu/?service=http%3A%2F%2Fse2%2Dwebapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fmazemap%2Fredirect");
+		redirectView.setUrl("https://auth.dtu.dk/dtu/?service=https%3A%2F%2Fse2%2Dwebapp05%2Ecompute%2Edtu%2Edk%3A8443%2Fmazemap%2Fredirect");
 
 		return redirectView;
 	}
@@ -135,7 +135,7 @@ public class LoginController {
 		String name = "noname";
 		boolean login = false;
 
-		String u = "https://auth.dtu.dk/dtu/servicevalidate?service=http%3A%2F%2Fse2-webapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fmazemap%2Fredirect&ticket=" + ticket;
+		String u = "https://auth.dtu.dk/dtu/servicevalidate?service=https%3A%2F%2Fse2-webapp05%2Ecompute%2Edtu%2Edk%3A8443%2Fmazemap%2Fredirect&ticket=" + ticket;
 		if (isUrlValid(u))
 		{
 			URL url = new URL(u);
