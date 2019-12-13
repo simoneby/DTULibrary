@@ -1,4 +1,8 @@
 var baseUrl;
+var curLocation = {
+	lat: 0,
+	long: 0
+};
 	document.getElementById("createButton").addEventListener("click", function() {
 		document.querySelector(".bg-modal").style.display="block";
 		document.querySelector(".feedback").style.display="none";
@@ -58,6 +62,11 @@ var baseUrl;
         map.on('load', function(){
 
            console.log(currentLong,currentLat);
+
+           curLocation.lat = currentLat;
+           curLocation.long = currentLong;
+           localStorage.setItem("storedLocation",JSON.stringify(curLocation));
+
 
            var blueDot = new Mazemap.BlueDot( {
               zLevel: 1,
