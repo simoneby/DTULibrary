@@ -36,14 +36,20 @@
 
         <!-- Nav -->
         <nav id="nav">
-            <ul>
-                <li><a href="index" class="active"><span class="icon fa-home"></span></a></li>
-                <li><a href="friendlist"><span class="icon fas fa-users"></span></a></li>
-                <li><a href="survey_main"><i class="fas fa-poll-h"></i></a></li>
-                <li><a href="events"><i class="fa fa-calendar"></i></a></li>
-                <li><a href="login"><span class="icon fas fa-sign-in"></span></a></li>
-                <li><a href="logout"><span class="icon fas fa-sign-out"></span></a></li>
-            </ul>
+			<ul>
+				<li><a href="index"><span class="icon fa-home"></span></a></li>
+				<% if(session.getAttribute("user")!=null) {%>
+				<li><a href="friendlist"><span class="icon fas fa-users"></span></a></li>
+				<li><a href="survey_main" class="active"><i class="fas fa-poll-h"></i></a></li>
+				<li><a href="events"><i class="fa fa-calendar"></i></a></li>
+				<% } else { %>
+
+				<li><a href="login"><span class="icon fas fa-sign-in"></span></a></li>
+				<%}%>
+				<% if(session.getAttribute("user")!=null) {%>
+				<li><a href="logout"><span class="icon fas fa-sign-out"></span></a></li>
+				<% } %>
+			</ul>
         </nav>
 
         <!-- Main -->

@@ -95,7 +95,7 @@ public class FirstUnitTest {
       Assert.assertTrue(!friends.isEmpty());
    }
 
-   //test case checking that method getSentFriendRequests returns the proper result
+   //test case checking that method testAddFriend returns the proper result
    @Test
    public void testAddFriend() {
       //setting up variable before executing the method
@@ -126,7 +126,76 @@ public class FirstUnitTest {
       System.out.println("Size " + friends.size());
       Assert.assertTrue(!friends.isEmpty());
    }
+   //test case checking that method testAddFriend returns the proper result
+   @Test
+   public void testAcceptFriendRequest() {
+      //setting up variable before executing the method
+      String userEmail1 = String.format(student_email_format,1);
+      
+      //getting some information about the object before execution
+      Set<User> receivedFriendRequests_initial = userRepository.findUserByEmail(userEmail1).getReceivedFriendRequests();
+      Set<User> friends_initial = userRepository.findUserByEmail(userEmail1).getFriends();
 
+      String userEmail2 = receivedFriendRequests_initial.iterator().next().getEmail();
+      Assert.assertTrue(userEmail2!=null && userEmail2!="");
+      //executing the method
+      String result = friendListService.acceptFriendRequest(userEmail1,userEmail2);
+      //getting info about the objects after execution
+      Set<User> receivedFriendRequests_modified = userRepository.findUserByEmail(userEmail2).getReceivedFriendRequests();     
+      Set<User> friends_modified = userRepository.findUserByEmail(userEmail1).getFriends();
+
+      Assert.assertNotNull(result);
+      Assert.assertNotNull(receivedFriendRequests_initial);
+      Assert.assertNotNull(friends_initial);
+      Assert.assertNotNull(friends_modified);
+      Assert.assertNotNull(receivedFriendRequests_modified);
+      Assert.assertSame((receivedFriendRequests_initial.size() -1), receivedFriendRequests_modified.size());
+      Assert.assertSame((friends_initial.size()+1), friends_modified.size());
+      boolean friendListContains = false;
+      for (User user : friends_modified) {
+         if(user.getEmail() == userEmail2)
+         {
+            friendListContains= true;
+            break;
+         }
+      }
+      Assert.assertTrue(friendListContains);
+   }
+      //test case checking that method testAddFriend returns the proper result
+      @Test
+      public void testRejectFriendRequest() {
+         //setting up variable before executing the method
+         String userEmail1 = String.format(student_email_format,1);
+         
+         //getting some information about the object before execution
+         Set<User> receivedFriendRequests_initial = userRepository.findUserByEmail(userEmail1).getReceivedFriendRequests();
+         Set<User> friends_initial = userRepository.findUserByEmail(userEmail1).getFriends();
+   
+         String userEmail2 = receivedFriendRequests_initial.iterator().next().getEmail();
+         
+         //executing the method
+         String result = friendListService.rejectFriendRequest(userEmail1,userEmail2);
+         //getting info about the objects after execution
+         Set<User> receivedFriendRequests_modified = userRepository.findUserByEmail(userEmail2).getReceivedFriendRequests();     
+         Set<User> friends_modified = userRepository.findUserByEmail(userEmail1).getFriends();
+   
+         Assert.assertNotNull(result);
+         Assert.assertNotNull(receivedFriendRequests_initial);
+         Assert.assertNotNull(friends_initial);
+         Assert.assertNotNull(friends_modified);
+         Assert.assertNotNull(receivedFriendRequests_modified);
+         Assert.assertSame((receivedFriendRequests_initial.size() ), receivedFriendRequests_modified.size()+1);
+         Assert.assertSame((friends_initial.size() ), friends_modified.size());
+         boolean friendListContains = false;
+         for (User user : friends_modified) {
+            if(user.getEmail() == userEmail2)
+            {
+               friendListContains= true;
+               break;
+            }
+         }
+         Assert.assertFalse(friendListContains);
+      }
    private void deleteCreatedUsers()
    {
       for(int i=1;i<7;i++)
