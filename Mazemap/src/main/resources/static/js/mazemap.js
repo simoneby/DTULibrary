@@ -1,4 +1,5 @@
-
+		
+		var baseUrl = $("baseUrl").val();
     	var currentLat,currentLong;
     	var curLocation = {
     		lat : 0,
@@ -89,7 +90,8 @@
 						// processData: false,
 						type: 'get',
 						async: false,
-						url: 'http://localhost:8080/friends/all'
+						url: baseUrl + '/friends/all'
+						// url: 'http://localhost:8080/friends/all'
 
 					
 					});
