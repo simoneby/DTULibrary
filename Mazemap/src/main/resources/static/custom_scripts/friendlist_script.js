@@ -1,3 +1,4 @@
+//@author s192671
 var baseUrl = "";
 $(document).ready(function () {
     var friends = [];

@@ -3,6 +3,7 @@
 	<%@ page session="true" contentType="text/html;charset=UTF-8" language="java" %>
 	<%@page import="com.models.User"%>
 	<%@page import="com.helpers.ServerUrl"%>
+	<!-- @author s192671 -->
 <head>
 	<meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="./css/main.css">
@@ -36,12 +37,18 @@
 		<!-- Nav -->
 		<nav id="nav">
 			<ul>
-				<li><a href="index" class="active"><span class="icon fa-home"></span></a></li>
-				<li><a href="#"><span class="icon fas fa-users"></span></a></li>
+				<li><a href="index" ><span class="icon fa-home"></span></a></li>
+				<% if(session.getAttribute("user")!=null) {%>
+				<li><a href="friendlist" class="active"><span class="icon fas fa-users"></span></a></li>
 				<li><a href="survey_main"><i class="fas fa-poll-h"></i></a></li>
 				<li><a href="events"><i class="fa fa-calendar"></i></a></li>
+				<% } else { %>
+
 				<li><a href="login"><span class="icon fas fa-sign-in"></span></a></li>
+				<%}%>
+				<% if(session.getAttribute("user")!=null) {%>
 				<li><a href="logout"><span class="icon fas fa-sign-out"></span></a></li>
+				<% } %>
 			</ul>
 		</nav>
 
@@ -91,11 +98,8 @@
 															</td> 
 														</tr>
 														<tr>
-															<td colspan="2"><p>#:email#</p>
+															<td colspan="2">#:email#
 																</td>
-															<td colspan="1">
-																<button>See location </button>
-															</td>
 														<td colspan="1" class="edit-buttons">
 															<a class="k-button k-delete-button" href="\\#"><span class="k-icon k-i-close"></span></a>
 														</td>
