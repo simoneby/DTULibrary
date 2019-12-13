@@ -252,8 +252,8 @@ var curLocation = {
             innerCircleColor: '#FEFEFE',
             innerCircleScale: 0.7,
             glyphColor: '#000',
-            glyphSize: 20,
-            glyph: '🤷'
+            glyphSize: 15,
+            glyph: eventData[i].name
         } )
            .setLngLat({lng: eventData[i].lng, lat: eventData[i].lat})
            markerIteratorPopup = new Mazemap.Popup({ closeOnClick: true, offset: [0,-40]})
