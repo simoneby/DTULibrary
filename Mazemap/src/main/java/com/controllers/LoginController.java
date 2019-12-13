@@ -34,7 +34,6 @@ import java.util.Scanner;
 import java.io.IOException;
 import org.springframework.*;
 
-// import com.controllers.RedirectController.*;
 import org.springframework.web.servlet.view.RedirectView;
 // @Author: s191772, s154666
 @SessionAttributes("user")
@@ -45,74 +44,6 @@ public class LoginController {
 	@Autowired
 	private RoleRepository roleRepository;
 	private User user;
-
-	// if (succesfulSignIn) {
-	// if (userRepository.findUsersByEmail(user.getEmail()).isEmpty()) {
-	// User entity = new User();
-	// entity.setEmail(user.getEmail());
-	// entity.setName("some name");
-	// entity.addRole(roleRepository.findAll().iterator().next());
-	// userRepository.save(entity);
-	// user = entity;
-	// //return entity;
-	// return "User added";
-	// } else {
-	// //return userRepository.findUserByEmail(user.getEmail());
-	// return String.format("Login successful %s",user.getEmail());
-	// }
-	// } else {
-	// if (!userRepository.findUsersByEmail(user.getEmail()).isEmpty()) {
-	// //return userRepository.findUserByEmail(user.getEmail());
-	// //return user;
-	// return "Login succesfull :)";
-	// }
-	// //return String;
-	// return "Credentials not recognized";
-	// }
-	// }
-	//@ModelAttribute("user")
-//	@RequestMapping(value = "/signin", method = RequestMethod.POST)
-//	public String signin(
-//			@RequestParam(value = "email", required = true, defaultValue = "") String email,
-//			@RequestParam(value = "password", required = false, defaultValue = "") String password) {
-//		/*
-//		 * if(roleRepository.findAll()==null ||
-//		 * !roleRepository.findAll().iterator().hasNext()) { roleRepository.save(new
-//		 * Role("Student")); roleRepository.save(new Role("Faculty"));
-//		 * roleRepository.save(new Role("Library Staff")); }
-//		 */
-//
-//		// check DTU inside sign in
-//		if (email == null)
-//			return "Email is null";
-//		boolean succesfulDTUSignIn = true;
-//		boolean login = false;
-//		if (succesfulDTUSignIn) {
-//			if (userRepository.findUsersByEmail(email).isEmpty()) {
-//				User entity = new User();
-//				entity.setEmail(email);
-//				entity.setName("some name");
-//				entity.addRole(roleRepository.findAll().iterator().next());
-//				userRepository.save(entity);
-//				this.user = entity;
-//				login = true;
-//			} else {
-//				this.user= userRepository.findUserByEmail(email);
-//				login = true;
-//			}
-//		} else {
-//			if (!userRepository.findUsersByEmail(email).isEmpty()) {
-//				this.user = userRepository.findUserByEmail(email);
-//				login = true;
-//			}
-//		}
-//		if(login)
-//		{
-//			setUpUserForm();
-//			return loginsuccesful(this.user.getEmail());
-//		}
-//		return "Login Failed!";
-//	}
 
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public RedirectView login(HttpServletResponse HttpServletResponse)
@@ -177,10 +108,6 @@ public class LoginController {
 				this.user.setStudentnr(studentnr);
 
 				User entity = new User();
-//				entity.setEmail(email);
-//				entity.setName("some name");
-//				entity.addRole(roleRepository.findAll().iterator().next());
-//				userRepository.save(entity);
 				saveUserInSession(httpSession);
 				return "register";
 			}

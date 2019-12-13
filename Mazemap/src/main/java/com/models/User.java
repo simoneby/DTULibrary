@@ -31,8 +31,6 @@ public class User {
 
     private String email;
 
-    // private Integer loc_id;
-
     @JsonIgnore
     private String password;
     @JsonIgnore
@@ -179,7 +177,6 @@ public class User {
             return false;
         friends.remove(friend);
         return true;
-        // friend.friendRequests.remove(o)
     }
 
     public boolean removeFriendFromFollowerByEmail(String email) {

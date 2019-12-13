@@ -8,11 +8,6 @@ import net.sf.json.JSONObject;
 public class InitialSensorData {
 
     public static int sensorNum = 0;
-    // static String soundUnit = "dB";
-    // static String humidityUnit = "%";
-    // static String temperatureUnit = "degree-celsius";
-    // static String ultraSoundUnit = "cm";
-    // static String lightUnit = "lux";
     static SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
 	private String type;
 	private String unit;
@@ -24,12 +19,6 @@ public class InitialSensorData {
     private int id = 0;
     private Date timeStamp = null;
     
-    // private float sound = -1;
-    // private float humidity = -1;
-    // private float temperature = -1;
-    // private float ultraSound = -1;
-    // private float light = -1;
-
     public InitialSensorData()
     {
         
@@ -46,7 +35,7 @@ public class InitialSensorData {
         type = (String) sensor.get("type");
         unit = (String) sensor.get("unit");
         value = Float.valueOf(sensor.getString("value"));
-        //changeData(sensor.getString("type"),Float.valueOf(sensor.getString("value")),false);
+        
     }
 
     public String getName()
@@ -54,34 +43,6 @@ public class InitialSensorData {
         return name;
     }
 
-    // public boolean changeData(String type, float value, boolean b)
-    // {
-
-    //     switch(type) {
-
-    //         case ("Humidity"):
-    //             if(humidity>=0 && b) return false;
-    //             humidity = value;
-    //             break;
-    //         case("ultraSound"):
-    //             if(ultraSound>=0 && b) return false;
-    //             ultraSound = value;
-    //             break;
-    //         case("Sound"):
-    //             if(sound>=0 && b) return false;
-    //             sound = value;
-    //             break;
-    //         case("Light"):
-    //             if(light>=0 && b) return false;
-    //             sound = value;
-    //             break;
-    //         case("Temperature"):
-    //             if(temperature>=0 && b) return false;
-    //             temperature = value;
-    //             break;
-    //     }
-    //     return true;
-    // }
 
     public static int getSensorNum() {
         return sensorNum;

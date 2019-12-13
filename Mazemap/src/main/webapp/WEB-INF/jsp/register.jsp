@@ -127,36 +127,7 @@
 				}
 			});
 
-			// var roleData1 = [];
-			// require(["jquery", "kendo.multiselect.min"],
-			// 	function ($, kendo) {
-			// 		roleData1 = new kendo.data.DataSource({
-			// 			transport: {
-			// 				read: {
-			// 					url: "https://se2-webapp05.compute.dtu.dk:8080/roles/all",
-			// 					type: "get",
-			// 					dataType: "json"
-			// 				}
-			// 			}
-			// 		});
-
-			// 		// create multiSelect from input HTML element
-			// 		roleData1.read().then(function () 
-			// 		{
-			// 			$("#roles").kendoMultiSelect(
-			// 			{
-			// 				placeHolder: "Select user roles...",
-			// 				autoBind: true,
-			// 				dataSource: roleData1,
-			// 				dataTextField: "name",
-			// 				dataValueField: "id",
-			// 				value: []
-			// 			}
-			// 			).data("kendoMultiSelect");
-			// 		}
-			// 		);
-			// 	}
-			// );
+			
 
 			const handleFormSubmit = event => {
 
@@ -169,20 +140,10 @@
 				$("#signup").find("input, textarea, select").each(function () {
 					var inputType = this.tagName.toUpperCase() === "INPUT" && this.type.toUpperCase();
 					if (inputType !== "BUTTON" && inputType !== "SUBMIT") {
-						// if (this.name === "roles") {
-						// 	var user_roles = [];
-						// 	$("#roles option:selected").each(function () {
-						// 		var optionValue = $(this).val();
-						// 		var optionText = $(this).text();
-						// 		user_roles.push({ id: optionValue, name: optionText });
-						// 		console.log("optionText", optionText,optionValue);
-						// 	});
-						// 	user[this.name] = user_roles;
-						// }
-						// else {
+						
 							user[this.name] = $(this).val();
 							console.log(this.name);
-						// }
+						
 					}
 				});
 
@@ -201,12 +162,7 @@
 					type: 'POST',
 					url: baseUrl + '/signup'
 				});
-				// $.post("http://localhost:8080/signup",
-				// 	{ user : user},
-				// 	function (data, status) {
-				// 		alert("Data: " + data + "\nStatus: " + status);
-				// 	}
-				// 	);
+				
 			};
 			const form = document.getElementById('signup');
 			form.addEventListener('submit', handleFormSubmit);

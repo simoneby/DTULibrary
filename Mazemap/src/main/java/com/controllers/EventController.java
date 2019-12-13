@@ -8,7 +8,6 @@ import com.helpers.*;
 import com.helpers.ReturnMessageHelper;
 import com.models.*;
 import java.util.Set;
-//import java.util.concurrent.atomic.AtomicLong;
 import com.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +29,6 @@ public class EventController
 	@RequestMapping(value = "/eventdata", method = RequestMethod.GET)
 	  public Set<Event> getEventData() 
 	  {
-	    // ArrayList<SensorData> sensorData = new ArrayList<SensorData>();
 		HashSet<Event> tempEvents = new HashSet<Event>();
 		eventRepository.findAll().forEach(tempEvents::add);
 	    Set<Event> events = tempEvents;
@@ -76,24 +74,9 @@ public class EventController
 			        	Optional<Event> tempEvent = eventRepository.findById(id);
 			        	Event event = tempEvent.get();
 			        	eventRepository.deleteById(id);
-			            /*
-			            //User friend = userRepository.findUsersByEmail(friendEmail).get(0);
-			            if (event != null && currentUser != null) {
-			                User u = userRepository.findUserByEmail(currentUser.getEmail());
-			                    try {
-			                        u.removeFriendFromFollowingByEmail(friendEmail);
-			                        friend.removeFriendFromFollowerByEmail(u.getEmail());
-			                        userRepository.save(u);
-			                        userRepository.save(friend);
-			                        returnMessage = String.format("Friend %s was removed from your list!", friendEmail);
-			                    } catch (Exception e) {
-			                        e.printStackTrace();
-			                        returnMessage = "There was an error when removing your friend! Check the email you input!";
-			                    }
-
-			            } else {*/
+			           
 			                returnMessage = "Error: one of the entities is null!";
-			          //  }
+			         
 			        }
 			        return ReturnMessageHelper.getReturnMessage(returnMessage);
 			    }

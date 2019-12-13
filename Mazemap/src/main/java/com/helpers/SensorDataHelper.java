@@ -47,21 +47,6 @@ public class SensorDataHelper {
         {
             String s = jsonArray.getJSONObject(i).getString("pointId");
             boolean deal = false;
-            /*
-            for (int j = 0; j<InitialSensorData.sensorNum ; ++j)
-                if(s == sensors[j].getName())
-                {
-                    try {
-                        Exception e = new Exception("There is a value conflict");
-                        if(!sensors[j].changeData(jsonArray.getJSONObject(i).getString("type"), (float) jsonArray.getJSONObject(i).get("value"),true))
-                            throw e;
-                    } catch (Exception e1) {
-                        e1.printStackTrace();
-                    }
-                    deal = true;
-                    break;
-                }*/
-            //if(!deal)
                 try {
                     sensors[i] = new InitialSensorData(jsonArray.getJSONObject(i));
                 } catch (ParseException e) {

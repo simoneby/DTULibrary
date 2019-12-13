@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-//@SessionAttributes("user")
 //@Author s154666, s192671
 @RestController
 public class RegisterController {
@@ -25,7 +24,6 @@ public class RegisterController {
 
 	@PostMapping(value = "/signup", headers = "Accept='application/json'")
 	public String signup(@SessionAttribute("user") User user, @RequestBody User newUser) {
-		// return user.toString();
 
 		if (! userRepository.findUsersByEmail(user.getEmail()).isEmpty()) {
 			String name2 = newUser.getName();

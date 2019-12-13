@@ -23,7 +23,6 @@ public class Coordinates {
             int index = zone > 0 ? zone-1 : 9;
             double[][] finalCoord = new double[5][2];
             for (int i =0;i<floor_0_1[index].length;i++) {
-                //finalCoord[i] = floor_0_1[index][i];
                 finalCoord[i][0]=floor_0_1[index][i][1];
                 finalCoord[i][1]=floor_0_1[index][i][0];
             }

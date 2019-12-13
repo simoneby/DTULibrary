@@ -95,48 +95,6 @@
                 background-position: 0 -450px;
             }
     </style>
-	<script>
-		// $(document).ready(function () {
-
-		// 	const handleFormSubmit = event => {
-		// 		// Stop the form from submitting since we’re handling that with AJAX.
-		// 		event.preventDefault();
-		// 		submitForm();
-		// 	}
-		// 	function submitForm() {
-		// 		var user = {};
-		// 		$("#sign_in").find("input, textarea, select").each(function () {
-		// 			var inputType = this.tagName.toUpperCase() === "INPUT" && this.type.toUpperCase();
-		// 			if (inputType !== "BUTTON" && inputType !== "SUBMIT") {
-		// 					user[this.name] = $(this).val();
-		// 			}
-		// 		});
-
-		// 		console.log(user);
-		// 		$.ajax({
-		// 			contentType: 'application/json',
-		// 			data: JSON.stringify(user),
-		// 			dataType: 'json',
-		// 			success: function (data, status) {
-		// 				$("#result").text("<p> You've been logged in! </p>");
-		// 			},
-		// 			error: function ( ) {
-		// 				console.log("Device control failed");
-		// 			},
-		// 			processData: false,
-		// 			type: 'POST',
-		// 			url: 'http://localhost:8080/loginNew'
-		// 		});
-		// 		// $.post("http://localhost:8080/signup",
-		// 		// 	{ user : user},
-		// 		// 	function (data, status) {
-		// 		// 		alert("Data: " + data + "\nStatus: " + status);
-		// 		// 	}
-		// 		// 	);
-		// 	};
-		// 	const form = document.getElementById('sign_in');
-		// 	form.addEventListener('submit', handleFormSubmit);
-		// });
-    </script>
+	
 </body>
 </html>

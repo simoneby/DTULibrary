@@ -30,7 +30,6 @@ public class SensorDataController {
   @RequestMapping(value = "/zonedata", method = RequestMethod.GET)
   public ProcessedSensorData[] getZoneData(
       @RequestParam(name = "level", required = false, defaultValue = "0") short level) {
-    // ArrayList<SensorData> sensorData = new ArrayList<SensorData>();
     HashMap<String, ProcessedSensorData> zoneData = new HashMap<String, ProcessedSensorData>();
     InitialSensorData[] sensorData = SensorDataHelper.getSensorData();
     for (int i = 0; i < sensorData.length; i++) {
@@ -75,14 +74,5 @@ public class SensorDataController {
         "https://eds.modcam.io/v1/peoplecounter/installations", HttpMethod.GET, entity, installations.getClass(),
         uriVariables);
     return response.getBody().toString();
-    // installations = restTemplate.getForObject(
-    // "https://eds.modcam.io/v1/heatmap/installations", installations.getClass());
-    /*
-     * for(Installation i : installations)
-     * 
-     * {
-     * 
-     * }
-     */
   }
 }

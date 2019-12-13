@@ -100,9 +100,7 @@ public class SurveyController {
             Date today = new Date(0);
             surveyAnswer.setDate(today);
             surveyAnswer.setUser(currentUser);
-            // surveyAnswerRepository.save(surveyAnswer);
-
-            // Set<Question> questions = currentSurvey.getQuestions();
+            
             Set<QuestionAnswer> questionAnswerSet = surveyAnswer.getQuestionAnswers();
             surveyAnswer.setQuestionAnswers(null);
 
