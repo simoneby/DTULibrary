@@ -33,10 +33,11 @@ import java.sql.Date;
 // @ContextConfiguration(
 // classes = {FilteredUserRepository.class,FriendListService.class})
 @TestPropertySource("/application.properties")
-public class EventTesting {
+public class EventTest {
    static String student_number_format="sxxxxx%s";
    static String student_email_format="sxxxxx%s@student.dtu.dk";
-   static java.util.Date current = new java.util.Date();
+   java.util.Date current = new java.util.Date();
+   Date today = new Date(current.getTime());
    @Autowired
    FilteredUserRepository userRepository;
    @Autowired
@@ -64,14 +65,14 @@ public class EventTesting {
 	       userRepository.save(user);
 	       createdUsers.put(i,user);
 	    }
-	       Event event = new Event("yesterday", 14, 14, "yesterday", new Date(current.getTime()), createdUsers.get(1));
+	       Event event = new Event("yesterday", 14, 14, "yesterday", new Date(today.getTime()-(1L*24L*60L*60L*1000L)), createdUsers.get(1));
 	       eventRepository.save(event);
 	       createdEvents.put(1,event);
-	       Event event2 = new Event("tomorrow", 14, 14, "tomorrow", new Date(current.getTime()+1L*24L*60L*60L*1000L), createdUsers.get(2));
-	       eventRepository.save(event);
+	       Event event2 = new Event("tomorrow", 14, 14, "tomorrow", new Date(today.getTime()+(1L*24L*60L*60L*1000L)), createdUsers.get(2));
+	       eventRepository.save(event2);
 	       createdEvents.put(2,event);
-	       Event event4 = new Event("in30days", 14, 14, "in30Days", new Date(current.getTime()+30L*24L*60L*60L*1000L), createdUsers.get(1));
-	       eventRepository.save(event);
+	       Event event3 = new Event("in30Days", 14, 14, "in30Days", new Date(today.getTime()+(30L*24L*60L*60L*1000L)), createdUsers.get(1));
+	       eventRepository.save(event3);
 	       createdEvents.put(3,event);
    }
  
@@ -91,6 +92,7 @@ public class EventTesting {
       Boolean hasTomorrowsEvent = false;
       Boolean noYesterdaysEvent = true;
       Boolean noMonthEvent = true;
+      System.out.println(events);
       for (Event event : events) {
           if (event.getDescription() == "tomorrow") {
              hasTomorrowsEvent = true;
@@ -106,19 +108,14 @@ public class EventTesting {
       //declare asserts (conditions that the result of the method must meet for the tests to pass)
       Assert.assertNotNull("getEventData is null", events);
       Assert.assertTrue(hasTomorrowsEvent);
-      Assert.assertTrue(!noYesterdaysEvent);
-      Assert.assertTrue(!noMonthEvent);
-   }
-   @Test
-   public void randomTest()
-   {
-	Assert.assertTrue(false); 
+      Assert.assertTrue(noYesterdaysEvent);
+      Assert.assertTrue(noMonthEvent);
    }
    @Test
    public void testCreateEvent() {
 	   User user = userRepository.findUserByEmail(String.format(student_email_format, 1));
       //execute the method from the service
-	  Event event = new Event("createEvent", 14, 14, "createEventdesc", new Date(current.getTime()), user);
+	  Event event = new Event("createEvent", 14, 14, "createEventdesc", new Date(today.getTime()), user);
       eventService.createEvent(event);
       List<Event> events = eventRepository.findEventsByCreator(user);
       
@@ -130,6 +127,40 @@ public class EventTesting {
       }
       //declare asserts (conditions that the result of the method must meet for the tests to pass)
       Assert.assertTrue(foundEvent);
+   }
+   @Test
+   public void testDeleteEvent() {
+	   User user = userRepository.findUserByEmail(String.format(student_email_format, 1));
+	   List<Event> events = eventRepository.findEventsByCreator(user);
+	   Event event = events.get(1);
+	   Assert.assertNotNull("List is not null", events);
+	   eventService.deleteEvent(event.getId());
+	   events = eventRepository.findEventsByCreator(user);
+	   Boolean eventWasDeleted = true; 
+	   for( Event iterateEvent : events) {
+		   if(iterateEvent.getId() == event.getId())
+			   eventWasDeleted = false;
+	   }
+	   Assert.assertTrue(eventWasDeleted);
+   }
+   
+   @Test
+   public void testUpdateEvent() {
+	   User user = userRepository.findUserByEmail(String.format(student_email_format, 1));
+	   List<Event> events = eventRepository.findEventsByCreator(user);
+	   Event event = events.get(1);
+	   Assert.assertNotNull("List is not null", events);
+	   Assert.assertTrue(event.getName() != "tested");
+	   event.setName("tested");
+	   eventService.updateEvent(event);
+	   events = eventRepository.findEventsByCreator(user);
+	   Event event1 = events.get(1);
+	   Boolean eventWasUpdated = false; 
+	   for( Event iterateEvent : events) {
+		   if(iterateEvent.getId() == event.getId() && iterateEvent.getName() == "tested")
+			   eventWasUpdated = true;
+	   }
+		   Assert.assertTrue(eventWasUpdated);
    }
   
    private void deleteCreatedEvents()
