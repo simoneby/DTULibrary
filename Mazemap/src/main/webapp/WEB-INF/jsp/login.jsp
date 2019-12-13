@@ -13,7 +13,7 @@
 	<script src="./js/skel.min.js"></script>
 	<script src="./js/util.js"></script>
 	<script src="./js/main.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js" crossorigin="anonymous"></script>
 	<script src="./kendo-ui-core/js/kendo.core.min.js"></script>
 	<script src="./kendo-ui-core/js/kendo.data.min.js"></script>
 	<script src="./kendo-ui-core/js/kendo.dropdownlist.min.js"></script>
