@@ -1,7 +1,7 @@
 
 
 	/**
- 		* Kasper Jensen s183051
+ 		* @Author s183051
  		*
  		* Layers, get request for zones
  		*/
@@ -126,16 +126,7 @@
   			return response.json();
 			}).then(data => {
   				zonePolygons = data;
-  			 /* if(zonePolygons.length > 0)
-  				zonePolygons[0].geometry.coordinates = [ [  [12.523030,55.787066],
-                       [12.523013,55.787037],
-                       [12.523118,55.787017],
-                       [12.523132,55.787038], [12.523030,55.787066] ] ];
-              if(zonePolygons.length > 1)
-				zonePolygons[1].geometry.coordinates = [ [  [12.522894,55.786921],
-                       [12.523096,55.786884],
-                       [12.523069,55.786829],
-                       [12.522862,55.786863], [12.522894,55.786921] ] ];    */                                
+  			                               
                 map.getSource("custom-polygon-layer").setData({type: "FeatureCollection", features:zonePolygons });
 				}).catch(err => {
   			console.log('The request failed!'); 

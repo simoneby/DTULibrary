@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+//@Author s191218, s192671
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 public class SensorData {
