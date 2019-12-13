@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<%@ page session="true" contentType="text/html;charset=UTF-8" language="java" %>
+<%@page import="com.helpers.ServerUrl"%>
 <head>
 	<meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="./css/main.css">
@@ -174,7 +176,7 @@
 				<button onclick="broadcastToAll()">
 					<!-- <input type="button" onclick="window.alert('Hi!')"> -->
 				<script>
-					var baseUrl = $("baseUrl").val();
+					var baseUrl = $("#baseUrl").val();
 					function broadcastToAll(){
 						var locMessage = prompt("Tell your friends where you are: ");
 						var stLoc = JSON.parse(localStorage.getItem("storedLocation"));
