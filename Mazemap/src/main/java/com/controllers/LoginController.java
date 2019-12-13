@@ -36,7 +36,7 @@ import org.springframework.*;
 
 // import com.controllers.RedirectController.*;
 import org.springframework.web.servlet.view.RedirectView;
-// @Author: s191772 and s154666
+// @Author: s191772, s154666
 @SessionAttributes("user")
 @Controller
 public class LoginController {

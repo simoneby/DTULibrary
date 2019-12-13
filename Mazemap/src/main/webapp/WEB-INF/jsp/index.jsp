@@ -170,6 +170,7 @@
 					</iframe>
 				</div>
 			</section>
+			<!-- s191545 -->
 			<section id="shareLocation">
 				<% if(session.getAttribute("user")!=null) {%>
 				<button onclick="broadcastToAll()" >

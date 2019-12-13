@@ -3,6 +3,7 @@ import com.models.*;
 
 import java.util.List;
 
+//@Author s183051, s170899
 public class AjaxResponseBody {
 
     String msg;

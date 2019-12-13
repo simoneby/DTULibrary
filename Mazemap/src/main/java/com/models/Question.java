@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.util.Set;
 
+//@Author s154666, s192671, s191772
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "survey" })
 @Entity
 public class Question {

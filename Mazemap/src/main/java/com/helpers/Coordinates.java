@@ -1,5 +1,6 @@
 package com.helpers;
 
+//@Author s192671, s191772
 public class Coordinates {
     private static double[][][] floor_0_1 = {
             { { 55.786713, 12.523675 }, { 55.786774, 12.523707 }, { 55.786742, 12.523485 }, { 55.786804, 12.523525 } },

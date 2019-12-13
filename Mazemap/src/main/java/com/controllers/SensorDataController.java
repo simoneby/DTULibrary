@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+//@Author s191545, s191218
 @RestController
 @RequestMapping(path = "/sensors")
 public class SensorDataController {

@@ -1,7 +1,7 @@
 
 
 	/**
- 		* Kasper Jensen s183051
+ 		* @Author s183051
  		*
  		* Layers, get request for zones
  		*/

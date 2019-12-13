@@ -6,6 +6,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+//@Author s191772, s191545
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "user"})
 @Entity(name = "location") // This tells Hibernate to make a table out of this class
 public class LocationOfUsers {

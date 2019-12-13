@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import net.sf.json.JSONObject;
 
+//@Author s192671
 public class InitialSensorData {
 
     public static int sensorNum = 0;

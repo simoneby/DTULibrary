@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 //@SessionAttributes("user")
+//@Author s154666, s192671
 @RestController
 public class RegisterController {
 	@Autowired

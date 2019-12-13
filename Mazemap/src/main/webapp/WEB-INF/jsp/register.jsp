@@ -27,6 +27,7 @@
 </head>
 
 <body>
+	<!-- @Author s192671, s154666 -->
 	<input type="hidden" id="baseUrl" name="baseUrl" value = '<%= ServerUrl.baseUrl %>' > 
 	<div class="page-wrap">
 

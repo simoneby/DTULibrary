@@ -31,6 +31,7 @@
 </head>
 
 <body>
+	<!-- @Author s192671 -->
 	<input type="hidden" id="baseUrl" name="baseUrl" value = '<%= ServerUrl.baseUrl %>' > 
 	<div class="page-wrap">
 

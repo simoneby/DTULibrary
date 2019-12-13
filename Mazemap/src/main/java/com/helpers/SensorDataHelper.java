@@ -10,6 +10,7 @@ import java.text.ParseException;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONArray;
 
+//@Author s191218
 public class SensorDataHelper {
 
     private static JSONObject jsonObject = null;

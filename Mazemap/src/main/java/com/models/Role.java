@@ -1,6 +1,4 @@
 
-
-
 package com.models;
 import javax.persistence.*;
 import java.util.HashSet;

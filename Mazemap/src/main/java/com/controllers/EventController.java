@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import java.sql.Date;
 
+//@Author s183051, s170899
 @RestController
 @RequestMapping(path = "/events")
 public class EventController 
