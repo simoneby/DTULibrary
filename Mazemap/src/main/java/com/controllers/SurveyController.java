@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.sql.Date;
 
-// @Author: s191772 and s154666
+// @Author: s191772, s154666
 @RequestMapping("/survey")
 @RestController
 public class SurveyController {
@@ -100,9 +100,7 @@ public class SurveyController {
             Date today = new Date(0);
             surveyAnswer.setDate(today);
             surveyAnswer.setUser(currentUser);
-            // surveyAnswerRepository.save(surveyAnswer);
-
-            // Set<Question> questions = currentSurvey.getQuestions();
+            
             Set<QuestionAnswer> questionAnswerSet = surveyAnswer.getQuestionAnswers();
             surveyAnswer.setQuestionAnswers(null);
 

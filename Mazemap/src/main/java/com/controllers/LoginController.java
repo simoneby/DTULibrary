@@ -35,9 +35,8 @@ import java.util.Scanner;
 import java.io.IOException;
 import org.springframework.*;
 
-// import com.controllers.RedirectController.*;
 import org.springframework.web.servlet.view.RedirectView;
-// @Author: s191772 and s154666
+// @Author: s191772, s154666
 @SessionAttributes("user")
 @Controller
 public class LoginController {
@@ -47,7 +46,6 @@ public class LoginController {
 	private RoleRepository roleRepository;
 	private User user;
 
-
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public RedirectView login(HttpServletResponse HttpServletResponse)
 	{
@@ -55,7 +53,7 @@ public class LoginController {
 
 		// Redirects to the Auth DTU service
 		// Returns the user with se2-webapp05.compute.dtu.dk/redirect?ticket=[TICKET]
-		redirectView.setUrl("https://auth.dtu.dk/dtu/?service=http%3A%2F%2Fse2%2Dwebapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fmazemap%2Fredirect");
+		redirectView.setUrl("https://auth.dtu.dk/dtu/?service=https%3A%2F%2Fse2%2Dwebapp05%2Ecompute%2Edtu%2Edk%3A8443%2Fmazemap%2Fredirect");
 
 		return redirectView;
 	}
@@ -69,8 +67,7 @@ public class LoginController {
 		String name = "noname";
 		boolean login = false;
 
-		String u = "https://auth.dtu.dk/dtu/servicevalidate?service=http%3A%2F%2Fse2-webapp05%2Ecompute%2Edtu%2Edk%3A8080%2Fmazemap%2Fredirect&ticket=" + ticket;
-		if (LoginService.isUrlValid(u))
+
 		{
 			URL url = new URL(u);
 			URLConnection con = url.openConnection();
@@ -111,11 +108,7 @@ public class LoginController {
 				this.user.setStudentnr(studentnr);
 
 				User entity = new User();
-//				entity.setEmail(email);
-//				entity.setName("some name");
-//				entity.addRole(roleRepository.findAll().iterator().next());
-//				userRepository.save(entity);
-				LoginService.saveUserInSession(httpSession);
+
 				return "register";
 			}
 		}

@@ -17,7 +17,7 @@ import org.hibernate.Transaction;
 import java.io.Serializable;
 import java.util.*;
 
-
+//@Author s191772, s183051
 @Entity // This tells Hibernate to make a table out of this class
 public class Event {
     @Id

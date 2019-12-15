@@ -1,3 +1,4 @@
+//@author s192671
 var survey = {};
 var baseUrl;
 var listView = {};
@@ -98,8 +99,7 @@ $(document).ready(function () {
                 // refreshes the ListView
                 lv.refresh();
                 this.data().forEach(element => {
-                    // element.isRange = element.type == 1;
-                    // console.log("isRange" + element.number + "value" + element.isRange);
+                    
                 });
             }
         });
@@ -107,7 +107,6 @@ $(document).ready(function () {
         listView = $("#questionList").kendoListView({
             dataSource: questions,
             editable: true,
-            //editTemplate: kendo.template($("#editTemplate").html()),
             template: kendo.template($("#viewTemplate").html()),
             dataBound: function () {
                 console.log("databound happening");
@@ -124,13 +123,6 @@ $(document).ready(function () {
                         }).data("kendoSlider");
                     }
                 });
-                // $(".view_q_type").each(function (index) {
-                //     $(this).kendoDropDownList({
-                //         dataTextField: "text",
-                //         dataValueField: "value",
-                //         dataSource: q_type,
-                //     });
-                // });
             }
         }).data("kendoListView");
     };
@@ -158,12 +150,6 @@ $(document).ready(function () {
                 }
             }
         });
-        // var lv = $("#questionList").data("kendoListView");
-        // console.log("list view: ");console.log(lv);
-        // console.log(survey.questionAnswers)
-        // return;
-        // //survey.questions = questions.data();
-        // console.log(survey);
         $.ajax({
             contentType: 'application/json',
             data: JSON.stringify(survey),

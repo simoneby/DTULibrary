@@ -4,7 +4,7 @@
 <%@ page session="true" contentType="text/html;charset=UTF-8" language="java" %>
 <%@page import="com.models.User"%>
 <%@page import="com.helpers.ServerUrl"%>
-
+<!-- @Author s192671 -->
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="./css/main.css">
@@ -24,7 +24,7 @@
     <script src="./kendo-ui-core/js/kendo.pager.min.js"></script>
     <script src="./kendo-ui-core/js/kendo.data.min.js"></script>
     <script src="./kendo-ui-core/js/kendo.tabstrip.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js" crossorigin="anonymous"></script>
     <script src="./custom_scripts/survey_main_script.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>DTU CampusNet</title>
@@ -36,14 +36,20 @@
 
         <!-- Nav -->
         <nav id="nav">
-            <ul>
-                <li><a href="index" class="active"><span class="icon fa-home"></span></a></li>
-                <li><a href="friendlist"><span class="icon fas fa-users"></span></a></li>
-                <li><a href="survey_main"><i class="fas fa-poll-h"></i></a></li>
-                <li><a href="events"><i class="fa fa-calendar"></i></a></li>
-                <li><a href="login"><span class="icon fas fa-sign-in"></span></a></li>
-                <li><a href="logout"><span class="icon fas fa-sign-out"></span></a></li>
-            </ul>
+			<ul>
+				<li><a href="index"><span class="icon fa-home"></span></a></li>
+				<% if(session.getAttribute("user")!=null) {%>
+				<li><a href="friendlist"><span class="icon fas fa-users"></span></a></li>
+				<li><a href="survey_main" class="active"><i class="fas fa-poll-h"></i></a></li>
+				<li><a href="events"><i class="fa fa-calendar"></i></a></li>
+				<% } else { %>
+
+				<li><a href="login"><span class="icon fas fa-sign-in"></span></a></li>
+				<%}%>
+				<% if(session.getAttribute("user")!=null) {%>
+				<li><a href="logout"><span class="icon fas fa-sign-out"></span></a></li>
+				<% } %>
+			</ul>
         </nav>
 
         <!-- Main -->

@@ -1,3 +1,4 @@
+//@author s192671
 var baseUrl = "";
 $(document).ready(function () {
     var friends = [];
@@ -13,9 +14,7 @@ $(document).ready(function () {
     baseUrl = $("#baseUrl").val(); //http://se2-webapp05.compute.dtu.dk:8080/mazemap
     loadFriendlist(friends,friendRequestsReceived,friendRequestsSent);
 
-    //var acceptRequestButtons = document.getElementsByClassName('acceptReqButton');
-    //acceptRequestButtons.foreach()
-    //acceptRequestButtons.foreach.addEventListener('submit', handleFormSubmit);
+   
     const handleFormSubmit = event => {
 
         // Stop the form from submitting since we’re handling that with AJAX.

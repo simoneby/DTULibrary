@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+	<%@ page session="true" contentType="text/html;charset=UTF-8" language="java" %>
+	<%@page import="com.models.User"%>
+	<%@page import="com.helpers.ServerUrl"%>
 <head>
 	<meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="./css/main.css">
@@ -19,25 +22,25 @@
 </head>
 <body>
 
-		<!-- Scripts -->
-	<script src="/js/jquery.min.js"></script>
-	<script src="/js/jquery.poptrox.min.js"></script>
-	<script src="/js/jquery.scrolly.min.js"></script>
-	<script src="/js/skel.min.js"></script>
-	<script src="/js/util.js"></script>
-	<script src="/js/main.js"></script>
-	<script src="/kendo-ui-core/js/kendo.core.min.js"></script>
+	<input type="hidden" id="baseUrl" name="baseUrl" value = '<%= ServerUrl.baseUrl %>' > 
+
     <div class="page-wrap">
 
 		<!-- Nav -->
 		<nav id="nav">
 			<ul>
 				<li><a href="#" class="active"><span class="icon fa-home"></span></a></li>
+				<% if(session.getAttribute("user")!=null) {%>
 				<li><a href="friendlist"><span class="icon fas fa-users"></span></a></li>
 				<li><a href="survey_main"><i class="fas fa-poll-h"></i></a></li>
 				<li><a href="events"><i class="fa fa-calendar"></i></a></li>
+				<% } else { %>
+
 				<li><a href="login"><span class="icon fas fa-sign-in"></span></a></li>
+				<%}%>
+				<% if(session.getAttribute("user")!=null) {%>
 				<li><a href="logout"><span class="icon fas fa-sign-out"></span></a></li>
+				<% } %>
 			</ul>
 		</nav>
 
@@ -57,99 +60,6 @@
 				</div>
 			</section>
 
-			<!--Share Location to All-->
-			
-	
-			<!--CREATING A BUTTON FOR CREATE EVENT-->
-					<!--
-			<section>
-			<h1>Create an event by clicking below</h1>
-			<a id="button" class="button">Create Event</a>
-			</section>
-			
-			<section id="createEvent">
-			<div id="feedback"></div>
-			
-					<div class="bg-modal">
-						<div class="modal-content">
-							<div id="close" class="close">+</div>
-							<form id="createEventForm">
-								<input type="text" id="description" name="eventDescr" placeholder="Event Description">
-								<input type="date" id="date" name="date" placeholder="Event date">
-								<input type="text" id="name" name="name" placeholder="Event Name">
-								<input type="time" id="time" name="time" placeholder="Event hour">
-								<input type="number" step=0.01 id="eventLng" name="lng" placeholder="Event Longitude">
-								<input type="number" step=0.01 id="eventLat" name="lat" placeholder="Event Latitude">
-								<button type="submit" id="submitEventForm" onclick="fire_ajax_submit()">Tester</button>
-								
-								
-							</form>
-						</div>
-						<script>
-							
-							document.getElementById("button").addEventListener("click", function() {
-								document.querySelector(".bg-modal").style.display="flex";
-							});
-							
-							document.getElementById("close").addEventListener("click", function() {
-								document.querySelector(".bg-modal").style.display="none";
-							});
-							
-							function fire_ajax_submit() {
-
-							    var event = {}
-							    event["description"] = $("#description").val();
-							    event["name"] = $("#name").val();
-							    event["date"] = $("#date").val();
-							    event["time"] = $("#time").val();
-							    event["lng"] = $("#eventLng").val();
-							    event["lat"] = $("#eventLat").val();
-							    
-
-							    $("#submitEventForm").prop("disabled", true);
-
-							    $.ajax({
-							        type: "POST",
-							        contentType: "application/json",
-							        url: "/events/createevent",
-							        data: JSON.stringify(event),
-							        dataType: 'json',
-							        cache: false,
-							        timeout: 600000,
-							        success: function (data) {
-
-							            var json = "<h4>Ajax Response</h4><pre>"
-							                + JSON.stringify(data, null, 4) + "</pre>";
-							            $('#feedback').html(json);
-
-							            console.log("SUCCESS : ", data);
-							            $("#submitEventForm").prop("disabled", false);
-							            document.querySelector(".bg-modal").style.display="none";
-
-							        },
-							        error: function (e) {
-
-							            var json = "<h4>Ajax Response</h4><pre>"
-							                + e.responseText + "</pre>";
-							            $('#feedback').html(json);
-
-							            console.log("ERROR : ", e);
-							            $("#submitEventForm").prop("disabled", false);
-
-							        }
-							    });
-
-							}	
-						</script>
-					</div>
-			</section>
-			
-			 --!>
-			
-			<!-- STOP HERE TEST -->
-			
-			
-			
 			
 			<section id="map">
 			
@@ -167,12 +77,13 @@
 					</iframe>
 				</div>
 			</section>
+			<!-- s191545 -->
 			<section id="shareLocation">
-
-				<button onclick="broadcastToAll()">
+				<% if(session.getAttribute("user")!=null) {%>
+				<button onclick="broadcastToAll()" >
 					<!-- <input type="button" onclick="window.alert('Hi!')"> -->
 				<script>
-
+					var baseUrl = $("#baseUrl").val();
 					function broadcastToAll(){
 						var locMessage = prompt("Tell your friends where you are: ");
 						var stLoc = JSON.parse(localStorage.getItem("storedLocation"));
@@ -197,13 +108,15 @@
 					},
 					processData: false,
 					type: 'POST',
-					url: 'http://localhost:8080/location/addMessage'
+					url: baseUrl+'/location/addMessage'
 				});
 
 					}
 				</script>
    						Broadcast Location
 				</button>
+				<%} %>
+
 			</section>
 
 			
