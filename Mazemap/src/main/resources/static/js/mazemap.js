@@ -80,7 +80,7 @@ var curLocation = {
            .setLngLat( {lng: currentLong, lat: currentLat} )
            .setAccuracy(10).addTo(map);
 
-/*
+
            function showLocations(){
             var friends;
             $.ajax({
@@ -136,7 +136,7 @@ var curLocation = {
                 
             }
             showLocations();
-*/
+
 
 		/**
  		* @Author s183051
