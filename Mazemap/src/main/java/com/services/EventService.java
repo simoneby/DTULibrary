@@ -47,17 +47,12 @@ public class EventService
 		return new HashSet<Event>(userFilteredEvents);
 	  }
     
-    public void createEvent(//User user,
+    public void createEvent(User user,
             Event event) {
-		
-		Optional<User> user2 = userRepository.findById(13);
-		if(user2.isPresent()) {
-			User saveUser = user2.get();
-			event.setCreator(saveUser);
-		}
-		eventRepository.save(event);
+			event.setCreator(user);
+			eventRepository.save(event);
     }
-    public String deleteEvent(//User user,
+    public String deleteEvent(User user,
 			@RequestParam  Integer id) {
     	String returnMessage;
     	if (id == 0)
@@ -65,30 +60,20 @@ public class EventService
     	else {
        	Optional<Event> tempEvent = eventRepository.findById(id);
 		Event event = tempEvent.get();
-		eventRepository.deleteById(id);
-		/*
-		//User friend = userRepository.findUsersByEmail(friendEmail).get(0);
-		if (event != null && currentUser != null) {
-			User u = userRepository.findUserByEmail(currentUser.getEmail());
-		    try {
-		    	u.removeFriendFromFollowingByEmail(friendEmail);
-		        friend.removeFriendFromFollowerByEmail(u.getEmail());
-		        userRepository.save(u);
-		        userRepository.save(friend);
-		        returnMessage = String.format("Friend %s was removed from your list!", friendEmail);
-		        } catch (Exception e) {
-		        	e.printStackTrace();
-		            returnMessage = "There was an error when removing your friend! Check the email you input!";
-		            }
-        } else {*/
-			returnMessage = "Error: one of the entities is null!";
-		    //  }
+		if(event.getCreator != user)
+			returnMessage = String.format("Creator doesn't match logged in user!", id);
+		else
+			eventRepository.deleteById(id);
     	}
     	return ReturnMessageHelper.getReturnMessage(returnMessage);
     }
     
-    public void updateEvent(Event event)  
+    public void updateEvent(User user,
+    		Event event)  
 	{
-		eventRepository.save(event);
+    	if(event.getCreator == user) {
+			eventRepository.save(event);
+    	}
+		
 	}
 }
