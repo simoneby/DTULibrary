@@ -16,72 +16,86 @@
     <script src="./js/main.js"></script>
     <script src="./kendo-ui-core/js/kendo.core.min.js"></script>
     <style>
-        body {
-           margin: 0px;
-           padding: 0px;
-           width: 100%;
-           height: 100%;
-
-       }
-       #sensorZones{
-        position: absolute;
-        box-sizing: border-box;
-        padding: 10px;
-        top: 80px;
-        left: 10px;
-        width: auto;
-        height: auto;
-        width: calc( 50% - 20px );
-        display: none;
-        background: rgb(255, 255, 255);
-        border-radius: 4px;
-        box-shadow: 0px 0px 0px 1px rgba(93, 93, 93, 0.31)
-    }
-    #createButton{
-        position: absolute;
-        box-sizing: border-box;
-        padding: 10px;
-        top: 10px;
-        left: 10px;
-        width: auto;
-        height: auto;
-        display: block;
-        background: rgb(255, 255, 255);
-        border-radius: 4px;
-        box-shadow: 0px 0px 0px 1px rgba(93, 93, 93, 0.31)           
-    }        
-    #bg-modal{
-     position: absolute;
-     box-sizing: border-box;
-     padding: 10px;
-     top: 10px;
-     left: 10px;
-     width: auto;
-     height: auto;
-     display: none;
-     background: rgb(255, 255, 255);
- }
- #feedback{
-    position: absolute;
-    box-sizing: border-box;
-    padding: 10px;
-    top: 10px;
-    left: 120px;
-    width: auto;
-    height: auto;
-    display: none;
-    background: rgb(255, 255, 255);
+body {
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	height: 100%;
+	
+}
+#sensorZones{
+            position: absolute;
+            box-sizing: border-box;
+            padding: 10px;
+            top: 80px;
+            left: 10px;
+            width: auto;
+            height: auto;
+            width: calc( 50% - 20px );
+            display: none;
+            background: rgb(255, 255, 255);
+            border-radius: 4px;
+            box-shadow: 0px 0px 0px 1px rgba(93, 93, 93, 0.31)
+        }
+#createButton{
+ 			position: absolute;
+            box-sizing: border-box;
+            padding: 10px;
+            top: 10px;
+            left: 10px;
+            width: auto;
+            height: auto;
+            display: block;
+            background: rgb(255, 255, 255);
+            border-radius: 4px;
+            box-shadow: 0px 0px 0px 1px rgba(93, 93, 93, 0.31)           
+}
+#okPlacement{
+ 			position: absolute;
+            box-sizing: border-box;
+            padding: 10px;
+            top: 10px;
+            left: 10px;
+            width: auto;
+            height: auto;
+            display: none;
+            background: rgb(255, 255, 255);
+            border-radius: 4px;
+            box-shadow: 0px 0px 0px 1px rgba(93, 93, 93, 0.31)           
+}        
+#bg-modal{
+			position: absolute;
+            box-sizing: border-box;
+            padding: 10px;
+            top: 10px;
+            left: 10px;
+            width: auto;
+            height: auto;
+            display: none;
+            background: rgb(255, 255, 255);
+}
+#feedback{
+position: absolute;
+            box-sizing: border-box;
+            padding: 10px;
+            top: 10px;
+            left: 120px;
+            width: auto;
+            height: auto;
+            display: none;
+            background: rgb(255, 255, 255);
 }
 </style>
 </head>
 <body>
-    <input type="hidden" id="baseUrlInput" name="baseUrlInput" value = 'http://se2-webapp05.compute.dtu.dk:8080/mazemap' > 
+    <input type="hidden" id="baseUrlInput" name="baseUrlInput" value = 'https://se2-webapp05.compute.dtu.dk:8443/mazemap' > 
 
     <div id="startLat"></div>
     <div id="startLon"></div>
     <div id="map" class="mazemap"></div>
     <div id="sensorZones"></div>
     <button id="createButton" class="createButton">Create Event</button>
+     <button id="okPlacement" class="okPlacement">Place Event</button>
     <section id="createEvent">
      <div class="feedback" id="feedback"></div>
      <!-- The popup modal -->
@@ -95,6 +109,7 @@
             <input type="time" id="time" name="time" placeholder="Event hour">
             <input type="number" step=0.0000000000000001 id="eventLng" class="eventLng" name="lng" placeholder="Event Longitude">
             <input type="number" step=0.0000000000000001 id="eventLat" class="eventLat" name="lat" placeholder="Event Latitude">
+            <button type="button" id="placeEvent" class="placeEvent" name="placeEvent">Place Event</button>
             <button type="submit" id="submitEventForm" onclick="fire_ajax_submit()">Create Event</button>
         </form>
     </div>
