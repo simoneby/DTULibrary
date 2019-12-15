@@ -69,8 +69,16 @@ public class EventService
     }
     
     public void updateEvent(User user,
-    		Event event)  
+    		Event event, Integer id)  
 	{
-			eventRepository.save(event);
+    		Optional<Event> tempEvent = eventRepository.findById(id);
+    		tempEvent.description = event.description;
+    		tempEvent.setName(event.name);
+    		tempEvent.setDate(event.date);
+    		tempEvent.setTime(event.time);
+    		tempEvent.setLng(event.lng);
+    		tempEvent.setLat(event.lat);
+    		
+			eventRepository.save(tempEvent);
 	}
 }
