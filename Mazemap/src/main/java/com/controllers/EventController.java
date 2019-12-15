@@ -73,8 +73,8 @@ public class EventController
     }
 			  
     @RequestMapping(value = "/updateevent", method = RequestMethod.POST)
-	public void updateEvent(@SessionAttribute("user") User user, @RequestBody Event event, Integer id)  
+	public void updateEvent(@SessionAttribute("user") User user, @RequestBody Event event)  
 	{
-		eventService.updateEvent(user, event, id);
+		eventService.updateEvent(user, event);
 	}
 }

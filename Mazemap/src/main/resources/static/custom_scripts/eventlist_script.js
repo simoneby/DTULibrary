@@ -71,8 +71,10 @@ function loadEventlist(events) {
                         	optionsCorrect["time"] = options.time;
                         	optionsCorrect["lng"] = options.lng;
                         	optionsCorrect["lat"] = options.lat;
-                        	var id = options.id;
-                        	return JSON.stringify({event : optionsCorrect, id: id});
+                        	optionsCorrect["id"] = options.id;
+                        	
+                        	return JSON.stringify(optionsCorrect);
+                        	
                         }
                     }
                 }
