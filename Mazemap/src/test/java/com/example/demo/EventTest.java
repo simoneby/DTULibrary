@@ -116,7 +116,7 @@ public class EventTest {
 	   User user = userRepository.findUserByEmail(String.format(student_email_format, 1));
       //execute the method from the service
 	  Event event = new Event("createEvent", 14, 14, "createEventdesc", new Date(today.getTime()), user);
-      eventService.createEvent(event);
+      eventService.createEvent(user, event);
       List<Event> events = eventRepository.findEventsByCreator(user);
       
       Boolean foundEvent = false;
@@ -134,7 +134,7 @@ public class EventTest {
 	   List<Event> events = eventRepository.findEventsByCreator(user);
 	   Event event = events.get(1);
 	   Assert.assertNotNull("List is not null", events);
-	   eventService.deleteEvent(event.getId());
+	   eventService.deleteEvent(user, event.getId());
 	   events = eventRepository.findEventsByCreator(user);
 	   Boolean eventWasDeleted = true; 
 	   for( Event iterateEvent : events) {
@@ -152,7 +152,7 @@ public class EventTest {
 	   Assert.assertNotNull("List is not null", events);
 	   Assert.assertTrue(event.getName() != "tested");
 	   event.setName("tested");
-	   eventService.updateEvent(event);
+	   eventService.updateEvent(user, event);
 	   events = eventRepository.findEventsByCreator(user);
 	   Event event1 = events.get(1);
 	   Boolean eventWasUpdated = false; 
