@@ -21,6 +21,9 @@
     <title>DTU CampusNet</title>
 </head>
 <body>
+
+	<input type="hidden" id="baseUrl" name="baseUrl" value = '<%= ServerUrl.baseUrl %>' > 
+
     <div class="page-wrap">
 
 		<!-- Nav -->
@@ -172,7 +175,7 @@
 				<button onclick="broadcastToAll()" >
 					<!-- <input type="button" onclick="window.alert('Hi!')"> -->
 				<script>
-
+					var baseUrl = $("#baseUrl").val();
 					function broadcastToAll(){
 						var locMessage = prompt("Tell your friends where you are: ");
 						var stLoc = JSON.parse(localStorage.getItem("storedLocation"));
@@ -197,7 +200,7 @@
 					},
 					processData: false,
 					type: 'POST',
-					url: 'http://localhost:8080/location/addMessage'
+					url: baseUrl+'/location/addMessage'
 				});
 
 					}
