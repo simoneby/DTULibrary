@@ -54,14 +54,14 @@ public class EventService
     }
     public String deleteEvent(User user,
 			@RequestParam  Integer id) {
-    	String returnMessage;
+    	String returnMessage = "";
     	if (id == 0)
     		returnMessage = String.format("The event with id %s does not exist!", id);
     	else {
        	Optional<Event> tempEvent = eventRepository.findById(id);
 		Event event = tempEvent.get();
 		if(event.getCreator() != user)
-			returnMessage = String.format("Creator doesn't match logged in user!", id);
+			returnMessage = String.format("Creator doesn't match logged in user!");
 		else
 			eventRepository.deleteById(id);
     	}
