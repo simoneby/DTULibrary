@@ -267,64 +267,74 @@ var curLocation = {
       });	         
      }
 
-           function showLocations(){
-            var friends;
-            $.ajax({
+    function showLocations() {
+        if(baseUrl==null)
+        {
+            baseUrl = $("#baseUrlInput").val();
+        }
+        var friends;
+        $.ajax({
 
-                dataType: 'json',
-                success: function (data2) {
-                    try {
-                        data2 = jQuery.parseJSON(data2);
-                    }
-                    catch (err) {
-                        data2 = typeof data2 =='object' ? data2 : jQuery.parseJSON(data2);
-                    }
-                    if(data2 != null)
-                    	friends = data2;
-                    console.log("get happened");
-                },
-                error: function () {
-                    console.log("Stuff happened");
-                },
-                        // processData: false,
-                        type: 'get',
-                        async: false,
-                        url: baseUrl + '/friends/all'
-                        // url: 'http://localhost:8080/friends/all'
+            dataType: 'json',
+            success: function (data2) {
+                try {
+                    data2 = jQuery.parseJSON(data2);
+                }
+                catch (err) {
+                    data2 = typeof data2 == 'object' ? data2 : jQuery.parseJSON(data2);
+                }
+                friends = data2;
+            },
+            error: function () {
+                console.log("Stuff happened");
+            },
+            // processData: false,
+            type: 'get',
+            async: false,
+            url: baseUrl + '/friends/all'
+            // url: 'http://localhost:8080/friends/all'
 
 
-                    });
-            if(friends != null){
-            	console.log("friends array length " + friends.length);
-            	for (i=0;i<friends.length;i++){
-            		if(friends[i].name != null)
-            		{
-                    var matches = friends[i].name.match(/\b(\w)/g); // first letter of each word in string
-                    var displayName = matches.join('').toUpperCase(); 
-                    console.log("balh");
+        });
+        console.log("friends array length " + friends.length);
+        for (i = 0; i < friends.length; i++) {
+            var matches = "";
+            var displayName = "";
+            if(friends[i].name==null)
+            {
+                 matches = friends[i].name.match(/\b(\w)/g); // first letter of each word in string
+                 displayName = matches.join('').toUpperCase();
+            }
+            else
+            {
+                displayName = friends[i].studentnr;
+            }
+             
+            console.log("balh");
 
-                    if (friends[i].locationOfUser!=null){
-                        var la = parseFloat(friends[i].locationOfUser.coordinateX);
-                        var lo = parseFloat(friends[i].locationOfUser.coordinateY);
-                        console.log("bluah",la,lo);
+            if (friends[i].locationOfUser != null) {
+                var la = parseFloat(friends[i].locationOfUser.coordinateX);
+                var lo = parseFloat(friends[i].locationOfUser.coordinateY);
+                console.log("bluah", la, lo);
 
-                        var tempMarker = new Mazemap.MazeMarker( {
-                            color: "MazePink",
-                            size: 35,
-                            zLevel: 1,
-                            glyph: displayName,
-                            glyphColor:'#000000',
-                            glyphSize:'20'
-                        }).setLngLat({lng: lo, lat: la}).addTo(map);
-                        var markerIteratorPopup = new Mazemap.Popup({ closeOnClick: true, offset: [0,-40]})
-                        .setHTML(friends[i].name + ": " + friends[i].locationOfUser.locationMessage);
-                        tempMarker.setPopup(markerIteratorPopup);
-                        tempMarker.addTo(map);
-                    }
-                }}
-                
-            }}
-            showLocations();
+                var tempMarker = new Mazemap.MazeMarker({
+                    color: "MazePink",
+                    size: 35,
+                    zLevel: 1,
+                    glyph: displayName,
+                    glyphColor: '#000000',
+                    glyphSize: '20'
+                }).setLngLat({ lng: lo, lat: la }).addTo(map);
+                var markerIteratorPopup = new Mazemap.Popup({ closeOnClick: true, offset: [0, -40] })
+                    .setHTML(friends[i].name + ": " + friends[i].locationOfUser.locationMessage);
+                tempMarker.setPopup(markerIteratorPopup);
+                tempMarker.addTo(map);
+            }
+        }
+
+    }
+    showLocations();
+
 
 
 	
