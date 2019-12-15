@@ -294,11 +294,11 @@ var curLocation = {
 
 
                     });
-            //if(friends != null){
+            if(friends != null){
             	console.log("friends array length " + friends.length);
             	for (i=0;i<friends.length;i++){
-            	//	if(friends[i].name != null)
-            	//		{
+            		if(friends[i].name != null)
+            		{
                     var matches = friends[i].name.match(/\b(\w)/g); // first letter of each word in string
                     var displayName = matches.join('').toUpperCase(); 
                     console.log("balh");
@@ -321,7 +321,7 @@ var curLocation = {
                         tempMarker.setPopup(markerIteratorPopup);
                         tempMarker.addTo(map);
                     }
-               // }}
+                }}
                 
             }}
             showLocations();
