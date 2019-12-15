@@ -1,4 +1,4 @@
-package com.example.demo;
+/*package com.example.demo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +34,7 @@ public class FirstUnitTest {
    static String student_number_format="sxxxxx%s";
    static String student_email_format="sxxxxx%s@student.dtu.dk";
    @Autowired
-   FilteredUserRepository userRepository;
+   FilteredUserRepository userRepository;   
    @Autowired
    FriendListService friendListService;
 
@@ -43,7 +43,7 @@ public class FirstUnitTest {
    @Before
    public void initializeTest() {
       deleteCreatedUsers();
-      HashMap<Integer,User> createdUsers = new HashMap<Integer,User>();
+      HashMap<Integer,User> createdUsers = new HashMap<Integer,User>();   
       for(int i=1;i<7;i++)
       {
          String studentNr = String.format(student_number_format,i);
@@ -51,7 +51,7 @@ public class FirstUnitTest {
          User user = new User("Name"+i,studentNr,email);
          userRepository.save(user);
          createdUsers.put(i,user);
-      }
+      }      
       User friend1 = createdUsers.get(1);
       User friend2 = createdUsers.get(2);
       User friend3 = createdUsers.get(3);
@@ -142,4 +142,4 @@ public class FirstUnitTest {
          userRepository.deleteAll(users);
       }
    }
-}
+}*/

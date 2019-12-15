@@ -36,6 +36,12 @@ public class EventController
 		return eventService.getEventData();
 	  }
 	
+	@RequestMapping(value = "/userfilteredeventdata", method = RequestMethod.GET)
+	  public Set<Event> getUserFilteredEventData(@SessionAttribute("user") User user) 
+	  {
+		return eventService.getUserFilteredEventData(user);
+	  }
+	
 	@RequestMapping(value = "/createevent", method = RequestMethod.POST)
 	public ResponseEntity<?> createEvent(//@SessionAttribute("user") User user,
             @Valid @RequestBody Event event, Errors errors) {
