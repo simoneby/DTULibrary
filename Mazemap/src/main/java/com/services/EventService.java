@@ -60,7 +60,7 @@ public class EventService
     	else {
        	Optional<Event> tempEvent = eventRepository.findById(id);
 		Event event = tempEvent.get();
-		if(event.getCreator != user)
+		if(event.getCreator() != user)
 			returnMessage = String.format("Creator doesn't match logged in user!", id);
 		else
 			eventRepository.deleteById(id);
@@ -71,7 +71,7 @@ public class EventService
     public void updateEvent(User user,
     		Event event)  
 	{
-    	if(event.getCreator == user) {
+    	if(event.getCreator() == user) {
 			eventRepository.save(event);
     	}
 		
