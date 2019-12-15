@@ -64,7 +64,7 @@ public class EventService
 			returnMessage = String.format("Creator doesn't match logged in user!");
 		else*/
 			eventRepository.deleteById(id);
-    	//}
+    	}
     	return ReturnMessageHelper.getReturnMessage(returnMessage);
     }
     
