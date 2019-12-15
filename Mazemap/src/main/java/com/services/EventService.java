@@ -71,9 +71,6 @@ public class EventService
     public void updateEvent(User user,
     		Event event)  
 	{
-    	if(event.getCreator() == user) {
 			eventRepository.save(event);
-    	}
-		
 	}
 }
