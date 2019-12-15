@@ -43,10 +43,10 @@ public class EventController
 	  }
 	
 	@RequestMapping(value = "/createevent", method = RequestMethod.POST)
-	public ResponseEntity<?> createEvent(//@SessionAttribute("user") User user,
+	public ResponseEntity<?> createEvent(@SessionAttribute("user") User user,
             @Valid @RequestBody Event event, Errors errors) {
 		
-		eventService.createEvent(/*user, */event);
+		eventService.createEvent(user, event);
 		AjaxResponseBody result = new AjaxResponseBody();
         
         //If error, just return a 400 bad request, along with the error message
@@ -66,14 +66,14 @@ public class EventController
     }
 
     @RequestMapping(value = "/deleteevent", method = RequestMethod.DELETE)
-	public String deleteFriend(//@SessionAttribute("user") User user,
+	public String deleteFriend(@SessionAttribute("user") User user,
 			@RequestParam  Integer id) {
-	   return eventService.deleteEvent(id);
+	   return eventService.deleteEvent(id, user);
     }
 			  
     @RequestMapping(value = "/updateevent", method = RequestMethod.POST)
-	public void updateEvent(@Valid @RequestBody Event event, Errors errors)  
+	public void updateEvent(@SessionAttribute("user") User user, @Valid @RequestBody Event event, Errors errors)  
 	{
-		eventService.updateEvent(event);
+		eventService.updateEvent(event,user);
 	}
 }

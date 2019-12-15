@@ -42,7 +42,7 @@ function loadEventlist(events) {
 	                },
 		 				transport: {
 		 					read: {
-                        url: baseUrl + "/events/eventdata",
+                        url: baseUrl + "/events/userfilteredeventdata",
                         type: "get",
                         dataType: "json"
                     },
