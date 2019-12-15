@@ -71,7 +71,8 @@ public class EventService
     public void updateEvent(User user,
     		Event event, Integer id)  
 	{
-    		Optional<Event> tempEvent = eventRepository.findById(id);
+    		Optional<Event> optionalEvent = eventRepository.findById(id);
+    		Event tempEvent = optionalEvent.get();
     		tempEvent.setDescription = event.description;
     		tempEvent.setName(event.name);
     		tempEvent.setDate(event.date);
