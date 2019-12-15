@@ -64,6 +64,7 @@ function loadEventlist(events) {
                             return {id : options.id};
                         }
                         if (operation == "update" && options) {
+                        	options.public = false;
                         	return JSON.stringify(options);
                         }
                     }
