@@ -108,7 +108,7 @@ var curLocation = {
 
 
                     });
-            if(friends.length > 1 && friends != null)
+            if(friends.length > 0 && friends != null){
             	console.log("friends array length " + friends.length);
             	for (i=0;i<friends.length;i++){
             		if(friends[i].name != null)
@@ -137,7 +137,7 @@ var curLocation = {
                     }
                 }}
                 
-            }
+            }}
             showLocations();
 
 
