@@ -35,6 +35,7 @@ function loadEventlist(events) {
 	                                lng: { type : "number" },
 	                                description:{ type : "string"},
 	                                isPublic:{ type: "boolean"},
+	                                creator:{ type:"string"},
 	                                date: { type : "string" },
 	                                time: { type : "string" },
 	                            }
