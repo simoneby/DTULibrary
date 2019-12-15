@@ -71,7 +71,6 @@
 				<div id="friends_tab" class="column">
 					<div class="demo-section k-content">
 						<div id="tabstrip">
-							<div id="tab3">
 								<h2> Create new survey</h2>
 								<form id="survey_form">
 									<label for="name"> Enter survey name: </label>
@@ -86,10 +85,10 @@
 										<div id="questionList">
 										</div>
 									</div>
-									<ul class="actions">
-										<li><input value="save survey" class="button" type="submit"></li>
-									</ul>
+									<input id="save_survey" value="Save survey" class="button" type="submit">
 								</form>
+								<div id = "result">
+									</div>
 								<script type="text/x-kendo-tmpl" id="viewTemplate">
 									<div class=" k-widget">
 										<p> 
