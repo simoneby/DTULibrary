@@ -76,7 +76,7 @@ public class FriendListController {
   
     @RequestMapping(value = "/deleteFriend", method = RequestMethod.DELETE)
     public String deleteFriend(@SessionAttribute("user") User currentUser,@RequestParam  String friendEmail) {
-        String returnMessage = friendService.rejectFriendRequest(currentUser.getEmail(), friendEmail);
+        String returnMessage = friendService.deleteFriend(currentUser.getEmail(), friendEmail);
         return ReturnMessageHelper.getReturnMessage(returnMessage);
     }
 }
