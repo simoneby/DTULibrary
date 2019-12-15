@@ -152,7 +152,7 @@ public class EventTest {
 	   Assert.assertNotNull("List is not null", events);
 	   Assert.assertTrue(event.getName() != "tested");
 	   event.setName("tested");
-	   eventService.updateEvent(user, event, event.getId());
+	   eventService.updateEvent(user, event);
 	   events = eventRepository.findEventsByCreator(user);
 	   Event event1 = events.get(1);
 	   Boolean eventWasUpdated = false; 
