@@ -186,7 +186,7 @@ var curLocation = {
   document.querySelector(".eventLat").value=center.lat;
 
 	var placingEvent = false;
-  map.on('dragend', function() {
+  map.on('drag', function() {
 	  center = map.getBounds().getCenter();
    	document.querySelector(".eventLng").value=center.lng;
    	document.querySelector(".eventLat").value=center.lat;

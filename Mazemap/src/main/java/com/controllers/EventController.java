@@ -67,13 +67,13 @@ public class EventController
     }
 
     @RequestMapping(value = "/deleteevent", method = RequestMethod.DELETE)
-	public String deleteFriend(@SessionAttribute("user") User user,
+	public String deleteEvent(@SessionAttribute("user") User user,
 			@RequestParam  Integer id) {
 	   return eventService.deleteEvent(user, id);
     }
 			  
     @RequestMapping(value = "/updateevent", method = RequestMethod.POST)
-	public void updateEvent(@SessionAttribute("user") User user, @Valid @RequestBody Event event, Errors errors)  
+	public void updateEvent(@SessionAttribute("user") User user, @Valid @RequestBody Event event)  
 	{
 		eventService.updateEvent(user, event);
 	}
