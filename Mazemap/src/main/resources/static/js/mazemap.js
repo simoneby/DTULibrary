@@ -11,6 +11,10 @@ var curLocation = {
 	
 	document.getElementById("close").addEventListener("click", function() {
 		document.querySelector(".bg-modal").style.display="none";
+		document.querySelector(".createButton").style.display="block";
+		if(placingEvent){
+			createMarker.remove();
+		}
 	});
 	
    var currentLat,currentLong;
@@ -181,10 +185,14 @@ var curLocation = {
   document.querySelector(".eventLng").value=center.lng;
   document.querySelector(".eventLat").value=center.lat;
 
+	var placingEvent = false;
   map.on('dragend', function() {
-     center = map.getBounds().getCenter();
-     document.querySelector(".eventLng").value=center.lng;
-     document.querySelector(".eventLat").value=center.lat;
+	  center = map.getBounds().getCenter();
+   	document.querySelector(".eventLng").value=center.lng;
+   	document.querySelector(".eventLat").value=center.lat;
+   	if(placingEvent){
+   		createMarker.setLngLat({lng: center.lng, lat: center.lat});
+   	}
  });
 
   //@Author s183051, s170899
@@ -235,6 +243,37 @@ var curLocation = {
    });
 
 }	
+  var createMarker;
+  document.getElementById("placeEvent").addEventListener("click", function() {
+  placingEvent = true;
+  center = map.getBounds().getCenter();
+  
+  if(typeof(createMarker) === 'undefined')
+	{
+	createMarker = new Mazemap.MazeMarker( {
+		zLevel : 1,
+		color: 'green',
+		innerCircle: true,
+		innerCircleColor: '#FEFEFE',
+		innerCircleScale: 0.7,
+		glyphColor: '#000',
+		glyphSize: 20,
+		glyph: '🤷'
+	} ).setLngLat({lng: center.lng, lat: center.lat});
+	 	createMarker.addTo(map);
+			}
+	document.querySelector(".bg-modal").style.display="none";
+	document.querySelector(".createButton").style.display="none";
+	document.querySelector(".okPlacement").style.display="block";
+	
+});
+
+	
+  document.getElementById("okPlacement").addEventListener("click", function() {
+	document.querySelector(".bg-modal").style.display="block";
+	document.querySelector(".okPlacement").style.display="none";
+		
+	});
 	//function to get and draw markers on the map - catching right now just to test
 	function redrawMarkers() {   
 		var eventData;
