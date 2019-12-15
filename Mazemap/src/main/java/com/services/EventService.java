@@ -73,12 +73,12 @@ public class EventService
 	{
     		Optional<Event> optionalEvent = eventRepository.findById(id);
     		Event tempEvent = optionalEvent.get();
-    		tempEvent.setDescription = event.description;
-    		tempEvent.setName(event.name);
-    		tempEvent.setDate(event.date);
-    		tempEvent.setTime(event.time);
-    		tempEvent.setLng(event.lng);
-    		tempEvent.setLat(event.lat);
+    		tempEvent.setDescription(event.getDescription());
+    		tempEvent.setName(event.getName());
+    		tempEvent.setDate(event.getDate());
+    		tempEvent.setTime(event.getTime());
+    		tempEvent.setLng(event.getLng());
+    		tempEvent.setLat(event.getLat());
     		
 			eventRepository.save(tempEvent);
 	}
