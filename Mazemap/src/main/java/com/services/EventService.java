@@ -72,7 +72,7 @@ public class EventService
     		Event event, Integer id)  
 	{
     		Optional<Event> tempEvent = eventRepository.findById(id);
-    		tempEvent.description = event.description;
+    		tempEvent.setDescription = event.description;
     		tempEvent.setName(event.name);
     		tempEvent.setDate(event.date);
     		tempEvent.setTime(event.time);
