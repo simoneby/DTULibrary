@@ -17,7 +17,7 @@ $(document).ready(function () {
         }
     });
     loadEventlist(events);
-    baseUrl = $("#baseUrlInput").val();
+    baseUrl = $("#baseUrl").val();
 });
 
 function loadEventlist(events) {
