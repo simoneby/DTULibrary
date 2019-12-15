@@ -3,6 +3,7 @@ package com.models;
 import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+//@Author s191218
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Installation {
 private String id;

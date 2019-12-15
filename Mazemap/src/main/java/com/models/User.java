@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.*;
 
 
+//@Author s192671
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "friends", "teammates", "friendRequests",
         "sentFriendRequests", "receivedFriendRequests" })
 @Entity // This tells Hibernate to make a table out of this class
@@ -29,8 +30,6 @@ public class User {
     private String studentnr;
 
     private String email;
-
-    // private Integer loc_id;
 
     @JsonIgnore
     private String password;
@@ -178,7 +177,6 @@ public class User {
             return false;
         friends.remove(friend);
         return true;
-        // friend.friendRequests.remove(o)
     }
 
     public boolean removeFriendFromFollowerByEmail(String email) {

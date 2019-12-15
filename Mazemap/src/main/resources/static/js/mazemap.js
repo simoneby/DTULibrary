@@ -1,3 +1,4 @@
+//@Author s191545
 var baseUrl;
 var curLocation = {
 	lat: 0,
@@ -134,7 +135,7 @@ var curLocation = {
 
 
 		/**
- 		* Kasper Jensen s183051
+ 		* @Author s183051
  		*
  		* Layers, get request for zones
  		*/
@@ -186,6 +187,7 @@ var curLocation = {
      document.querySelector(".eventLat").value=center.lat;
  });
 
+  //@Author s183051, s170899
   function fire_ajax_submit() {
 
    var event = {}

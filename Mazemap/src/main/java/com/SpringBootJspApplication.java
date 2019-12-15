@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+
+//@Author s154666
 @SpringBootApplication
 public class SpringBootJspApplication<User> extends SpringBootServletInitializer 
 {

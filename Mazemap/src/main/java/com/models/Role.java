@@ -1,6 +1,4 @@
 
-
-
 package com.models;
 import javax.persistence.*;
 import java.util.HashSet;
@@ -37,13 +35,5 @@ public class Role {
     public void setName(String name) {
         this.name = name;
     }
-/*
-    @ManyToMany
-    @JoinTable(name="roles_of_users")
-    private Set<User> role = new HashSet<User>();
-    public void addRole (User user){
-        role.add(user);
-    }
-*/
 
 }

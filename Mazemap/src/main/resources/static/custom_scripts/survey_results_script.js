@@ -43,8 +43,7 @@ $(document).ready(function () {
                 $("#survey_info").html("Survey was created on " + survey.startDate.toDateString() + " and expires on " + survey.endDate.toDateString());
                 loadQuestionsAndList(survey.questions);
             });
-            //$("#expiration_date").kendoDateInput();
-            //var questionList = [];
+            
         });
     function loadQuestionsAndList(qlist) {
         questions = new kendo.data.DataSource({
@@ -67,7 +66,7 @@ $(document).ready(function () {
             },
             sort: { field: "number", dir: "asc" }
         });
-        //console.log("sth1");
+        
         listView = $("#questionList").kendoListView({
             dataSource: questions,
             template: kendo.template($("#viewTemplate").html()),

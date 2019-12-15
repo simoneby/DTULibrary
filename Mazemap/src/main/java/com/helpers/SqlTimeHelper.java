@@ -1,12 +1,11 @@
 package com.helpers;
 
-//import javax.xml.rpc.encoding.*;
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import java.io.IOException;
 
 
-
+//@Author s183051, s170899
 public final class SqlTimeHelper extends JsonDeserializer<java.sql.Time> {
 
     @Override

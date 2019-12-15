@@ -44,10 +44,9 @@ $(document).ready(function () {
                         element.isRange = element.type == 1;
                         console.log("isRange" + element.number + "value" + element.isRange);
                     });
-                    //	  listView.refresh();
+                   
                 }
             });
-            //console.log("sth1");
             listView = $("#questionList").kendoListView({
                 dataSource: questions,
                 editale: true,
@@ -82,8 +81,6 @@ $(document).ready(function () {
         });
     $(".k-add-button").click(function (e) {
         var currentQuestionNumber = questionList.length + 1;
-        //e.model.number = currentQuestionNumber;
-        //e.model.type = 1;
         console.log("adding");
         listView.add();
         $(".range_edit").hide();
@@ -106,7 +103,7 @@ $(document).ready(function () {
             });
         });
         e.preventDefault();
-        //console.log("add event activated");
+        
     });
     const handleFormSubmit = event => {
         // Stop the form from submitting since we’re handling that with AJAX.
@@ -119,20 +116,10 @@ $(document).ready(function () {
         $("#survey_form").find("input, textarea").each(function () {
             var inputType = this.tagName.toUpperCase() === "INPUT" && this.type.toUpperCase();
             if (inputType !== "BUTTON" && inputType !== "SUBMIT") {
-                // if (this.name === "roles") {
-                // 	var user_roles = [];
-                // 	$("#roles option:selected").each(function () {
-                // 		var optionValue = $(this).val();
-                // 		var optionText = $(this).text();
-                // 		user_roles.push({ id: optionValue, name: optionText });
-                // 		console.log("optionText", optionText,optionValue);
-                // 	});
-                // 	user[this.name] = user_roles;
-                // }
-                // else {
+                
                 survey[this.name] = $(this).val();
                 console.log(this.name);
-                // }
+                
             }
         });
         survey.questions = questions.data(); 
@@ -153,12 +140,7 @@ $(document).ready(function () {
             type: 'POST',
             url: baseUrl + '/survey/save'
         });
-        // $.post("http://localhost:8080/signup",
-        // 	{ user : user},
-        // 	function (data, status) {
-        // 		alert("Data: " + data + "\nStatus: " + status);
-        // 	}
-        // 	);
+        
     };
     const form = document.getElementById('survey_form');
     form.addEventListener('submit', handleFormSubmit);
