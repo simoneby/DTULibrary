@@ -64,8 +64,15 @@ function loadEventlist(events) {
                             return {id : options.id};
                         }
                         if (operation == "update" && options) {
-                        	options.public = false;
-                        	return JSON.stringify(options);
+                        	var optionsCorrect = {};
+                        	optionsCorrect["description"] = options.description;
+                        	optionsCorrect["name"] = options.name;
+                        	optionsCorrect["date"] = options.date;
+                        	optionsCorrect["time"] = options.time;
+                        	optionsCorrect["lng"] = options.lng;
+                        	optionsCorrect["lat"] = options.lat;
+                        	
+                        	return JSON.stringify(optionsCorrect);
                         }
                     }
                 }
