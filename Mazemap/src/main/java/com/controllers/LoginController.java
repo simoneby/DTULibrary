@@ -62,65 +62,29 @@ public class LoginController {
 	@GetMapping(value="/redirect")
 	public String redirect(@RequestParam("ticket") String ticket, HttpSession httpSession,Model model, HttpServletRequest request) throws MalformedURLException, IOException
 	{
-
-		String studentnr = "initial";
-		String name = "noname";
-		boolean login = false;
-
-
-		{
-			URL url = new URL(u);
-			URLConnection con = url.openConnection();
-			InputStream in = con.getInputStream();
-			String encoding = con.getContentEncoding();  // ** WRONG: should use "con.getContentType()" instead but it returns something like "text/html; charset=UTF-8" so this value must be parsed to extract the actual encoding
-			studentnr = IOUtils.toString(in, "UTF-8").replaceAll("\\s","").replaceAll("\\<.*?\\>", "");
-
-			try 
-			{
-				User foundUser = null;
-				if (userRepository.findUserByStudentnr(studentnr) == null) 
-				{
-					User entity = new User();
-					entity.setEmail(String.format("%s@student.dtu.dk",studentnr));
-					entity.setStudentnr(studentnr);
-					//entity.addRole(roleRepository.findAll().iterator().next());
-					userRepository.save(entity);
-					this.user = entity;
-					//login = true;
-
-					LoginService.saveUserInSession(httpSession);
-					// GO TO REGISTER PAGE
-					return "register";
-				}
-				else 
-				{
-					foundUser = userRepository.findUserByStudentnr(studentnr);
-					//name = foundUser.getName();
-					//login = true;
-					this.user = foundUser;
-					LoginService.saveUserInSession(httpSession);
-					return "index";
-				}
-				
-			} catch (HibernateException | NullPointerException e){ //POSSIBLY CLEAN UP LATER
-				// GO TO REGISTER PAGE
-				this.user = new User();
-				this.user.setStudentnr(studentnr);
-
-				User entity = new User();
-
-				return "register";
-			}
-		}
-
-
-		return "index";
-
+		return LoginService.redirectService(ticket,httpSession,model,request);
 	}
 
 
 
-	
+	public static boolean isUrlValid(String url) {
+		try {
+			URL obj = new URL(url);
+			obj.toURI();
+			return true;
+		} catch (MalformedURLException e) {
+			return false;
+		} catch (URISyntaxException e) {
+			return false;
+		}
+	}
+
+	public void saveUserInSession(HttpSession httpSession) 
+	{
+		if(httpSession.getAttribute("user")!=null)
+			httpSession.removeAttribute("user");
+		httpSession.setAttribute("user", this.user);
+	}
 
 	@GetMapping(path = "/loginsuccesful")
 	public String loginsuccesful(@RequestParam(value = "name", required = false, defaultValue = "World") String name) {
@@ -142,7 +106,7 @@ public class LoginController {
 		//name = foundUser.getName();
 		//login = true;
 		this.user = foundUser;
-		LoginService.saveUserInSession(httpSession);
+		saveUserInSession(httpSession);
 		return "loginsuccesful";
 	}
 }

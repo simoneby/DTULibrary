@@ -9,6 +9,7 @@ import com.repositories.*;
 import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.*;
-import org.springframework.stereotype.Service;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,8 +40,9 @@ import java.util.HashSet;
 import java.util.Set;
 import com.models.*;
 
+//@Author s154666
 @SessionAttributes("user")
-@Service
+@Component
 public class LoginService
 {
 	@Autowired
@@ -49,7 +50,64 @@ public class LoginService
 
 	private static User user;
 
-	
+	public static String redirectService(String ticket, HttpSession httpSession,Model model, HttpServletRequest request) 
+		throws MalformedURLException, IOException
+	{
+
+		String studentnr = "initial";
+		String name = "noname";
+		boolean login = false;
+
+		String u = "https://auth.dtu.dk/dtu/servicevalidate?service=https%3A%2F%2Fse2-webapp05%2Ecompute%2Edtu%2Edk%3A8443%2Fmazemap%2Fredirect&ticket=" + ticket;
+		if (isUrlValid(u))
+		{
+			URL url = new URL(u);
+			URLConnection con = url.openConnection();
+			InputStream in = con.getInputStream();
+			String encoding = con.getContentEncoding();  // ** WRONG: should use "con.getContentType()" instead but it returns something like "text/html; charset=UTF-8" so this value must be parsed to extract the actual encoding
+			studentnr = IOUtils.toString(in, "UTF-8").replaceAll("\\s","").replaceAll("\\<.*?\\>", "");
+
+			try 
+			{
+				User foundUser = null;
+				if (userRepository.findUserByStudentnr(studentnr) == null) 
+				{
+					User entity = new User();
+					entity.setEmail(String.format("%s@student.dtu.dk",studentnr));
+					entity.setStudentnr(studentnr);
+					//entity.addRole(roleRepository.findAll().iterator().next());
+					userRepository.save(entity);
+					user = entity;
+					//login = true;
+
+					saveUserInSession(httpSession);
+					// GO TO REGISTER PAGE
+					return "register";
+				}
+				else 
+				{
+					foundUser = userRepository.findUserByStudentnr(studentnr);
+					//name = foundUser.getName();
+					//login = true;
+					user = foundUser;
+					saveUserInSession(httpSession);
+					return "index";
+				}
+				
+			} catch (HibernateException | NullPointerException e){ //POSSIBLY CLEAN UP LATER
+				// GO TO REGISTER PAGE
+				user = new User();
+				user.setStudentnr(studentnr);
+
+				User entity = new User();
+				saveUserInSession(httpSession);
+				return "register";
+			}
+		}
+
+
+		return "index";
+	}
 
 
 	public static void saveUserInSession(HttpSession httpSession) 
@@ -72,9 +130,5 @@ public class LoginService
 			return false;
 		}
 	}
-
-
-
-
 
 }
