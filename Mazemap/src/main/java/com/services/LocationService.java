@@ -18,7 +18,13 @@ public class LocationService {
     private FilteredUserRepository userRepository;
 
 
-    public Set<User> addMessage(String userEmail) {
+    public String addMessage(String userEmail, LocationOfUsers location) {
+
+        User cu = userRepository.findUsersByEmail(userEmail).get(0);
+
+        LocationOfUsers loc = locationRepository.findLocationOfUsersByUser(cu);
+        
+
         if (location != null && cu != null) {
             try {
             	if (loc!= null){
@@ -39,7 +45,6 @@ public class LocationService {
                 return "There was an error and location could not be saved";
             }
         }
-        return userRepository.findUserByEmail(userEmail).getFriends();
     }
 
     public ArrayList<LocationOfUsers> getAllLocations() {
@@ -47,16 +52,16 @@ public class LocationService {
         locationRepository.findAll().forEach(locations::add);
         return locations;
 
-    public Set<User> getAllFriends(String userEmail) {
-        if (userEmail == null) {
-            try {
-                throw new Exception("User email undefined");
-            } catch (Exception e) {
-                e.printStackTrace();
-                return new HashSet<User>();
-            }
-        }
-        return userRepository.findUserByEmail(userEmail).getFriends();
-    }
+    // public Set<User> getAllFriends(String userEmail) {
+    //     if (userEmail == null) {
+    //         try {
+    //             throw new Exception("User email undefined");
+    //         } catch (Exception e) {
+    //             e.printStackTrace();
+    //             return new HashSet<User>();
+    //         }
+    //     }
+    //     return userRepository.findUserByEmail(userEmail).getFriends();
+    // }
 
 }
