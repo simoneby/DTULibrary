@@ -36,8 +36,27 @@ public class Event {
 
     private java.sql.Date date;
     
+    @OneToOne
+    @JoinColumn(name="event_creator")
+    private User creator;
+    
+    @ManyToMany
+    @JoinTable(name="attends_event")
+    private Set<User> attends = new HashSet<User>();
+    
     @JsonDeserialize(using = SqlTimeHelper.class)
     private java.sql.Time time;
+    
+    public Event(){}
+    
+    public Event(String name, double lat, double lng, String description, java.sql.Date date, User creator) {
+        this.name = name;
+        this.lat = lat;
+        this.lng = lng;
+        this.description = description;
+        this.date = date;
+        this.creator = creator;
+    }
 
     public Date getDate() {
         return date;
@@ -110,16 +129,12 @@ public class Event {
         return creator;
     }
 
-    @OneToOne
-    @JoinColumn(name="event_creator")
-    private User creator;
+   
     public void setCreator (User creator) {
         this.creator = creator;
     }
 
-    @ManyToMany
-    @JoinTable(name="attends_event")
-    private Set<User> attends = new HashSet<User>();
+   
     public void addAttender (User user){
         attends.add(user);
     }

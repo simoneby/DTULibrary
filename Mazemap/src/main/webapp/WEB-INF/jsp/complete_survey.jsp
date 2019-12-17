@@ -78,9 +78,7 @@
                                         <div id="questionList">
                                         </div>
                                     </div>
-                                    <ul class="actions">
-                                        <li><input id="save_survey" value="Submit survey answers" class="button" type="submit"></li>
-                                    </ul>
+                                    <input id="save_survey" value="Submit survey answers" class="button" type="submit">
                                 </form>
                                 <div id="result"></div>
                                 <script type="text/x-kendo-tmpl" id="viewTemplate">
@@ -108,6 +106,7 @@
                             </div>
                         </div>
                     </div>
+				</div>
             </section>
             <!--                                                 <div class="edit-buttons">
                                                         <a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit"></span></a> </div>

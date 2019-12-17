@@ -36,7 +36,6 @@ public class SurveyController {
     public String save(@SessionAttribute("user") User currentUser, @RequestBody Survey survey) {
 
         if (userRepository.findUserByStudentnr(currentUser.getStudentnr()) != null) {
-
             java.util.Date current = new java.util.Date();
             Date today = new Date(current.getTime());
             survey.setStartDate(today);
@@ -48,7 +47,7 @@ public class SurveyController {
                 question.setSurvey(survey);
                 questionRepository.save(question);
             }
-            return ReturnMessageHelper.getReturnMessage("survey saved!");
+            return ReturnMessageHelper.getReturnMessage("Survey was succesfully created!");
         } else {
             return ReturnMessageHelper.getReturnMessage("You need to log in to create a survey!");
         }

@@ -155,8 +155,8 @@ $(document).ready(function () {
             data: JSON.stringify(survey),
             dataType: 'json',
             success: function (data, status) {
-                $("#result").text("<p>" + data + "</p>");
-                $("#save_survey").disabled = true;
+                $("#result").html("<p> <b>" + data.message + "</b></p>");
+                $("#save_survey").prop('disabled',true);
             },
             error: function () {
                 console.log("Stuff happened");
