@@ -46,7 +46,7 @@ import com.models.*;
 public class LoginService
 {
 	@Autowired
-	private FilteredUserRepository userRepository;
+	private static FilteredUserRepository userRepository;
 
 	private static User user;
 
@@ -69,46 +69,49 @@ public class LoginService
 
 			try 
 			{
-				User foundUser = null;
 				if (userRepository.findUserByStudentnr(studentnr) == null) 
 				{
-					User entity = new User();
-					entity.setEmail(String.format("%s@student.dtu.dk",studentnr));
-					entity.setStudentnr(studentnr);
-					//entity.addRole(roleRepository.findAll().iterator().next());
-					userRepository.save(entity);
-					user = entity;
-					//login = true;
-
+					registerNewUser(studentnr);
 					saveUserInSession(httpSession);
 					// GO TO REGISTER PAGE
 					return "register";
 				}
 				else 
 				{
-					foundUser = userRepository.findUserByStudentnr(studentnr);
-					//name = foundUser.getName();
-					//login = true;
-					user = foundUser;
+					loginExistingUser(studentnr);
 					saveUserInSession(httpSession);
+					// GO TO INDEX PAGE
 					return "index";
 				}
 				
 			} catch (HibernateException | NullPointerException e){ //POSSIBLY CLEAN UP LATER
 				// GO TO REGISTER PAGE
-				user = new User();
-				user.setStudentnr(studentnr);
-
-				User entity = new User();
+				registerNewUser(studentnr);
 				saveUserInSession(httpSession);
 				return "register";
 			}
 		}
 
-
+		// IF URL IS INVALID
 		return "index";
 	}
 
+	public static User registerNewUser(String studentnr)
+	{
+		User entity = new User();
+		entity.setEmail(String.format("%s@student.dtu.dk",studentnr));
+		entity.setStudentnr(studentnr);
+		//entity.addRole(roleRepository.findAll().iterator().next());
+		userRepository.save(entity);
+		return entity;
+	}
+
+	public static User loginExistingUser(String studentnr)
+	{
+		User foundUser = userRepository.findUserByStudentnr(studentnr);
+		user = foundUser;
+		return foundUser;
+	}
 
 	public static void saveUserInSession(HttpSession httpSession) 
 	{
