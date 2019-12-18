@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.helpers.Coordinates;
 
-//@Author s192671
+//@Author s192671,s191218
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProcessedSensorData {
 	@JsonIgnore
@@ -85,6 +85,8 @@ public class ProcessedSensorData {
 	}
 
 	public void addProperty(String type, String unit, double value) {
+		if(unit.equals("int")) unit = "";
+		//unit = unit+'\n';
 		properties.addProperty(type, unit, value);
 	}
 
@@ -203,7 +205,7 @@ public class ProcessedSensorData {
 		}
 
 		public void addProperty(String type, String unit, double value) {
-			zoneProperties.add(new SensorValue(type, unit, value));
+			properties.addProperty(type, unit, value);
 		}
 
 		public void setzLevel(short zLevel) {

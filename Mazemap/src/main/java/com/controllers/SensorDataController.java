@@ -60,19 +60,4 @@ public class SensorDataController {
   public InitialSensorData[] getBaseData2() {
     return SensorDataHelper.getSensorData();
   }
-
-  @RequestMapping(value = "/peopleCounter", method = RequestMethod.GET)
-  public String getPeopleCounter(@RequestParam(value = "studnum", required = false, defaultValue = "") String name) {
-    ArrayList<Installation> installations = new ArrayList<Installation>();
-    HttpHeaders headers = new HttpHeaders();
-    headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-    headers.add("x-client-id", "DTUAPI");
-    headers.add("x-api-key", "3593e5b65f4ad590f859a876f976ba18");
-    Object uriVariables = null;
-    HttpEntity<ArrayList<Installation>> entity = new HttpEntity<ArrayList<Installation>>(installations, headers);
-    ResponseEntity<? extends ArrayList> response = restTemplate.exchange(
-        "https://eds.modcam.io/v1/peoplecounter/installations", HttpMethod.GET, entity, installations.getClass(),
-        uriVariables);
-    return response.getBody().toString();
-  }
 }
