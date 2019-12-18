@@ -63,15 +63,6 @@
 			
 			<section id="map">
 			
-				<div class="inner column">
-					<h2> Upcoming Events: </h2>
-					<ul>
-					<li>
-					Concert happening on <b> 20 Sept 2019 18:00</b> 
-					at <b> Sports Hall </b>
-					</li>
-					</ul>
-				</div>
 				<div class="resp-container">
 					<iframe class="resp-iframe" data-src="app.html" src="mazemap.html">
 					</iframe>

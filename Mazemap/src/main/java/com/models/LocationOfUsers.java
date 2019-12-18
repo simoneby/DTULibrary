@@ -65,6 +65,16 @@ public class LocationOfUsers {
         return this.user;
     }
 
-
+    public LocationOfUsers(User user, double coordinateX, double coordinateY, String locationMessage) {
+        this.user = user;
+        this.coordinateX = coordinateX;
+        this.coordinateY = coordinateY;
+        this.locationMessage = locationMessage;
+    }
+    public LocationOfUsers() {
+    }
+    // public Integer getUser(Integer user_id2){
+    //     return user_id2;
+    // }
 
 }
