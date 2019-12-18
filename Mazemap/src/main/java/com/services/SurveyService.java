@@ -54,33 +54,7 @@ public class SurveyService {
 
     }
 
-    public String testShit(User user)
-    {
-        if(userRepository== null)
-        {
-            return "This is not getting injected";
-        }
-        if(surveyRepository== null)
-        {
-            return "This is not getting injected";
-        }
 
-        if(surveyAnswerRepository== null)
-        {
-            return "This is not getting injected";
-        }
-        if(questionRepository== null)
-        {
-            return "This is not getting injected";
-        }
-        if(questionAnswerRepository== null)
-        {
-            return "This is not getting injected";
-        }
-
-        return "ok";
-
-    }
 
     public Set<Survey> activeSurvey(){
         java.util.Date current = new java.util.Date();
