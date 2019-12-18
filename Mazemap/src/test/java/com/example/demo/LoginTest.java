@@ -177,7 +177,7 @@ public class LoginTest
 				userRepository.deleteAll(users);
 			}	
 		}
-		List<User> users = userRepository.findUsersByEamil("abcd@dtu.dk");
+		List<User> users = userRepository.findUsersByEmail("abcd@dtu.dk");
 		if(users != null & users.size() > 0)
 		{
 			userRepository.deleteAll(users);
