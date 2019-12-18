@@ -56,13 +56,15 @@ public class SurveyController {
     // TODO: get/filter survey by date (to display only current surveys)
 
     @GetMapping(value = "/active")
-    public @ResponseBody Set<Survey> activeSurvey() {
+    public @ResponseBody Set<Survey> activeSurvey(@SessionAttribute("user") User user) {
         java.util.Date current = new java.util.Date();
         Date today = new Date(current.getTime());
         Set<Survey> all_surveys = surveyRepository.findByIdGreaterThanEqual(1);
         Set<Survey> active_surveys = new HashSet<Survey>();
         for (Survey survey : all_surveys) {
             if (survey.getStartDate().before(today) && survey.getEndDate().after(today)) {
+                if(survey.getCreator().getId() == user.getId())
+                continue;
                 active_surveys.add(survey);
             }
 
