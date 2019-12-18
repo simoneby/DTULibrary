@@ -26,9 +26,9 @@ import com.services.*;
 //run by using cmd mvn -q test
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@org.springframework.transaction.annotation.Transactional
-@TestPropertySource("/application.properties")
-public class FriendListTest {
+
+@TestPropertySource("/testing.properties")
+public class FirstUnitTest {
    static String student_number_format="sxxxxx%s";
    static String student_email_format="sxxxxx%s@student.dtu.dk";
    @Autowired

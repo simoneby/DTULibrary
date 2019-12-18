@@ -32,7 +32,7 @@ import java.sql.Date;
 @org.springframework.transaction.annotation.Transactional
 // @ContextConfiguration(
 // classes = {FilteredUserRepository.class,FriendListService.class})
-@TestPropertySource("/application.properties")
+@TestPropertySource("/testing.properties")
 public class EventTest {
    static String student_number_format="sxxxxx%s";
    static String student_email_format="sxxxxx%s@student.dtu.dk";
