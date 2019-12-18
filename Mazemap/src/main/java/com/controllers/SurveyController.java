@@ -66,43 +66,9 @@ public class SurveyController {
         return surveyRepository.findByCreator(currentUser);
     }
 
-   /* @GetMapping(value = "/current/answer")
-    public @ResponseBody SurveyAnswer currentSurveyAnswer(@RequestParam int survey_id) {
-        return surveyservice.getCurrentSurveyAnswer(survey_id);
-    }*/
-/*
-=======
-        if (userRepository.findUserByStudentnr(currentUser.getStudentnr()) != null) {
-
-            java.util.Date current = new java.util.Date();
-            Date today = new Date(current.getTime());
-            survey.setStartDate(today);
-            survey.setCreator(currentUser);
-            Set<Question> questions = survey.getQuestions();
-            survey.setQuestions(null);
-            surveyRepository.save(survey);
-            for (Question question : questions) {
-                question.setSurvey(survey);
-                questionRepository.save(question);
-            }
-            return ReturnMessageHelper.getReturnMessage("survey saved!");
-        } else {
-            return ReturnMessageHelper.getReturnMessage("You need to log in to create a survey!");
-        }
-    }*/
-
-
     @GetMapping(value = "/current/answer")
     public @ResponseBody SurveyAnswer currentSurveyAnswer(@RequestParam int survey_id) {
-        Survey survey = surveyRepository.findById(survey_id);
-        SurveyAnswer answer = new SurveyAnswer();
-        answer.setSurvey(survey);
-        Set<QuestionAnswer> question_answers = new HashSet<QuestionAnswer>();
-        for (Question question : survey.getQuestions()) {
-            question_answers.add(new QuestionAnswer(question));
-        }
-        answer.setQuestionAnswers(question_answers);
-        return answer;
+        return surveyservice.getCurrentSurveyAnswer(survey_id);
     }
 
 

@@ -41,11 +41,12 @@ public class SurveyService {
             Set<Question> questions = survey.getQuestions();
             survey.setQuestions(null);
             surveyRepository.save(survey);
+
             for (Question question : questions) {
                 question.setSurvey(survey);
                 questionRepository.save(question);
             }
-            return "survey saved!";
+            return "survey was successfully saved!";
         }
         else {
             return "You need to log in to create a survey!";
@@ -120,16 +121,16 @@ public class SurveyService {
         }
     }
 
-    /*public SurveyAnswer getCurrentSurveyAnswer(int survey_id){
+    public SurveyAnswer getCurrentSurveyAnswer(int survey_id){
         Survey survey = surveyRepository.findById(survey_id);
         SurveyAnswer answer = new SurveyAnswer();
         answer.setSurvey(survey);
         Set<QuestionAnswer> question_answers = new HashSet<QuestionAnswer>();
-        for (Question question : survey.getQuestions()) {
+        for (Question question : questionRepository.findBySurvey(survey)) {
             question_answers.add(new QuestionAnswer(question));
         }
         answer.setQuestionAnswers(question_answers);
         return answer;
-    }*/
+    }
 
 }
