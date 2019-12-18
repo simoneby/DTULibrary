@@ -292,7 +292,7 @@ var curLocation = {
             type: 'get',
             async: false,
             url: 'https://se2-webapp05.compute.dtu.dk:8443/mazemap' + '/friends/all'
-            // url: 'http://localhost:8080/friends/all'
+            // url: 'http://localhost:8443/friends/all'
 
 
         });
