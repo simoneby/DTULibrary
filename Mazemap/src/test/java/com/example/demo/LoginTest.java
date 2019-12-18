@@ -43,12 +43,15 @@ public class LoginTest
 	@Autowired
 	FilteredUserRepository userRepository;
 
+	@Autowired
+	LoginService loginService;
+
 
 	//this method is executed before every test case
    	//use it to create any data you might need / initialize properties for the test
 	@Before
 	public void initializeTest() {
-		deleteCreatedUsers();
+		deleteCreatedUsers(10);
 		HashMap<Integer,User> createdUsers = new HashMap<Integer,User>();
 		for(int i=1;i<7;i++)
 		{
@@ -78,7 +81,7 @@ public class LoginTest
    	//use this to cleanup / remove any data you have created in the before method or in the tests
 	@After
 	public void cleanupTest() {
-		deleteCreatedUsers();
+		deleteCreatedUsers(10);
 	}
 
 
@@ -91,37 +94,64 @@ public class LoginTest
 		
 		RedirectWrapper result = null;
 		try {
-			result = LoginService.redirectService(studentNr);
+			result = loginService.redirectService(studentNr);
 		} catch (IOException e)
 		{
-			Assert.fail();
+			Assert.fail("IOException at redirectService call");
 		}
 
 		Assert.assertFalse(result.getExisted());
 
 		User foundUser = userRepository.findUserByStudentnr(studentNr);
 
-		Assert.assertNotNull(foundUser);
+		Assert.assertNotNull("Cannot find user in userRepository",foundUser);
 
 		Assert.assertEquals(user.getStudentnr(),foundUser.getStudentnr());
 		Assert.assertEquals(user.getEmail(),foundUser.getEmail());
-
-
 	}
 
-	private void deleteCreatedUsers()
+	@Test
+	public void testExistingUser() 
 	{
-		for(int i=1;i<7;i++)
+		String studentNr = String.format(student_number_format,1);
+		String email = String.format(student_email_format,1);
+		User user = new User("Name"+1,studentNr,email);
+		
+		RedirectWrapper result = null;
+		try {
+			result = loginService.redirectService(studentNr);
+		} catch (IOException e)
+		{
+			Assert.fail("IOException at redirectService call");
+		}
+
+		Assert.assertTrue(result.getExisted());
+
+		User foundUser = userRepository.findUserByStudentnr(studentNr);
+
+		Assert.assertNotNull("Cannot find user in userRepository", foundUser);
+
+		Assert.assertEquals(user.getStudentnr(),foundUser.getStudentnr());
+		Assert.assertEquals(user.getEmail(),foundUser.getEmail());
+	}
+
+	private void deleteCreatedUsers(int j)
+	{
+		for(int i=1;i<j;i++)
 		{
 			List<User> users = userRepository.findUsersByEmail(String.format(student_email_format, i));
 			for (User user : users) {
 				user.removeAllFriends();
 			}
 		}
-		for(int i=1;i<7;i++)
+		for(int i=1;i<j;i++)
 		{
 			List<User> users = userRepository.findUsersByEmail(String.format(student_email_format, i));
-			userRepository.deleteAll(users);
+			if(users != null & users.size() > 0)
+			{
+				userRepository.deleteAll(users);
+			}
+			
 		}
 	}
 

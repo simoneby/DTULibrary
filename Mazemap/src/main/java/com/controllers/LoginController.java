@@ -45,6 +45,8 @@ public class LoginController {
 	private FilteredUserRepository userRepository;
 	@Autowired
 	private RoleRepository roleRepository;
+	@Autowired
+	private LoginService loginService;
 	private User user;
 
 	@RequestMapping(value="/login",method=RequestMethod.GET)
@@ -74,7 +76,7 @@ public class LoginController {
 			String encoding = con.getContentEncoding();  // ** WRONG: should use "con.getContentType()" instead but it returns something like "text/html; charset=UTF-8" so this value must be parsed to extract the actual encoding
 			studentnr = IOUtils.toString(in, "UTF-8").replaceAll("\\s","").replaceAll("\\<.*?\\>", "");
 			
-			RedirectWrapper result = LoginService.redirectService(studentnr);
+			RedirectWrapper result = loginService.redirectService(studentnr);
 
 			user = result.getUser();
 			saveUserInSession(httpSession);
