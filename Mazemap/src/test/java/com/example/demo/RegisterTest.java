@@ -36,7 +36,7 @@ import java.io.IOException;
 // @ContextConfiguration(
 // classes = {FilteredUserRepository.class,FriendListService.class})
 @TestPropertySource("/testing.properties")
-public class LoginTest 
+public class RegisterTest 
 {
 	static String student_number_format="sxxxxx%s";
 	static String student_email_format="sxxxxx%s@student.dtu.dk";
@@ -44,8 +44,7 @@ public class LoginTest
 	FilteredUserRepository userRepository;
 
 	@Autowired
-	LoginService loginService;
-
+	RegisterService registerService;
 
 	//this method is executed before every test case
    	//use it to create any data you might need / initialize properties for the test
@@ -84,80 +83,12 @@ public class LoginTest
 		deleteCreatedUsers(10);
 	}
 
-
 	@Test
-	public void testRegisterUser() 
-	{
-		String studentNr = String.format(student_number_format,9);
-		String email = String.format(student_email_format,9);
-		User user = new User("Name"+9,studentNr,email);
-		
-		RedirectWrapper result = null;
-		try {
-			result = loginService.redirectService(studentNr);
-		} catch (IOException e)
-		{
-			Assert.fail("IOException at redirectService call");
-		}
-
-		Assert.assertFalse(result.getExisted());
-
-		User foundUser = userRepository.findUserByStudentnr(studentNr);
-
-		Assert.assertNotNull("Cannot find user in userRepository",foundUser);
-
-		Assert.assertEquals(user.getStudentnr(),foundUser.getStudentnr());
-		Assert.assertEquals(user.getEmail(),foundUser.getEmail());
-	}
-
-	@Test
-	public void testRegisterUserNonStudent() 
-	{
-		String studentNr = "abcd";
-		String email = "abcd@dtu.dk";
-		User user = new User("abcd",studentNr,email);
-		
-		RedirectWrapper result = null;
-		try {
-			result = loginService.redirectService(studentNr);
-		} catch (IOException e)
-		{
-			Assert.fail("IOException at redirectService call");
-		}
-
-		Assert.assertFalse(result.getExisted());
-
-		User foundUser = userRepository.findUserByStudentnr(studentNr);
-
-		Assert.assertNotNull("Cannot find user in userRepository",foundUser);
-
-		Assert.assertEquals(user.getStudentnr(),foundUser.getStudentnr());
-		Assert.assertEquals(user.getEmail(),foundUser.getEmail());
-	}
-
-	@Test
-	public void testExistingUser() 
-	{
+	public void setNameTest() {
 		String studentNr = String.format(student_number_format,1);
-		String email = String.format(student_email_format,1);
-		User user = new User("Name"+1,studentNr,email);
-		
-		RedirectWrapper result = null;
-		try {
-			result = loginService.redirectService(studentNr);
-		} catch (IOException e)
-		{
-			Assert.fail("IOException at redirectService call");
-		}
-
-		Assert.assertTrue(result.getExisted());
-
 		User foundUser = userRepository.findUserByStudentnr(studentNr);
-
-		Assert.assertNotNull("Cannot find user in userRepository", foundUser);
-
-		Assert.assertEquals(user.getStudentnr(),foundUser.getStudentnr());
-		Assert.assertEquals(user.getEmail(),foundUser.getEmail());
+		registerService.setName(foundUser,"NewName");
+		Assert.assertEquals(foundUser.getName(), "NewName");
 	}
 
 	private void deleteCreatedUsers(int j)
