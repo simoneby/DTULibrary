@@ -4,6 +4,7 @@ package com.helpers;
 
 public class Coordinates {
     private static double[][][] floors = {
+			
 			//     right up                       right down             left down                      left up
 			{ { 55.786858, 12.523722 }, { 55.786785, 12.523671 }, { 55.786794, 12.523634 }, { 55.786865, 12.523676 } },//0
             { { 55.786777, 12.523675 }, { 55.786699, 12.523640 }, { 55.786735, 12.523483 }, { 55.786807, 12.523493 } },//1
