@@ -1,5 +1,5 @@
 package com.helpers;
-
+//@author Wendy&Laura
 public class Coordinates {
     private static double[][][] floors = {
 			//     right up                       right down             left down                      left up

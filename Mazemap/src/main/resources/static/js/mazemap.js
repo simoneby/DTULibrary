@@ -236,7 +236,7 @@
 	});
 	}
 	
-	// Wendy Dec.6th
+	//@author Wendy Dec.6th
 	var zonePolygons;
 	function redrawPolygons() {
 		var zLevel = map.getZLevel();

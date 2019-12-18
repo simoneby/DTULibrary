@@ -1,4 +1,5 @@
-
+/*
+//@author Wendy
 package com.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,3 +74,4 @@ public class SensorDataService
 	}
 
 }
+*/

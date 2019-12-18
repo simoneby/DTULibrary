@@ -1,3 +1,4 @@
+//@author Wendy&Laura
 package com.models;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
