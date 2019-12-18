@@ -37,7 +37,7 @@ import com.helpers.*;
 @org.springframework.transaction.annotation.Transactional
 // @ContextConfiguration(
 // classes = {FilteredUserRepository.class,FriendListService.class})
-@TestPropertySource("/application.properties")
+@TestPropertySource("/testing.properties")
 public class SensorUnitTest 
 {
    @Autowired
