@@ -34,6 +34,7 @@ import java.net.*;
 import java.util.Scanner;
 import java.io.IOException;
 import org.springframework.*;
+import com.helpers.RedirectWrapper;
 
 import org.springframework.web.servlet.view.RedirectView;
 // @Author: s191772, s154666
@@ -60,12 +61,45 @@ public class LoginController {
 
 	// @author s154666
 	@GetMapping(value="/redirect")
-	public String redirect(@RequestParam("ticket") String ticket, HttpSession httpSession,Model model, HttpServletRequest request) throws MalformedURLException, IOException
+	public String redirect(@RequestParam("ticket") String ticket, HttpSession httpSession,Model model, HttpServletRequest request) 
+	throws MalformedURLException, IOException
 	{
-		return LoginService.redirectService(ticket,httpSession,model,request);
+		String studentnr = "none";
+		String u = "https://auth.dtu.dk/dtu/servicevalidate?service=https%3A%2F%2Fse2-webapp05%2Ecompute%2Edtu%2Edk%3A8443%2Fmazemap%2Fredirect&ticket=" + ticket;
+		if (isUrlValid(u))
+		{
+			URL url = new URL(u);
+			URLConnection con = url.openConnection();
+			InputStream in = con.getInputStream();
+			String encoding = con.getContentEncoding();  // ** WRONG: should use "con.getContentType()" instead but it returns something like "text/html; charset=UTF-8" so this value must be parsed to extract the actual encoding
+			studentnr = IOUtils.toString(in, "UTF-8").replaceAll("\\s","").replaceAll("\\<.*?\\>", "");
+			
+			RedirectWrapper result = LoginService.redirectService(studentnr);
+
+			user = result.getUser();
+			saveUserInSession(httpSession);
+			if (result.getExisted())
+			{
+				return "index";
+			}
+			else
+			{
+				return "register";
+			}
+		}
+		else
+		{
+			return "index";
+		}
 	}
 
 
+	public void saveUserInSession(HttpSession httpSession) 
+	{
+		if(httpSession.getAttribute("user")!=null)
+			httpSession.removeAttribute("user");
+		httpSession.setAttribute("user", user);
+	}
 
 	public static boolean isUrlValid(String url) {
 		try {
@@ -77,13 +111,6 @@ public class LoginController {
 		} catch (URISyntaxException e) {
 			return false;
 		}
-	}
-
-	public void saveUserInSession(HttpSession httpSession) 
-	{
-		if(httpSession.getAttribute("user")!=null)
-			httpSession.removeAttribute("user");
-		httpSession.setAttribute("user", this.user);
 	}
 
 	@GetMapping(path = "/loginsuccesful")
