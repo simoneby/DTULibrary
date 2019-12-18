@@ -2,7 +2,7 @@
 <html lang="en">
 	<%@ page session="true" contentType="text/html;charset=UTF-8" language="java" %>
 	<%@page import="com.models.User"%>
-	<%@page import="com.Helpers.ServerUrl"%>
+	<%@page import="com.helpers.ServerUrl"%>
 <head>
 	<meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="./css/main.css">
@@ -23,6 +23,7 @@
 	<script src="./kendo-ui-core/js/kendo.tabstrip.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
 	<script src="./custom_scripts/friendlist_script.js"></script>
+	<script src="https://kit.fontawesome.com/7510661d31.js" crossorigin="anonymous"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>DTU CampusNet</title>
 </head>
@@ -36,8 +37,9 @@
 		<nav id="nav">
 			<ul>
 				<li><a href="index" class="active"><span class="icon fa-home"></span></a></li>
-				<li><a href=""><span class="icon fas fa-map"></span></a></li>
 				<li><a href="#"><span class="icon fas fa-users"></span></a></li>
+				<li><a href="survey_main"><i class="fas fa-poll-h"></i></a></li>
+				<li><a href="events"><i class="fa fa-calendar"></i></a></li>
 				<li><a href="login"><span class="icon fas fa-sign-in"></span></a></li>
 				<li><a href="logout"><span class="icon fas fa-sign-out"></span></a></li>
 			</ul>

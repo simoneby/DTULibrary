@@ -96,36 +96,26 @@ public class SurveyService {
 
     }
 
-    public String saveAnswer(User currentUser,SurveyAnswer surveyAnswer,Survey currentSurvey) {
+    public String saveAnswer(User currentUser,SurveyAnswer surveyAnswer) {
         if (userRepository.findUserByStudentnr(currentUser.getStudentnr()) != null) {
 
-            java.util.Date current = new java.util.Date();
-            Date today = new Date(current.getTime());
+            Date today = new Date(0);
             surveyAnswer.setDate(today);
             surveyAnswer.setUser(currentUser);
-            surveyAnswer.setSurvey(currentSurvey);
+            // surveyAnswerRepository.save(surveyAnswer);
 
-            Set<Question> questions = currentSurvey.getQuestions();
+            // Set<Question> questions = currentSurvey.getQuestions();
             Set<QuestionAnswer> questionAnswerSet = surveyAnswer.getQuestionAnswers();
-
-            for (Question q : questions)
-            {
-                for (QuestionAnswer qa : questionAnswerSet)
-                {
-                    if (q.getNumber() == qa.getNumber())
-                    {
-                        qa.setQuestion(q);
-                        qa.setQuestionType(q.getType());
-                        questionAnswerRepository.save(qa);
-                        break;
-                    }
-                }
-            }
+            surveyAnswer.setQuestionAnswers(null);
 
             surveyAnswerRepository.save(surveyAnswer);
-            return "survey answers saved!";
-        }
-        else {
+            for (QuestionAnswer qa : questionAnswerSet) {
+                qa.setQuestionType(qa.getQuestion().getType());
+                qa.setSurveyAnswer(surveyAnswer);
+                questionAnswerRepository.save(qa);
+            }
+            return "Thank you for answering the survey!";
+        } else {
             return "You need to log in to answer a survey!";
         }
     }

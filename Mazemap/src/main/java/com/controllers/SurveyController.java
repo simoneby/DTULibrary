@@ -33,14 +33,12 @@ public class SurveyController {
     @Autowired
     private QuestionAnswerRepository questionAnswerRepository;
 
-
     @Autowired
     private SurveyService surveyservice;
 
     @PostMapping(value = "/save", headers = "Accept='application/json'")
     public String save(@SessionAttribute("user") User currentUser, @RequestBody Survey survey) {
         return ReturnMessageHelper.getReturnMessage(surveyservice.save(currentUser, survey));
-
     }
 
     @GetMapping(value = "/active")
@@ -57,8 +55,8 @@ public class SurveyController {
     }
 
     @PostMapping(value = "/answer/save", headers = "Accept='application/json'")
-    public String saveAnswer(@SessionAttribute("user") User currentUser, @RequestBody SurveyAnswer surveyAnswer, @RequestBody Survey currentSurvey) {
-        return ReturnMessageHelper.getReturnMessage(surveyservice.saveAnswer(currentUser, surveyAnswer, currentSurvey));
+    public String saveAnswer(@SessionAttribute("user") User currentUser, @RequestBody SurveyAnswer surveyAnswer) {
+        return ReturnMessageHelper.getReturnMessage(surveyservice.saveAnswer(currentUser, surveyAnswer));
 
     }
 
@@ -72,6 +70,40 @@ public class SurveyController {
     public @ResponseBody SurveyAnswer currentSurveyAnswer(@RequestParam int survey_id) {
         return surveyservice.getCurrentSurveyAnswer(survey_id);
     }*/
+/*
+=======
+        if (userRepository.findUserByStudentnr(currentUser.getStudentnr()) != null) {
+
+            java.util.Date current = new java.util.Date();
+            Date today = new Date(current.getTime());
+            survey.setStartDate(today);
+            survey.setCreator(currentUser);
+            Set<Question> questions = survey.getQuestions();
+            survey.setQuestions(null);
+            surveyRepository.save(survey);
+            for (Question question : questions) {
+                question.setSurvey(survey);
+                questionRepository.save(question);
+            }
+            return ReturnMessageHelper.getReturnMessage("survey saved!");
+        } else {
+            return ReturnMessageHelper.getReturnMessage("You need to log in to create a survey!");
+        }
+    }*/
+
+
+    @GetMapping(value = "/current/answer")
+    public @ResponseBody SurveyAnswer currentSurveyAnswer(@RequestParam int survey_id) {
+        Survey survey = surveyRepository.findById(survey_id);
+        SurveyAnswer answer = new SurveyAnswer();
+        answer.setSurvey(survey);
+        Set<QuestionAnswer> question_answers = new HashSet<QuestionAnswer>();
+        for (Question question : survey.getQuestions()) {
+            question_answers.add(new QuestionAnswer(question));
+        }
+        answer.setQuestionAnswers(question_answers);
+        return answer;
+    }
 
 
     @GetMapping(value = "/question_answers")
