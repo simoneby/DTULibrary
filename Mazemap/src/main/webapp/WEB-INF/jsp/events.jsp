@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- s183051 -->
+<%@ page session="true" contentType="text/html;charset=UTF-8" language="java" %>
+<%@page import="com.helpers.ServerUrl"%>
 
 <head>
 	<meta charset="utf-8" />
@@ -19,7 +22,7 @@
 	<script src="./kendo-ui-core/js/kendo.pager.min.js"></script>
 	<script src="./kendo-ui-core/js/kendo.data.min.js"></script>
 	<script src="./kendo-ui-core/js/kendo.tabstrip.min.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
 	<script src="./custom_scripts/eventlist_script.js"></script>
 	<script src="https://kit.fontawesome.com/7510661d31.js" crossorigin="anonymous"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,6 +30,7 @@
 </head>
 
 <body>
+<input type="hidden" id="baseUrl" name="baseUrl" value='<%= ServerUrl.baseUrl %>'>
 	<div class="page-wrap">
 
 		<!-- Nav -->
@@ -72,32 +76,32 @@
 									<div id="pagerEvents" class="k-pager-wrap"></div>
 								</div>
 
-								<script type="text/x-kendo-template" id="templateEvents">
+								<script type="text/x-kendo-template" id="template1">
 									<div class="k-widget">
 													<tr>
 
-															<td colspan="4">
-																<h3>#:name#</h3>
-															</td> 
+															<th colspan="4">
+																<h3<p>>#:name#</h3></p>
+															</th> 
 													</tr>
 													<tr>
 															<td colspan="2"><p>#:description#</p>
 													</td>															
 													</tr>
 													<tr>
-															<td colspan="1"><p>#:date#</p>
+															<td colspan="1">On #:date#
 															</td>															
-															<td colspan="1"><p>#:time#</p>
+															<td colspan="1">at #:time#<p></p>
 															</td>
 													
 														<td colspan="1" class="edit-buttons">
-															<a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit-tools"></span></a><p>Edit event</p>
-															<a class="k-button k-delete-button" href="\\#"><span class="k-icon k-i-close"></span></a><p>Delete event</p>
+															<a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit-tools"></span></a>Edit event
+															<a class="k-button k-delete-button" href="\\#"><span class="k-icon k-i-close"></span></a>Delete event
 														</td>
 													</tr>
 									</div>
 									</script>
-									<script type="text/x-kendo-tmpl" id="editTemplate">
+									<script type="text/x-kendo-tmpl" id="template2">
         								<div class="event-view k-widget">
 								            <dl>
                 								<dt>Name</dt>

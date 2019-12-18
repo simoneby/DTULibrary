@@ -1,5 +1,15 @@
+//@Author s183051
+var baseUrl;
+
 $(document).ready(function () {
     var events = [];
+    $("#tabstrip").kendoTabStrip({
+        animation:  {
+            open: {
+                effects: "fadeIn"
+            }
+        }
+    });
     require.config({
         baseUrl: "./kendo-ui-core/js/", // the path where the kendo scripts are present
         paths: {
@@ -7,10 +17,11 @@ $(document).ready(function () {
         }
     });
     loadEventlist(events);
+    baseUrl = $("#baseUrl").val();
 });
 
 function loadEventlist(events) {
-	 require(["jquery", "kendo.pager.min", "kendo.listview.min"],
+	require(["jquery", "kendo.pager.min", "kendo.listview.min", "kendo.data.min", "kendo.dropdownlist.min", "kendo.slider.min"],
 		      function ($, kendo) {
 		 			events = new kendo.data.DataSource({
 
@@ -32,17 +43,17 @@ function loadEventlist(events) {
 	                },
 		 				transport: {
 		 					read: {
-                        url: "http://localhost:8080/events/eventdata",
+                        url: baseUrl + "/events/userfilteredeventdata",
                         type: "get",
                         dataType: "json"
                     },
                     destroy: {
-                        url: "http://localhost:8080/events/deleteevent",
+                        url: baseUrl + "/events/deleteevent",
                         type: "delete",
                         dataType: "json",
                     },
                     update: {
-                    	url: "http://localhost:8080/events/updateevent",
+                    	url: baseUrl + "/events/updateevent",
                     	type: "post",
                     	dataType:"json",
                     	contentType:"application/json",
@@ -53,7 +64,17 @@ function loadEventlist(events) {
                             return {id : options.id};
                         }
                         if (operation == "update" && options) {
-                        	return JSON.stringify(options);
+                        	var optionsCorrect = {};
+                        	optionsCorrect["description"] = options.description;
+                        	optionsCorrect["name"] = options.name;
+                        	optionsCorrect["date"] = options.date;
+                        	optionsCorrect["time"] = options.time;
+                        	optionsCorrect["lng"] = options.lng;
+                        	optionsCorrect["lat"] = options.lat;
+                        	optionsCorrect["id"] = options.id;
+                        	
+                        	return JSON.stringify(optionsCorrect);
+                        	
                         }
                     }
                 }
@@ -67,8 +88,8 @@ function loadEventlist(events) {
 
                 $("#listViewEvents").kendoListView({
                     dataSource: events,
-                    template: kendo.template($("#templateEvents").html()),
-                    editTemplate: kendo.template($("#editTemplate").html())
+                    template: kendo.template($("#template1").html()),
+                    editTemplate: kendo.template($("#template2").html())
                 });
             });
 	 });

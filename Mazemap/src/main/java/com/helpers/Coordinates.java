@@ -1,5 +1,6 @@
 package com.helpers;
 
+//@Author s192671, s191772
 public class Coordinates {
     private static double[][][] floor_0_1 = {
             { { 55.786713, 12.523675 }, { 55.786774, 12.523707 }, { 55.786742, 12.523485 }, { 55.786804, 12.523525 } },
@@ -22,7 +23,6 @@ public class Coordinates {
             int index = zone > 0 ? zone-1 : 9;
             double[][] finalCoord = new double[5][2];
             for (int i =0;i<floor_0_1[index].length;i++) {
-                //finalCoord[i] = floor_0_1[index][i];
                 finalCoord[i][0]=floor_0_1[index][i][1];
                 finalCoord[i][1]=floor_0_1[index][i][0];
             }

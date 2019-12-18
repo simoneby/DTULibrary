@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.sql.Date;
 
-// @Author: s191772 and s154666
+// @Author: s191772, s154666
 @RequestMapping("/survey")
 @RestController
 public class SurveyController {
@@ -57,7 +57,6 @@ public class SurveyController {
     @PostMapping(value = "/answer/save", headers = "Accept='application/json'")
     public String saveAnswer(@SessionAttribute("user") User currentUser, @RequestBody SurveyAnswer surveyAnswer) {
         return ReturnMessageHelper.getReturnMessage(surveyservice.saveAnswer(currentUser, surveyAnswer));
-
     }
 
     @GetMapping(value = "/my_surveys")

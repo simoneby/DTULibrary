@@ -23,7 +23,7 @@
 	<script src="./kendo-ui-core/js/kendo.pager.min.js"></script>
 	<script src="./kendo-ui-core/js/kendo.data.min.js"></script>
 	<script src="./kendo-ui-core/js/kendo.tabstrip.min.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js" crossorigin="anonymous"></script>
 	<script src="./custom_scripts/survey_script.js"></script>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -31,19 +31,25 @@
 </head>
 
 <body>
+	<!-- @Author s192671 -->
 	<input type="hidden" id="baseUrl" name="baseUrl" value = '<%= ServerUrl.baseUrl %>' > 
 	<div class="page-wrap">
 
 		<!-- Nav -->
 		<nav id="nav">
 			<ul>
-				<li><a href="index" class="active"><span class="icon fa-home"></span></a></li>
-				<li><a href=""><span class="icon fas fa-map"></span></a></li>
+				<li><a href="index"><span class="icon fa-home"></span></a></li>
+				<% if(session.getAttribute("user")!=null) {%>
 				<li><a href="friendlist"><span class="icon fas fa-users"></span></a></li>
-				<li><a href="save_survey"><i class="fas fa-poll-h"></i></a></li>
+				<li><a href="survey_main"><i class="fas fa-poll-h"></i></a></li>
 				<li><a href="events"><i class="fa fa-calendar"></i></a></li>
+				<% } else { %>
+
 				<li><a href="login"><span class="icon fas fa-sign-in"></span></a></li>
+				<%}%>
+				<% if(session.getAttribute("user")!=null) {%>
 				<li><a href="logout"><span class="icon fas fa-sign-out"></span></a></li>
+				<% } %>
 			</ul>
 		</nav>
 
@@ -65,7 +71,6 @@
 				<div id="friends_tab" class="column">
 					<div class="demo-section k-content">
 						<div id="tabstrip">
-							<div id="tab3">
 								<h2> Create new survey</h2>
 								<form id="survey_form">
 									<label for="name"> Enter survey name: </label>
@@ -80,10 +85,10 @@
 										<div id="questionList">
 										</div>
 									</div>
-									<ul class="actions">
-										<li><input value="save survey" class="button" type="submit"></li>
-									</ul>
+									<input id="save_survey" value="Save survey" class="button" type="submit">
 								</form>
+								<div id = "result">
+									</div>
 								<script type="text/x-kendo-tmpl" id="viewTemplate">
 									<div class=" k-widget">
 										<p> 
