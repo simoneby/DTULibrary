@@ -126,14 +126,14 @@
                                     <dt> 
 									</dl>
 								<div class="range_edit">
-									<p>Start<input type="text" data-bind="value:start" data-role="numerictextbox" data-type="number" name="start"  min="1" />
+									<p>Start<input type="text" data-bind="value:start" data-role="numerictextbox" data-type="number" format="0" decimals="0" restrictDecimals = "true" name="start"  min="1" />
 									
 									 label: 
 																	
 									<input type="text" class="k-textbox" data-bind="value:start_label" name="start_label"  />
 								</p>	
 								<p>
-										 End <input type="text" data-bind="value:end" data-role="numerictextbox" data-type="number" name="end" min="1" /> </dt>
+										 End <input type="text" data-bind="value:end" data-role="numerictextbox" data-type="number" format="0" decimals="0" restrictDecimals = "true" name="end" min="1" /> </dt>
 												label: 
 										
 										<input type="text" class="k-textbox" data-bind="value:end_label" name="end_label"  />

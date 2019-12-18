@@ -42,8 +42,15 @@ public class SurveyController {
     }
 
     @GetMapping(value = "/active")
-    public @ResponseBody Set<Survey> activeSurvey() {
-        return surveyservice.activeSurvey();
+    public @ResponseBody Set<Survey> activeSurvey(@SessionAttribute("user") User currentUser) {
+        Set<Survey> surveys =  surveyservice.activeSurvey();
+        Set<Survey> toRemove = new HashSet<Survey>();
+        for (Survey survey : surveys) {
+            if(survey.getCreator().getId()== currentUser.getId())
+            toRemove.add(survey);
+        }
+        surveys.removeAll(toRemove);
+        return surveys;
 
     }
 
