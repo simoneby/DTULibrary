@@ -8,6 +8,7 @@
     <title>DTU CampusNet</title>
 </head>
 <body>
+	<!-- @Author s154666 -->
 <h1>Hello !</h1>
 <p>SignUp Page <span th:text="${appName}">Our App</span></p>
 </body>

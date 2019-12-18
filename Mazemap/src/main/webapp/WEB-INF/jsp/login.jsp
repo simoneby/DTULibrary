@@ -13,7 +13,7 @@
 	<script src="./js/skel.min.js"></script>
 	<script src="./js/util.js"></script>
 	<script src="./js/main.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js" crossorigin="anonymous"></script>
 	<script src="./kendo-ui-core/js/kendo.core.min.js"></script>
 	<script src="./kendo-ui-core/js/kendo.data.min.js"></script>
 	<script src="./kendo-ui-core/js/kendo.dropdownlist.min.js"></script>
@@ -23,6 +23,7 @@
     <title>DTU CampusNet</title>
 </head>
 <body>
+	<!-- s192671 -->
 	<div class="page-wrap">
 
 		<!-- Nav -->
@@ -63,11 +64,7 @@
 					<label for="password">Password</label>
 					<input name="password" id="password" type="password" placeholder="Password">
 				</div>
-				<!-- <div class="field half">
-				<h4><label for="user_role">User roles</label></h4>
-				<select id="user_role">
-				</select>
-				</div> -->
+				
 				<ul class="actions">
 					<li><input value="Log in" class="button" type="submit"></li>
 				</ul>
@@ -107,47 +104,7 @@
             }
     </style>
 	<script>
-		// $(document).ready(function () {
-
-		// 	const handleFormSubmit = event => {
-		// 		// Stop the form from submitting since we’re handling that with AJAX.
-		// 		event.preventDefault();
-		// 		submitForm();
-		// 	}
-		// 	function submitForm() {
-		// 		var user = {};
-		// 		$("#sign_in").find("input, textarea, select").each(function () {
-		// 			var inputType = this.tagName.toUpperCase() === "INPUT" && this.type.toUpperCase();
-		// 			if (inputType !== "BUTTON" && inputType !== "SUBMIT") {
-		// 					user[this.name] = $(this).val();
-		// 			}
-		// 		});
-
-		// 		console.log(user);
-		// 		$.ajax({
-		// 			contentType: 'application/json',
-		// 			data: JSON.stringify(user),
-		// 			dataType: 'json',
-		// 			success: function (data, status) {
-		// 				$("#result").text("<p> You've been logged in! </p>");
-		// 			},
-		// 			error: function ( ) {
-		// 				console.log("Device control failed");
-		// 			},
-		// 			processData: false,
-		// 			type: 'POST',
-		// 			url: 'http://localhost:8080/loginNew'
-		// 		});
-		// 		// $.post("http://localhost:8080/signup",
-		// 		// 	{ user : user},
-		// 		// 	function (data, status) {
-		// 		// 		alert("Data: " + data + "\nStatus: " + status);
-		// 		// 	}
-		// 		// 	);
-		// 	};
-		// 	const form = document.getElementById('sign_in');
-		// 	form.addEventListener('submit', handleFormSubmit);
-		// });
+		
     </script>
 </body>
 </html>

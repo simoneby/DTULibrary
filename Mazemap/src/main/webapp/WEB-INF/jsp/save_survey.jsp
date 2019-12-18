@@ -23,7 +23,7 @@
 	<script src="./kendo-ui-core/js/kendo.pager.min.js"></script>
 	<script src="./kendo-ui-core/js/kendo.data.min.js"></script>
 	<script src="./kendo-ui-core/js/kendo.tabstrip.min.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js" crossorigin="anonymous"></script>
 	<script src="./custom_scripts/survey_script.js"></script>
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -31,6 +31,7 @@
 </head>
 
 <body>
+	<!-- @Author s192671 -->
 	<input type="hidden" id="baseUrl" name="baseUrl" value = '<%= ServerUrl.baseUrl %>' > 
 	<div class="page-wrap">
 
@@ -70,7 +71,6 @@
 				<div id="friends_tab" class="column">
 					<div class="demo-section k-content">
 						<div id="tabstrip">
-							<div id="tab3">
 								<h2> Create new survey</h2>
 								<form id="survey_form">
 									<label for="name"> Enter survey name: </label>
@@ -85,10 +85,10 @@
 										<div id="questionList">
 										</div>
 									</div>
-									<ul class="actions">
-										<li><input value="save survey" class="button" type="submit"></li>
-									</ul>
+									<input id="save_survey" value="Save survey" class="button" type="submit">
 								</form>
+								<div id = "result">
+									</div>
 								<script type="text/x-kendo-tmpl" id="viewTemplate">
 									<div class=" k-widget">
 										<p> 
@@ -126,14 +126,14 @@
                                     <dt> 
 									</dl>
 								<div class="range_edit">
-									<p>Start<input type="text" data-bind="value:start" data-role="numerictextbox" data-type="number" name="start"  min="1" />
+									<p>Start<input type="text" data-bind="value:start" data-role="numerictextbox" data-type="number" format="0" decimals="0" restrictDecimals = "true" name="start"  min="1" />
 									
 									 label: 
 																	
 									<input type="text" class="k-textbox" data-bind="value:start_label" name="start_label"  />
 								</p>	
 								<p>
-										 End <input type="text" data-bind="value:end" data-role="numerictextbox" data-type="number" name="end" min="1" /> </dt>
+										 End <input type="text" data-bind="value:end" data-role="numerictextbox" data-type="number" format="0" decimals="0" restrictDecimals = "true" name="end" min="1" /> </dt>
 												label: 
 										
 										<input type="text" class="k-textbox" data-bind="value:end_label" name="end_label"  />

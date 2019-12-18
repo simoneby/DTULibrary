@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.helpers.Coordinates;
 
+//@Author s192671
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProcessedSensorData {
 	@JsonIgnore
