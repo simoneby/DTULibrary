@@ -85,6 +85,8 @@ public class ProcessedSensorData {
 	}
 
 	public void addProperty(String type, String unit, double value) {
+		if(unit.equals("int")) unit = "";
+		//unit = unit+'\n';
 		properties.addProperty(type, unit, value);
 	}
 
@@ -203,9 +205,6 @@ public class ProcessedSensorData {
 		}
 
 		public void addProperty(String type, String unit, double value) {
-			if(unit.equals("int")) unit = "";
-			
-			//unit = unit+'\n';
 			properties.addProperty(type, unit, value);
 		}
 
