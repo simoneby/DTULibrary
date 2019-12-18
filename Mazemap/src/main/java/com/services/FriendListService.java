@@ -3,7 +3,7 @@ package com.services;
 import com.repositories.FilteredUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+import com.repositories.LocationRepository;
 import java.util.HashSet;
 import java.util.Set;
 import com.models.*;
@@ -13,7 +13,8 @@ import com.models.*;
 public class FriendListService {
     @Autowired
     private FilteredUserRepository userRepository;
-
+    @Autowired
+    private LocationRepository locationRepository;
     public Set<User> getAllFriends(String userEmail) {
         if (userEmail == null) {
             try {

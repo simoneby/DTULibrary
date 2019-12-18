@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Iterator;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -23,6 +24,7 @@ import com.SpringBootJspApplication;
 import com.models.*;
 import com.services.*;
 
+//@s191545
 //run by using cmd mvn -q test
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -46,121 +48,95 @@ public class LocationUnitTest {
    //use it to create any data you might need / initialize properties for the test
    @Before
    public void initializeTest() {
-      deleteCreatedUsers();
+      deleteCreatedUsers(); // delete locations and locations
       HashMap<Integer,User> createdUsers = new HashMap<Integer,User>();
-      HashMap<LocationOfUsers> createdLocations = new HashMap<LocationOfUsers>();
+      HashMap<Integer,LocationOfUsers> createdLocations = new HashMap<Integer,LocationOfUsers>();
 
       for(int i=1;i<7;i++)
       {
          String studentNr = String.format(student_number_format,i);
          String email = String.format(student_email_format,i);
          User user = new User("Name"+i,studentNr,email);
-         LocationOfUsers location = new LocationOfUsers(i,i*10,i*10,"message"+i);//id, coordx,coordy,message
-         locationRespository.save(location)
+         LocationOfUsers location = new LocationOfUsers(user,i*10,i*10,"message"+i);//id, coordx,coordy,message
+         locationRepository.save(location);
          userRepository.save(user);
          createdUsers.put(i,user);
-         createdLocations.put(location)
       }
       User friend1 = createdUsers.get(1);
       User friend2 = createdUsers.get(2);
-      User friend3 = createdUsers.get(3);
-      User friend4 = createdUsers.get(4);
+      
       friend1.setFriend(friend2);
       friend2.setFriend(friend1);
-      friend1.setFriend(friend3);
-      friend4.setFriend(friend1);
 
-
-      LocationOfUsers location1 = createdLocations.get(1);
-      LocationOfUsers location2 = createdLocations.get(2);
-
-      friend1.setLocationOfUsers(location1);
-      friend2.setLocationOfUsers(location2);
-
-      
       userRepository.save(friend1);
       userRepository.save(friend2);
-      userRepository.save(friend3);
-      userRepository.save(friend4);
 
-      locationRespository.save(loc)
-
-      // friendListService = new FriendListService();
    }
    //this method is executed after every test method
    //use this to cleanup / remove any data you have created in the before method or in the tests
    @After
    public void cleanupTest() {
       deleteCreatedUsers();
+
    }
 
-   //test case checking that method getAllFriends returns the proper result
-   //results need to be used to check user location
-   @Test
-   public void testGetAllFriends() {
-      //execute the method from the service
-      String userEmail = String.format(student_email_format,1);
-      Set<User> friends = friendListService.getAllFriends(userEmail);
-      //declare asserts (conditions that the result of the method must meet for the tests to pass)
-      Assert.assertNotNull("getAllFriends is null", friends);
-      Assert.assertTrue(!friends.isEmpty());
-   }
-
-
-   //results need to be used to check user location
+   //test case to get all the locations from database
    @Test
    public void testGetAllLocations() {
       //execute the method from the service
       ArrayList<LocationOfUsers> locations = locationService.getAllLocations();
       //declare asserts (conditions that the result of the method must meet for the tests to pass)
       Assert.assertNotNull("getAllLocations is null", locations);
-      Assert.assertTrue(!location.isEmpty());
+      Assert.assertTrue(!locations.isEmpty());
+      for (LocationOfUsers location : locations){
+         Assert.assertNotNull("Location must have a user", location.getUser());
+
+      }
    }
 
-   //test case checking that method getSentFriendRequests returns the proper result
+   //test case checking that all your friends locations
    @Test
    public void testGetAllFriendsLocations() {
       String userEmail = String.format(student_email_format,1);
       Set<User> friends = friendListService.getAllFriends(userEmail);
-      //declare asserts (conditions that the result of the method must meet for the tests to pass)
       Assert.assertNotNull("getAllFriends is null", friends);
-      Assert.assertNotNull("FriendsLocation is null", friends[0].locationOfUsers);
-
-      // String userEmail = String.format(student_email_format,1);
-      // Assert.assertNotNull(friendListService);
-      // Set<User> friends = friendListService.getSentFriendRequests(userEmail);
-      // Assert.assertNotNull("getSentFriendRequests is null", friends);
-      // Assert.assertTrue(!friends.isEmpty());
+      for (User user : friends)
+      {
+         Assert.assertNotNull("Cannot get friends location", locationRepository.findLocationOfUsersByUser(user));
+      }
    }
 
-   //test case checking that method getSentFriendRequests returns the proper result
+   //testing that all add location storing location information into the database
    @Test
    public void testAddLocation() {
-      String userEmail = String.format(student_email_format,1);
-      LocationOfUsers locationTest = new LocationOfUsers(192,50,12,"messageTest");      
-      String didItAdd = locationService.addMessage(userEmail, locationTest)
+      // String userEmail = String.format(student_email_format,1);
+      String studentNr = String.format(student_number_format,5);
+      String email = String.format(student_email_format,5);
+      User user = new User("Name"+5,studentNr,email);
+      LocationOfUsers locationTest = new LocationOfUsers(user,50,12,"messageTest");      
+      String didItAdd = locationService.addMessage(email, locationTest);
       Assert.assertTrue(didItAdd.contains("Your location was saved"));
 
    }
-   @Test
-   public void testBroadcastLocation() {
-      //This test has been modified to test for manually 
-     
+  
+   private void deleteCreatedUsers()
+   {
+      for(int i=1;i<7;i++)
+      {
+         List<User> users = userRepository.findUsersByEmail(String.format(student_email_format, i));
+         for (User user : users) {
+            user.removeAllFriends();
+            LocationOfUsers userLocation = locationRepository.findLocationOfUsersByUser(user);
+            if (userLocation != null){
+               locationRepository.delete(userLocation);
+            }
+         }
+      }
+      for(int i=1;i<8;i++)
+      {
+         List<User> users = userRepository.findUsersByEmail(String.format(student_email_format, i));
+         userRepository.deleteAll(users);
+      }
    }
-
-   // private void deleteCreatedUsers()
-   // {
-   //    for(int i=1;i<7;i++)
-   //    {
-   //       List<User> users = userRepository.findUsersByEmail(String.format(student_email_format, i));
-   //       for (User user : users) {
-   //          user.removeAllFriends();
-   //       }
-   //    }
-   //    for(int i=1;i<7;i++)
-   //    {
-   //       List<User> users = userRepository.findUsersByEmail(String.format(student_email_format, i));
-   //       userRepository.deleteAll(users);
-   //    }
-   // }
+  
 }

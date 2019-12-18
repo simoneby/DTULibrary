@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashSet;
 import java.util.Set;
 import com.models.*;
+import java.util.*;
 
 //@Author s191545
 @Component
@@ -45,12 +46,14 @@ public class LocationService {
                 return "There was an error and location could not be saved";
             }
         }
+        return "not saved";
     }
 
     public ArrayList<LocationOfUsers> getAllLocations() {
         ArrayList<LocationOfUsers> locations = new ArrayList<LocationOfUsers>();
         locationRepository.findAll().forEach(locations::add);
         return locations;
+    }
 
     // public Set<User> getAllFriends(String userEmail) {
     //     if (userEmail == null) {

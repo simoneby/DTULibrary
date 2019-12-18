@@ -30,8 +30,9 @@ public class LocationController {
 
     @RequestMapping(value = "/addMessage", method = RequestMethod.POST)
     public String addMessage(@SessionAttribute("user") User currentUser, @RequestBody LocationOfUsers location) {
-        String returnMessage = locationService.addMessage(currentUser.getEmail(),location)
-        return ReturnMessageHelper.getReturnMessage(returnMessage);
+        String returnMessage = locationService.addMessage(currentUser.getEmail(),location);
+        return returnMessage;
+    }
     //     User cu = userRepository.findUsersByEmail(currentUser.getEmail()).get(0);
 
     //     LocationOfUsers loc = locationRepository.findLocationOfUsersByUser(cu);
@@ -60,10 +61,10 @@ public class LocationController {
     // }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public ArrayList<LocationOfUsers> getAllLocations() {
+    public ArrayList<LocationOfUsers> getAllLocations(){
     //     ArrayList<LocationOfUsers> locations = new ArrayList<LocationOfUsers>();
     //     locationRepository.findAll().forEach(locations::add);
-        return locationservice.getAllLocations();
+        return locationService.getAllLocations();
         
     }
 
