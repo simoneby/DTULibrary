@@ -46,21 +46,5 @@ public class RegisterController {
 			return "index";
 		}
 	}
-
-	@GetMapping(value = "signup_test")
-	public @ResponseBody String signup_test() {
-
-		User testUser = null;
-		String studentnr = "s154666";
-
-		testUser = userRepository.findUserByStudentnr(studentnr);
-
-		testUser.setName("qweqweqwe");
-
-		userRepository.save(testUser);
-
-		return "donee :)) "+testUser.getName();
-
-	}
 }
 

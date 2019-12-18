@@ -80,7 +80,14 @@ public class LoginService
 	public User registerNewUser(String studentnr)
 	{
 		User entity = new User();
-		entity.setEmail(String.format("%s@student.dtu.dk",studentnr));
+		if (studentnr.charAt(0) == 's')
+		{
+			entity.setEmail(String.format("%s@student.dtu.dk",studentnr));
+		}
+		else
+		{
+			entity.setEmail(String.format("%s@dtu.dk",studentnr));
+		}
 		entity.setStudentnr(studentnr);
 		//entity.addRole(roleRepository.findAll().iterator().next());
 		userRepository.save(entity);

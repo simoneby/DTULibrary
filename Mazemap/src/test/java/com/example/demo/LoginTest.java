@@ -111,6 +111,31 @@ public class LoginTest
 	}
 
 	@Test
+	public void testRegisterUserNonStudent() 
+	{
+		String studentNr = "abcd";
+		String email = "abcd@dtu.dk";
+		User user = new User("abcd",studentNr,email);
+		
+		RedirectWrapper result = null;
+		try {
+			result = loginService.redirectService(studentNr);
+		} catch (IOException e)
+		{
+			Assert.fail("IOException at redirectService call");
+		}
+
+		Assert.assertFalse(result.getExisted());
+
+		User foundUser = userRepository.findUserByStudentnr(studentNr);
+
+		Assert.assertNotNull("Cannot find user in userRepository",foundUser);
+
+		Assert.assertEquals(user.getStudentnr(),foundUser.getStudentnr());
+		Assert.assertEquals(user.getEmail(),foundUser.getEmail());
+	}
+
+	@Test
 	public void testExistingUser() 
 	{
 		String studentNr = String.format(student_number_format,1);
