@@ -9,4 +9,5 @@ import java.util.*;
 @Repository
 public interface QuestionAnswerRepository extends CrudRepository<QuestionAnswer,Integer> {
 	Set<QuestionAnswer> findByQuestionId(int question_id);
+	Set<QuestionAnswer> findByIdGreaterThanEqual(int id);
 }
