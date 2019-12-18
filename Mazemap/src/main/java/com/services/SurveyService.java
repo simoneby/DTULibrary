@@ -12,6 +12,7 @@ import com.models.*;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+//@Author: s191772
 @Component
 public class SurveyService {
     @Autowired
@@ -52,6 +53,34 @@ public class SurveyService {
 
     }
 
+    public String testShit(User user)
+    {
+        if(userRepository== null)
+        {
+            return "This is not getting injected";
+        }
+        if(surveyRepository== null)
+        {
+            return "This is not getting injected";
+        }
+
+        if(surveyAnswerRepository== null)
+        {
+            return "This is not getting injected";
+        }
+        if(questionRepository== null)
+        {
+            return "This is not getting injected";
+        }
+        if(questionAnswerRepository== null)
+        {
+            return "This is not getting injected";
+        }
+
+        return "ok";
+
+    }
+
     public Set<Survey> activeSurvey(){
         java.util.Date current = new java.util.Date();
         Date today = new Date(current.getTime());
@@ -70,11 +99,11 @@ public class SurveyService {
     public String saveAnswer(User currentUser,SurveyAnswer surveyAnswer,Survey currentSurvey) {
         if (userRepository.findUserByStudentnr(currentUser.getStudentnr()) != null) {
 
-            Date today = new Date(0);
+            java.util.Date current = new java.util.Date();
+            Date today = new Date(current.getTime());
             surveyAnswer.setDate(today);
             surveyAnswer.setUser(currentUser);
             surveyAnswer.setSurvey(currentSurvey);
-            // surveyAnswerRepository.save(surveyAnswer);
 
             Set<Question> questions = currentSurvey.getQuestions();
             Set<QuestionAnswer> questionAnswerSet = surveyAnswer.getQuestionAnswers();
@@ -100,4 +129,17 @@ public class SurveyService {
             return "You need to log in to answer a survey!";
         }
     }
+
+    public SurveyAnswer getCurrentSurveyAnswer(int survey_id){
+        Survey survey = surveyRepository.findById(survey_id);
+        SurveyAnswer answer = new SurveyAnswer();
+        answer.setSurvey(survey);
+        Set<QuestionAnswer> question_answers = new HashSet<QuestionAnswer>();
+        for (Question question : survey.getQuestions()) {
+            question_answers.add(new QuestionAnswer(question));
+        }
+        answer.setQuestionAnswers(question_answers);
+        return answer;
+    }
+
 }

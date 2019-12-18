@@ -10,4 +10,5 @@ import java.util.*;
 @Repository
 public interface QuestionRepository extends CrudRepository<Question,Integer> {
 	Set<Question> findBySurvey(Survey survey);
+	Set<Question> findByIdGreaterThanEqual(int id);
 }
