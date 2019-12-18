@@ -68,10 +68,10 @@ public class SurveyController {
         return surveyRepository.findByCreator(currentUser);
     }
 
-    @GetMapping(value = "/current/answer")
+   /* @GetMapping(value = "/current/answer")
     public @ResponseBody SurveyAnswer currentSurveyAnswer(@RequestParam int survey_id) {
         return surveyservice.getCurrentSurveyAnswer(survey_id);
-    }
+    }*/
 
 
     @GetMapping(value = "/question_answers")

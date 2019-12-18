@@ -159,12 +159,17 @@ public class SurveyUnitTests {
 
     }
 
-    /*@Test
+    @Test
     public void testAnswerSurvey(){
+
+        Survey new_survey = createSurvey();
+        surveyService.save(getAnyUser(), new_survey);
+
+
         Set<SurveyAnswer> all_answers = surveyAnswerRepository.findByIdGreaterThanEqual(1);
         int old_answers = all_answers.size();
 
-        Survey new_survey = createSurvey();
+
 
         SurveyAnswer survey_answer = new SurveyAnswer();
 
@@ -185,8 +190,9 @@ public class SurveyUnitTests {
         Assert.assertNotNull(survey_answer);
         Assert.assertNotNull(new_survey);
 
-        surveyService.save(getAnyUser(), new_survey);
+
         Assert.assertNotNull(surveyRepository.findByName("new survey"));
+
         surveyService.saveAnswer(getAnyUser(), survey_answer,surveyRepository.findByName("new survey"));
 
         all_answers = surveyAnswerRepository.findByIdGreaterThanEqual(1);
@@ -197,7 +203,7 @@ public class SurveyUnitTests {
 
 
     }
-*/
+
     private User getAnyUser(){
         Set<User> users = userRepository.findByIdGreaterThanEqual(1);
         Assert.assertNotSame(0, users.size());

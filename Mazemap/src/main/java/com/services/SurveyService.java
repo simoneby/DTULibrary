@@ -130,7 +130,7 @@ public class SurveyService {
         }
     }
 
-    public SurveyAnswer getCurrentSurveyAnswer(int survey_id){
+    /*public SurveyAnswer getCurrentSurveyAnswer(int survey_id){
         Survey survey = surveyRepository.findById(survey_id);
         SurveyAnswer answer = new SurveyAnswer();
         answer.setSurvey(survey);
@@ -140,6 +140,6 @@ public class SurveyService {
         }
         answer.setQuestionAnswers(question_answers);
         return answer;
-    }
+    }*/
 
 }
