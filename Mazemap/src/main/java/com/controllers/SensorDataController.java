@@ -27,6 +27,7 @@ public class SensorDataController {
   @Autowired
   RestTemplate restTemplate;
 
+ 
   @RequestMapping(value = "/zonedata", method = RequestMethod.GET)
   public ProcessedSensorData[] getZoneData(
       @RequestParam(name = "level", required = false, defaultValue = "0") short level) {
