@@ -26,7 +26,9 @@ import com.services.*;
 //run by using cmd mvn -q test
 @SpringBootTest
 @RunWith(SpringRunner.class)
-
+@org.springframework.transaction.annotation.Transactional
+// @ContextConfiguration(
+// classes = {FilteredUserRepository.class,FriendListService.class})
 @TestPropertySource("/testing.properties")
 public class FriendListTest {
    static String student_number_format="sxxxxx%s";
