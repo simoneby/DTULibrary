@@ -71,11 +71,12 @@ public class EventService
     public void updateEvent(User user,
     		Event event)  
 	{
-    	if(event.getCreator().getId() != user.getId())
-    		return;
-    	else {
     	Optional<Event> optionalEvent = eventRepository.findById(event.getId());
     	Event tempEvent = optionalEvent.get();
+    	
+    	if(tempEvent.getCreator().getId() != user.getId())
+    		return;
+    	else {
     	tempEvent.setDescription(event.getDescription());
     	tempEvent.setName(event.getName());
     	tempEvent.setDate(event.getDate());
