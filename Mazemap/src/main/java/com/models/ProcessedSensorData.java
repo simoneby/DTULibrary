@@ -1,3 +1,4 @@
+//@Author s191218, s192671
 package com.models;
 
 import java.util.ArrayList;
@@ -6,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.helpers.Coordinates;
 
-//@Author s192671,s191218
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProcessedSensorData {
 	@JsonIgnore
@@ -86,7 +86,6 @@ public class ProcessedSensorData {
 
 	public void addProperty(String type, String unit, double value) {
 		if(unit.equals("int")) unit = "";
-		//unit = unit+'\n';
 		properties.addProperty(type, unit, value);
 	}
 
@@ -137,22 +136,6 @@ public class ProcessedSensorData {
 		this.type = type;
 	}
 
-	public PolygonGeometry getGeometry() {
-		return geometry;
-	}
-
-	public void setGeometry(short floor, short zone) {
-		this.geometry.addCoordinates(floor, zone);
-	}
-
-	public PolygonProperties getProperties() {
-		return properties;
-	}
-
-	public void setProperties(PolygonProperties properties) {
-		this.properties = properties;
-	}
-
 	// #region inner classes
 	class PolygonGeometry {
 		String type = "Polygon";
@@ -181,7 +164,6 @@ public class ProcessedSensorData {
 		public void setCoordinates(ArrayList<double[][]> coordinates) {
 			this.coordinates = coordinates;
 		}
-
 	}
 
 	class PolygonProperties {
@@ -205,13 +187,28 @@ public class ProcessedSensorData {
 		}
 
 		public void addProperty(String type, String unit, double value) {
-			properties.addProperty(type, unit, value);
+			zoneProperties.add(new SensorValue(type, unit, value));
 		}
 
 		public void setzLevel(short zLevel) {
 			this.zLevel = zLevel;
 		}
+	}
 
+	public PolygonGeometry getGeometry() {
+		return geometry;
+	}
+
+	public void setGeometry(short floor, short zone) {
+		this.geometry.addCoordinates(floor, zone);
+	}
+
+	public PolygonProperties getProperties() {
+		return properties;
+	}
+
+	public void setProperties(PolygonProperties properties) {
+		this.properties = properties;
 	}
 	// #endregion
 }

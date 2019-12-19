@@ -243,7 +243,7 @@ var curLocation = {
 
       });
    }
-
+   //@Author s191218,s183051
    	//function to get and redraw polygons on start and on floor switch, Coordinates need to be server side
    	function redrawPolygons() {
    		var zLevel = map.getZLevel();
@@ -261,6 +261,8 @@ var curLocation = {
       });	         
      }
 
+	//@Arthur: s191545,s191218
+	//show friends location
     function showLocations() {
         if(baseUrl==null)
         {
@@ -290,6 +292,8 @@ var curLocation = {
 
 
         });
+		//@Arthur: s191545,s191218
+		//show friends location
         console.log("friends array length " + friends.length);
         for (i = 0; i < friends.length; i++) {
             var matches = "";
