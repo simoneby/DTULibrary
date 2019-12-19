@@ -68,7 +68,8 @@ function loadEventlist(events) {
                         	optionsCorrect["description"] = options.description;
                         	optionsCorrect["name"] = options.name;
                         	var dt = new Date(options.date);
-                        	optionsCorrect["date"] = dt.getFullYear() + "-" + dt.getMonth()+1 + "-" + dt.getDate();
+                        	var month = dt.getMonth()+1;
+                        	optionsCorrect["date"] = dt.getFullYear() + "-" + month + "-" + dt.getDate();
                         	optionsCorrect["time"] = options.time;
                         	optionsCorrect["lng"] = options.lng;
                         	optionsCorrect["lat"] = options.lat;
