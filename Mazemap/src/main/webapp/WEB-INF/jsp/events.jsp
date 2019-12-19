@@ -23,8 +23,8 @@
 	<script src="./kendo-ui-core/js/kendo.data.min.js"></script>
 	<script src="./kendo-ui-core/js/kendo.tabstrip.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.js" crossorigin="anonymous"></script>
-	<script src="./custom_scripts/eventlist_script.js"></script>
 	<script src="https://kit.fontawesome.com/7510661d31.js" crossorigin="anonymous"></script>
+	<script src="./custom_scripts/eventlist_script.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>DTU CampusNet</title>
 </head>
