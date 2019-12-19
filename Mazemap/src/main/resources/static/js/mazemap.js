@@ -209,7 +209,7 @@ var curLocation = {
    	
    });
 
-}	
+	
 	//function to get and draw markers on the map - catching right now just to test
 	function redrawMarkers() {   
 		var eventData;
