@@ -209,43 +209,37 @@ var curLocation = {
    	
    });
 
-   	
-     document.getElementById("okPlacement").addEventListener("click", function() {
-   	document.querySelector(".bg-modal").style.display="block";
-   	document.querySelector(".okPlacement").style.display="none";
-   		
-   	});
-   	//function to get and draw markers on the map - catching right now just to test
-   	function redrawMarkers() {   
-   		var eventData;
-          var markerIterator;
-          var markerIteratorPopup;
-          fetch(baseUrl+'/events/eventdata').then(response => {
-              return response.json();
-          }).then(data => {
-             eventData = data;
-             for(var i in eventData){
-              markerIterator = new Mazemap.MazeMarker( {
-               zLevel : 1,
-               color: 'green',
-               innerCircle: true,
-               innerCircleColor: '#FEFEFE',
-               innerCircleScale: 0.7,
-               glyphColor: '#000',
-               glyphSize: 20,
-               glyph: '🤷'
-           } )
-              .setLngLat({lng: eventData[i].lng, lat: eventData[i].lat})
-              markerIteratorPopup = new Mazemap.Popup({ closeOnClick: true, offset: [0,-40]})
-              .setHTML(eventData[i].date + " at " + eventData[i].time + " --- " + eventData[i].description);
+}	
+	//function to get and draw markers on the map - catching right now just to test
+	function redrawMarkers() {   
+		var eventData;
+       var markerIterator;
+       var markerIteratorPopup;
+       fetch(baseUrl+'/events/eventdata').then(response => {
+           return response.json();
+       }).then(data => {
+          eventData = data;
+          for(var i in eventData){
+           markerIterator = new Mazemap.MazeMarker( {
+            zLevel : 1,
+            color: 'green',
+            innerCircle: true,
+            innerCircleColor: '#FEFEFE',
+            innerCircleScale: 0.7,
+            glyphColor: '#000',
+            glyphSize: 12,
+            glyph: eventData[i].name
+        } )
+           .setLngLat({lng: eventData[i].lng, lat: eventData[i].lat})
+           markerIteratorPopup = new Mazemap.Popup({ closeOnClick: true, offset: [0,-40]})
+           .setHTML(eventData[i].date + " at " + eventData[i].time + " --- " + eventData[i].description);
 
-              markerIterator.setPopup(markerIteratorPopup);
+           markerIterator.setPopup(markerIteratorPopup);
 
-              markerIterator.addTo(map);
+           markerIterator.addTo(map);
 
-          }                                    
-      }).catch(err => {
-
+       }                                    
+   }).catch(err => {
 
       });
    }

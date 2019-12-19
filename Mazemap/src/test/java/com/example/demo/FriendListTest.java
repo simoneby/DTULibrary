@@ -30,7 +30,7 @@ import com.services.*;
 // @ContextConfiguration(
 // classes = {FilteredUserRepository.class,FriendListService.class})
 @TestPropertySource("/testing.properties")
-public class FirstUnitTest {
+public class FriendListTest {
    static String student_number_format="sxxxxx%s";
    static String student_email_format="sxxxxx%s@student.dtu.dk";
    @Autowired
