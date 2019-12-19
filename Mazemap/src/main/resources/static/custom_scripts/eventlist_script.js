@@ -10,12 +10,12 @@ $(document).ready(function () {
             }
         }
     });
-    require.config({
+   /* require.config({
         baseUrl: "./kendo-ui-core/js/", // the path where the kendo scripts are present
         paths: {
             "jquery": "./jquery.min",//jquery path
         }
-    });
+    });*/
     loadEventlist(events);
     baseUrl = $("#baseUrl").val();
 });
