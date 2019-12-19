@@ -1,4 +1,5 @@
 //@Author s191218
+
 package com.example.demo;
 
 import org.junit.Test;
@@ -53,7 +54,7 @@ public class SensorUnitTest
    public void testGetZoneData() 
    {
       //execute the method from the service
-	  for(short i = -1; i<=2; ++i)
+	  for(short i = 0; i<=2; ++i)
 	  {
 	      ProcessedSensorData[] sensorData = sensorDataService.getZoneData(i);
 		  //declare asserts (conditions that the result of the method must meet for the tests to pass)
