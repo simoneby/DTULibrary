@@ -95,8 +95,8 @@
 															</td>
 													
 														<td colspan="1" class="edit-buttons">
-															<a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit-tools"></span></a>Edit event
-															<a class="k-button k-delete-button" href="\\#"><span class="k-icon k-i-close"></span></a>Delete event
+															<a class="k-button k-edit-button" href="\\#"><span class="k-icon k-i-edit-tools"></span></a> Edit event
+															<a class="k-button k-delete-button" href="\\#"><span class="k-icon k-i-close"></span></a> Delete event
 														</td>
 													</tr>
 									</div>
