@@ -71,8 +71,9 @@ public class EventService
     public void updateEvent(User user,
     		Event event)  
 	{
-    	if(user.getId() != event.getCreator().getId())
+    	if(event.getCreator().getId() != user.getId())
     		return;
+    	else {
     	Optional<Event> optionalEvent = eventRepository.findById(event.getId());
     	Event tempEvent = optionalEvent.get();
     	tempEvent.setDescription(event.getDescription());
@@ -83,5 +84,6 @@ public class EventService
     	tempEvent.setLat(event.getLat());
     		
 		eventRepository.save(tempEvent);
+    	}
 	}
 }
