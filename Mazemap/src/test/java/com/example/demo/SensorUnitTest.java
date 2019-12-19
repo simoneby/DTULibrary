@@ -1,4 +1,6 @@
+
 //@Author s191218
+
 
 package com.example.demo;
 
@@ -57,8 +59,11 @@ public class SensorUnitTest
 	  {
 	      ProcessedSensorData[] sensorData = sensorDataService.getZoneData(i);
 		  //declare asserts (conditions that the result of the method must meet for the tests to pass)
+
 		  if(sensorData==null)
 			System.out.println("There is no sensor data on level" + i);
+
 	  }      
    } 
 }
+*/

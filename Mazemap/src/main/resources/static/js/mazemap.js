@@ -1,4 +1,4 @@
-//@Author s191545
+//@Author s191545, s183051
 var baseUrl;
 var curLocation = {
 	lat: 0,
@@ -115,7 +115,8 @@ var curLocation = {
    	    redrawMarkers();
 
        });
-
+        
+    //@Author s183051
    	//simple append function
    	function appendString(item, output) {
    		var res = output.concat(item.type + ": " + item.value + " " + item.unit + " ");
@@ -183,7 +184,8 @@ var curLocation = {
           }
       });
 
-   }	
+   }
+     //@Author s183051
      var createMarker;
      document.getElementById("placeEvent").addEventListener("click", function() {
      placingEvent = true;
@@ -209,7 +211,7 @@ var curLocation = {
    	
    });
 
-}	
+	
 	//function to get and draw markers on the map - catching right now just to test
 	function redrawMarkers() {   
 		var eventData;
