@@ -59,10 +59,10 @@ public class EventService
     		returnMessage = String.format("The event with id %s does not exist!", id);
     	else {
        	Optional<Event> tempEvent = eventRepository.findById(id);
-		/*Event event = tempEvent.get();
-		if(event.getCreator() != user)
+		Event event = tempEvent.get();
+		if(event.getCreator().getId() != user.getId())
 			returnMessage = String.format("Creator doesn't match logged in user!");
-		else*/
+		else
 			eventRepository.deleteById(id);
     	}
     	return ReturnMessageHelper.getReturnMessage(returnMessage);
@@ -71,15 +71,17 @@ public class EventService
     public void updateEvent(User user,
     		Event event)  
 	{
-    		Optional<Event> optionalEvent = eventRepository.findById(event.getId());
-    		Event tempEvent = optionalEvent.get();
-    		tempEvent.setDescription(event.getDescription());
-    		tempEvent.setName(event.getName());
-    		tempEvent.setDate(event.getDate());
-    		tempEvent.setTime(event.getTime());
-    		tempEvent.setLng(event.getLng());
-    		tempEvent.setLat(event.getLat());
+    	if(user.getId() != event.getCreator().getId())
+    		return;
+    	Optional<Event> optionalEvent = eventRepository.findById(event.getId());
+    	Event tempEvent = optionalEvent.get();
+    	tempEvent.setDescription(event.getDescription());
+    	tempEvent.setName(event.getName());
+    	tempEvent.setDate(event.getDate());
+    	tempEvent.setTime(event.getTime());
+    	tempEvent.setLng(event.getLng());
+    	tempEvent.setLat(event.getLat());
     		
-			eventRepository.save(tempEvent);
+		eventRepository.save(tempEvent);
 	}
 }
