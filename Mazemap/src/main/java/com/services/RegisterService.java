@@ -44,58 +44,16 @@ import com.helpers.RedirectWrapper;
 //@Author s154666
 @SessionAttributes("user")
 @Component
-public class LoginService
+public class RegisterService
 {
 	@Autowired
 	private FilteredUserRepository userRepository;
 
-	public RedirectWrapper redirectService(String studentnr) 
-	throws IOException
+	public void setName(User user, String name)
 	{
-		
-		String name = "noname";
-		boolean login = false;
-		try 
-		{
-			if (userRepository.findUserByStudentnr(studentnr) == null) 
-			{
-				return new RedirectWrapper(registerNewUser(studentnr),false);
-			}
-			else 
-			{
-				return new RedirectWrapper(loginExistingUser(studentnr), true);
-			}
-
-		} 
-		catch (HibernateException | NullPointerException e)
-		{ 
-			return new RedirectWrapper(registerNewUser(studentnr),false);
-		}
-
-	}
-
-
-	public User registerNewUser(String studentnr)
-	{
-		User entity = new User();
-		if (studentnr.charAt(0) == 's')
-		{
-			entity.setEmail(String.format("%s@student.dtu.dk",studentnr));
-		}
-		else
-		{
-			entity.setEmail(String.format("%s@dtu.dk",studentnr));
-		}
-		entity.setStudentnr(studentnr);
-		//entity.addRole(roleRepository.findAll().iterator().next());
+		User entity = userRepository.findUserByStudentnr(user.getStudentnr());
+		entity.setName(name);
 		userRepository.save(entity);
-		return entity;
-	}
-
-	public User loginExistingUser(String studentnr)
-	{
-		User foundUser = userRepository.findUserByStudentnr(studentnr);
-		return foundUser;
 	}
 
 }

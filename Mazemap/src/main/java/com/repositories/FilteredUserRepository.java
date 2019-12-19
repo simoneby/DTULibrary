@@ -1,6 +1,6 @@
 package com.repositories;
 import com.models.*;
-import java.util.List;
+import java.util.*;
 import org.springframework.data.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -11,4 +11,5 @@ public interface FilteredUserRepository extends CrudRepository<User, Integer>{
 	  User findUserByEmail(String email);
 	  User findUserByStudentnr(String studentnr);
 	  User findById(int id);
-}
+	  Set<User> findByIdGreaterThanEqual(int id);
+ }
