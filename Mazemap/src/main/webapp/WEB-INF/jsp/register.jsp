@@ -74,9 +74,8 @@
 					<input name="name" id="name" type="text"
 						placeholder="Enter your name here...">
 					</input>
-					<ul class="actions">
-						<li><input value="signup" class="button" type="submit"></li>
-					</ul>
+				</br>
+					<input value="signup" class="button" type="submit">
 				</form>
 				<div id="signupResult">
 				</div>
