@@ -24,7 +24,7 @@ $(document).ready(function () {
     function submitForm() {
         var data = {};
         data.friendEmail = $("#friendEmail").val();
-        console.log(data.friendEmail);
+       
         doPostRequest(data.friendEmail,baseUrl + '/friends/add',"#addFriendResult");
     };
 
@@ -41,12 +41,12 @@ $(document).ready(function () {
 
 function acceptRequest(element) {
     var friendEmail = element.getAttribute("data-email");
-    console.log("accepted");
+   
     doPostRequest(friendEmail,baseUrl + '/friends/acceptFriendRequest',"#acceptRequestResult");
 };
 function rejectRequest(element) {
     var friendEmail = element.getAttribute("data-email");
-    console.log("rejected")
+   
     doPostRequest(friendEmail,baseUrl + '/friends/rejectFriendRequest',"#rejectRequestResult");
 };
 function doPostRequest(data, url,resultId)
@@ -56,12 +56,12 @@ function doPostRequest(data, url,resultId)
         data: data,
         dataType: 'json',
         success: function (data, status) {
-            console.log("Data: " + data + "\nStatus: " + status);
+          
             $(resultId).html("<p>"+ data.message+"</p>") 
             loadFriendlist();
         },
         error: function () {
-            console.log("Something went wrong!");
+            console.log("Request failed");
         },
         processData: false,
         type: 'POST',
@@ -84,10 +84,9 @@ function loadFriendlist(friends,friendRequestsReceived,friendRequestsSent) {
                         dataType: "json",
                     },
                     parameterMap: function(options, operation) {
-                        console.log(operation);
-                        console.log(options);
+                      
                         if (operation !== "read" && options) {
-                            //console.log(options.models);
+                           
                             return {friendEmail : options.email};
                         }
                     }

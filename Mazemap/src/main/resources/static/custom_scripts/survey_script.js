@@ -39,10 +39,10 @@ $(document).ready(function () {
                 },
                 sort: { field: "number", dir: "asc" },
                 change: function (e) {
-                    console.log(e.model);
+                   
                     this.data().forEach(element => {
                         element.isRange = element.type == 1;
-                        console.log("isRange" + element.number + "value" + element.isRange);
+                       
                     });
                    
                 }
@@ -55,7 +55,7 @@ $(document).ready(function () {
                 edit: function (e) {
                     if (e.model.number == 0) {
                         e.model.number = this.dataSource.data().length;
-                        console.log(e.model.isRange);
+                      
                     }
                 },
                 dataBound: function () {
@@ -81,7 +81,7 @@ $(document).ready(function () {
         });
     $(".k-add-button").click(function (e) {
         var currentQuestionNumber = questionList.length + 1;
-        console.log("adding");
+       
         listView.add();
         $(".range_edit").hide();
         $(".view_q_type, .type_in_Edit").each(function (index) {
@@ -118,12 +118,12 @@ $(document).ready(function () {
             if (inputType !== "BUTTON" && inputType !== "SUBMIT") {
                 
                 survey[this.name] = $(this).val();
-                console.log(this.name);
+               
                 
             }
         });
         survey.questions = questions.data(); 
-        console.log(survey);
+       
         $.ajax({
             contentType: 'application/json',
             data: JSON.stringify(survey),
@@ -133,7 +133,7 @@ $(document).ready(function () {
                 $("#save_survey").prop('disabled',true);
             },
             error: function () {
-                console.log("Stuff happened");
+                console.log("Request failed");
             },
             processData: false,
             type: 'POST',
