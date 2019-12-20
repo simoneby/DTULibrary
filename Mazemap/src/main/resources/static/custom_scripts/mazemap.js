@@ -66,7 +66,7 @@ var curLocation = {
 		//map.center = {lng: currentLong, lat: currentLat};
         map.on('load', function(){
 
-           console.log(currentLong,currentLat);
+          
 
            curLocation.lat = currentLat;
            curLocation.long = currentLong;
@@ -165,7 +165,7 @@ var curLocation = {
               + JSON.stringify(data, null, 4) + "</pre>";
               $('#feedback').html(data.msg);
               window.location.reload(true);
-              console.log("SUCCESS : ", data);
+             
               $("#submitEventForm").prop("disabled", false);
               document.querySelector(".feedback").style.display="block";
               document.querySelector(".bg-modal").style.display="none";
@@ -284,7 +284,7 @@ var curLocation = {
                 friends = data2;
             },
             error: function () {
-                console.log("Stuff happened");
+                console.log("The request failed");
             },
             // processData: false,
             type: 'get',
@@ -296,7 +296,7 @@ var curLocation = {
         });
 		//@Arthur: s191545,s191218
 		//show friends location
-        console.log("friends array length " + friends.length);
+        
         for (i = 0; i < friends.length; i++) {
             var matches = "";
             var displayName = "";
@@ -310,12 +310,12 @@ var curLocation = {
                 displayName = friends[i].studentnr;
             }
              
-            console.log("balh");
+           
 
             if (friends[i].locationOfUser != null) {
                 var la = parseFloat(friends[i].locationOfUser.coordinateX);
                 var lo = parseFloat(friends[i].locationOfUser.coordinateY);
-                console.log("bluah", la, lo);
+              
 
                 var tempMarker = new Mazemap.MazeMarker({
                     color: "MazePink",
