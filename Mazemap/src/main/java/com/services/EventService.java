@@ -35,7 +35,7 @@ public class EventService
 		eventRepository.findAll().forEach(allEvents::add);
 	    Set<Event> activeEvents = new HashSet<Event>();
         for (Event event : allEvents) {
-            if (event.getDate().after(today) && event.getDate().before(new Date(today.getTime() + 7l*24l*60l*60l*1000l))) {
+            if (event.getDate().after(new Date(today.getTime() -1l*24l*60l*60l*1000l)) && event.getDate().before(new Date(today.getTime() + 7l*24l*60l*60l*1000l))) {
                activeEvents.add(event);
             }
 
