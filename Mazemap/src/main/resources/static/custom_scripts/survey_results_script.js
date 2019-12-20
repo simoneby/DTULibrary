@@ -83,9 +83,9 @@ function loadAnswers(question_id, question_number) {
     });
     require(["jquery", "kendo.pager.min", "kendo.listview.min", "kendo.data.min"],
         function ($, kendo) {
-            console.log("loading answers with id " + question_id + " and number" + question_number);
+         
             var answerDiv = $("#answers" + question_number);
-            console.log(answerDiv);
+         
             if (!isEmpty(answerDiv)) {
                 answerDiv.show();
                 return;
@@ -117,8 +117,7 @@ function loadAnswers(question_id, question_number) {
             });
 
             question_answers.read().then(function () {
-                console.log("we are reading...");
-                console.log(question_answers.data());
+               
                 answerDiv.kendoListView({
                     dataSource: question_answers,
                     editable: true,

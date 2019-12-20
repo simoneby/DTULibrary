@@ -60,7 +60,7 @@ function loadEventlist(events) {
                     },
                     parameterMap: function(options, operation) {
                         if (operation == "destroy" && options) {
-                            //console.log(options.models);
+                          
                             return {id : options.id};
                         }
                         if (operation == "update" && options) {

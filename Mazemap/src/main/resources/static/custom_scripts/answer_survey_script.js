@@ -93,7 +93,7 @@ $(document).ready(function () {
             },
             sort: { field: "number", dir: "asc" },
             change: function (e) {
-                console.log(e.model);
+              
                 //attachEvents();
                 var lv = $("#questionList").data("kendoListView");
                 // refreshes the ListView
@@ -103,15 +103,15 @@ $(document).ready(function () {
                 });
             }
         });
-        //console.log("sth1");
+     
         listView = $("#questionList").kendoListView({
             dataSource: questions,
             editable: true,
             template: kendo.template($("#viewTemplate").html()),
             dataBound: function () {
-                console.log("databound happening");
+               
                 this.dataSource.data().forEach(element => {
-                    console.log(element);
+                   
                     if (element.question_isRange) {
                         var slider = $("#slider_" + element.number).kendoSlider({
                             increaseButtonTitle: "Right",
@@ -159,7 +159,7 @@ $(document).ready(function () {
                 $("#save_survey").prop('disabled',true);
             },
             error: function () {
-                console.log("Stuff happened");
+                console.log("Request failed");
             },
             processData: false,
             type: 'POST',

@@ -71,11 +71,10 @@ $(document).ready(function () {
             surveys_created.read().then(function () {
                 loadSurveysCreated();
             });
-            //$("#expiration_date").kendoDateInput();
-            //var questionList = [];
+          
         });
     function loadSurveys() {
-        //console.log("sth1");
+       
         listView = $("#survey_list_to_complete").kendoListView({
             dataSource: surveys,
             template: kendo.template($("#template1").html()),
@@ -86,7 +85,7 @@ $(document).ready(function () {
         }).data("kendoListView");
     };
     function loadSurveysCreated() {
-        //console.log("sth1");
+        
         listView = $("#survey_list_created").kendoListView({
             dataSource: surveys_created,
             template: kendo.template($("#template2").html()),
